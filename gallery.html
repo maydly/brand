@@ -9,13 +9,6 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap"></noscript>
-<!--
-  브랜드-005 · 작업(Portfolio) — 시안 A 에디토리얼 지면 (261010 명진 "a가 제일 좋다") · 조립기가 만듦(직접 고치지 말 것)
-  · 게시물 하나 = 잡지 한 지면(스프레드). 표지는 원래 비율 그대로(자르지 않음), 데스크탑 높이 min(68vh,620px)
-  · 달마다 잡지 섹션처럼 큰 세리프 숫자로 구분, 최신 달이 위. 게시물이 늘어도 화면 근처만 그려 넣음(지연 로딩)
-  · 주소: #studio·#outdoor = 탭 / #p=코드 = 그 게시물 크게 보기 / #p=코드&s=번호 = 그 게시물의 n번째 사진부터
-  · 데이터: site_assets/ig-data.js (window.MAYDLY_IG)
--->
 <style>
   :root{
     --bg:#f7f4ec; --panel:#efe9df; --green-wash:#e8f0e4;
@@ -23,17 +16,15 @@
     --accent:#3f7d57; --accentD:#356a4a; --gold:#a8894f;
     --sans:Pretendard,'Apple SD Gothic Neo',sans-serif;
     --serif:Georgia, AppleMyungjo, "Noto Serif KR", serif;
-    --H:min(68vh,620px);                 /* 데스크탑 주인공 사진 높이 */
+    --H:min(68vh,620px);                 
     --ease:cubic-bezier(.2,.7,.2,1);
-    --wipe:cubic-bezier(.76,0,.2,1);     /* 마스크가 걷히는 곡선 */
+    --wipe:cubic-bezier(.76,0,.2,1);     
     --barH:58px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{-webkit-text-size-adjust:100%; text-size-adjust:100%; scroll-padding-top:calc(var(--barH) + 12px);}  /* 키보드 이동 시 상단바 밑에 숨지 않게 */
+  html{-webkit-text-size-adjust:100%; text-size-adjust:100%; scroll-padding-top:calc(var(--barH) + 12px);}  
   html.lock, html.lock body{overflow:hidden;}
-  /* 크게 보기를 연 동안에도 상단바(sticky)가 붙어 있게(v1.0.2): body 의 overflow:hidden 은 body 를 스크롤 상자로 만들어
-     상단바가 문서 맨 위로 풀렸다가, 닫을 때 배경이 걷히는 동안 상단바 없이 보이고 끝에 튀어나왔다. clip 은 스크롤 상자를 만들지 않는다
-     (clip 을 모르는 옛 브라우저는 위의 hidden 그대로) */
+  
   html.lock body{overflow:clip;}
   body{background:var(--bg); color:var(--tx); font-family:var(--sans); line-height:1.6; letter-spacing:-.01em;
     -webkit-font-smoothing:antialiased; word-break:keep-all; overflow-wrap:break-word;}
@@ -43,11 +34,11 @@
   :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
   img{max-width:100%;}
 
-  /* 목업 배너(랜딩과 같음) */
+  
   .mockbar{background:var(--panel); color:var(--tx3); text-align:center; font-size:.78rem; padding:8px 12px; border-bottom:1px solid var(--line);}
   .mockbar b{color:var(--accentD);}
 
-  /* ── 상단바 ── */
+  
   .bar{position:sticky; top:0; z-index:50; background:rgba(247,244,236,.8);
     -webkit-backdrop-filter:saturate(160%) blur(14px); backdrop-filter:saturate(160%) blur(14px);
     border-bottom:1px solid transparent; transition:border-color .3s, background .3s;}
@@ -67,11 +58,11 @@
   .cmv{grid-area:1/1; white-space:nowrap; transition:transform .55s var(--ease), opacity .55s var(--ease);}
   .car{font-size:.75rem; color:var(--tx3); transition:transform .3s var(--ease);}
   .curm[aria-expanded="true"] .car{transform:rotate(180deg);}
-  /* 상담 신청 — 랜딩 상단 초록 버튼과 같은 모양(목차 단추와 높이를 맞춤) */
+  
   .navbook{display:inline-flex; align-items:center; justify-content:center; min-height:42px; padding:0 18px; border-radius:980px;
     background:var(--accent); color:#fff; font-size:.82rem; font-weight:600; white-space:nowrap; transition:background .2s;}
   .navbook:hover{background:var(--accentD);}
-  /* 목차 펼침 */
+  
   .tocp{position:absolute; right:max(28px,env(safe-area-inset-right)); top:calc(var(--barH) - 2px); width:min(300px, calc(100vw - 40px));
     max-height:min(64vh,520px); overflow:auto; overscroll-behavior:contain; background:#fffdf8; border:1px solid var(--line); border-radius:16px;
     box-shadow:0 24px 60px -20px rgba(40,50,35,.28); padding:8px; opacity:0; visibility:hidden; transform:translateY(-6px) scale(.98); transform-origin:top right;
@@ -83,11 +74,11 @@
   .tocp .k{font-family:var(--serif); font-size:1.08rem; color:var(--tx);}
   .tocp .c{font-size:.8rem; color:var(--tx3);}
 
-  /* 클로버 — 여백에 몇 개만 은은하게 */
+  
   .cwm{position:absolute; pointer-events:none; color:var(--accent); opacity:.075; z-index:0;}
   .cwm svg{display:block; width:100%; height:auto;}
 
-  /* ── 머리말 ── */
+  
   .mast{position:relative; overflow:hidden; padding:clamp(30px,5.4vh,50px) 0 0;}
   .mast-in{position:relative; z-index:1; max-width:1180px; margin:0 auto; padding:0 max(40px,env(safe-area-inset-right)) 0 max(40px,env(safe-area-inset-left));}
   .kicker{font-size:.78rem; letter-spacing:.24em; text-transform:uppercase; color:var(--accentD); font-weight:600;}
@@ -104,30 +95,27 @@
   .tabs button.on .c{color:rgba(255,255,255,.78);}
   .contents{display:flex; align-items:center; gap:10px; min-width:0; flex:1 1 340px; justify-content:flex-end;}
   .contents .cl{font-family:var(--serif); font-style:italic; color:var(--gold); font-size:.98rem; flex:none;}
-  /* 의도한 가로 스크롤 영역(달이 많아지면 옆으로 밀어 봄) */
+  
   .cs{display:flex; gap:2px; overflow-x:auto; min-width:0; scrollbar-width:none; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch;}
   .cs::-webkit-scrollbar{display:none;}
-  .cs.ovf:not(.end){-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent); mask-image:linear-gradient(90deg,#000 82%,transparent);}  /* 달이 많아 넘치면 오른쪽이 흐려져 밀 수 있음을 알림 */
+  .cs.ovf:not(.end){-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent); mask-image:linear-gradient(90deg,#000 82%,transparent);}  
   .cs button{flex:none; min-height:42px; padding:0 11px; border-radius:999px; font-family:var(--serif); font-size:.98rem; color:var(--tx); white-space:nowrap; transition:background .2s;}
   .cs button .n{font-family:var(--sans); font-size:.75rem; color:var(--tx3); margin-left:5px; vertical-align:1px;}
   .cs button:hover{background:var(--green-wash);}
 
-  /* 공통 등장(양방향: 내릴 때·올릴 때 모두, 들어오는 쪽에서) */
+  
   .rv{opacity:0; transform:translateY(calc(var(--dir,1) * 18px)); transition:opacity .9s var(--ease) var(--d,0s), transform .9s var(--ease) var(--d,0s);}
   .rv.in{opacity:1; transform:none;}
 
-  /* ── 지면 ── */
-  .feed{--edge:20px; max-width:1180px; margin:0 auto; padding:0 max(40px,env(safe-area-inset-right)) 0 max(40px,env(safe-area-inset-left));}   /* 가로 아이폰은 노치만큼 안쪽으로(v1.0.1) */
+  
+  .feed{--edge:20px; max-width:1180px; margin:0 auto; padding:0 max(40px,env(safe-area-inset-right)) 0 max(40px,env(safe-area-inset-left));}   
   .mon{position:relative;}
-  /* 화면 밖 달 묶음은 그리지 않음(v1.0.3 · 데스크탑 901px 이상) — 게시물이 수백 개 쌓이면 갤러리 위쪽(최신 달)에서 휠 스크롤이
-     느려지던 것(재검수 312개 실측: 5% 자리 프레임 p50 83ms). 다 그린 달에만 JS 가 .cv 와 그 달의 실제 높이(--mh)를 붙여, 건너뛰는
-     동안에도 같은 높이를 쓴다 — 목차 이동·#p= 주소로 열기·등장 움직임의 자리가 그대로. 달 상자를 좌우 40px 넓히고 안쪽 여백으로
-     되돌려(보이는 자리 같음) 사진 그림자가 잘리지 않게, flow-root 로 마지막 지면의 아래 여백을 달 안에 둔다(보이는 간격 같음) */
+  
   @media (min-width:901px){
     .mon{display:flow-root; margin:0 -40px; padding:0 40px;}
     .mon.cv{content-visibility:auto; contain-intrinsic-size:auto var(--mh,2400px);}
   }
-  /* 달 = 잡지 섹션: 큰 세리프 숫자 + 옆에 영문 달·게시물 수, 아래 선이 그어짐 */
+  
   .mh{position:relative; padding:clamp(36px,6vh,64px) 0 clamp(34px,5vh,48px);}
   .mon:first-child .mh{padding-top:clamp(26px,3.6vh,36px);}
   .mhr{display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:6px 24px;}
@@ -148,7 +136,7 @@
   .mh.in .rule{transform:scaleX(1);}
   .mm .cwm{position:relative; display:block; width:30px; margin:0 0 6px; opacity:.1; transform:rotate(14deg);}
 
-  /* 바닥 — 이어지는 안내·인스타 링크(시안 A) 다음에 사이트 푸터(랜딩과 같음) */
+  
   .sent{height:1px;}
   .foot{position:relative; overflow:hidden; border-top:1px solid var(--line); margin-top:20px; padding:56px 0 48px; text-align:center; background:var(--panel);}
   .foot .cwm{left:8%; top:26px; width:40px; transform:rotate(-12deg);}
@@ -157,7 +145,7 @@
   .fl a{display:inline-flex; align-items:center; min-height:44px; padding:0 4px; color:var(--accentD); font-weight:600;}
   .foot .more{display:none; color:var(--tx3); font-size:.86rem; margin-bottom:10px;}
   .foot:not(.done) .more{display:block;}
-  /* 사이트 푸터 — 랜딩 푸터 규칙만 옮김(랜딩 CSS 전체는 넣지 않음: .ph .tx .go .th .tabs .kicker .more .brand 이름이 겹침) */
+  
   footer{background:var(--panel); color:var(--tx3); font-size:.82rem; border-top:1px solid var(--line); padding:46px 0 calc(46px + env(safe-area-inset-bottom));
     font-family:'Pretendard','Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; line-height:1.55;}
   footer .wrap{max-width:1040px; margin:0 auto; padding:0 max(28px,env(safe-area-inset-right)) 0 max(28px,env(safe-area-inset-left));}
@@ -169,10 +157,10 @@
   footer .cols a:hover{color:var(--tx);}
   footer .btm{padding-top:22px;}
   @media(max-width:760px){ footer .brand{padding:8px 0;} }
-  /* 사이트 푸터 링크 — 손가락으로 누르는 칸 44px(폰·터치 화면 · v1.0.1, 랜딩과 같은 규칙) */
+  
   @media (max-width:760px), (pointer:coarse){ footer .top .cols a{display:flex; align-items:center; min-height:44px; margin:0;} }
 
-  /* ── 크게 보기 (밝은 배경) ── */
+  
   .lbx{position:fixed; inset:0; z-index:90; display:none; align-items:center; justify-content:center; gap:40px; padding:28px 92px; overscroll-behavior:contain;}
   .lbx:before{content:''; position:fixed; inset:0; z-index:-1; background:rgba(247,244,236,.96);
     -webkit-backdrop-filter:blur(16px) saturate(120%); backdrop-filter:blur(16px) saturate(120%); opacity:0; transition:opacity .4s var(--ease);}
@@ -203,11 +191,10 @@
   .lx{position:fixed; top:max(16px,env(safe-area-inset-top)); right:max(16px,env(safe-area-inset-right));}
   .lpv{left:max(20px,env(safe-area-inset-left)); top:50%; transform:translateY(-50%);}
   .lnx{right:max(20px,env(safe-area-inset-right)); top:50%; transform:translateY(-50%);}
-  /* 닫을 때는 글·장수·단추가 기다리지 않고 바로 사라지게(v1.0.2) — 열 때의 늦게 나타나기(지연)를 닫을 때도 쓰면 배경이 먼저 걷혀
-     뒤의 지면 글과 두 겹으로 겹쳐 보였다. 열 때 움직임은 그대로 */
+  
   .lbx:not(.show) .ltx, .lbx:not(.show) .lct, .lbx:not(.show) .lbtn{transition-delay:0s; transition-duration:.18s;}
 
-  /* ── 태블릿·폰 (지면 자체의 폰 규칙은 공용 블록 .esp …) ── */
+  
   @media (max-width:900px){
     .bar-in{padding:0 max(20px,env(safe-area-inset-right)) 0 max(20px,env(safe-area-inset-left));}
     .tocp{right:max(20px,env(safe-area-inset-right));}
@@ -224,7 +211,7 @@
     .rule{margin-top:12px;}
   }
   @media (max-width:640px){
-    .contents{display:none;}             /* 폰은 상단바 「목차」로 같은 일을 함 — 첫 화면에 사진이 더 보이게 */
+    .contents{display:none;}             
     .mast .cwm.c2{display:none;}
   }
   @media (max-width:860px){
@@ -234,9 +221,9 @@
     .lpv{left:max(8px,env(safe-area-inset-left));} .lnx{right:max(8px,env(safe-area-inset-right));}
     .lbtn{width:44px; height:44px; background:rgba(255,255,255,.9);}
   }
-  /* 폰 상단바: 로고 · 목차 · 상담 신청이 한 줄에 들어가게(가로 넘침 없이, 누르는 것 40px 이상) */
+  
   @media (max-width:560px){
-    .crumb{display:none;}                /* 폰은 '작업' 표시를 숨김(첫 화면 제목이 「작업」) */
+    .crumb{display:none;}                
     .br{gap:8px;}
     .curm{padding:0 12px 0 14px; gap:8px;}
     .cmw{min-width:5em;}
@@ -248,31 +235,29 @@
     .cmw{min-width:4.6em;}
     .navbook{padding:0 14px;}
   }
-  @media (max-width:340px){ .curm > span:first-child{display:none;} }   /* 아주 좁은 폰(320)은 「목차」 글자만 숨김 — 지금 달·▾ 는 그대로 */
+  @media (max-width:340px){ .curm > span:first-child{display:none;} }   
 
-  /* 움직임 줄이기 설정이면 전부 끔 */
+  
   @media (prefers-reduced-motion: reduce){
     .rv, .mn, .my, .md, .mm, .rule, .lct, .ltx, .lbtn, .lbx:before{opacity:1 !important; transform:none !important; transition:none !important;}
     .cmv, .tocp{transition:none !important;}
   }
 
-  /* ── 작업 지면(시안 A 에디토리얼, v1.0 · 261010 명진 "a가 제일 좋다") — 갤러리·랜딩 공용 ── */
+  
   .esp{--H:min(68vh,620px); --ease:cubic-bezier(.2,.7,.2,1); --wipe:cubic-bezier(.76,0,.2,1); --serif:Georgia, AppleMyungjo, "Noto Serif KR", serif;
     font-family:Pretendard,'Apple SD Gothic Neo',sans-serif; line-height:1.6; letter-spacing:-.01em; text-align:start;
     display:flex; align-items:center; justify-content:center; gap:clamp(36px,5.5vw,88px); margin:0 auto clamp(96px,13vh,140px);}
   .esp.eR{flex-direction:row-reverse;}
-  /* 기본값은 :where 로 낮게(시안 A의 전역 규칙과 같은 무게) — .ego .eth .ecv 같은 지면 규칙을 덮지 않게 */
+  
   :where(.esp) img{max-width:100%;}
   :where(.esp) a{color:inherit; text-decoration:none;}
   :where(.esp) button{font:inherit; color:inherit; background:none; border:0; cursor:pointer; text-align:inherit;}
   :where(.esp) a, :where(.esp) button{-webkit-tap-highlight-color:transparent;}
   :where(.esp) :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
-  :where(.esp) a:not([target]){letter-spacing:normal;}   /* 랜딩의 링크 = 갤러리의 버튼과 같은 글자 간격(버튼 기본값) */
-  .ent, .ent *, .ent:before, .ent *:before{transition:none !important;}   /* 방향을 바꿀 때 잠깐 전환 끔 */
-  /* 사진 — 원래 비율, 마스크가 걷히듯(아래에서 들어오면 아래부터, 위에서 들어오면 위부터) */
-  /* 패럴랙스 이동은 2D translate(v1.0.2) — translate3d 는 지면마다 합성 레이어를 늘 만들었다(게시물 312개 = 레이어 624개).
-     움직임·모양은 같다. ※ 이것으로 나아진 것은 레이어 수와 「맨 아래에서 위로」 스크롤뿐 — 갤러리 위쪽 휠 스크롤이 느리던 것은
-     갤러리의 화면 밖 달 묶음을 그리지 않게 해서 고쳤다(v1.0.3 · GALLERY_CSS 의 .mon.cv) */
+  :where(.esp) a:not([target]){letter-spacing:normal;}   
+  .ent, .ent *, .ent:before, .ent *:before{transition:none !important;}   
+  
+  
   .eph{flex:none; position:relative; margin:0; width:min(calc(var(--H) * var(--r)), 62%); transform:translate(0,var(--py,0px));}
   .eph:before{content:''; position:absolute; inset:0; border-radius:3px; box-shadow:0 34px 64px -30px rgba(40,50,35,.42), 0 2px 8px rgba(40,50,35,.06);
     opacity:0; transition:opacity .9s var(--ease) .55s;}
@@ -293,7 +278,7 @@
   .ebdg{position:absolute; left:12px; top:12px; z-index:2; background:rgba(255,253,248,.94); color:var(--accentD); font-size:.78rem; font-weight:700;
     border-radius:999px; padding:4px 11px; letter-spacing:.02em; opacity:0; transition:opacity .6s var(--ease) .8s;}
   .eph.in .ebdg{opacity:1;}
-  /* 글 — 날짜·계정 / 세리프 제목·글 4줄·다음 사진 미리보기·넘겨보기 */
+  
   .etx{flex:0 1 420px; align-self:stretch; min-width:0; display:flex; flex-direction:column; justify-content:space-between; gap:28px; padding:4px 0 2px;
     transform:translate(0,var(--ty,0px));}
   .eu{opacity:0; transform:translateY(calc(var(--dir,1) * 18px)); transition:opacity .9s var(--ease) var(--d,0s), transform .9s var(--ease) var(--d,0s);}
@@ -316,7 +301,7 @@
   .eth:hover{transform:translateY(-4px); box-shadow:0 16px 26px -14px rgba(40,50,35,.45);}
   .eth.emore{display:flex; align-items:center; justify-content:center; width:58px; background:transparent; border:1px solid var(--line); box-shadow:none;
     font-family:var(--serif); color:var(--tx2); font-size:1.02rem;}
-  .eth.emore:before{content:'+' attr(data-n);}   /* 남은 장수 — 글자로 넣지 않고 그림(금액 흔적 검사기의 '+숫자'와 헷갈리지 않게) */
+  .eth.emore:before{content:'+' attr(data-n);}   
   .eth.emore:hover{background:var(--green-wash); box-shadow:none;}
   .ego{--d:.52s; display:inline-flex; align-items:center; gap:10px; margin-top:22px; min-height:46px; padding:0 22px; border-radius:999px; border:1px solid #cfe0cd;
     color:var(--accentD); font-weight:600; font-size:.95rem;
@@ -325,7 +310,7 @@
   .ego:hover{background:var(--green-wash); border-color:var(--accent);}
   .ego:hover .ear{transform:translateX(4px);}
   .esp.ereel .ego:hover .ear{transform:translate(3px,-3px);}
-  /* 태블릿·폰: 사진 위 / 글 아래, 사진은 화면 한쪽 끝에 붙여 번갈아(--edge = 감싼 쪽 좌우 여백) */
+  
   @media (max-width:900px){
     .esp, .esp.eR{flex-direction:column; align-items:flex-start; gap:20px; margin-bottom:clamp(64px,9vh,92px);}
     .eph{width:min(88vw, calc(min(70vh,640px) * var(--r)));}
@@ -339,7 +324,7 @@
     .eth{height:76px; width:calc(76px * var(--tr,.8));}
     .eth.emore{width:52px;}
   }
-  /* 움직임 줄이기 설정이면 전부 끔 */
+  
   @media (prefers-reduced-motion: reduce){
     .eu, .ekk .eln, .eph:before, .ebdg, .eim{opacity:1 !important; transform:none !important; transition:none !important;}
     .emk{-webkit-clip-path:none !important; clip-path:none !important; transition:none !important;}
@@ -405,7 +390,6 @@
   </div>
 </main>
 
-<!-- 푸터 -->
 <footer><div class="wrap">
   <div class="top">
     <div>
@@ -440,7 +424,6 @@ window.EDZ = (function(){
   function dot(t){ return String(t).replace(/-/g,'.'); }
   function norm(s){ return String(s || '').replace(/\s+/g,' ').trim(); }
   function acctKo(a){ return KO[a] || 'maydly'; }
-  // 제목 = 명진 글의 첫 문단(원래 줄바꿈 그대로) · 나머지 = 본문
   function split(p){
     var body = String(p.body || ''), paras = body.split(/\n[ \t]*\n/), first = paras[0] || '';
     if (first && norm(first) === norm(p.title)) return {t:first.split('\n'), rest:paras.slice(1).join('\n\n').trim()};
@@ -485,7 +468,6 @@ window.EDZ = (function(){
       sp.style.setProperty('--ty', (p * amp * .45).toFixed(1) + 'px');
     });
   }
-  // 그림이 다 받아지면 살며시 보이게
   function onImg(e){ var t = e.target; if (t && t.tagName === 'IMG' && t.closest && t.closest('.esp')) t.classList.add('ld'); }
   document.addEventListener('load', onImg, true);
   document.addEventListener('error', onImg, true);
@@ -498,12 +480,10 @@ window.EDZ = (function(){
     var A = o.A || '', link = o.href || null;
     var reel = p.kind === 'reel', n = p.slides.length, r = p.cover.w / p.cover.h, s = split(p), ex = excerpt(s.rest);
     var label = norm(p.title) || 'maydly 작업';
-    // 레티나 화면에서도 선명하게: 표지(목록용)와 1번 사진(같은 그림, 더 큼)을 srcset 으로
     var s0 = p.slides[0], hi = (s0 && s0.w > p.cover.w && Math.abs(s0.w/s0.h - r) < .02) ? s0 : null;
     var cw = o.cw ? o.cw() : Math.min(Math.max(innerWidth-80, 320), 1100);
     var dw = Math.round(Math.min(Math.min(innerHeight*.68, 620) * r, .62 * cw));
     var set = hi ? ' srcset="'+A+p.cover.src+' '+p.cover.w+'w, '+A+hi.src+' '+hi.w+'w" sizes="(min-width: 901px) '+dw+'px, 88vw"' : '';
-    // 다음 사진 미리보기 2~3장(가로 사진이면 2장) — 작은 파일(t)로
     var wide = !reel && p.slides.slice(1,4).some(function(x){ return x.w/x.h > 1.2; });
     var prev = reel ? [] : p.slides.slice(1, wide ? 3 : 4), more = reel ? 0 : n - 1 - prev.length;
     function hit(cls, k, attrs, inner){
@@ -546,7 +526,6 @@ window.EDZ = (function(){
   'use strict';
   var E = window.EDZ;
   var D = window.MAYDLY_IG || {posts:[]}, A = 'site_assets/';
-  // 최신이 위 — 날짜 내림차순(같은 날이면 원래 순서 유지)
   var ALL = (D.posts || []).filter(function(p){ return p && p.time && p.cover && p.slides && p.slides.length; })
     .map(function(p,i){ return [p,i]; })
     .sort(function(a,b){ return a[0].time < b[0].time ? 1 : a[0].time > b[0].time ? -1 : a[1]-b[1]; })
@@ -699,8 +678,6 @@ window.EDZ = (function(){
   }
   curm.addEventListener('click', function(e){ e.stopPropagation(); toggleToc(); });
   tocl.addEventListener('click', function(e){ var b = e.target.closest('button[data-k]'); if (b){ toggleToc(false); jump(b.dataset.k); } });
-  // 목차를 펼친 채 바깥을 누르면 목차만 닫는다 — 그 누름이 아래 사진(크게 보기)·링크로 넘어가지 않게 먼저 잡는 단계에서 막음(v1.0.1)
-  // 상단바의 단추(「상담 신청」·로고)는 일부러 누른 것이라 그대로 눌리게 둔다
   document.addEventListener('click', function(e){
     if (!tocOpen || tocp.contains(e.target) || curm.contains(e.target)) return;
     toggleToc(false);
@@ -779,7 +756,6 @@ window.EDZ = (function(){
     paintText();
     lbx.classList.add('open'); document.documentElement.classList.add('lock');
     setDims(s.w, s.h);
-    // 이미 받아 둔 그림(표지·미리보기)을 먼저 보여 주고, 큰 그림은 받는 대로 교체
     var q = srcEl ? (srcEl.tagName === 'IMG' ? srcEl : srcEl.querySelector('img')) : null;
     if (q && q.complete && q.naturalWidth) li.src = q.currentSrc || q.src; else li.removeAttribute('src');
     if (!reduce && srcEl){
@@ -793,7 +769,6 @@ window.EDZ = (function(){
     }
     requestAnimationFrame(function(){ lbx.classList.add('show'); });
     loadInto(A + s.src, s.w, s.h, 0); preload();
-    // 랜딩에서 주소(#p=)로 바로 열 때는 닫기 단추에 초록 테두리 없이(갤러리 안에서 눌러 열 때와 같은 모습) — 초점은 그대로 닫기 단추로
     try { $('lx').focus(srcEl ? {preventScroll:true} : {preventScroll:true, focusVisible:false}); } catch (err) {}
   }
   function coverInView(i){
@@ -842,8 +817,6 @@ window.EDZ = (function(){
     else if (e.key === 'ArrowLeft'){ e.preventDefault(); step(-1); }
     else if (e.key === 'ArrowRight'){ e.preventDefault(); step(1); }
   });
-  // 손가락으로 밀어 넘기기(세로 스크롤과 헷갈리지 않게 가로로 충분히 밀었을 때만)
-  // 두 손가락(사진 확대·축소)이 한 번이라도 닿은 동작, 확대해 둔 상태에서 옮기는 동작은 넘기기로 보지 않는다(v1.0.1)
   var t0 = null;
   function zoomed(){ return !!(window.visualViewport && visualViewport.scale > 1.01); }
   lbx.addEventListener('touchstart', function(e){
