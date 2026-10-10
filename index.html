@@ -355,6 +355,50 @@
   .namegap{margin-top:34px;}
   .namemark{font-size:clamp(3rem,9vw,5.4rem); font-weight:500; letter-spacing:-.02em; line-height:1.05; margin:26px auto 0; color:var(--tx);}
   .pgrid .pc.wide{grid-column:1 / -1;}
+  
+  .menu{padding:110px 0; background:linear-gradient(180deg,#fbfaf6,var(--bg));}
+  .mstep{max-width:900px; margin:52px auto 0; font-weight:700; font-size:1.05rem; display:flex; align-items:center; gap:10px;}
+  .mstep span{font-family:Georgia,serif; font-size:.8rem; letter-spacing:.12em; color:#fff; background:var(--accent); border-radius:980px; padding:4px 11px; font-weight:700;}
+  .mtypes{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; max-width:900px; margin:16px auto 0;}
+  .mt{background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px 22px 20px;}
+  .mt .no{font-family:Georgia,serif; font-size:.78rem; letter-spacing:.14em; color:var(--gold); font-weight:700;}
+  .mt h3{font-size:1.12rem; margin:6px 0 6px;} .mt .mtg{color:var(--accentD); font-size:.9rem; line-height:1.6;} .mt p{color:var(--tx2); font-size:.92rem; margin-top:8px; line-height:1.6;}
+  .mgrid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; max-width:900px; margin:16px auto 0;}
+  .mc{background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px 24px;}
+  .mc .no{font-family:Georgia,serif; font-size:.86rem; color:var(--accent); font-weight:700; letter-spacing:.06em;}
+  .mc h3{font-size:1.08rem; margin:6px 0 8px;}
+  .mc ul{list-style:none; padding:0; margin:0;} .mc li{color:var(--tx2); padding:4px 0 4px 14px; position:relative; line-height:1.6;}
+  .mc li:before{content:''; position:absolute; left:0; top:14px; width:5px; height:5px; border-radius:50%; background:#9cc3a8;}
+  .mcnote{margin-top:10px; color:var(--tx3); font-size:.86rem; line-height:1.6;}
+  .mout{max-width:900px; margin:16px auto 0; color:var(--tx3); font-size:.92rem; text-align:center;}
+  .mhow{max-width:900px; margin:16px auto 0; background:#e8f0e4; border-radius:20px; padding:26px 28px;}
+  .mhow p{color:var(--tx2);} .mhow ol{margin:12px 0 4px 1.3em; color:var(--tx); line-height:1.9;}
+  .mbtns{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;}
+  @media(max-width:860px){ .mtypes{grid-template-columns:1fr;} }
+  @media(max-width:760px){ .menu{padding:80px 0;} .mgrid{grid-template-columns:1fr;} .mc,.mt{padding:20px;} .mhow{padding:22px 20px;} .mstep{margin-top:40px;} .mbtns .btn{flex:1 1 100%; text-align:center;} }
+  
+  .atabs{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .atabs button{font:inherit; font-size:.92rem; border:1px solid #cfe0cd; background:#fff; color:var(--accentD); border-radius:980px; padding:10px 16px; cursor:pointer; min-height:44px;}
+  .atabs button.on{background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600;}
+  .aform{margin-top:14px; display:grid; gap:10px;}
+  .af label{display:block; font-size:.86rem; color:var(--tx2); margin-bottom:4px;}
+  .af input{font:inherit; font-size:1rem; width:100%; border:1px solid var(--line); border-radius:12px; padding:11px 13px; background:#fff; color:var(--tx);}
+  .af[hidden]{display:none;}
+  .aform .btn{justify-self:start; margin-top:6px; border:0; cursor:pointer; font:inherit; font-weight:600;}
+  .anote{color:var(--accentD); font-size:.92rem;}
+  #aout{font:inherit; font-size:.9rem; width:100%; min-height:140px; border:1px solid var(--line); border-radius:12px; padding:10px;}
+  .navmenu{display:none; width:44px; height:44px; border:0; background:none; cursor:pointer; flex-direction:column; justify-content:center; align-items:center; gap:5px; margin-left:auto; margin-right:6px;}
+  .navmenu span{display:block; width:20px; height:2px; border-radius:2px; background:var(--tx); transition:transform .25s, opacity .25s;}
+  .nav.open .navmenu span:nth-child(1){transform:translateY(7px) rotate(45deg);} .nav.open .navmenu span:nth-child(2){opacity:0;} .nav.open .navmenu span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  @media(max-width:760px){
+    .navmenu{display:flex;}
+    .nav .in{position:relative;}
+    .nav.open .navlinks{display:flex; flex-direction:column; gap:0; position:absolute; left:0; right:0; top:100%; background:rgba(251,250,247,.98); border-bottom:1px solid var(--line); padding:6px 20px 12px; box-shadow:0 18px 30px -20px rgba(40,50,35,.25);}
+    .nav.open .navlinks a{padding:12px 0; font-size:1rem; border-bottom:1px solid var(--line);}
+    .nav.open .navlinks a:last-child{border-bottom:0;}
+    .aform .btn{justify-self:stretch; text-align:center;}
+  }
+  .mcsub{margin-top:12px; font-size:.86rem; font-weight:700; color:var(--accentD);}
 </style>
 </head>
 <body>
@@ -367,9 +411,11 @@
     <a href="#work">작업</a>
     <a href="#process">촬영 과정</a>
     <a href="#signature">단어 여정</a>
+    <a href="#menu">촬영 메뉴</a>
     <a href="#consult">촬영 상담</a>
     <a href="#faq">FAQ</a>
   </div>
+  <button class="navmenu" id="navmenu" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
   <a class="navbook" href="#consult">상담 신청</a>
 </div></div>
 
@@ -478,6 +524,47 @@
   </div>
 </section>
 
+<section class="menu" id="menu"><div class="wrap">
+  <div class="center reveal">
+    <div class="kicker">What we do</div>
+    <h2 class="big">어떤 촬영을 함께할까요?</h2>
+    <p class="subcopy">지금의 나를 담는 사진부터, 브랜드와 함께 만드는 새로운 장면까지.</p>
+  </div>
+  <div class="mstep reveal"><span>STEP 01</span>무엇을 하고 싶나요?</div>
+  <div class="mtypes">
+    <div class="mt reveal"><div class="no">PERSONAL</div><h3>나를 위한 촬영</h3><p class="mtg">개인 프로필 · 콘셉트 화보 · 인물 촬영</p><p>지금의 나를, 나에게 어울리는 장면으로 남겨요.</p></div>
+    <div class="mt reveal"><div class="no">COMMERCIAL</div><h3>브랜드를 위한 촬영</h3><p class="mtg">패션 룩북 · 모델과 제품이 함께하는 화보 · 캠페인</p><p>목적과 제작 규모에 맞춰 함께 설계해요.</p></div>
+    <div class="mt reveal"><div class="no">COLLABORATION</div><h3>함께 만드는 작업</h3><p class="mtg">제품 협찬 · 스타일링 협업 · 공동 창작 프로젝트</p><p>maydly의 촬영과 기획에 브랜드의 제품과 아이디어를 더해요.</p></div>
+  </div>
+  <div class="mstep reveal"><span>STEP 02</span>촬영은 이렇게 맞춰갈 수 있어요</div>
+  <div class="mgrid">
+    <div class="mc reveal"><div class="no">01</div><h3>누구와</h3><ul><li>혼자</li><li>둘 — 커플 · 친구</li><li>여럿이 함께</li></ul></div>
+    <div class="mc reveal"><div class="no">02</div><h3>어디서</h3><ul><li>스튜디오 — 서울 둔촌동 호리존 스튜디오</li><li>야외 — 장소는 상담에서 함께 정해요</li><li>해외 — 출장 일정과 비용은 따로 협의해요</li></ul></div>
+    <div class="mc reveal"><div class="no">03</div><h3>어떤 분위기로</h3><ul><li>원하는 시안 · 레퍼런스를 주셔도 되고</li><li>의상 · 소품 · 색상 중 포인트 하나로 잡아도 돼요</li><li>막막하면 단어 여정으로 함께 찾아요</li><li>꽃을 들고 싶다면 함께 골라요</li></ul></div>
+    <div class="mc reveal"><div class="no">04</div><h3>더하고 싶다면</h3><ul><li>전체 셀렉 원본 사진</li><li>전체 셀렉 색보정</li><li>디테일 보정 더하기</li><li>maydly 표기 없는 사진</li></ul><p class="mcsub">원하시면 해드려요</p><ul><li>빈티지 디카 · 폴라로이드 촬영</li><li>촬영 현장 비하인드(BTS) 영상</li></ul><p class="mcnote">기본 전달본에는 maydly 표기가 들어가요. 더하고 싶은 건 상담에서 함께 안내드려요.</p></div>
+  </div>
+  <p class="mout reveal">헤어 · 메이크업과 원본 RAW 파일은 포함되지 않아요. 메이크업은 매트한 피부 표현을 추천해요.</p>
+  <div class="mstep reveal"><span>STEP 03</span>신청과 협의</div>
+  <div class="mhow reveal" id="apply">
+    <p>어떤 촬영인지 고르고 몇 가지만 적어 주세요. 「내용 복사하고 카카오톡 열기」를 누르면 정리된 글이 복사되고 카카오톡 채널이 열려요. 채팅창에 붙여넣어 보내 주시면 돼요. 구성과 금액은 상담에서 안내드려요.</p>
+    <div class="atabs" role="tablist"><button type="button" class="on" data-t="p">개인 촬영 신청</button><button type="button" data-t="b">브랜드 견적 문의</button><button type="button" data-t="c">협업 제안</button></div>
+    <form class="aform" id="aform" onsubmit="return false">
+      <div class="af" data-for="p b c"><label>성함 · 인스타그램 아이디</label><input name="who" placeholder="예) 김메이 · @maydly_u"></div>
+      <div class="af" data-for="b c"><label>브랜드 · 담당자</label><input name="brand" placeholder="브랜드 이름과 담당하시는 분"></div>
+      <div class="af" data-for="p"><label>누구와</label><input name="with" placeholder="혼자 · 둘(커플 · 친구) · 여럿"></div>
+      <div class="af" data-for="b"><label>촬영 목적</label><input name="goal" placeholder="패션 룩북 · 모델과 제품 화보 · 캠페인 등"></div>
+      <div class="af" data-for="c"><label>제안 내용</label><input name="idea" placeholder="제품 협찬 · 스타일링 협업 · 공동 창작 등"></div>
+      <div class="af" data-for="p b"><label>어디서</label><input name="where" placeholder="스튜디오 · 야외 · 해외"></div>
+      <div class="af" data-for="b"><label>결과물 쓰임</label><input name="use" placeholder="어디에 어떻게 쓰실지(웹 · SNS · 인쇄 등)"></div>
+      <div class="af" data-for="p b c"><label>원하는 분위기 · 참고 자료</label><input name="mood" placeholder="시안 · 레퍼런스 링크나 단어 여정 결과"></div>
+      <div class="af" data-for="p b c"><label>희망 날짜 · 시기</label><input name="date" placeholder="예) 11월 중 평일"></div>
+      <button type="button" class="btn pri" id="asend">내용 복사하고 카카오톡 열기</button>
+      <p class="anote" id="anote" hidden>복사했어요 — 카카오톡 채팅창에 붙여넣어 보내 주세요.</p>
+      <textarea id="aout" readonly hidden></textarea>
+    </form>
+  </div>
+</div></section>
+
 <section class="consult" id="consult">
   <svg class="cwm a" viewBox="0 0 40 40"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
   <svg class="cwm b" viewBox="0 0 40 40"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
@@ -492,16 +579,9 @@
       <p>촬영마다 원하는 모습도, 필요한 준비도 다르기에 이야기를 나눈 뒤 <b>컨셉과 장소, 촬영 시간과 결과물 구성</b>을 함께 정해요.</p>
       <p>비용도 그 내용을 바탕으로 미리 자세히 안내드릴게요.</p>
     </div>
-    <div class="cfhead reveal">상담에서 함께 정하는 것</div>
-    <div class="cfgrid">
-      <div class="cf reveal"><div class="no">01</div><h3>무엇을</h3><p>어떤 ‘지금의 나’를, 어떤 분위기로 남길지</p></div>
-      <div class="cf reveal"><div class="no">02</div><h3>어디서</h3><p>호리존 스튜디오인지, 야외나 다른 공간인지</p></div>
-      <div class="cf reveal"><div class="no">03</div><h3>누구와</h3><p>혼자인지, 둘이나 여럿이 함께인지</p></div>
-      <div class="cf reveal"><div class="no">04</div><h3>어떻게</h3><p>얼마나 찍고, 어디까지 다듬어 전해드릴지</p></div>
-    </div>
     <p class="cpull serif reveal">어떤 사진을 남기고 싶은지,<br><span class="hl">먼저 들려주세요.</span></p>
     <div class="ccta reveal">
-      <a class="btn pri" href="https://ig.me/m/maydly_u" target="_blank" rel="noopener">촬영 상담 신청하기</a>
+      <a class="btn pri" href="#apply">촬영 상담 신청하기</a>
       <a class="btn out" href="https://maydly.github.io/maydly-hub/word-journey/" target="_blank" rel="noopener">단어 여정 먼저 해보기</a>
     </div>
     <p class="cnote reveal">단어 여정에서 고른 다섯 단어는, 상담의 첫 재료가 돼요.</p>
@@ -546,7 +626,7 @@
     <h2 class="big serif">지금의 나를, 담으러 오세요.</h2>
     <p class="subcopy">단어 여정으로 마음을 한 번 데우고 오시면, 그 결로 촬영을 준비해둘게요.</p>
     <div class="cta">
-      <a class="btn pri" href="https://ig.me/m/maydly_u" target="_blank" rel="noopener">@maydly_u로 상담 신청하기</a>
+      <a class="btn pri" href="#apply">상담 신청하기</a>
     </div>
   </div>
 </section>
@@ -558,14 +638,41 @@
       <p style="margin-top:10px; color:var(--tx3); max-width:280px;">오늘의 너에게, 또 한 번 반하다 · mad about you</p>
     </div>
     <div class="cols">
-      <div><div class="h">둘러보기</div><a href="#work">작업</a><a href="#process">촬영 과정</a><a href="#signature">단어 여정</a><a href="#consult">촬영 상담</a></div>
-      <div><div class="h">연결</div><a href="https://ig.me/m/maydly_u" target="_blank" rel="noopener">촬영 상담 신청</a><a href="#faq">FAQ</a><a href="#policy">예약·취소 안내</a></div>
+      <div><div class="h">둘러보기</div><a href="#work">작업</a><a href="#process">촬영 과정</a><a href="#signature">단어 여정</a><a href="#menu">촬영 메뉴</a><a href="#consult">촬영 상담</a></div>
+      <div><div class="h">연결</div><a href="#apply">촬영 상담 신청</a><a href="#faq">FAQ</a><a href="#policy">예약·취소 안내</a></div>
       <div><div class="h">Instagram</div><a href="https://instagram.com/maydly_u" target="_blank" rel="noopener">@maydly_u · 작가 계정</a><a href="https://instagram.com/maydly_s" target="_blank" rel="noopener">@maydly_s · 스튜디오</a><a href="https://instagram.com/maydly_f" target="_blank" rel="noopener">@maydly_f · 야외</a></div>
     </div>
   </div>
   <div class="btm">maydly · MyoungJin Kim</div>
 </div></footer>
 
+<script>
+  (function(){
+    var nav = document.getElementById('nav'), mb = document.getElementById('navmenu');
+    if (nav && mb){
+      mb.addEventListener('click', function(){ var o = nav.classList.toggle('open'); mb.setAttribute('aria-expanded', o); mb.setAttribute('aria-label', o ? '메뉴 닫기' : '메뉴 열기'); });
+      nav.addEventListener('click', function(e){ if (e.target.closest('.navlinks a')){ nav.classList.remove('open'); mb.setAttribute('aria-expanded', false); } });
+    }
+    var form = document.getElementById('aform'); if (!form) return;
+    var KAKAO = 'https://pf.kakao.com/_pxnxgbn/chat', cur = 'p', NAME = {p:'개인 촬영 신청', b:'브랜드 견적 문의', c:'협업 제안'};
+    function show(t){ cur = t;
+      [].forEach.call(document.querySelectorAll('.atabs button'), function(b){ b.classList.toggle('on', b.dataset.t === t); b.setAttribute('aria-selected', b.dataset.t === t); });
+      [].forEach.call(form.querySelectorAll('.af'), function(f){ f.hidden = f.dataset.for.split(' ').indexOf(t) < 0; });
+      document.getElementById('anote').hidden = true; document.getElementById('aout').hidden = true; }
+    document.querySelector('.atabs').addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) show(b.dataset.t); });
+    document.getElementById('asend').addEventListener('click', function(){
+      var lines = ['[maydly ' + NAME[cur] + ']'];
+      [].forEach.call(form.querySelectorAll('.af'), function(f){ if (f.hidden) return; var v = f.querySelector('input').value.trim(); lines.push(f.querySelector('label').textContent + ': ' + (v || '-')); });
+      var txt = lines.join('\n'), out = document.getElementById('aout'), note = document.getElementById('anote');
+      out.value = txt;
+      function done(){ note.hidden = false; }
+      function fail(){ out.hidden = false; out.select(); note.hidden = false; note.textContent = '자동 복사가 안 돼서 아래 글을 직접 복사해 주세요.'; }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fail); else fail();
+      window.open(KAKAO, '_blank', 'noopener');
+    });
+    show('p');
+  })();
+</script>
 <script src="site_assets/ig-data.js"></script>
 <script>
 /* maydly 작업 지면(시안 A 에디토리얼) — 갤러리·랜딩 공용 (조립기 SPREAD_JS · v1.0) */
