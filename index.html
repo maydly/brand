@@ -400,6 +400,14 @@
   }
   .mcsub{margin-top:12px; font-size:.86rem; font-weight:700; color:var(--accentD);}
   .mc li .mcs{color:var(--tx3); font-size:.9rem;}
+  
+  .mlink{display:inline-block; margin-top:10px; padding:6px 0; color:var(--accentD); font-weight:600; font-size:.92rem;}
+  .brandsec{padding:100px 0; background:#fbfaf6; border-top:1px solid var(--line);}
+  .mtypes.two{grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:40px;}
+  .brandsec .mhow{margin-top:16px;}
+  .aout{font:inherit; font-size:.9rem; width:100%; min-height:140px; border:1px solid var(--line); border-radius:12px; padding:10px;}
+  @media(max-width:760px){ .brandsec{padding:80px 0;} .mtypes.two{grid-template-columns:1fr;} .mlink{padding:10px 0;} }
+  .mcnote .mysign{font-family:Georgia,AppleMyungjo,serif; font-style:italic; color:var(--accentD); font-size:1.05em;}
 </style>
 </head>
 <body>
@@ -415,6 +423,7 @@
     <a href="#menu">촬영 안내</a>
     <a href="#consult">촬영 상담</a>
     <a href="#faq">FAQ</a>
+    <a href="#brand">브랜드 · 협업</a>
   </div>
   <button class="navmenu" id="navmenu" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
   <a class="navbook" href="#consult">상담 신청</a>
@@ -527,44 +536,34 @@
 
 <section class="menu" id="menu"><div class="wrap">
   <div class="center reveal">
-    <div class="kicker">What we do</div>
-    <h2 class="big">어떤 촬영을 함께할까요?</h2>
-    <p class="subcopy">지금의 나를 담는 사진부터, 브랜드와 함께 만드는 새로운 장면까지.</p>
+    <div class="kicker">Personal</div>
+    <h2 class="big">나를 위한 촬영</h2>
+    <p class="subcopy">개인 프로필 · 콘셉트 화보 · 인물 촬영<br>지금의 나를, 나에게 어울리는 장면으로 남겨요.</p>
   </div>
-  <div class="mstep reveal"><span>STEP 01</span>무엇을 하고 싶나요?</div>
-  <div class="mtypes">
-    <div class="mt reveal"><div class="no">PERSONAL</div><h3>나를 위한 촬영</h3><p class="mtg">개인 프로필 · 콘셉트 화보 · 인물 촬영</p><p>지금의 나를, 나에게 어울리는 장면으로 남겨요.</p></div>
-    <div class="mt reveal"><div class="no">COMMERCIAL</div><h3>브랜드를 위한 촬영</h3><p class="mtg">패션 룩북 · 모델과 제품이 함께하는 화보</p><p>목적과 제작 규모에 맞춰 함께 설계해요.</p></div>
-    <div class="mt reveal"><div class="no">COLLABORATION</div><h3>함께 만드는 작업</h3><p class="mtg">제품 협찬 · 스타일링 협업 · 공동 창작 프로젝트</p><p>maydly의 촬영과 기획에 브랜드의 제품과 아이디어를 더해요.</p></div>
-  </div>
-  <div class="mstep reveal"><span>STEP 02</span>촬영은 이렇게 맞춰갈 수 있어요</div>
+  <div class="mstep reveal" id="fit"><span>STEP 01</span>이렇게 맞춰가요</div>
   <div class="mgrid">
     <div class="mc reveal"><div class="no">01</div><h3>누구와</h3><ul><li>혼자</li><li>둘 — 커플 · 친구</li><li>여럿이 함께</li></ul></div>
     <div class="mc reveal"><div class="no">02</div><h3>어디서</h3><ul><li>스튜디오 — 기본은 서울 둔촌동 호리존 스튜디오<br><span class="mcs">컨셉에 따라 다른 스튜디오를 대관해 진행하기도 해요</span></li><li>야외 — 장소는 상담에서 함께 정해요</li><li>해외 — 출장 일정과 비용은 따로 협의해요</li></ul></div>
     <div class="mc reveal"><div class="no">03</div><h3>어떤 분위기로</h3><ul><li>원하는 시안 · 레퍼런스를 주셔도 되고</li><li>의상 · 소품 · 색상 중 포인트 하나로 잡아도 돼요</li><li>막막하면 단어 여정으로 함께 찾아요</li><li>꽃을 들고 싶다면 함께 골라요</li></ul></div>
-    <div class="mc reveal"><div class="no">04</div><h3>더하고 싶다면</h3><ul><li>전체 셀렉 원본 사진</li><li>전체 셀렉 색보정</li><li>디테일 보정 더하기</li><li>maydly 표기 없는 사진</li></ul><p class="mcsub">원하시면 해드려요</p><ul><li>빈티지 디카 · 폴라로이드 촬영</li><li>촬영 현장 비하인드(BTS) 영상</li></ul><p class="mcnote">기본 전달본에는 maydly 표기가 들어가요. 더하고 싶은 건 상담에서 함께 안내드려요.</p></div>
+    <div class="mc reveal"><div class="no">04</div><h3>더하고 싶다면</h3><ul><li>전체 셀렉 원본 사진</li><li>전체 셀렉 색보정</li><li>디테일 보정 더하기</li></ul><p class="mcsub">원하시면 해드려요</p><ul><li>빈티지 디카 · 폴라로이드 촬영</li><li>촬영 현장 비하인드(BTS) 영상</li></ul><p class="mcnote">사진 속 함께 했던 시간의 <span class="mysign">maydly</span> 로고가 담겨요.</p></div>
   </div>
   <p class="mout reveal">헤어 · 메이크업과 원본 RAW 파일은 포함되지 않아요. 메이크업은 매트한 피부 표현을 추천해요.</p>
-  <div class="mstep reveal"><span>STEP 03</span>신청과 협의</div>
+  <div class="mstep reveal"><span>STEP 02</span>개인 촬영 신청</div>
   <div class="mhow reveal" id="apply">
-    <p>어떤 촬영인지 고르고 몇 가지만 적어 주세요. 「내용 복사하고 카카오톡 열기」를 누르면 정리된 글이 복사되고 카카오톡 채널이 열려요. 채팅창에 붙여넣어 보내 주시면 돼요. 구성과 금액은 상담에서 안내드려요.</p>
-    <div class="atabs" role="tablist"><button type="button" class="on" data-t="p">개인 촬영 신청</button><button type="button" data-t="b">브랜드 견적 문의</button><button type="button" data-t="c">협업 제안</button></div>
+    <p>몇 가지만 적어 주세요. 「내용 복사하고 카카오톡 열기」를 누르면 정리된 글이 복사되고 카카오톡 채널이 열려요. 채팅창에 붙여넣어 보내 주시면 돼요. 구성과 금액은 상담에서 안내드려요.</p>
     <form class="aform" id="aform" onsubmit="return false">
-      <div class="af" data-for="p b c"><label>성함 · 인스타그램 아이디</label><input name="who" placeholder="예) 김메이 · @maydly_u"></div>
-      <div class="af" data-for="b c"><label>브랜드 · 담당자</label><input name="brand" placeholder="브랜드 이름과 담당하시는 분"></div>
+      <div class="af" data-for="p"><label>성함 · 인스타그램 아이디</label><input name="who" placeholder="예) 김메이 · @maydly_u"></div>
       <div class="af" data-for="p"><label>누구와</label><input name="with" placeholder="혼자 · 둘(커플 · 친구) · 여럿"></div>
-      <div class="af" data-for="b"><label>촬영 목적</label><input name="goal" placeholder="패션 룩북 · 모델과 제품 화보 등"></div>
-      <div class="af" data-for="c"><label>제안 내용</label><input name="idea" placeholder="제품 협찬 · 스타일링 협업 · 공동 창작 등"></div>
-      <div class="af" data-for="p b"><label>어디서</label><input name="where" placeholder="스튜디오 · 야외 · 해외"></div>
-      <div class="af" data-for="b"><label>결과물 쓰임</label><input name="use" placeholder="어디에 어떻게 쓰실지(웹 · SNS · 인쇄 등)"></div>
-      <div class="af" data-for="p b c"><label>원하는 분위기 · 참고 자료</label><input name="mood" placeholder="시안 · 레퍼런스 링크나 단어 여정 결과"></div>
-      <div class="af" data-for="p b c"><label>희망 날짜 · 시기</label><input name="date" placeholder="예) 11월 중 평일"></div>
-      <button type="button" class="btn pri" id="asend">내용 복사하고 카카오톡 열기</button>
-      <p class="anote" id="anote" hidden>복사했어요 — 카카오톡 채팅창에 붙여넣어 보내 주세요.</p>
-      <textarea id="aout" readonly hidden></textarea>
+      <div class="af" data-for="p"><label>어디서</label><input name="where" placeholder="스튜디오 · 야외 · 해외"></div>
+      <div class="af" data-for="p"><label>원하는 분위기 · 참고 자료</label><input name="mood" placeholder="시안 · 레퍼런스 링크나 단어 여정 결과"></div>
+      <div class="af" data-for="p"><label>희망 날짜 · 시기</label><input name="date" placeholder="예) 11월 중 평일"></div>
+      <button type="button" class="btn pri asend">내용 복사하고 카카오톡 열기</button>
+      <p class="anote" hidden></p>
+      <textarea class="aout" readonly hidden></textarea>
     </form>
   </div>
 </div></section>
+
 
 <section class="consult" id="consult">
   <svg class="cwm a" viewBox="0 0 40 40"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
@@ -609,7 +608,7 @@
   <div class="center reveal">
     <div class="kicker">Before you book</div>
     <h2 class="big">예약 전에 꼭 읽어주세요</h2>
-    <p class="subcopy">모든 촬영에 똑같이 적용되는 공통 기본 규정이에요.</p>
+    <p class="subcopy">개인 촬영에 공통으로 적용되는 기본 규정이에요. 브랜드 · 협업은 진행 조건을 따로 안내드려요.</p>
   </div>
   <div class="pgrid">
     <div class="pc wide reveal"><h3>📝 사전 준비</h3><ul><li>의상과 착용 사진, 시안 등 준비 내용은 <b>촬영일 5일 전까지</b> 함께 확인해요</li><li>기한 안에 확인되지 않으면 정상 진행이 어려울 수 있어요</li><li>준비 미확인으로 촬영이 어려운 경우 <b>당일 취소와 같은 기준</b>이 적용돼요</li></ul></div>
@@ -632,6 +631,33 @@
   </div>
 </section>
 
+<section class="brandsec" id="brand"><div class="wrap">
+  <div class="center reveal">
+    <div class="kicker">For brands</div>
+    <h2 class="big">브랜드 · 협업 문의</h2>
+    <p class="subcopy">브랜드 촬영과 협업은 목적과 규모에 맞춰 따로 이야기해요.<br>진행 조건과 일정은 문의 후 개별로 안내드려요.</p>
+  </div>
+  <div class="mtypes two">
+    <div class="mt reveal"><div class="no">COMMERCIAL</div><h3>브랜드를 위한 촬영</h3><p class="mtg">패션 룩북 · 모델과 제품이 함께하는 화보</p><p>목적과 제작 규모에 맞춰 함께 설계해요.</p></div>
+    <div class="mt reveal"><div class="no">COLLABORATION</div><h3>함께 만드는 작업</h3><p class="mtg">제품 협찬 · 스타일링 협업 · 공동 창작 프로젝트</p><p>maydly의 촬영과 기획에 브랜드의 제품과 아이디어를 더해요.</p></div>
+  </div>
+  <div class="mhow reveal">
+    <div class="atabs" id="btabs" role="tablist"><button type="button" class="on" data-t="b">브랜드 견적 문의</button><button type="button" data-t="c">협업 제안</button></div>
+    <form class="aform" id="bform" onsubmit="return false">
+      <div class="af" data-for="b c"><label>브랜드 · 담당자</label><input name="brand" placeholder="브랜드 이름과 담당하시는 분"></div>
+      <div class="af" data-for="b c"><label>연락받을 곳</label><input name="contact" placeholder="인스타그램 아이디나 이메일"></div>
+      <div class="af" data-for="b"><label>촬영 목적</label><input name="goal" placeholder="패션 룩북 · 모델과 제품 화보 등"></div>
+      <div class="af" data-for="b"><label>결과물 쓰임</label><input name="use" placeholder="어디에 어떻게 쓰실지(웹 · SNS · 인쇄 등)"></div>
+      <div class="af" data-for="c"><label>제안 내용</label><input name="idea" placeholder="제품 협찬 · 스타일링 협업 · 공동 창작 등"></div>
+      <div class="af" data-for="b c"><label>참고 자료</label><input name="ref" placeholder="브랜드 소개 · 레퍼런스 링크"></div>
+      <div class="af" data-for="b c"><label>희망 일정</label><input name="date" placeholder="예) 11월 중"></div>
+      <button type="button" class="btn pri asend">내용 복사하고 카카오톡 열기</button>
+      <p class="anote" hidden></p>
+      <textarea class="aout" readonly hidden></textarea>
+    </form>
+  </div>
+</div></section>
+
 <footer><div class="wrap">
   <div class="top">
     <div>
@@ -640,7 +666,7 @@
     </div>
     <div class="cols">
       <div><div class="h">둘러보기</div><a href="#work">작업</a><a href="#process">촬영 과정</a><a href="#signature">단어 여정</a><a href="#menu">촬영 안내</a><a href="#consult">촬영 상담</a></div>
-      <div><div class="h">연결</div><a href="#apply">촬영 상담 신청</a><a href="#faq">FAQ</a><a href="#policy">예약·취소 안내</a></div>
+      <div><div class="h">연결</div><a href="#apply">촬영 상담 신청</a><a href="#brand">브랜드 · 협업 문의</a><a href="#faq">FAQ</a><a href="#policy">예약·취소 안내</a></div>
       <div><div class="h">Instagram</div><a href="https://instagram.com/maydly_u" target="_blank" rel="noopener">@maydly_u · 작가 계정</a><a href="https://instagram.com/maydly_s" target="_blank" rel="noopener">@maydly_s · 스튜디오</a><a href="https://instagram.com/maydly_f" target="_blank" rel="noopener">@maydly_f · 야외</a></div>
     </div>
   </div>
@@ -654,24 +680,29 @@
       mb.addEventListener('click', function(){ var o = nav.classList.toggle('open'); mb.setAttribute('aria-expanded', o); mb.setAttribute('aria-label', o ? '메뉴 닫기' : '메뉴 열기'); });
       nav.addEventListener('click', function(e){ if (e.target.closest('.navlinks a')){ nav.classList.remove('open'); mb.setAttribute('aria-expanded', false); } });
     }
-    var form = document.getElementById('aform'); if (!form) return;
-    var KAKAO = 'https://pf.kakao.com/_pxnxgbn/chat', cur = 'p', NAME = {p:'개인 촬영 신청', b:'브랜드 견적 문의', c:'협업 제안'};
-    function show(t){ cur = t;
-      [].forEach.call(document.querySelectorAll('.atabs button'), function(b){ b.classList.toggle('on', b.dataset.t === t); b.setAttribute('aria-selected', b.dataset.t === t); });
-      [].forEach.call(form.querySelectorAll('.af'), function(f){ f.hidden = f.dataset.for.split(' ').indexOf(t) < 0; });
-      document.getElementById('anote').hidden = true; document.getElementById('aout').hidden = true; }
-    document.querySelector('.atabs').addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) show(b.dataset.t); });
-    document.getElementById('asend').addEventListener('click', function(){
-      var lines = ['[maydly ' + NAME[cur] + ']'];
-      [].forEach.call(form.querySelectorAll('.af'), function(f){ if (f.hidden) return; var v = f.querySelector('input').value.trim(); lines.push(f.querySelector('label').textContent + ': ' + (v || '-')); });
-      var txt = lines.join('\n'), out = document.getElementById('aout'), note = document.getElementById('anote');
-      out.value = txt;
-      function done(){ note.hidden = false; }
-      function fail(){ out.hidden = false; out.select(); note.hidden = false; note.textContent = '자동 복사가 안 돼서 아래 글을 직접 복사해 주세요.'; }
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fail); else fail();
-      window.open(KAKAO, '_blank', 'noopener');
-    });
-    show('p');
+    var KAKAO = 'https://pf.kakao.com/_pxnxgbn/chat';
+    function setup(formId, tabsId, names, first){
+      var form = document.getElementById(formId); if (!form) return;
+      var tabs = tabsId ? document.getElementById(tabsId) : null, cur = first;
+      var out = form.querySelector('.aout'), note = form.querySelector('.anote');
+      function show(t){ cur = t;
+        if (tabs) [].forEach.call(tabs.querySelectorAll('button'), function(b){ b.classList.toggle('on', b.dataset.t === t); b.setAttribute('aria-selected', b.dataset.t === t); });
+        [].forEach.call(form.querySelectorAll('.af'), function(f){ f.hidden = f.dataset.for.split(' ').indexOf(t) < 0; });
+        note.hidden = true; out.hidden = true; }
+      if (tabs) tabs.addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) show(b.dataset.t); });
+      form.querySelector('.asend').addEventListener('click', function(){
+        var lines = ['[maydly ' + names[cur] + ']'];
+        [].forEach.call(form.querySelectorAll('.af'), function(f){ if (f.hidden) return; var v = f.querySelector('input').value.trim(); lines.push(f.querySelector('label').textContent + ': ' + (v || '-')); });
+        var txt = lines.join('\n'); out.value = txt;
+        function done(){ note.textContent = '복사했어요 — 카카오톡 채팅창에 붙여넣어 보내 주세요.'; note.hidden = false; }
+        function fail(){ out.hidden = false; out.select(); note.textContent = '자동 복사가 안 돼서 아래 글을 직접 복사해 주세요.'; note.hidden = false; }
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fail); else fail();
+        window.open(KAKAO, '_blank', 'noopener');
+      });
+      show(first);
+    }
+    setup('aform', null, {p:'개인 촬영 신청'}, 'p');
+    setup('bform', 'btabs', {b:'브랜드 견적 문의', c:'협업 제안'}, 'b');
   })();
 </script>
 <script src="site_assets/ig-data.js"></script>
