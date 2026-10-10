@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>maydly · 작업</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap"></noscript>
+<!--
+  브랜드-005 · 작업(Portfolio) — 시안 A 에디토리얼 지면 (261010 명진 "a가 제일 좋다") · 조립기가 만듦(직접 고치지 말 것)
+  · 게시물 하나 = 잡지 한 지면(스프레드). 표지는 원래 비율 그대로(자르지 않음), 데스크탑 높이 min(68vh,620px)
+  · 달마다 잡지 섹션처럼 큰 세리프 숫자로 구분, 최신 달이 위. 게시물이 늘어도 화면 근처만 그려 넣음(지연 로딩)
+  · 주소: #studio·#outdoor = 탭 / #p=코드 = 그 게시물 크게 보기 / #p=코드&s=번호 = 그 게시물의 n번째 사진부터
+  · 데이터: site_assets/ig-data.js (window.MAYDLY_IG)
+-->
+<style>
+  :root{
+    --bg:#f7f4ec; --panel:#efe9df; --green-wash:#e8f0e4;
+    --tx:#1d231b; --tx2:#586250; --tx3:#8b9182; --line:#e3ded1;
+    --accent:#3f7d57; --accentD:#356a4a; --gold:#a8894f;
+    --sans:Pretendard,'Apple SD Gothic Neo',sans-serif;
+    --serif:Georgia, AppleMyungjo, "Noto Serif KR", serif;
+    --H:min(68vh,620px);                 /* 데스크탑 주인공 사진 높이 */
+    --ease:cubic-bezier(.2,.7,.2,1);
+    --wipe:cubic-bezier(.76,0,.2,1);     /* 마스크가 걷히는 곡선 */
+    --barH:58px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%; text-size-adjust:100%; scroll-padding-top:calc(var(--barH) + 12px);}  /* 키보드 이동 시 상단바 밑에 숨지 않게 */
+  html.lock, html.lock body{overflow:hidden;}
+  /* 크게 보기를 연 동안에도 상단바(sticky)가 붙어 있게(v1.0.2): body 의 overflow:hidden 은 body 를 스크롤 상자로 만들어
+     상단바가 문서 맨 위로 풀렸다가, 닫을 때 배경이 걷히는 동안 상단바 없이 보이고 끝에 튀어나왔다. clip 은 스크롤 상자를 만들지 않는다
+     (clip 을 모르는 옛 브라우저는 위의 hidden 그대로) */
+  html.lock body{overflow:clip;}
+  body{background:var(--bg); color:var(--tx); font-family:var(--sans); line-height:1.6; letter-spacing:-.01em;
+    -webkit-font-smoothing:antialiased; word-break:keep-all; overflow-wrap:break-word;}
+  a{color:inherit; text-decoration:none;}
+  button{font:inherit; color:inherit; background:none; border:0; cursor:pointer; text-align:inherit;}
+  a,button{-webkit-tap-highlight-color:transparent;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+  img{max-width:100%;}
+
+  /* 목업 배너(랜딩과 같음) */
+  .mockbar{background:var(--panel); color:var(--tx3); text-align:center; font-size:.78rem; padding:8px 12px; border-bottom:1px solid var(--line);}
+  .mockbar b{color:var(--accentD);}
+
+  /* ── 상단바 ── */
+  .bar{position:sticky; top:0; z-index:50; background:rgba(247,244,236,.8);
+    -webkit-backdrop-filter:saturate(160%) blur(14px); backdrop-filter:saturate(160%) blur(14px);
+    border-bottom:1px solid transparent; transition:border-color .3s, background .3s;}
+  .bar.scr{border-bottom-color:var(--line); background:rgba(247,244,236,.92);}
+  .bar-in{position:relative; max-width:1180px; margin:0 auto; height:var(--barH);
+    padding:0 max(28px,env(safe-area-inset-right)) 0 max(28px,env(safe-area-inset-left));
+    display:flex; align-items:center; justify-content:space-between; gap:12px;}
+  .bl{display:flex; align-items:center; min-width:0;}
+  .brand{display:inline-flex; align-items:center; gap:6px; min-height:44px; font-size:1.2rem; font-weight:600; letter-spacing:-.02em;}
+  .brand svg{display:block;}
+  .crumb{display:inline-flex; align-items:center; min-height:24px; margin-left:12px; padding-left:12px; border-left:1px solid var(--line); color:var(--tx2); font-size:.9rem; white-space:nowrap;}
+  .br{display:flex; align-items:center; gap:10px; flex:none;}
+  .curm{display:inline-flex; align-items:center; gap:10px; min-height:42px; padding:0 14px 0 16px; border:1px solid var(--line); border-radius:999px;
+    background:rgba(255,253,248,.92); font-size:.8rem; color:var(--tx3); letter-spacing:.06em; transition:border-color .2s, background .2s; flex:none;}
+  .curm:hover{border-color:#cfe0cd; background:#fff;}
+  .cmw{display:inline-grid; overflow:hidden; height:1.5em; line-height:1.5em; font-family:var(--serif); color:var(--tx); font-size:1rem; letter-spacing:.01em; min-width:5.4em;}
+  .cmv{grid-area:1/1; white-space:nowrap; transition:transform .55s var(--ease), opacity .55s var(--ease);}
+  .car{font-size:.75rem; color:var(--tx3); transition:transform .3s var(--ease);}
+  .curm[aria-expanded="true"] .car{transform:rotate(180deg);}
+  /* 상담 신청 — 랜딩 상단 초록 버튼과 같은 모양(목차 단추와 높이를 맞춤) */
+  .navbook{display:inline-flex; align-items:center; justify-content:center; min-height:42px; padding:0 18px; border-radius:980px;
+    background:var(--accent); color:#fff; font-size:.82rem; font-weight:600; white-space:nowrap; transition:background .2s;}
+  .navbook:hover{background:var(--accentD);}
+  /* 목차 펼침 */
+  .tocp{position:absolute; right:max(28px,env(safe-area-inset-right)); top:calc(var(--barH) - 2px); width:min(300px, calc(100vw - 40px));
+    max-height:min(64vh,520px); overflow:auto; overscroll-behavior:contain; background:#fffdf8; border:1px solid var(--line); border-radius:16px;
+    box-shadow:0 24px 60px -20px rgba(40,50,35,.28); padding:8px; opacity:0; visibility:hidden; transform:translateY(-6px) scale(.98); transform-origin:top right;
+    transition:opacity .25s var(--ease), transform .25s var(--ease), visibility 0s linear .25s;}
+  .tocp.open{opacity:1; visibility:visible; transform:none; transition:opacity .25s var(--ease), transform .25s var(--ease);}
+  .tocp .hd{font-family:var(--serif); font-style:italic; color:var(--gold); font-size:.95rem; padding:8px 12px 4px;}
+  .tocp button{display:flex; width:100%; align-items:baseline; justify-content:space-between; gap:12px; min-height:44px; padding:8px 12px; border-radius:10px;}
+  .tocp button:hover, .tocp button.on{background:var(--green-wash);}
+  .tocp .k{font-family:var(--serif); font-size:1.08rem; color:var(--tx);}
+  .tocp .c{font-size:.8rem; color:var(--tx3);}
+
+  /* 클로버 — 여백에 몇 개만 은은하게 */
+  .cwm{position:absolute; pointer-events:none; color:var(--accent); opacity:.075; z-index:0;}
+  .cwm svg{display:block; width:100%; height:auto;}
+
+  /* ── 머리말 ── */
+  .mast{position:relative; overflow:hidden; padding:clamp(30px,5.4vh,50px) 0 0;}
+  .mast-in{position:relative; z-index:1; max-width:1180px; margin:0 auto; padding:0 max(40px,env(safe-area-inset-right)) 0 max(40px,env(safe-area-inset-left));}
+  .kicker{font-size:.78rem; letter-spacing:.24em; text-transform:uppercase; color:var(--accentD); font-weight:600;}
+  .mrow{display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 22px; margin-top:8px;}
+  .mast h1{font-family:var(--serif); font-weight:500; font-size:clamp(2.4rem,4.6vw,3.4rem); line-height:1.1; letter-spacing:-.02em;}
+  .lede{color:var(--tx2); font-size:clamp(1rem,1.5vw,1.1rem);}
+  .tools{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 28px; margin-top:22px; padding-top:14px; border-top:1px solid var(--line);}
+  .tabs{display:flex; gap:8px; flex-wrap:wrap;}
+  .tabs button{min-height:42px; padding:0 18px; border:1px solid var(--line); border-radius:999px; background:#fffdf8; color:var(--tx2); font-size:.9rem;
+    transition:background .2s, border-color .2s, color .2s;}
+  .tabs button:hover{border-color:#cfe0cd;}
+  .tabs button .c{color:var(--tx3); font-size:.78rem; margin-left:6px;}
+  .tabs button.on{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .tabs button.on .c{color:rgba(255,255,255,.78);}
+  .contents{display:flex; align-items:center; gap:10px; min-width:0; flex:1 1 340px; justify-content:flex-end;}
+  .contents .cl{font-family:var(--serif); font-style:italic; color:var(--gold); font-size:.98rem; flex:none;}
+  /* 의도한 가로 스크롤 영역(달이 많아지면 옆으로 밀어 봄) */
+  .cs{display:flex; gap:2px; overflow-x:auto; min-width:0; scrollbar-width:none; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch;}
+  .cs::-webkit-scrollbar{display:none;}
+  .cs.ovf:not(.end){-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent); mask-image:linear-gradient(90deg,#000 82%,transparent);}  /* 달이 많아 넘치면 오른쪽이 흐려져 밀 수 있음을 알림 */
+  .cs button{flex:none; min-height:42px; padding:0 11px; border-radius:999px; font-family:var(--serif); font-size:.98rem; color:var(--tx); white-space:nowrap; transition:background .2s;}
+  .cs button .n{font-family:var(--sans); font-size:.75rem; color:var(--tx3); margin-left:5px; vertical-align:1px;}
+  .cs button:hover{background:var(--green-wash);}
+
+  /* 공통 등장(양방향: 내릴 때·올릴 때 모두, 들어오는 쪽에서) */
+  .rv{opacity:0; transform:translateY(calc(var(--dir,1) * 18px)); transition:opacity .9s var(--ease) var(--d,0s), transform .9s var(--ease) var(--d,0s);}
+  .rv.in{opacity:1; transform:none;}
+
+  /* ── 지면 ── */
+  .feed{--edge:20px; max-width:1180px; margin:0 auto; padding:0 max(40px,env(safe-area-inset-right)) 0 max(40px,env(safe-area-inset-left));}   /* 가로 아이폰은 노치만큼 안쪽으로(v1.0.1) */
+  .mon{position:relative;}
+  /* 화면 밖 달 묶음은 그리지 않음(v1.0.3 · 데스크탑 901px 이상) — 게시물이 수백 개 쌓이면 갤러리 위쪽(최신 달)에서 휠 스크롤이
+     느려지던 것(재검수 312개 실측: 5% 자리 프레임 p50 83ms). 다 그린 달에만 JS 가 .cv 와 그 달의 실제 높이(--mh)를 붙여, 건너뛰는
+     동안에도 같은 높이를 쓴다 — 목차 이동·#p= 주소로 열기·등장 움직임의 자리가 그대로. 달 상자를 좌우 40px 넓히고 안쪽 여백으로
+     되돌려(보이는 자리 같음) 사진 그림자가 잘리지 않게, flow-root 로 마지막 지면의 아래 여백을 달 안에 둔다(보이는 간격 같음) */
+  @media (min-width:901px){
+    .mon{display:flow-root; margin:0 -40px; padding:0 40px;}
+    .mon.cv{content-visibility:auto; contain-intrinsic-size:auto var(--mh,2400px);}
+  }
+  /* 달 = 잡지 섹션: 큰 세리프 숫자 + 옆에 영문 달·게시물 수, 아래 선이 그어짐 */
+  .mh{position:relative; padding:clamp(36px,6vh,64px) 0 clamp(34px,5vh,48px);}
+  .mon:first-child .mh{padding-top:clamp(26px,3.6vh,36px);}
+  .mhr{display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:6px 24px;}
+  .mt{display:flex; align-items:baseline; flex-wrap:wrap; gap:0 .22em; font-family:var(--serif); font-weight:400; line-height:.86; color:var(--tx);}
+  .mw{display:inline-block; overflow:hidden; padding:.08em .03em .06em; margin:-.08em -.03em -.06em;}
+  .mn{display:inline-block; font-size:clamp(4.8rem,9.4vw,7.4rem); letter-spacing:-.035em; font-variant-numeric:lining-nums;
+    transform:translateY(calc(var(--dir,1) * 108%)); transition:transform 1.15s var(--wipe);}
+  .md{font-size:clamp(1.8rem,3.2vw,2.5rem); color:var(--gold); opacity:0; transition:opacity .9s var(--ease) .35s;}
+  .my{display:inline-block; font-size:clamp(1.7rem,3vw,2.4rem); color:var(--tx2); letter-spacing:.02em; font-variant-numeric:lining-nums;
+    transform:translateY(calc(var(--dir,1) * 108%)); transition:transform 1.05s var(--wipe) .14s;}
+  .mh.in .mn, .mh.in .my{transform:none;}
+  .mh.in .md{opacity:1;}
+  .mm{display:flex; flex-direction:column; align-items:flex-end; gap:2px; padding-bottom:.35em; color:var(--tx3); font-size:.86rem; text-align:right;
+    opacity:0; transform:translateY(calc(var(--dir,1) * 10px)); transition:opacity .8s var(--ease) .5s, transform .8s var(--ease) .5s;}
+  .mm i{font-family:var(--serif); font-size:1.1rem; color:var(--gold);}
+  .mh.in .mm{opacity:1; transform:none;}
+  .rule{display:block; height:1px; background:var(--tx); opacity:.2; margin-top:16px; transform:scaleX(0); transform-origin:left center; transition:transform 1.3s var(--wipe) .2s;}
+  .mh.in .rule{transform:scaleX(1);}
+  .mm .cwm{position:relative; display:block; width:30px; margin:0 0 6px; opacity:.1; transform:rotate(14deg);}
+
+  /* 바닥 — 이어지는 안내·인스타 링크(시안 A) 다음에 사이트 푸터(랜딩과 같음) */
+  .sent{height:1px;}
+  .foot{position:relative; overflow:hidden; border-top:1px solid var(--line); margin-top:20px; padding:56px 0 48px; text-align:center; background:var(--panel);}
+  .foot .cwm{left:8%; top:26px; width:40px; transform:rotate(-12deg);}
+  .foot-in{position:relative; z-index:1; max-width:1180px; margin:0 auto; padding:0 max(28px,env(safe-area-inset-right)) 0 max(28px,env(safe-area-inset-left));}
+  .fl{color:var(--tx2); font-size:.95rem;}
+  .fl a{display:inline-flex; align-items:center; min-height:44px; padding:0 4px; color:var(--accentD); font-weight:600;}
+  .foot .more{display:none; color:var(--tx3); font-size:.86rem; margin-bottom:10px;}
+  .foot:not(.done) .more{display:block;}
+  /* 사이트 푸터 — 랜딩 푸터 규칙만 옮김(랜딩 CSS 전체는 넣지 않음: .ph .tx .go .th .tabs .kicker .more .brand 이름이 겹침) */
+  footer{background:var(--panel); color:var(--tx3); font-size:.82rem; border-top:1px solid var(--line); padding:46px 0 calc(46px + env(safe-area-inset-bottom));
+    font-family:'Pretendard','Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; line-height:1.55;}
+  footer .wrap{max-width:1040px; margin:0 auto; padding:0 max(28px,env(safe-area-inset-right)) 0 max(28px,env(safe-area-inset-left));}
+  footer .top{display:flex; justify-content:space-between; gap:28px; flex-wrap:wrap; padding-bottom:26px; border-bottom:1px solid var(--line);}
+  footer .brand{display:flex; align-items:center; gap:5px; min-height:0; color:var(--tx); font-size:1.05rem; font-weight:600; letter-spacing:-.02em;}
+  footer .cols{display:flex; gap:52px; flex-wrap:wrap;}
+  footer .cols .h{color:var(--tx); font-weight:600; margin-bottom:10px;}
+  footer .cols a{display:block; color:var(--tx2); margin:8px 0;}
+  footer .cols a:hover{color:var(--tx);}
+  footer .btm{padding-top:22px;}
+  @media(max-width:760px){ footer .brand{padding:8px 0;} }
+  /* 사이트 푸터 링크 — 손가락으로 누르는 칸 44px(폰·터치 화면 · v1.0.1, 랜딩과 같은 규칙) */
+  @media (max-width:760px), (pointer:coarse){ footer .top .cols a{display:flex; align-items:center; min-height:44px; margin:0;} }
+
+  /* ── 크게 보기 (밝은 배경) ── */
+  .lbx{position:fixed; inset:0; z-index:90; display:none; align-items:center; justify-content:center; gap:40px; padding:28px 92px; overscroll-behavior:contain;}
+  .lbx:before{content:''; position:fixed; inset:0; z-index:-1; background:rgba(247,244,236,.96);
+    -webkit-backdrop-filter:blur(16px) saturate(120%); backdrop-filter:blur(16px) saturate(120%); opacity:0; transition:opacity .4s var(--ease);}
+  .lbx.open{display:flex;}
+  .lbx.show:before{opacity:1;}
+  .lph{position:relative; margin:0; flex:none; display:flex; flex-direction:column; align-items:center; gap:14px;}
+  #li{display:block; border-radius:4px; background:#ebe5d8; box-shadow:0 30px 70px -26px rgba(40,50,35,.42); transform-origin:0 0; max-width:none;}
+  .lct{font-size:.82rem; color:var(--tx3); letter-spacing:.08em; font-variant-numeric:tabular-nums; min-height:1.3em; opacity:0; transition:opacity .4s var(--ease) .2s;}
+  .lbx.show .lct{opacity:1;}
+  .lbx.wait .lct{animation:pulse 1s ease-in-out infinite;}
+  @keyframes pulse{50%{opacity:.4;}}
+  .ltx{flex:0 0 300px; max-height:80vh; overflow:auto; opacity:0; transform:translateY(14px); transition:opacity .5s var(--ease) .18s, transform .5s var(--ease) .18s;}
+  .lbx.show .ltx{opacity:1; transform:none;}
+  .ltx .ekk{letter-spacing:.14em;}
+  .ltx .ekk .eln{transform:scaleX(1);}
+  .ltx h2{font-family:var(--serif); font-weight:500; font-size:1.5rem; line-height:1.42; letter-spacing:-.01em; margin-top:16px; overflow-wrap:anywhere;}
+  .ltx .lb{margin-top:14px; color:var(--tx2); font-size:.98rem; line-height:1.85; white-space:pre-line;}
+  .lsg{display:flex; gap:4px; margin-top:22px;}
+  .lsg i{flex:1; max-width:26px; height:2px; border-radius:2px; background:var(--line); transition:background .3s;}
+  .lsg i.on{background:var(--accent);}
+  .ltx .ig{display:inline-flex; align-items:center; min-height:44px; margin-top:14px; color:var(--accentD); font-weight:600;}
+  .ltx .ig:hover{text-decoration:underline; text-underline-offset:3px;}
+  .lbtn{position:absolute; z-index:3; width:48px; height:48px; border-radius:50%; background:#fff; border:1px solid var(--line); color:var(--accentD);
+    font-size:1.5rem; line-height:1; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(40,50,35,.1);
+    opacity:0; transition:opacity .35s var(--ease) .15s, background .2s;}
+  .lbx.show .lbtn{opacity:1;}
+  .lbtn:hover{background:var(--green-wash);}
+  .lx{position:fixed; top:max(16px,env(safe-area-inset-top)); right:max(16px,env(safe-area-inset-right));}
+  .lpv{left:max(20px,env(safe-area-inset-left)); top:50%; transform:translateY(-50%);}
+  .lnx{right:max(20px,env(safe-area-inset-right)); top:50%; transform:translateY(-50%);}
+  /* 닫을 때는 글·장수·단추가 기다리지 않고 바로 사라지게(v1.0.2) — 열 때의 늦게 나타나기(지연)를 닫을 때도 쓰면 배경이 먼저 걷혀
+     뒤의 지면 글과 두 겹으로 겹쳐 보였다. 열 때 움직임은 그대로 */
+  .lbx:not(.show) .ltx, .lbx:not(.show) .lct, .lbx:not(.show) .lbtn{transition-delay:0s; transition-duration:.18s;}
+
+  /* ── 태블릿·폰 (지면 자체의 폰 규칙은 공용 블록 .esp …) ── */
+  @media (max-width:900px){
+    .bar-in{padding:0 max(20px,env(safe-area-inset-right)) 0 max(20px,env(safe-area-inset-left));}
+    .tocp{right:max(20px,env(safe-area-inset-right));}
+    .mast-in, .feed{padding:0 max(20px,env(safe-area-inset-right)) 0 max(20px,env(safe-area-inset-left));}
+    .tools{flex-direction:column; flex-wrap:nowrap; align-items:stretch; margin-top:18px;}
+    .contents{justify-content:flex-start; flex:none;}
+    .mh{padding:clamp(20px,3vh,32px) 0 clamp(24px,3.4vh,32px);}
+    .mon:first-child .mh{padding-top:clamp(14px,2.4vh,22px);}
+    .mn{font-size:clamp(4rem,19vw,5.6rem);}
+    .my{font-size:clamp(1.45rem,6.2vw,2rem);}
+    .md{font-size:clamp(1.5rem,6.2vw,2rem);}
+    .mm{font-size:.8rem;}
+    .mm i{font-size:1rem;}
+    .rule{margin-top:12px;}
+  }
+  @media (max-width:640px){
+    .contents{display:none;}             /* 폰은 상단바 「목차」로 같은 일을 함 — 첫 화면에 사진이 더 보이게 */
+    .mast .cwm.c2{display:none;}
+  }
+  @media (max-width:860px){
+    .lbx{flex-direction:column; justify-content:flex-start; gap:16px; padding:calc(max(16px,env(safe-area-inset-top)) + 62px) max(16px,env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left)); overflow-y:auto;}
+    .ltx{flex:none; width:100%; max-width:560px; max-height:none; overflow:visible;}
+    .lpv, .lnx{top:calc(max(16px,env(safe-area-inset-top)) + 62px + var(--ih,300px) / 2);}
+    .lpv{left:max(8px,env(safe-area-inset-left));} .lnx{right:max(8px,env(safe-area-inset-right));}
+    .lbtn{width:44px; height:44px; background:rgba(255,255,255,.9);}
+  }
+  /* 폰 상단바: 로고 · 목차 · 상담 신청이 한 줄에 들어가게(가로 넘침 없이, 누르는 것 40px 이상) */
+  @media (max-width:560px){
+    .crumb{display:none;}                /* 폰은 '작업' 표시를 숨김(첫 화면 제목이 「작업」) */
+    .br{gap:8px;}
+    .curm{padding:0 12px 0 14px; gap:8px;}
+    .cmw{min-width:5em;}
+    .navbook{padding:0 15px;}
+  }
+  @media (max-width:400px){
+    .bar-in{padding:0 max(16px,env(safe-area-inset-right)) 0 max(16px,env(safe-area-inset-left));}
+    .curm{padding:0 11px 0 13px; gap:7px;}
+    .cmw{min-width:4.6em;}
+    .navbook{padding:0 14px;}
+  }
+  @media (max-width:340px){ .curm > span:first-child{display:none;} }   /* 아주 좁은 폰(320)은 「목차」 글자만 숨김 — 지금 달·▾ 는 그대로 */
+
+  /* 움직임 줄이기 설정이면 전부 끔 */
+  @media (prefers-reduced-motion: reduce){
+    .rv, .mn, .my, .md, .mm, .rule, .lct, .ltx, .lbtn, .lbx:before{opacity:1 !important; transform:none !important; transition:none !important;}
+    .cmv, .tocp{transition:none !important;}
+  }
+
+  /* ── 작업 지면(시안 A 에디토리얼, v1.0 · 261010 명진 "a가 제일 좋다") — 갤러리·랜딩 공용 ── */
+  .esp{--H:min(68vh,620px); --ease:cubic-bezier(.2,.7,.2,1); --wipe:cubic-bezier(.76,0,.2,1); --serif:Georgia, AppleMyungjo, "Noto Serif KR", serif;
+    font-family:Pretendard,'Apple SD Gothic Neo',sans-serif; line-height:1.6; letter-spacing:-.01em; text-align:start;
+    display:flex; align-items:center; justify-content:center; gap:clamp(36px,5.5vw,88px); margin:0 auto clamp(96px,13vh,140px);}
+  .esp.eR{flex-direction:row-reverse;}
+  /* 기본값은 :where 로 낮게(시안 A의 전역 규칙과 같은 무게) — .ego .eth .ecv 같은 지면 규칙을 덮지 않게 */
+  :where(.esp) img{max-width:100%;}
+  :where(.esp) a{color:inherit; text-decoration:none;}
+  :where(.esp) button{font:inherit; color:inherit; background:none; border:0; cursor:pointer; text-align:inherit;}
+  :where(.esp) a, :where(.esp) button{-webkit-tap-highlight-color:transparent;}
+  :where(.esp) :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+  :where(.esp) a:not([target]){letter-spacing:normal;}   /* 랜딩의 링크 = 갤러리의 버튼과 같은 글자 간격(버튼 기본값) */
+  .ent, .ent *, .ent:before, .ent *:before{transition:none !important;}   /* 방향을 바꿀 때 잠깐 전환 끔 */
+  /* 사진 — 원래 비율, 마스크가 걷히듯(아래에서 들어오면 아래부터, 위에서 들어오면 위부터) */
+  /* 패럴랙스 이동은 2D translate(v1.0.2) — translate3d 는 지면마다 합성 레이어를 늘 만들었다(게시물 312개 = 레이어 624개).
+     움직임·모양은 같다. ※ 이것으로 나아진 것은 레이어 수와 「맨 아래에서 위로」 스크롤뿐 — 갤러리 위쪽 휠 스크롤이 느리던 것은
+     갤러리의 화면 밖 달 묶음을 그리지 않게 해서 고쳤다(v1.0.3 · GALLERY_CSS 의 .mon.cv) */
+  .eph{flex:none; position:relative; margin:0; width:min(calc(var(--H) * var(--r)), 62%); transform:translate(0,var(--py,0px));}
+  .eph:before{content:''; position:absolute; inset:0; border-radius:3px; box-shadow:0 34px 64px -30px rgba(40,50,35,.42), 0 2px 8px rgba(40,50,35,.06);
+    opacity:0; transition:opacity .9s var(--ease) .55s;}
+  .eph.in:before{opacity:1;}
+  .ecv{position:relative; display:block; width:100%; padding:0; cursor:zoom-in; border-radius:3px;}
+  .emk{position:relative; display:block; overflow:hidden; border-radius:3px; aspect-ratio:var(--r); background:#ebe5d8;
+    -webkit-clip-path:inset(calc(50% + var(--dir,1) * 50%) 0 calc(50% - var(--dir,1) * 50%) 0);
+    clip-path:inset(calc(50% + var(--dir,1) * 50%) 0 calc(50% - var(--dir,1) * 50%) 0);
+    transition:clip-path 1.2s var(--wipe), -webkit-clip-path 1.2s var(--wipe);}
+  .eph.in .emk{-webkit-clip-path:inset(0 0 0 0); clip-path:inset(0 0 0 0);}
+  .eim{display:block; width:100%; height:100%; object-fit:contain; transform:scale(1.14); opacity:0;
+    transition:transform 1.8s var(--ease), opacity .6s ease;}
+  .eim.ld{opacity:1;}
+  .eph.in .eim{transform:scale(1);}
+  .ezl{position:absolute; right:12px; bottom:12px; z-index:2; background:rgba(255,253,248,.94); color:var(--accentD); font-size:.78rem; font-weight:600;
+    border-radius:999px; padding:6px 12px; opacity:0; transform:translateY(6px); transition:opacity .3s var(--ease), transform .3s var(--ease); pointer-events:none;}
+  .ecv:hover .ezl{opacity:1; transform:none;}
+  .ebdg{position:absolute; left:12px; top:12px; z-index:2; background:rgba(255,253,248,.94); color:var(--accentD); font-size:.78rem; font-weight:700;
+    border-radius:999px; padding:4px 11px; letter-spacing:.02em; opacity:0; transition:opacity .6s var(--ease) .8s;}
+  .eph.in .ebdg{opacity:1;}
+  /* 글 — 날짜·계정 / 세리프 제목·글 4줄·다음 사진 미리보기·넘겨보기 */
+  .etx{flex:0 1 420px; align-self:stretch; min-width:0; display:flex; flex-direction:column; justify-content:space-between; gap:28px; padding:4px 0 2px;
+    transform:translate(0,var(--ty,0px));}
+  .eu{opacity:0; transform:translateY(calc(var(--dir,1) * 18px)); transition:opacity .9s var(--ease) var(--d,0s), transform .9s var(--ease) var(--d,0s);}
+  .etx.in .eu{opacity:1; transform:none;}
+  .eday{--d:.04s; font-family:var(--serif); font-size:clamp(2.8rem,4vw,3.6rem); line-height:.9; font-weight:400; color:var(--tx);
+    letter-spacing:-.03em; font-variant-numeric:lining-nums; margin-bottom:16px;}
+  .ekk{--d:.1s; display:flex; align-items:center; gap:12px; font-size:.8rem; letter-spacing:.16em; color:var(--accentD); font-weight:600;}
+  .ekk .eln{flex:1; height:1px; background:var(--line); transform:scaleX(0); transform-origin:left center; transition:transform 1.2s var(--wipe) .35s;}
+  .etx.in .ekk .eln{transform:scaleX(1);}
+  .ekk time{font-family:var(--serif); letter-spacing:.05em; color:var(--tx3); font-weight:400; font-size:.95rem;}
+  .ett{--d:.2s; font-family:var(--serif); font-weight:500; font-size:clamp(1.45rem,2.25vw,2.05rem); line-height:1.4; letter-spacing:-.015em; color:var(--tx);
+    text-wrap:balance; overflow-wrap:anywhere;}
+  .eex{--d:.3s; margin-top:16px; color:var(--tx2); font-size:.98rem; line-height:1.8; white-space:pre-line;
+    display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4; overflow:hidden;}
+  .epv{--d:.42s; display:flex; gap:8px; margin-top:24px; align-items:flex-end;}
+  .eth{position:relative; display:block; flex:none; height:88px; width:calc(88px * var(--tr,.8)); border-radius:3px; overflow:hidden; background:#ebe5d8;
+    box-shadow:0 10px 20px -12px rgba(40,50,35,.4); transition:transform .35s var(--ease), box-shadow .35s var(--ease); cursor:zoom-in;}
+  .eth img{display:block; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .5s ease;}
+  .eth img.ld{opacity:1;}
+  .eth:hover{transform:translateY(-4px); box-shadow:0 16px 26px -14px rgba(40,50,35,.45);}
+  .eth.emore{display:flex; align-items:center; justify-content:center; width:58px; background:transparent; border:1px solid var(--line); box-shadow:none;
+    font-family:var(--serif); color:var(--tx2); font-size:1.02rem;}
+  .eth.emore:before{content:'+' attr(data-n);}   /* 남은 장수 — 글자로 넣지 않고 그림(금액 흔적 검사기의 '+숫자'와 헷갈리지 않게) */
+  .eth.emore:hover{background:var(--green-wash); box-shadow:none;}
+  .ego{--d:.52s; display:inline-flex; align-items:center; gap:10px; margin-top:22px; min-height:46px; padding:0 22px; border-radius:999px; border:1px solid #cfe0cd;
+    color:var(--accentD); font-weight:600; font-size:.95rem;
+    transition:opacity .9s var(--ease) var(--d), transform .9s var(--ease) var(--d), background .25s, border-color .25s;}
+  .ego .ear{display:inline-block; transition:transform .3s var(--ease);}
+  .ego:hover{background:var(--green-wash); border-color:var(--accent);}
+  .ego:hover .ear{transform:translateX(4px);}
+  .esp.ereel .ego:hover .ear{transform:translate(3px,-3px);}
+  /* 태블릿·폰: 사진 위 / 글 아래, 사진은 화면 한쪽 끝에 붙여 번갈아(--edge = 감싼 쪽 좌우 여백) */
+  @media (max-width:900px){
+    .esp, .esp.eR{flex-direction:column; align-items:flex-start; gap:20px; margin-bottom:clamp(64px,9vh,92px);}
+    .eph{width:min(88vw, calc(min(70vh,640px) * var(--r)));}
+    .esp.eL .eph{margin-left:calc(-1 * var(--edge,20px));}
+    .esp.eR .eph{margin-right:calc(-1 * var(--edge,20px)); align-self:flex-end;}
+    .emk, .eph:before{border-radius:0;}
+    .etx{flex:none; align-self:stretch; width:100%; gap:14px; padding:0;}
+    .eday{display:none;}
+    .ett{font-size:clamp(1.35rem,5.4vw,1.7rem);}
+    .eex{font-size:.96rem;}
+    .eth{height:76px; width:calc(76px * var(--tr,.8));}
+    .eth.emore{width:52px;}
+  }
+  /* 움직임 줄이기 설정이면 전부 끔 */
+  @media (prefers-reduced-motion: reduce){
+    .eu, .ekk .eln, .eph:before, .ebdg, .eim{opacity:1 !important; transform:none !important; transition:none !important;}
+    .emk{-webkit-clip-path:none !important; clip-path:none !important; transition:none !important;}
+    .eph, .etx{transform:none !important;}
+    .eth, .ego, .ego .ear{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="clv" viewBox="0 0 40 40"><g fill="currentColor">
+    <path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/>
+    <path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/>
+    <path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/>
+    <path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/>
+  </g></symbol>
+</svg>
+
+
+<header class="bar" id="bar">
+  <div class="bar-in">
+    <div class="bl">
+      <a class="brand" href="./" aria-label="maydly 첫 화면으로">maydly <svg width="17" height="17" viewBox="0 0 40 40" aria-hidden="true" style="color:#4f9a6a"><use href="#clv"/></svg></a>
+      <span class="crumb">작업</span>
+    </div>
+    <div class="br">
+      <button class="curm" id="curm" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="tocp" aria-label="달별 목차 열기">
+        <span>목차</span><span class="cmw" id="cmw"><span class="cmv">&nbsp;</span></span><span class="car" aria-hidden="true">▾</span>
+      </button>
+      <a class="navbook" href="./#consult">상담 신청</a>
+    </div>
+    <div class="tocp" id="tocp" role="menu" aria-label="달별 목차"><p class="hd">Contents</p><div id="tocl"></div></div>
+  </div>
+</header>
+
+<main>
+  <section class="mast">
+    <span class="cwm" aria-hidden="true" style="right:6%; top:18px; width:58px; transform:rotate(15deg);"><svg viewBox="0 0 40 40"><use href="#clv"/></svg></span>
+    <span class="cwm c2" aria-hidden="true" style="right:15%; top:64px; width:26px; transform:rotate(-20deg); opacity:.06;"><svg viewBox="0 0 40 40"><use href="#clv"/></svg></span>
+    <div class="mast-in">
+      <p class="kicker rv">Portfolio</p>
+      <div class="mrow rv" style="--d:.08s">
+        <h1>작업</h1>
+        <p class="lede">인스타그램에 올린 작업을 달마다 쌓아 두었어요.</p>
+      </div>
+      <div class="tools rv" style="--d:.2s">
+        <div class="tabs" id="tabs" role="tablist" aria-label="계정별로 보기"></div>
+        <nav class="contents" aria-label="달별 목차"><span class="cl">Contents</span><div class="cs" id="cs" data-hscroll="1"></div></nav>
+      </div>
+    </div>
+  </section>
+
+  <div class="feed" id="feed" aria-live="off"></div>
+  <div class="sent" id="sent" aria-hidden="true"></div>
+
+  <div class="foot" id="foot">
+    <span class="cwm" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#clv"/></svg></span>
+    <div class="foot-in">
+      <p class="more">아래로 내리면 이전 작업이 이어서 나와요.</p>
+      <p class="fl">더 많은 작업은 인스타그램에서 — <a href="https://instagram.com/maydly_s" target="_blank" rel="noopener">@maydly_s</a> · <a href="https://instagram.com/maydly_f" target="_blank" rel="noopener">@maydly_f</a> · <a href="https://instagram.com/maydly_u" target="_blank" rel="noopener">@maydly_u</a></p>
+    </div>
+  </div>
+</main>
+
+<!-- 푸터 -->
+<footer><div class="wrap">
+  <div class="top">
+    <div>
+      <div class="brand">maydly</div>
+      <p style="margin-top:10px; color:var(--tx3); max-width:280px;">너를 담는 순간, 세상이 반하다 · mad about you</p>
+    </div>
+    <div class="cols">
+      <div><div class="h">둘러보기</div><a href="./#signature">단어 여정</a><a href="./#process">촬영 과정</a><a href="./#work">작업</a><a href="./#consult">촬영 상담</a></div>
+      <div><div class="h">연결</div><a href="https://instagram.com/maydly_u" target="_blank" rel="noopener">촬영 상담 신청</a><a href="./#faq">FAQ</a><a href="./#policy">예약·취소 안내</a></div>
+      <div><div class="h">Instagram</div><a href="https://instagram.com/maydly_u" target="_blank" rel="noopener">@maydly_u · 작가 계정</a><a href="https://instagram.com/maydly_s" target="_blank" rel="noopener">@maydly_s · 스튜디오</a><a href="https://instagram.com/maydly_f" target="_blank" rel="noopener">@maydly_f · 야외</a></div>
+    </div>
+  </div>
+  <div class="btm">maydly · MyoungJin Kim</div>
+</div></footer>
+
+<div class="lbx" id="lbx" role="dialog" aria-modal="true" aria-label="게시물 크게 보기">
+  <button class="lbtn lx" id="lx" type="button" aria-label="닫기">×</button>
+  <button class="lbtn lpv" id="lp" type="button" aria-label="이전 사진">‹</button>
+  <figure class="lph" id="lph"><img id="li" alt=""><figcaption class="lct" id="lc"></figcaption></figure>
+  <div class="ltx" id="lt"></div>
+  <button class="lbtn lnx" id="ln" type="button" aria-label="다음 사진">›</button>
+</div>
+
+<script src="site_assets/ig-data.js"></script>
+<script>
+/* maydly 작업 지면(시안 A 에디토리얼) — 갤러리·랜딩 공용 (조립기 SPREAD_JS · v1.0) */
+window.EDZ = (function(){
+  'use strict';
+  var KO = {studio:'스튜디오', outdoor:'야외·스냅'};
+  var reduce = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function dot(t){ return String(t).replace(/-/g,'.'); }
+  function norm(s){ return String(s || '').replace(/\s+/g,' ').trim(); }
+  function acctKo(a){ return KO[a] || 'maydly'; }
+  // 제목 = 명진 글의 첫 문단(원래 줄바꿈 그대로) · 나머지 = 본문
+  function split(p){
+    var body = String(p.body || ''), paras = body.split(/\n[ \t]*\n/), first = paras[0] || '';
+    if (first && norm(first) === norm(p.title)) return {t:first.split('\n'), rest:paras.slice(1).join('\n\n').trim()};
+    return {t:[p.title || ''], rest: norm(body) === norm(p.title) ? '' : body.trim()};
+  }
+  function excerpt(rest){
+    return rest.split('\n').filter(function(l){ return !/^\s*([#@][^\s#@]+\s*)+$/.test(l); }).join('\n').replace(/\n{2,}/g,'\n').trim();
+  }
+
+  /* ── 등장 효과: 양방향 ──
+     들어오는 순간의 위치로 방향을 정한다(아래에서 들어오면 아래부터, 위에서 들어오면 위부터).
+     목차 점프처럼 화면을 거치지 않고 건너뛴 경우에도 맞도록, 숨김 상태를 전환 없이 먼저 맞춘 뒤 등장 */
+  var userScrolled = false;
+  addEventListener('scroll', function(){ userScrolled = true; }, {passive:true, once:true});
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el = e.target, r = e.boundingClientRect;
+      var d = !userScrolled ? 1 : ((r.top + r.height / 2) > innerHeight / 2 ? 1 : -1);
+      if (!el.classList.contains('in') && el.style.getPropertyValue('--dir') !== String(d)){
+        el.classList.add('ent'); el.style.setProperty('--dir', d); void el.offsetWidth; el.classList.remove('ent');
+      }
+      el.classList.add('in');
+    }); },
+    {threshold:.08, rootMargin:'0px 0px -6% 0px'});
+  var oo = new IntersectionObserver(function(es){ es.forEach(function(e){ if (!e.isIntersecting){
+      e.target.style.setProperty('--dir', e.boundingClientRect.top > 0 ? 1 : -1); e.target.classList.remove('in'); } }); },
+    {threshold:0, rootMargin:'15% 0px 15% 0px'});
+  function watch(el){ if (!el) return; if (reduce){ el.classList.add('in'); return; } io.observe(el); oo.observe(el); }
+  function unwatch(el){ if (!el) return; io.unobserve(el); oo.unobserve(el); }
+
+  /* ── 패럴랙스(아주 약하게): 사진은 살짝 늦게, 글은 살짝 빠르게 — 스크롤 때 para()를 부른다 ── */
+  var vis = new Set();
+  var po = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) vis.add(e.target); else vis.delete(e.target); }); },
+    {rootMargin:'10% 0px 10% 0px'});
+  function para(){
+    if (reduce) return;
+    var vh = innerHeight, amp = innerWidth <= 900 ? 8 : 16;
+    vis.forEach(function(sp){
+      var r = sp.getBoundingClientRect(), p = ((r.top + r.height/2) - vh/2) / vh;
+      p = Math.max(-1, Math.min(1, p));
+      sp.style.setProperty('--py', (-p * amp).toFixed(1) + 'px');
+      sp.style.setProperty('--ty', (p * amp * .45).toFixed(1) + 'px');
+    });
+  }
+  // 그림이 다 받아지면 살며시 보이게
+  function onImg(e){ var t = e.target; if (t && t.tagName === 'IMG' && t.closest && t.closest('.esp')) t.classList.add('ld'); }
+  document.addEventListener('load', onImg, true);
+  document.addEventListener('error', onImg, true);
+
+  /* ── 지면 하나 ──
+     o.A = 사진 폴더 주소, o.cw() = 지면이 들어갈 폭, o.lazy = 사진 전부 나중에 받기
+     o.href(code, n) 있으면 = 링크(랜딩: 갤러리로 가서 n번째 사진부터 크게) · 없으면 = 버튼(갤러리: 그 자리에서 크게, data-s 는 0부터) */
+  function spread(p, i, o){
+    o = o || {};
+    var A = o.A || '', link = o.href || null;
+    var reel = p.kind === 'reel', n = p.slides.length, r = p.cover.w / p.cover.h, s = split(p), ex = excerpt(s.rest);
+    var label = norm(p.title) || 'maydly 작업';
+    // 레티나 화면에서도 선명하게: 표지(목록용)와 1번 사진(같은 그림, 더 큼)을 srcset 으로
+    var s0 = p.slides[0], hi = (s0 && s0.w > p.cover.w && Math.abs(s0.w/s0.h - r) < .02) ? s0 : null;
+    var cw = o.cw ? o.cw() : Math.min(Math.max(innerWidth-80, 320), 1100);
+    var dw = Math.round(Math.min(Math.min(innerHeight*.68, 620) * r, .62 * cw));
+    var set = hi ? ' srcset="'+A+p.cover.src+' '+p.cover.w+'w, '+A+hi.src+' '+hi.w+'w" sizes="(min-width: 901px) '+dw+'px, 88vw"' : '';
+    // 다음 사진 미리보기 2~3장(가로 사진이면 2장) — 작은 파일(t)로
+    var wide = !reel && p.slides.slice(1,4).some(function(x){ return x.w/x.h > 1.2; });
+    var prev = reel ? [] : p.slides.slice(1, wide ? 3 : 4), more = reel ? 0 : n - 1 - prev.length;
+    function hit(cls, k, attrs, inner){
+      return link ? '<a class="'+cls+'" href="'+esc(link(p.code, k + 1))+'"'+attrs+'>'+inner+'</a>'
+                  : '<button class="'+cls+'" type="button" data-s="'+k+'"'+attrs+'>'+inner+'</button>';
+    }
+    var el = document.createElement('article');
+    el.className = 'esp ' + (i % 2 ? 'eR' : 'eL') + (reel ? ' ereel' : '');
+    el.style.setProperty('--r', r.toFixed(4));
+    el.dataset.i = i; el.dataset.code = p.code;
+    el.innerHTML =
+      '<figure class="eph">' + hit('ecv', 0, ' aria-label="'+esc(label)+' — 크게 보기"',
+          '<span class="emk"><img class="eim" src="'+A+p.cover.src+'"'+set+' width="'+p.cover.w+'" height="'+p.cover.h+'" alt="maydly '+acctKo(p.acct)+' 촬영 — '+esc(label)+'"'
+          + (!o.lazy && i < 2 ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async"></span>'
+          + '<span class="ezl" aria-hidden="true">크게 보기</span>')
+      + (reel ? '<span class="ebdg">▶ 영상</span>' : '') + '</figure>'
+      + '<div class="etx"><div class="etop"><p class="eday eu" aria-hidden="true">'+esc(p.time.slice(8,10))+'</p><p class="ekk eu"><span>'+acctKo(p.acct)+'</span><i class="eln" aria-hidden="true"></i><time datetime="'+esc(p.time)+'">'+dot(p.time)+'</time></p></div>'
+      + '<div class="ebot">' + (s.t.join('').trim() ? '<h3 class="ett eu">'+s.t.map(esc).join('<br>')+'</h3>' : '')   // 글 없는 게시물은 빈 제목 칸을 그리지 않음(v1.0.1)
+      + (ex ? '<p class="eex eu">'+esc(ex)+'</p>' : '')
+      + (prev.length ? '<div class="epv eu">' + prev.map(function(x, j){
+          return hit('eth', j + 1, ' style="--tr:'+Math.min(x.w/x.h, 1.5).toFixed(3)+'" aria-label="'+(j+2)+'번째 사진 크게 보기"',
+                     '<img src="'+A+(x.t || x.src)+'" alt="" loading="lazy" decoding="async">');
+        }).join('') + (more > 0 ? hit('eth emore', prev.length + 1, ' data-n="'+more+'" aria-label="나머지 '+more+'장 보기"', '') : '') + '</div>' : '')
+      + (reel ? '<a class="ego eu" href="'+esc(p.url)+'" target="_blank" rel="noopener">▶ 인스타그램에서 영상 보기 <span class="ear">↗</span></a>'
+              : hit('ego eu', 0, '', (n > 1 ? n+'장 넘겨보기' : '크게 보기')+' <span class="ear" aria-hidden="true">→</span>'))
+      + '</div></div>';
+    return el;
+  }
+  function mount(sp){
+    watch(sp.querySelector('.eph')); watch(sp.querySelector('.etx')); if (!reduce) po.observe(sp);
+    Array.prototype.forEach.call(sp.querySelectorAll('img'), function(im){ if (im.complete && im.naturalWidth) im.classList.add('ld'); });
+  }
+  function unmount(sp){ unwatch(sp.querySelector('.eph')); unwatch(sp.querySelector('.etx')); po.unobserve(sp); vis.delete(sp); }
+  return {KO:KO, reduce:reduce, esc:esc, dot:dot, norm:norm, acctKo:acctKo, split:split, excerpt:excerpt,
+          watch:watch, unwatch:unwatch, para:para, spread:spread, mount:mount, unmount:unmount};
+})();
+</script>
+<script>
+(function(){
+  'use strict';
+  var E = window.EDZ;
+  var D = window.MAYDLY_IG || {posts:[]}, A = 'site_assets/';
+  // 최신이 위 — 날짜 내림차순(같은 날이면 원래 순서 유지)
+  var ALL = (D.posts || []).filter(function(p){ return p && p.time && p.cover && p.slides && p.slides.length; })
+    .map(function(p,i){ return [p,i]; })
+    .sort(function(a,b){ return a[0].time < b[0].time ? 1 : a[0].time > b[0].time ? -1 : a[1]-b[1]; })
+    .map(function(x){ return x[0]; });
+  var KO = E.KO;
+  var EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var reduce = E.reduce;
+  var $ = function(id){ return document.getElementById(id); };
+  var feed=$('feed'), sent=$('sent'), tabs=$('tabs'), cs=$('cs'), tocl=$('tocl'), tocp=$('tocp'), curm=$('curm'), cmw=$('cmw'), bar=$('bar'), foot=$('foot');
+  var cur='all', list=[], rendered=0, lastKey=null, curBody=null, monEls=[], counts={}, months=[], CH=4;
+
+  var esc = E.esc, dot = E.dot, split = E.split, acctKo = E.acctKo, watch = E.watch, unwatch = E.unwatch;
+  function mlabel(k){ return k.slice(5,7) + ' · ' + k.slice(0,4); }
+  Array.prototype.forEach.call(document.querySelectorAll('.rv'), watch);
+
+  /* ── 탭(계정) ── */
+  function drawTabs(){
+    var c = {all:ALL.length, studio:0, outdoor:0};
+    ALL.forEach(function(p){ if (c[p.acct] != null) c[p.acct]++; });
+    tabs.innerHTML = ['all','studio','outdoor'].filter(function(k){ return c[k] > 0 || k === 'all'; }).map(function(k){
+      var on = k === cur;
+      return '<button type="button" role="tab" data-k="'+k+'" class="'+(on?'on':'')+'" aria-selected="'+on+'">'+(k==='all'?'전체':KO[k])+'<span class="c">'+c[k]+'</span></button>';
+    }).join('');
+  }
+  /* ── 목차(달) ── */
+  function drawToc(){
+    counts = {}; months = [];
+    list.forEach(function(p){ var k = p.time.slice(0,7); if (!counts[k]){ counts[k] = 0; months.push(k); } counts[k]++; });
+    cs.innerHTML = months.map(function(k){ return '<button type="button" data-k="'+k+'" aria-label="'+k.slice(0,4)+'년 '+(+k.slice(5,7))+'월로 이동">'+mlabel(k)+'<span class="n">'+counts[k]+'</span></button>'; }).join('');
+    tocl.innerHTML = months.map(function(k){ return '<button type="button" role="menuitem" data-k="'+k+'"><span class="k">'+mlabel(k)+'</span><span class="c">게시물 '+counts[k]+'개</span></button>'; }).join('');
+    csEdge();
+  }
+  function csEdge(){ cs.classList.toggle('ovf', cs.scrollWidth > cs.clientWidth + 2); cs.classList.toggle('end', cs.scrollLeft + cs.clientWidth >= cs.scrollWidth - 2); }
+  cs.addEventListener('scroll', csEdge, {passive:true});
+
+  /* ── 달 머리 ── */
+  function makeMonth(k, idx){
+    var y = k.slice(0,4), m = k.slice(5,7), sec = document.createElement('section');
+    sec.className = 'mon'; sec.id = 'm-' + k; sec.dataset.k = k;
+    sec.innerHTML = '<header class="mh">'
+      + '<div class="mhr"><h2 class="mt" aria-label="'+y+'년 '+(+m)+'월"><span class="mw" aria-hidden="true"><span class="mn">'+m+'</span></span>'
+      + '<span class="md" aria-hidden="true">·</span><span class="mw" aria-hidden="true"><span class="my">'+y+'</span></span></h2>'
+      + '<p class="mm">'+(idx % 2 === 1 ? '<span class="cwm" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#clv"/></svg></span>' : '')
+      + '<i>'+EN[(+m)-1]+'</i><span>게시물 '+counts[k]+'개</span></p></div>'
+      + '<i class="rule" aria-hidden="true"></i></header><div class="mb"></div>';
+    return sec;
+  }
+
+  /* ── 화면 밖 달 묶음 그리지 않기(v1.0.3 · 데스크탑) ── 다 그린 달(다음 달이 시작됐거나 마지막까지 그림)에 .cv 를 붙이면
+     화면 밖에 있을 때 브라우저가 그 달을 그리지 않는다(CSS .mon.cv). 건너뛰는 동안 쓰는 높이(--mh)는 붙이기 직전에 잰 실제 높이라
+     목차 이동·#p= 주소로 열기·등장 움직임이 지금과 같은 자리를 쓴다. 창 크기가 바뀌면 다 풀었다가 다시 재서 붙인다 */
+  var cvOK = !!(window.CSS && CSS.supports && CSS.supports('content-visibility', 'auto') && window.matchMedia);
+  var cvMq = cvOK ? matchMedia('(min-width: 901px)') : null, cvT = 0;
+  function cvSeal(sec){
+    if (!cvOK || !cvMq.matches || !sec || sec.classList.contains('cv')) return;
+    sec.style.setProperty('--mh', sec.getBoundingClientRect().height + 'px'); sec.classList.add('cv');   // 소수점까지(반올림 오차가 쌓이지 않게)
+  }
+  function cvReset(){
+    if (!cvOK) return;
+    monEls.forEach(function(sec){ sec.classList.remove('cv'); sec.style.removeProperty('--mh'); });
+    if (!cvMq.matches) return;
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){   // 한 번 그린 뒤(기억해 둔 옛 높이가 지워진 뒤) 다시 재서 붙임
+      var done = monEls.filter(function(sec, i){ return i < monEls.length - 1 || rendered >= list.length; });
+      var hs = done.map(function(sec){ return sec.getBoundingClientRect().height; });   // 먼저 다 재고 → 그다음 붙임(재고 쓰기를 번갈아 하지 않게)
+      done.forEach(function(sec, i){ sec.style.setProperty('--mh', hs[i] + 'px'); sec.classList.add('cv'); });
+    }); });
+  }
+
+  /* ── 지연 로딩: 화면 근처까지만 그려 넣고, 내려가면 이어 붙임 ── */
+  function cw(){ return Math.min(Math.max(innerWidth-80, 320), 1100); }
+  function renderMore(n){
+    var end = Math.min(list.length, rendered + n);
+    for (var i = rendered; i < end; i++){
+      var p = list[i], k = p.time.slice(0,7);
+      if (k !== lastKey){
+        if (monEls.length) cvSeal(monEls[monEls.length - 1]);   // 앞 달은 다 그림(v1.0.3)
+        var sec = makeMonth(k, monEls.length); feed.appendChild(sec); monEls.push(sec);
+        curBody = sec.querySelector('.mb'); lastKey = k; watch(sec.querySelector('.mh'));
+      }
+      var sp = E.spread(p, i, {A:A, cw:cw}); curBody.appendChild(sp); E.mount(sp); warmWatch(sp);
+    }
+    rendered = end;
+    if (rendered >= list.length && monEls.length) cvSeal(monEls[monEls.length - 1]);   // 마지막 달도 다 그림(v1.0.3)
+    foot.classList.toggle('done', rendered >= list.length);
+  }
+  function fill(){ var g = 0; while (rendered < list.length && g++ < 400 && sent.getBoundingClientRect().top < innerHeight + 1600) renderMore(CH); }
+  function renderTo(idx){ var g = 0; while (rendered <= idx && rendered < list.length && g++ < 400) renderMore(CH); fill(); }
+  var so = new IntersectionObserver(function(es){ if (es[0].isIntersecting) fill(); }, {rootMargin:'0px 0px 1600px 0px'});
+  so.observe(sent);
+
+  function build(){
+    Array.prototype.forEach.call(feed.querySelectorAll('.mh'), unwatch);
+    Array.prototype.forEach.call(feed.querySelectorAll('.esp'), E.unmount);
+    warmReset();
+    list = ALL.filter(function(p){ return cur === 'all' || p.acct === cur; });
+    feed.innerHTML = ''; rendered = 0; lastKey = null; curBody = null; monEls = []; curK = null;
+    drawToc(); fill(); frame();
+  }
+
+  /* ── 스크롤: 패럴랙스 + 지금 보는 달 + 상단바 ── */
+  var ticking = false, lastY = scrollY, curK = null;
+  function setMonth(k, dir){
+    if (!k || k === curK) return; curK = k;
+    var old = cmw.querySelector('.cmv:last-child'), nu = document.createElement('span');
+    nu.className = 'cmv'; nu.textContent = mlabel(k);
+    if (reduce || !old || old.textContent.trim() === ''){ cmw.innerHTML = ''; cmw.appendChild(nu); return; }
+    nu.style.transform = 'translateY(' + (dir > 0 ? 100 : -100) + '%)'; nu.style.opacity = '0';
+    cmw.appendChild(nu);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      old.style.transform = 'translateY(' + (dir > 0 ? -100 : 100) + '%)'; old.style.opacity = '0';
+      nu.style.transform = 'translateY(0)'; nu.style.opacity = '1';
+    }); });
+    setTimeout(function(){ if (old.parentNode) old.parentNode.removeChild(old); }, 650);
+  }
+  function frame(){
+    ticking = false;
+    var vh = innerHeight, y = scrollY;
+    E.para();
+    var k = null, lim = Math.max(bar.getBoundingClientRect().bottom + 40, vh * .4);   // 화면 40% 선을 넘은 달 = 지금 보는 달
+    for (var i = 0; i < monEls.length; i++){ if (monEls[i].getBoundingClientRect().top <= lim) k = monEls[i].dataset.k; else break; }
+    setMonth(k || months[0], y >= lastY ? 1 : -1);
+    lastY = y;
+    bar.classList.toggle('scr', y > 40);
+  }
+  addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(frame); } }, {passive:true});
+  addEventListener('resize', function(){ fill(); csEdge(); if (!ticking){ ticking = true; requestAnimationFrame(frame); } if (lbx.classList.contains('open')) fitNow();
+    clearTimeout(cvT); cvT = setTimeout(cvReset, 250); });   // 창 크기가 바뀌면 달 높이를 다시 잰다(v1.0.3)
+
+  /* ── 달로 이동 ── */
+  function jump(k){
+    var idx = -1; for (var i = 0; i < list.length; i++){ if (list[i].time.slice(0,7) === k){ idx = i; break; } }
+    if (idx < 0) return;
+    renderTo(idx + 1);
+    var sec = $('m-' + k); if (!sec) return;
+    var t = sec.querySelector('.mt').getBoundingClientRect().top + scrollY - bar.getBoundingClientRect().height - 30;
+    var d = t - scrollY;
+    if (!reduce && Math.abs(d) > innerHeight * 2.5) scrollTo(0, t - Math.sign(d) * innerHeight * .9);  // 먼 곳은 가까이 뛰고 마지막만 부드럽게
+    scrollTo({top:t, behavior: reduce ? 'auto' : 'smooth'});
+  }
+  cs.addEventListener('click', function(e){ var b = e.target.closest('button[data-k]'); if (b) jump(b.dataset.k); });
+  var tocOpen = false;
+  function toggleToc(force){
+    tocOpen = force != null ? force : !tocOpen;
+    if (tocOpen){   // 목차 단추 바로 아래로(옆에 「상담 신청」이 생겨서) — 폰에서 화면 밖으로 나가지 않게
+      var bi = tocp.parentNode.getBoundingClientRect(), c = curm.getBoundingClientRect();
+      tocp.style.right = Math.max(12, Math.min(bi.right - c.right, bi.width - tocp.offsetWidth - 12)) + 'px';
+    }
+    tocp.classList.toggle('open', tocOpen); curm.setAttribute('aria-expanded', String(tocOpen));
+    if (tocOpen) Array.prototype.forEach.call(tocl.children, function(b){ b.classList.toggle('on', b.dataset.k === curK); });
+  }
+  curm.addEventListener('click', function(e){ e.stopPropagation(); toggleToc(); });
+  tocl.addEventListener('click', function(e){ var b = e.target.closest('button[data-k]'); if (b){ toggleToc(false); jump(b.dataset.k); } });
+  // 목차를 펼친 채 바깥을 누르면 목차만 닫는다 — 그 누름이 아래 사진(크게 보기)·링크로 넘어가지 않게 먼저 잡는 단계에서 막음(v1.0.1)
+  // 상단바의 단추(「상담 신청」·로고)는 일부러 누른 것이라 그대로 눌리게 둔다
+  document.addEventListener('click', function(e){
+    if (!tocOpen || tocp.contains(e.target) || curm.contains(e.target)) return;
+    toggleToc(false);
+    if (!bar.contains(e.target)){ e.preventDefault(); e.stopPropagation(); }
+  }, true);
+
+  tabs.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-k]'); if (!b || b.dataset.k === cur) return;
+    cur = b.dataset.k; drawTabs(); build();
+    var top = feed.getBoundingClientRect().top + scrollY - bar.getBoundingClientRect().height;
+    if (scrollY > top) scrollTo(0, top);
+    if (history.replaceState) history.replaceState(null, '', cur === 'all' ? location.pathname + location.search : '#' + cur);
+  });
+
+  /* ── 미리보기의 큰 사진 미리 받기(v1.0.1) ── 미리보기는 작은 사진(ig/s)이라, 눌렀을 때 큰 사진이 아직 없으면 크게 보기가
+     흐린 사진으로 시작한다(시안 A는 미리보기가 큰 사진이라 처음부터 선명). ① 손가락·마우스가 미리보기에 닿는 순간
+     ② 미리보기 줄이 화면에 0.4초 머물면 — 그 지면 미리보기들의 큰 사진을 미리 받아 둔다(받아 둔 건 다시 받지 않음) */
+  var warmed = {}, wt = new Map();
+  function warm(p, k){ var x = p && p.slides && p.slides[k]; if (!x) return; var url = A + x.src; if (warmed[url]) return; var im = new Image(); im.decoding = 'async'; im.src = url; warmed[url] = im; }
+  function warmRow(row){ var sp = row.closest('.esp'), p = sp && list[+sp.dataset.i]; if (!p || p.code !== sp.dataset.code) return; Array.prototype.forEach.call(row.querySelectorAll('.eth[data-s]'), function(b){ warm(p, +b.dataset.s); }); }
+  function warmEl(t){ var b = t && t.closest ? t.closest('.eth[data-s]') : null; if (!b || !feed.contains(b)) return; var sp = b.closest('.esp'), p = sp && list[+sp.dataset.i]; if (p && p.code === sp.dataset.code) warm(p, +b.dataset.s); }
+  feed.addEventListener('pointerover', function(e){ warmEl(e.target); });
+  feed.addEventListener('pointerdown', function(e){ warmEl(e.target); });
+  feed.addEventListener('touchstart', function(e){ warmEl(e.target); }, {passive:true});
+  var wo = new IntersectionObserver(function(es){ es.forEach(function(e){
+      var row = e.target;
+      if (e.isIntersecting){ if (!wt.has(row)) wt.set(row, setTimeout(function(){ wt.delete(row); if (row.isConnected) warmRow(row); }, 400)); }
+      else if (wt.has(row)){ clearTimeout(wt.get(row)); wt.delete(row); }
+    }); }, {threshold:.5});
+  function warmWatch(sp){ var row = sp.querySelector('.epv'); if (row) wo.observe(row); }
+  function warmReset(){ wo.disconnect(); wt.forEach(function(t){ clearTimeout(t); }); wt.clear(); }
+
+  /* ── 크게 보기 ── */
+  var lbx=$('lbx'), li=$('li'), lc=$('lc'), lt=$('lt'), lph=$('lph'), pi=0, si=0, ptok=0, opener=null, openedPi=-1, openedSi=0, closeT=0;
+  function fit(w, h){
+    var vw = innerWidth, vh = innerHeight, mob = vw <= 860;
+    var mw = mob ? vw * .92 : Math.min(vw - 184 - 340, 900), mh = mob ? vh * .62 : vh * .82;
+    var s = Math.min(mw / w, mh / h, 1.6);
+    return [Math.max(40, Math.round(w * s)), Math.max(40, Math.round(h * s))];
+  }
+  function setDims(w, h){ var d = fit(w, h); li.style.width = d[0] + 'px'; li.style.height = d[1] + 'px'; lbx.style.setProperty('--ih', d[1] + 'px'); }
+  function fitNow(){ var s = list[pi] && list[pi].slides[si]; if (s) setDims(s.w, s.h); }
+  function loadInto(url, w, h, dir){
+    var tok = ++ptok, done = false, im = new Image();
+    function go(){
+      if (done || tok !== ptok) return; done = true; lbx.classList.remove('wait');
+      setDims(w, h); if (li.getAttribute('src') !== url) li.src = url;
+      if (dir && !reduce && li.animate) li.animate([{opacity:0, transform:'translateX(' + (dir * 40) + 'px)'}, {opacity:1, transform:'none'}], {duration:460, easing:'cubic-bezier(.2,.7,.2,1)'});
+    }
+    im.onload = go; im.onerror = go; im.decoding = 'async'; im.src = url;
+    if (im.complete && im.naturalWidth) go(); else lbx.classList.add('wait');
+  }
+  function lbText(p){
+    var s = split(p), n = p.slides.length, reel = p.kind === 'reel', segs = '';
+    if (n > 1) for (var j = 0; j < n; j++) segs += '<i' + (j === si ? ' class="on"' : '') + '></i>';
+    return '<p class="ekk"><span>' + acctKo(p.acct) + '</span><i class="eln" aria-hidden="true"></i><time datetime="' + esc(p.time) + '">' + dot(p.time) + '</time></p>'
+      + (s.t.join('').trim() ? '<h2>' + s.t.map(esc).join('<br>') + '</h2>' : '')
+      + (s.rest ? '<p class="lb">' + esc(s.rest) + '</p>' : '')
+      + (segs ? '<div class="lsg" aria-hidden="true">' + segs + '</div>' : '')
+      + '<a class="ig" href="' + esc(p.url) + '" target="_blank" rel="noopener">' + (reel ? '▶ 인스타그램에서 영상 보기 ↗' : '인스타그램에서 보기 ↗') + '</a>';
+  }
+  function paintText(){
+    var p = list[pi], n = p.slides.length;
+    lc.textContent = p.kind === 'reel' ? '영상 게시물 · 재생은 인스타그램에서' : (si + 1) + ' / ' + n;
+    if (lt.dataset.code !== p.code){ lt.innerHTML = lbText(p); lt.dataset.code = p.code; lt.scrollTop = 0; }
+    var segs = lt.querySelectorAll('.lsg i'); for (var j = 0; j < segs.length; j++) segs[j].classList.toggle('on', j === si);
+  }
+  function preload(){ var p = list[pi]; [si + 1, si - 1].forEach(function(j){ if (j >= 0 && j < p.slides.length){ var x = new Image(); x.src = A + p.slides[j].src; } }); }
+  function openLb(i, s0, srcEl){
+    if (!list[i]) return;
+    clearTimeout(closeT);
+    pi = i; si = Math.max(0, Math.min(s0 || 0, list[i].slides.length - 1)); openedPi = pi; openedSi = si; opener = document.activeElement;
+    var p = list[pi], s = p.slides[si];
+    li.getAnimations && li.getAnimations().forEach(function(a){ a.cancel(); });
+    li.style.cssText = ''; lt.dataset.code = '';
+    paintText();
+    lbx.classList.add('open'); document.documentElement.classList.add('lock');
+    setDims(s.w, s.h);
+    // 이미 받아 둔 그림(표지·미리보기)을 먼저 보여 주고, 큰 그림은 받는 대로 교체
+    var q = srcEl ? (srcEl.tagName === 'IMG' ? srcEl : srcEl.querySelector('img')) : null;
+    if (q && q.complete && q.naturalWidth) li.src = q.currentSrc || q.src; else li.removeAttribute('src');
+    if (!reduce && srcEl){
+      var a = srcEl.getBoundingClientRect(), b = li.getBoundingClientRect();
+      if (a.width > 4 && b.width > 4){
+        li.style.transition = 'none';
+        li.style.transform = 'translate(' + (a.left - b.left) + 'px,' + (a.top - b.top) + 'px) scale(' + (a.width / b.width) + ',' + (a.height / b.height) + ')';
+        li.getBoundingClientRect();
+        requestAnimationFrame(function(){ li.style.transition = 'transform .62s cubic-bezier(.2,.75,.15,1)'; li.style.transform = ''; });
+      }
+    }
+    requestAnimationFrame(function(){ lbx.classList.add('show'); });
+    loadInto(A + s.src, s.w, s.h, 0); preload();
+    // 랜딩에서 주소(#p=)로 바로 열 때는 닫기 단추에 초록 테두리 없이(갤러리 안에서 눌러 열 때와 같은 모습) — 초점은 그대로 닫기 단추로
+    try { $('lx').focus(srcEl ? {preventScroll:true} : {preventScroll:true, focusVisible:false}); } catch (err) {}
+  }
+  function coverInView(i){
+    var mk = feed.querySelector('.esp[data-i="' + i + '"] .eph.in .emk'); if (!mk) return null;
+    var r = mk.getBoundingClientRect(); return (r.bottom > 0 && r.top < innerHeight) ? mk : null;
+  }
+  function closeLb(){
+    if (!lbx.classList.contains('open')) return;
+    ptok++; lbx.classList.remove('wait');
+    var back = (!reduce && pi === openedPi && si === 0) ? coverInView(pi) : null;
+    lbx.classList.remove('show');
+    li.getAnimations && li.getAnimations().forEach(function(a){ a.cancel(); });
+    if (back){
+      var a = back.getBoundingClientRect(), b = li.getBoundingClientRect();
+      li.style.transition = 'transform .5s cubic-bezier(.6,0,.2,1)';
+      li.style.transform = 'translate(' + (a.left - b.left) + 'px,' + (a.top - b.top) + 'px) scale(' + (a.width / b.width) + ',' + (a.height / b.height) + ')';
+    } else if (!reduce){
+      li.style.transition = 'opacity .3s ease, transform .3s ease'; li.style.opacity = '0'; li.style.transform = 'scale(.97)';
+    }
+    closeT = setTimeout(function(){
+      lbx.classList.remove('open'); li.style.cssText = ''; li.removeAttribute('src'); lt.dataset.code = '';
+      document.documentElement.classList.remove('lock');
+      if (opener && opener.focus) try { opener.focus({preventScroll:true}); } catch (err) {}
+    }, reduce ? 0 : (back ? 500 : 300));
+  }
+  function step(d){
+    var p = list[pi]; si += d;
+    if (si >= p.slides.length){ pi = (pi + 1) % list.length; si = 0; }
+    else if (si < 0){ pi = (pi - 1 + list.length) % list.length; si = list[pi].slides.length - 1; }
+    paintText(); var s = list[pi].slides[si]; loadInto(A + s.src, s.w, s.h, d); preload();
+  }
+  feed.addEventListener('click', function(e){
+    var b = e.target.closest('[data-s]'); if (!b || !feed.contains(b)) return;
+    var sp = b.closest('.esp'); if (!sp) return;
+    var src = b.classList.contains('eth') ? b : sp.querySelector('.emk');
+    openLb(+sp.dataset.i, +b.dataset.s, src);
+  });
+  $('lx').addEventListener('click', closeLb);
+  $('lp').addEventListener('click', function(){ step(-1); });
+  $('ln').addEventListener('click', function(){ step(1); });
+  lbx.addEventListener('click', function(e){ if (e.target === lbx || e.target === lph) closeLb(); });
+  addEventListener('keydown', function(e){
+    if (tocOpen && e.key === 'Escape'){ toggleToc(false); curm.focus(); return; }
+    if (!lbx.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    else if (e.key === 'ArrowLeft'){ e.preventDefault(); step(-1); }
+    else if (e.key === 'ArrowRight'){ e.preventDefault(); step(1); }
+  });
+  // 손가락으로 밀어 넘기기(세로 스크롤과 헷갈리지 않게 가로로 충분히 밀었을 때만)
+  // 두 손가락(사진 확대·축소)이 한 번이라도 닿은 동작, 확대해 둔 상태에서 옮기는 동작은 넘기기로 보지 않는다(v1.0.1)
+  var t0 = null;
+  function zoomed(){ return !!(window.visualViewport && visualViewport.scale > 1.01); }
+  lbx.addEventListener('touchstart', function(e){
+    var t = e.touches[0];
+    t0 = (e.touches.length === 1 && !zoomed()) ? {id:t.identifier, x:t.clientX, y:t.clientY} : null;
+  }, {passive:true});
+  lbx.addEventListener('touchcancel', function(){ t0 = null; }, {passive:true});
+  lbx.addEventListener('touchend', function(e){
+    if (!t0 || e.touches.length){ t0 = null; return; }
+    var s = t0, c = null; t0 = null;
+    for (var k = 0; k < e.changedTouches.length; k++){ if (e.changedTouches[k].identifier === s.id){ c = e.changedTouches[k]; break; } }
+    if (!c || zoomed()) return;
+    var dx = c.clientX - s.x, dy = c.clientY - s.y;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) step(dx < 0 ? 1 : -1);
+  }, {passive:true});
+
+  /* ── 시작 ── 주소: #studio·#outdoor = 탭, #p=코드 = 그 게시물 크게, #p=코드&s=번호 = 그 게시물의 n번째 사진부터 */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';   // 지연 로딩이라 새로고침 시 맨 위에서 시작
+  var h = (location.hash || '').slice(1), m = /^p=([^&]+)(?:&s=(\d+))?/.exec(h);
+  if (h === 'studio' || h === 'outdoor') cur = h;
+  drawTabs(); build();
+  /* 주소(#p=코드)로 바로 연 게시물 — 닫으면 갤러리 맨 위가 아니라 그 게시물 자리가 보이게(v1.0.2):
+     열기 전에 그 지면까지 그려 두고, 지면이 화면 가운데(폰처럼 지면이 화면보다 길면 사진이 상단바 바로 아래) 오도록 바로 옮겨 둔다.
+     그 지면은 등장 움직임 없이 다 보이는 상태로 — #p=코드(1번 사진)로 열었다 닫으면 큰 사진이 표지 자리로 돌아가 내려앉는다 */
+  function placeAt(i){
+    renderTo(i);
+    var sp = feed.querySelector('.esp[data-i="' + i + '"]'); if (!sp) return;
+    var top = bar.offsetHeight, room = innerHeight - top, r = sp.getBoundingClientRect();
+    scrollTo(0, Math.max(0, Math.round(r.top + scrollY - top - (r.height < room ? (room - r.height) / 2 : 12))));
+    if (!reduce) [sp.querySelector('.eph'), sp.querySelector('.etx')].forEach(function(el){
+      if (!el || el.classList.contains('in')) return;
+      el.classList.add('ent'); el.style.setProperty('--dir', 1); el.classList.add('in'); void el.offsetWidth; el.classList.remove('ent');
+    });
+    frame();
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ E.para(); }); });   // 패럴랙스 자리도 맞춰 둠(닫은 뒤 첫 스크롤에 튀지 않게)
+  }
+  if (m){
+    var code = decodeURIComponent(m[1]), at = -1;
+    for (var x = 0; x < list.length; x++){ if (list[x].code === code){ at = x; break; } }
+    if (at >= 0){ placeAt(at); openLb(at, m[2] ? Math.max(0, +m[2] - 1) : 0, null); }
+  }
+})();
+</script>
+</body>
+</html>
