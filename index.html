@@ -408,6 +408,9 @@
   .aout{font:inherit; font-size:.9rem; width:100%; min-height:140px; border:1px solid var(--line); border-radius:12px; padding:10px;}
   @media(max-width:760px){ .brandsec{padding:80px 0;} .mtypes.two{grid-template-columns:1fr;} .mlink{padding:10px 0;} }
   .mcnote .mysign{font-family:Georgia,AppleMyungjo,serif; font-style:italic; color:var(--accentD); font-size:1.05em;}
+  .kinds{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:20px;}
+  .kinds span{border:1px solid #cfe0cd; background:#fff; color:var(--accentD); border-radius:980px; padding:7px 16px; font-size:.95rem; font-weight:600;}
+  .kindsnote{margin-top:12px; color:var(--tx3); font-size:.9rem;}
 </style>
 </head>
 <body>
@@ -538,7 +541,9 @@
   <div class="center reveal">
     <div class="kicker">Personal</div>
     <h2 class="big">나를 위한 촬영</h2>
-    <p class="subcopy">개인 프로필 · 콘셉트 화보 · 인물 촬영<br>지금의 나를, 나에게 어울리는 장면으로 남겨요.</p>
+    <p class="subcopy">지금의 나를, 나에게 어울리는 장면으로 남겨요.</p>
+    <div class="kinds"><span>프로필</span><span>졸업</span><span>앨범 자켓</span><span>콘셉트 화보</span><span>인물 촬영</span></div>
+    <p class="kindsnote">그 밖의 촬영도 편하게 물어봐 주세요.</p>
   </div>
   <div class="mstep reveal" id="fit"><span>STEP 01</span>이렇게 맞춰가요</div>
   <div class="mgrid">
@@ -552,6 +557,7 @@
   <div class="mhow reveal" id="apply">
     <p>몇 가지만 적어 주세요. 「내용 복사하고 카카오톡 열기」를 누르면 정리된 글이 복사되고 카카오톡 채널이 열려요. 채팅창에 붙여넣어 보내 주시면 돼요. 구성과 금액은 상담에서 안내드려요.</p>
     <form class="aform" id="aform" onsubmit="return false">
+      <div class="af" data-for="p"><label>어떤 촬영</label><input name="kind" placeholder="프로필 · 졸업 · 앨범 자켓 · 콘셉트 화보 등"></div>
       <div class="af" data-for="p"><label>성함 · 인스타그램 아이디</label><input name="who" placeholder="예) 김메이 · @maydly_u"></div>
       <div class="af" data-for="p"><label>누구와</label><input name="with" placeholder="혼자 · 둘(커플 · 친구) · 여럿"></div>
       <div class="af" data-for="p"><label>어디서</label><input name="where" placeholder="스튜디오 · 야외 · 해외"></div>
