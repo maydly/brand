@@ -2,21 +2,79 @@
    다시 가져오기 = 수집 후 조립기 재실행(자동 실행기가 함). 빼고 싶은 게시물은 1-1-6…/제외목록.json 에 코드를 넣는다
    (이 파일을 직접 고치면 다음 갱신 때 다시 덮인다). slides[].t = 미리보기용 작은 사진(긴 변 480px) */
 window.MAYDLY_IG = {
- "updated": "v1.3.5_maydly_브랜드사이트_인스타_A에디토리얼_촬영종류태그_261011_1113",
- "fetched": "2026-10-10",
+ "updated": "자동기록_261011_2011",
+ "fetched": "2026-10-11",
  "source": "instagram @maydly_s · @maydly_f 최근 게시물",
  "hero": [
+  "DeWgusMmIm6",
   "DeMJQuZmHwl",
   "DeJgwL9GBaQ",
-  "Ddd8h8xGEIs",
-  "DbS3kN3mMBu"
+  "Ddd8h8xGEIs"
  ],
  "landing": [
+  "DbS3kN3mMBu",
   "Da-cL6WmGT1",
-  "DasN6JaGD8k",
-  "DaSZFTCmBit"
+  "DasN6JaGD8k"
  ],
  "posts": [
+  {
+   "code": "DeWgusMmIm6",
+   "acct": "studio",
+   "kind": "post",
+   "time": "2026-10-11",
+   "title": "가을은 니트부터 🍂",
+   "body": "가을은 니트부터 🍂",
+   "cover": {
+    "src": "ig/t/DeWgusMmIm6.jpg",
+    "w": 720,
+    "h": 900
+   },
+   "slides": [
+    {
+     "src": "ig/g/DeWgusMmIm6_01.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/DeWgusMmIm6_01.jpg"
+    },
+    {
+     "src": "ig/g/DeWgusMmIm6_02.jpg",
+     "w": 1152,
+     "h": 1440,
+     "t": "ig/s/DeWgusMmIm6_02.jpg"
+    },
+    {
+     "src": "ig/g/DeWgusMmIm6_03.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/DeWgusMmIm6_03.jpg"
+    },
+    {
+     "src": "ig/g/DeWgusMmIm6_04.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/DeWgusMmIm6_04.jpg"
+    },
+    {
+     "src": "ig/g/DeWgusMmIm6_05.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/DeWgusMmIm6_05.jpg"
+    },
+    {
+     "src": "ig/g/DeWgusMmIm6_06.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/DeWgusMmIm6_06.jpg"
+    },
+    {
+     "src": "ig/g/DeWgusMmIm6_07.jpg",
+     "w": 1152,
+     "h": 1440,
+     "t": "ig/s/DeWgusMmIm6_07.jpg"
+    }
+   ],
+   "url": "https://www.instagram.com/p/DeWgusMmIm6/"
+  },
   {
    "code": "DeMJQuZmHwl",
    "acct": "studio",
