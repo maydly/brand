@@ -2,21 +2,79 @@
    다시 가져오기 = 수집 후 조립기 재실행(자동 실행기가 함). 빼고 싶은 게시물은 1-1-6…/제외목록.json 에 코드를 넣는다
    (이 파일을 직접 고치면 다음 갱신 때 다시 덮인다). slides[].t = 미리보기용 작은 사진(긴 변 480px) */
 window.MAYDLY_IG = {
- "updated": "자동기록_261012_0014",
+ "updated": "자동기록_261012_2153",
  "fetched": "2026-10-12",
  "source": "instagram @maydly_s · @maydly_f 최근 게시물",
  "hero": [
+  "DeY_5s4GHAU",
   "DeWgusMmIm6",
   "DeMJQuZmHwl",
-  "DeJgwL9GBaQ",
-  "Ddd8h8xGEIs"
+  "DeJgwL9GBaQ"
  ],
  "landing": [
+  "Ddd8h8xGEIs",
   "DbS3kN3mMBu",
-  "Da-cL6WmGT1",
-  "DasN6JaGD8k"
+  "Da-cL6WmGT1"
  ],
  "posts": [
+  {
+   "code": "DeY_5s4GHAU",
+   "acct": "studio",
+   "kind": "post",
+   "time": "2026-10-12",
+   "title": "검은 고양이를 입고 온 날. “한 컷만 더?” “냐.”",
+   "body": "검은 고양이를 입고 온 날.\n“한 컷만 더?”\n“냐.”",
+   "cover": {
+    "src": "ig/t/DeY_5s4GHAU.jpg",
+    "w": 720,
+    "h": 900
+   },
+   "slides": [
+    {
+     "src": "ig/g/DeY_5s4GHAU_01.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/DeY_5s4GHAU_01.jpg"
+    },
+    {
+     "src": "ig/g/DeY_5s4GHAU_02.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/DeY_5s4GHAU_02.jpg"
+    },
+    {
+     "src": "ig/g/DeY_5s4GHAU_03.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/DeY_5s4GHAU_03.jpg"
+    },
+    {
+     "src": "ig/g/DeY_5s4GHAU_04.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/DeY_5s4GHAU_04.jpg"
+    },
+    {
+     "src": "ig/g/DeY_5s4GHAU_05.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/DeY_5s4GHAU_05.jpg"
+    },
+    {
+     "src": "ig/g/DeY_5s4GHAU_06.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/DeY_5s4GHAU_06.jpg"
+    },
+    {
+     "src": "ig/g/DeY_5s4GHAU_07.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/DeY_5s4GHAU_07.jpg"
+    }
+   ],
+   "url": "https://www.instagram.com/p/DeY_5s4GHAU/"
+  },
   {
    "code": "DeWgusMmIm6",
    "acct": "studio",
