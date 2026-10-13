@@ -2,21 +2,79 @@
    다시 가져오기 = 수집 후 조립기 재실행(자동 실행기가 함). 빼고 싶은 게시물은 1-1-6…/제외목록.json 에 코드를 넣는다
    (이 파일을 직접 고치면 다음 갱신 때 다시 덮인다). slides[].t = 미리보기용 작은 사진(긴 변 480px) */
 window.MAYDLY_IG = {
- "updated": "자동기록_261012_2153",
- "fetched": "2026-10-12",
+ "updated": "자동기록_261013_2347",
+ "fetched": "2026-10-13",
  "source": "instagram @maydly_s · @maydly_f 최근 게시물",
  "hero": [
+  "DebbbMKGIuB",
   "DeY_5s4GHAU",
   "DeWgusMmIm6",
-  "DeMJQuZmHwl",
-  "DeJgwL9GBaQ"
+  "DeMJQuZmHwl"
  ],
  "landing": [
+  "DeJgwL9GBaQ",
   "Ddd8h8xGEIs",
-  "DbS3kN3mMBu",
-  "Da-cL6WmGT1"
+  "DbS3kN3mMBu"
  ],
  "posts": [
+  {
+   "code": "DebbbMKGIuB",
+   "acct": "studio",
+   "kind": "post",
+   "time": "2026-10-13",
+   "title": "고개를 숙이고 있던 건, 피기 전이라서. 나비는 먼저 알았지만.",
+   "body": "고개를 숙이고 있던 건,\n피기 전이라서.\n나비는 먼저 알았지만.",
+   "cover": {
+    "src": "ig/t/DebbbMKGIuB.jpg",
+    "w": 675,
+    "h": 900
+   },
+   "slides": [
+    {
+     "src": "ig/g/DebbbMKGIuB_01.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/DebbbMKGIuB_01.jpg"
+    },
+    {
+     "src": "ig/g/DebbbMKGIuB_02.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/DebbbMKGIuB_02.jpg"
+    },
+    {
+     "src": "ig/g/DebbbMKGIuB_03.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/DebbbMKGIuB_03.jpg"
+    },
+    {
+     "src": "ig/g/DebbbMKGIuB_04.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/DebbbMKGIuB_04.jpg"
+    },
+    {
+     "src": "ig/g/DebbbMKGIuB_05.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/DebbbMKGIuB_05.jpg"
+    },
+    {
+     "src": "ig/g/DebbbMKGIuB_06.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/DebbbMKGIuB_06.jpg"
+    },
+    {
+     "src": "ig/g/DebbbMKGIuB_07.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/DebbbMKGIuB_07.jpg"
+    }
+   ],
+   "url": "https://www.instagram.com/p/DebbbMKGIuB/"
+  },
   {
    "code": "DeY_5s4GHAU",
    "acct": "studio",
