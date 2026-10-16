@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap"></noscript>
+<title>maydly · 촬영 미리보기</title>
+<style>
+  :root{
+    --bg:#f7f4ec; --panel:#efe9df; --green-wash:#e8f0e4;
+    --tx:#1d231b; --tx2:#586250; --tx3:#8b9182; --line:#e3ded1;
+    --accent:#3f7d57; --accentD:#356a4a; --gold:#a8894f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  html,body{overflow-x:hidden; overflow-x:clip; max-width:100%;}   
+  body{background:var(--bg); color:var(--tx);
+    font-family:'Pretendard','Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased; letter-spacing:-.01em;
+    word-break:keep-all; overflow-wrap:break-word;}
+  a{color:inherit; text-decoration:none;}
+  .serif{font-family:Georgia, AppleMyungjo, "Noto Serif KR", serif;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 28px;}
+  .clv{display:inline-block; vertical-align:-2px;}
+
+  
+  .reveal{opacity:0; transform:translateY(var(--rv,26px)) scale(.988);
+    transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+    will-change:opacity, transform;}
+  .reveal.in{opacity:1; transform:none;}
+  @media(prefers-reduced-motion:reduce){ .reveal{opacity:1; transform:none; transition:none;} }
+
+  
+  .cwm{position:absolute; pointer-events:none; opacity:.05; color:var(--accent); z-index:0;}
+
+  
+  .mockbar{background:var(--panel); color:var(--tx3); text-align:center; font-size:.78rem; padding:8px 12px; border-bottom:1px solid var(--line);}
+  .mockbar b{color:var(--accentD);}
+
+  
+  .nav{position:sticky; top:0; z-index:40; background:rgba(251,250,247,.72); backdrop-filter:saturate(180%) blur(16px); border-bottom:1px solid transparent; transition:border-color .3s, background .3s;}
+  .nav.scr{border-bottom-color:rgba(0,0,0,.07); background:rgba(251,250,247,.9);}
+  .nav .in{display:flex; align-items:center; justify-content:space-between; height:54px;}
+  .brand{font-size:1.2rem; font-weight:600; letter-spacing:-.02em; display:flex; align-items:center; gap:5px;}
+  .navlinks{display:flex; gap:30px; font-size:.82rem; color:var(--tx2); font-weight:500;}
+  .navlinks a:hover{color:var(--tx);}
+  .navbook{font-size:.82rem; color:#fff; background:var(--accent); padding:8px 16px; border-radius:980px; font-weight:600;}
+  .navbook:hover{background:var(--accentD);}
+  @media(max-width:760px){ .navlinks{display:none;} }
+
+  
+  .btn{display:inline-flex; align-items:center; gap:6px; font-weight:500; font-size:1rem; cursor:pointer;
+    border-radius:980px; padding:13px 28px; border:1px solid transparent; transition:.2s;}
+  .btn.pri{background:var(--accent); color:#fff; border-color:var(--accent);}
+  .btn.pri:hover{background:var(--accentD); transform:translateY(-1px);}
+  .btn.out{background:transparent; color:var(--accentD); border-color:#cfe0cd;}
+  .btn.out:hover{border-color:var(--accent); background:var(--green-wash);}
+  .link{color:var(--accentD); font-weight:500;}
+  .link:hover{text-decoration:underline; text-underline-offset:3px;}
+  .link .ar{display:inline-block; transition:transform .2s;}
+  .link:hover .ar{transform:translateX(3px);}
+
+  
+  .hero{position:relative; overflow:hidden; text-align:center; padding:126px 28px 108px;
+    background:radial-gradient(130% 100% at 50% -10%, var(--green-wash) 0%, var(--bg) 55%);}
+  .hero .eyebrow{font-size:.8rem; letter-spacing:.2em; color:var(--accentD); font-weight:600; text-transform:uppercase; margin-bottom:22px;}
+  .hero h1{font-size:clamp(2.7rem,8vw,5rem); font-weight:700; line-height:1.08; letter-spacing:-.035em; position:relative; z-index:1;}
+  .hero h1 .em{color:var(--accentD);}
+  .hero .sub{font-size:clamp(1.1rem,2.6vw,1.5rem); color:var(--tx2); margin-top:24px; font-weight:400;}
+  .hero .who{color:var(--tx3); margin-top:12px; font-size:.98rem;}
+  .hero .cta{margin-top:36px; display:flex; gap:22px; justify-content:center; align-items:center; flex-wrap:wrap; position:relative; z-index:1;}
+  .hero .cwm.a{top:40px; left:6%; width:70px; transform:rotate(-12deg);}
+  .hero .cwm.b{bottom:30px; right:7%; width:52px; transform:rotate(16deg);}
+  .scrollcue{margin-top:56px; color:var(--tx3); font-size:.78rem; letter-spacing:.1em; animation:bob 2s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+  
+  .herofilm{height:clamp(320px,58vh,540px); position:relative; overflow:hidden;
+    background:linear-gradient(135deg,#8b9d84 0%,#b9bca8 45%,#ddd6c4 78%,#e7c9b6 100%);}
+  .herofilm:after{content:''; position:absolute; inset:0; box-shadow:inset 0 -90px 120px rgba(22,28,20,.34), inset 0 40px 90px rgba(22,28,20,.16);}
+  .herofilm .mk{position:absolute; left:0; right:0; bottom:24px; text-align:center; color:#fff; z-index:2;
+    font-size:.82rem; letter-spacing:.14em; text-transform:uppercase; text-shadow:0 2px 10px rgba(0,0,0,.4); opacity:.92;}
+
+  
+  section{padding:112px 0; position:relative; overflow:hidden;}
+  .center{text-align:center; max-width:740px; margin:0 auto;}
+  .kicker{font-size:.78rem; letter-spacing:.18em; color:var(--accentD); font-weight:600; text-transform:uppercase;}
+  h2.big{font-size:clamp(1.9rem,5vw,3.1rem); font-weight:700; letter-spacing:-.03em; line-height:1.16; margin-top:14px;}
+  .subcopy{color:var(--tx2); font-size:clamp(1.02rem,2.2vw,1.24rem); margin-top:18px; line-height:1.65;}
+
+  
+  .signature{background:var(--green-wash);}
+  .signature .chip{display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid var(--line);
+    color:var(--accentD); font-weight:600; border-radius:980px; padding:7px 16px; font-size:.82rem; margin-bottom:24px;}
+  .sigsteps{display:flex; justify-content:center; flex-wrap:wrap; margin:38px auto 32px; max-width:660px; border-top:1px solid #dbe6d6; border-bottom:1px solid #dbe6d6;}
+  .sigsteps .s{flex:1 1 150px; padding:22px 12px; border-left:1px solid #dbe6d6;}
+  .sigsteps .s:first-child{border-left:none;}
+  .sigsteps .n{font-size:1.5rem; font-weight:700; letter-spacing:-.03em;}
+  .sigsteps .t{font-size:.86rem; color:var(--tx2); margin-top:4px;}
+  .signature .cwm.a{bottom:20px; left:5%; width:60px; transform:rotate(10deg);}
+
+  
+  .process .steps{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:14px; margin-top:54px;}
+  @media(max-width:900px){ .process .steps{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  @media(max-width:520px){ .process .steps{grid-template-columns:1fr;} }
+  .pstep{padding:24px 18px;}
+  .pstep{background:#fff; border:1px solid var(--line); border-radius:20px; padding:26px 22px; position:relative;}
+  .pstep .num{font-family:Georgia,serif; font-size:.9rem; color:var(--accent); font-weight:700; letter-spacing:.05em;}
+  .pstep h3{font-size:1.12rem; font-weight:700; margin:12px 0 8px; letter-spacing:-.02em;}
+  .pstep p{color:var(--tx2); font-size:.94rem; line-height:1.6;}
+
+  
+  .story{background:var(--bg);}
+  .pull{font-size:clamp(1.5rem,4vw,2.5rem); font-weight:600; letter-spacing:-.03em; line-height:1.34;}
+  .pull .g{color:var(--accentD);}
+  .storybody{max-width:640px; margin:28px auto 0; color:var(--tx2); font-size:1.1rem; line-height:1.78;}
+  .storybody p{margin:15px 0;}
+  .storybody b{color:var(--tx); font-weight:600;}
+  .duo{display:flex; gap:16px; justify-content:center; margin-top:36px; flex-wrap:wrap;}
+  .duo .p{background:var(--panel); border-radius:16px; padding:16px 22px; min-width:170px;}
+  .duo .p .r{font-size:.78rem; color:var(--tx3); letter-spacing:.05em;}
+  .duo .p .nm{font-weight:700; margin-top:2px;}
+
+  
+  .name{background:var(--bg);}
+  .namebody{max-width:620px; margin:16px auto 0; color:var(--tx2); font-size:1.12rem; line-height:1.8;}
+  .namebody b{color:var(--tx); font-weight:600;}
+  .namequote{font-size:clamp(1.5rem,4vw,2.3rem); font-weight:600; letter-spacing:-.03em; line-height:1.5; margin:34px auto; color:var(--tx);}
+  .namequote .g{color:var(--accentD);}
+
+  
+  .beliefs{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; max-width:760px; margin:40px auto 0; text-align:left;}
+  @media(max-width:640px){ .beliefs{grid-template-columns:1fr;} }
+  .bel{background:#fff; border:1px solid var(--line); border-radius:16px; padding:22px 22px;}
+  .bel .bt{font-weight:700; font-size:1.05rem; letter-spacing:-.02em; display:flex; align-items:center; gap:8px;}
+  .bel .bt:before{content:'🍀'; font-size:.9rem; filter:grayscale(.15);}
+  .bel .bd{color:var(--tx2); font-size:.94rem; margin-top:8px; line-height:1.6;}
+
+  
+  .forwho{background:var(--green-wash);}
+  .whos{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; max-width:800px; margin:40px auto 0; text-align:left;}
+  @media(max-width:640px){ .whos{grid-template-columns:1fr;} }
+  .whos .w{background:#fff; border:1px solid #e2ecdd; border-radius:14px; padding:18px 20px; color:var(--tx); font-size:1rem; display:flex; gap:10px; align-items:flex-start;}
+  .whos .w:before{content:'✓'; color:var(--accent); font-weight:800; flex:none;}
+
+  
+  .work{background:var(--panel);}
+  .tags{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:22px;}
+  .tags .t{background:#fff; border:1px solid var(--line); color:var(--tx2); border-radius:980px; padding:6px 14px; font-size:.84rem;}
+  .gallery{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:44px;}
+  @media(max-width:760px){ .gallery{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  .gallery .ph{min-width:0; aspect-ratio:4/5; border-radius:16px; overflow:hidden; position:relative;
+    box-shadow:0 8px 24px rgba(40,50,35,.10); transition:transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s;}
+  .gallery .ph.tall{aspect-ratio:4/6;}
+  .gallery .ph:after{content:''; position:absolute; inset:0; box-shadow:inset 0 -60px 70px rgba(25,32,22,.28), inset 0 0 40px rgba(25,32,22,.10); pointer-events:none;}
+  .gallery .ph .cap{position:absolute; left:16px; bottom:14px; z-index:2; color:#fff; font-size:.9rem; font-weight:600; letter-spacing:.01em; text-shadow:0 1px 8px rgba(0,0,0,.4);}
+  .gallery .ph .cap small{display:block; font-size:.72rem; font-weight:500; opacity:.85; letter-spacing:.08em; text-transform:uppercase; margin-top:2px;}
+  .gallery .ph:hover{transform:translateY(-5px); box-shadow:0 20px 44px rgba(40,50,35,.20);}
+  
+  .ph.m-rain{background:linear-gradient(155deg,#93a2a7 0%,#b9bcb2 60%,#cdcabd 100%);}
+  .ph.m-sea{background:linear-gradient(155deg,#a3c0c6 0%,#c9c9ba 55%,#e4dac4 100%);}
+  .ph.m-couple{background:linear-gradient(155deg,#e0c2a4 0%,#cfcbb2 55%,#c6d1bd 100%);}
+  .ph.m-new{background:linear-gradient(155deg,#e4c7cd 0%,#dfd5cb 55%,#e7e0d0 100%);}
+  .ph.m-studio{background:linear-gradient(155deg,#cfc8ba 0%,#ddd7c9 60%,#ece7db 100%);}
+  .ph.m-forest{background:linear-gradient(155deg,#87997f 0%,#b4b79f 55%,#d9d3c2 100%);}
+  .work .more{text-align:center; margin-top:38px;}
+
+  
+  .herofilm.tri{height:auto; aspect-ratio:auto; background:none; max-width:1040px; margin:0 auto; padding:0 28px;
+    display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px;}
+  .herofilm.tri:after{display:none;}
+  .herofilm.tri a{display:block; aspect-ratio:4/5; border-radius:14px; overflow:hidden; position:relative; background:#e9e6dc; box-shadow:0 6px 18px rgba(40,50,35,.10);}
+  .herofilm.tri img{width:100%; height:100%; object-fit:cover; display:block; transition:transform 1.2s cubic-bezier(.2,.7,.2,1);}
+  .herofilm.tri a:hover img{transform:scale(1.03);}
+  @media(max-width:760px){ .herofilm.tri{grid-template-columns:repeat(2,minmax(0,1fr)); padding:0 20px; gap:8px;} .herofilm.tri a:nth-child(n+3){display:none;} }
+  .tags a.t:hover{border-color:var(--accent); color:var(--accentD);}
+  
+  .awk{--edge:28px; margin:clamp(52px,7vh,72px) auto 0;}
+  .awk .esp:last-child{margin-bottom:clamp(56px,8vh,76px);}
+  
+  html{-webkit-text-size-adjust:100%;}
+  a,button{-webkit-tap-highlight-color:transparent;}
+  .nav{-webkit-backdrop-filter:saturate(180%) blur(16px);}
+  @media(max-width:760px){ .navbook{padding:11px 18px;} .tags a.t{padding:11px 18px;} .link{display:inline-block; padding:11px 2px;} .brand{padding:8px 0;} }
+  
+  @media (max-width:760px), (pointer:coarse){ footer .top .cols a{display:flex; align-items:center; min-height:44px; margin:0;} }
+
+  
+  .esp{--H:min(68vh,620px); --ease:cubic-bezier(.2,.7,.2,1); --wipe:cubic-bezier(.76,0,.2,1); --serif:Georgia, AppleMyungjo, "Noto Serif KR", serif;
+    font-family:Pretendard,'Apple SD Gothic Neo',sans-serif; line-height:1.6; letter-spacing:-.01em; text-align:start;
+    display:flex; align-items:center; justify-content:center; gap:clamp(36px,5.5vw,88px); margin:0 auto clamp(96px,13vh,140px);}
+  .esp.eR{flex-direction:row-reverse;}
+  
+  :where(.esp) img{max-width:100%;}
+  :where(.esp) a{color:inherit; text-decoration:none;}
+  :where(.esp) button{font:inherit; color:inherit; background:none; border:0; cursor:pointer; text-align:inherit;}
+  :where(.esp) a, :where(.esp) button{-webkit-tap-highlight-color:transparent;}
+  :where(.esp) :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+  :where(.esp) a:not([target]){letter-spacing:normal;}   
+  .ent, .ent *, .ent:before, .ent *:before{transition:none !important;}   
+  
+  
+  .eph{flex:none; position:relative; margin:0; width:min(calc(var(--H) * var(--r)), 62%); transform:translate(0,var(--py,0px));}
+  .eph:before{content:''; position:absolute; inset:0; border-radius:3px; box-shadow:0 34px 64px -30px rgba(40,50,35,.42), 0 2px 8px rgba(40,50,35,.06);
+    opacity:0; transition:opacity .9s var(--ease) .55s;}
+  .eph.in:before{opacity:1;}
+  .ecv{position:relative; display:block; width:100%; padding:0; cursor:zoom-in; border-radius:3px;}
+  .emk{position:relative; display:block; overflow:hidden; border-radius:3px; aspect-ratio:var(--r); background:#ebe5d8;
+    -webkit-clip-path:inset(calc(50% + var(--dir,1) * 50%) 0 calc(50% - var(--dir,1) * 50%) 0);
+    clip-path:inset(calc(50% + var(--dir,1) * 50%) 0 calc(50% - var(--dir,1) * 50%) 0);
+    transition:clip-path 1.2s var(--wipe), -webkit-clip-path 1.2s var(--wipe);}
+  .eph.in .emk{-webkit-clip-path:inset(0 0 0 0); clip-path:inset(0 0 0 0);}
+  .eim{display:block; width:100%; height:100%; object-fit:contain; transform:scale(1.14); opacity:0;
+    transition:transform 1.8s var(--ease), opacity .6s ease;}
+  .eim.ld{opacity:1;}
+  .eph.in .eim{transform:scale(1);}
+  .ezl{position:absolute; right:12px; bottom:12px; z-index:2; background:rgba(255,253,248,.94); color:var(--accentD); font-size:.78rem; font-weight:600;
+    border-radius:999px; padding:6px 12px; opacity:0; transform:translateY(6px); transition:opacity .3s var(--ease), transform .3s var(--ease); pointer-events:none;}
+  .ecv:hover .ezl{opacity:1; transform:none;}
+  .ebdg{position:absolute; left:12px; top:12px; z-index:2; background:rgba(255,253,248,.94); color:var(--accentD); font-size:.78rem; font-weight:700;
+    border-radius:999px; padding:4px 11px; letter-spacing:.02em; opacity:0; transition:opacity .6s var(--ease) .8s;}
+  .eph.in .ebdg{opacity:1;}
+  
+  .etx{flex:0 1 420px; align-self:stretch; min-width:0; display:flex; flex-direction:column; justify-content:space-between; gap:28px; padding:4px 0 2px;
+    transform:translate(0,var(--ty,0px));}
+  .eu{opacity:0; transform:translateY(calc(var(--dir,1) * 18px)); transition:opacity .9s var(--ease) var(--d,0s), transform .9s var(--ease) var(--d,0s);}
+  .etx.in .eu{opacity:1; transform:none;}
+  .eday{--d:.04s; font-family:var(--serif); font-size:clamp(2.8rem,4vw,3.6rem); line-height:.9; font-weight:400; color:var(--tx);
+    letter-spacing:-.03em; font-variant-numeric:lining-nums; margin-bottom:16px;}
+  .ekk{--d:.1s; display:flex; align-items:center; gap:12px; font-size:.8rem; letter-spacing:.16em; color:var(--accentD); font-weight:600;}
+  .ekk .eln{flex:1; height:1px; background:var(--line); transform:scaleX(0); transform-origin:left center; transition:transform 1.2s var(--wipe) .35s;}
+  .etx.in .ekk .eln{transform:scaleX(1);}
+  .ekk time{font-family:var(--serif); letter-spacing:.05em; color:var(--tx3); font-weight:400; font-size:.95rem;}
+  .ett{--d:.2s; font-family:var(--serif); font-weight:500; font-size:clamp(1.45rem,2.25vw,2.05rem); line-height:1.4; letter-spacing:-.015em; color:var(--tx);
+    text-wrap:balance; overflow-wrap:anywhere;}
+  .eex{--d:.3s; margin-top:16px; color:var(--tx2); font-size:.98rem; line-height:1.8; white-space:pre-line;
+    display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4; overflow:hidden;}
+  .epv{--d:.42s; display:flex; gap:8px; margin-top:24px; align-items:flex-end;}
+  .eth{position:relative; display:block; flex:none; height:88px; width:calc(88px * var(--tr,.8)); border-radius:3px; overflow:hidden; background:#ebe5d8;
+    box-shadow:0 10px 20px -12px rgba(40,50,35,.4); transition:transform .35s var(--ease), box-shadow .35s var(--ease); cursor:zoom-in;}
+  .eth img{display:block; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .5s ease;}
+  .eth img.ld{opacity:1;}
+  .eth:hover{transform:translateY(-4px); box-shadow:0 16px 26px -14px rgba(40,50,35,.45);}
+  .eth.emore{display:flex; align-items:center; justify-content:center; width:58px; background:transparent; border:1px solid var(--line); box-shadow:none;
+    font-family:var(--serif); color:var(--tx2); font-size:1.02rem;}
+  .eth.emore:before{content:'+' attr(data-n);}   
+  .eth.emore:hover{background:var(--green-wash); box-shadow:none;}
+  .ego{--d:.52s; display:inline-flex; align-items:center; gap:10px; margin-top:22px; min-height:46px; padding:0 22px; border-radius:999px; border:1px solid #cfe0cd;
+    color:var(--accentD); font-weight:600; font-size:.95rem;
+    transition:opacity .9s var(--ease) var(--d), transform .9s var(--ease) var(--d), background .25s, border-color .25s;}
+  .ego .ear{display:inline-block; transition:transform .3s var(--ease);}
+  .ego:hover{background:var(--green-wash); border-color:var(--accent);}
+  .ego:hover .ear{transform:translateX(4px);}
+  .esp.ereel .ego:hover .ear{transform:translate(3px,-3px);}
+  
+  @media (max-width:900px){
+    .esp, .esp.eR{flex-direction:column; align-items:flex-start; gap:20px; margin-bottom:clamp(64px,9vh,92px);}
+    .eph{width:min(88vw, calc(min(70vh,640px) * var(--r)));}
+    .esp.eL .eph{margin-left:calc(-1 * var(--edge,20px));}
+    .esp.eR .eph{margin-right:calc(-1 * var(--edge,20px)); align-self:flex-end;}
+    .emk, .eph:before{border-radius:0;}
+    .etx{flex:none; align-self:stretch; width:100%; gap:14px; padding:0;}
+    .eday{display:none;}
+    .ett{font-size:clamp(1.35rem,5.4vw,1.7rem);}
+    .eex{font-size:.96rem;}
+    .eth{height:76px; width:calc(76px * var(--tr,.8));}
+    .eth.emore{width:52px;}
+  }
+  
+  @media (prefers-reduced-motion: reduce){
+    .eu, .ekk .eln, .eph:before, .ebdg, .eim{opacity:1 !important; transform:none !important; transition:none !important;}
+    .emk{-webkit-clip-path:none !important; clip-path:none !important; transition:none !important;}
+    .eph, .etx{transform:none !important;}
+    .eth, .ego, .ego .ear{transition:none !important;}
+  }
+  
+  .consult{background:radial-gradient(120% 80% at 50% 0%, #fcfbf7 0%, var(--bg) 62%);}
+  .consult .cwm.a{top:52px; left:6%; width:60px; transform:rotate(-11deg);}
+  .consult .cwm.b{bottom:46px; right:6%; width:46px; transform:rotate(15deg);}
+  .cpull{font-size:clamp(1.42rem,3.7vw,2.25rem); font-weight:600; letter-spacing:-.03em; line-height:1.48;
+    max-width:780px; margin:52px auto 0; text-align:center; color:var(--tx); position:relative; z-index:1;}
+  .cpull .hl{background-image:linear-gradient(transparent 60%, rgba(79,154,106,.24) 60%);
+    background-repeat:no-repeat; background-size:0% 100%; transition:background-size 1.1s cubic-bezier(.2,.7,.2,1) .3s;}
+  .cpull.in .hl{background-size:100% 100%;}
+  @media(prefers-reduced-motion:reduce){ .cpull .hl{transition:none; background-size:100% 100%;} }
+  .cbody{max-width:640px; margin:26px auto 0; color:var(--tx2); font-size:1.08rem; line-height:1.8; text-align:center; position:relative; z-index:1;}
+  .cbody p{margin:14px 0;}
+  .cbody b{color:var(--tx); font-weight:600;}
+  .cfhead{margin:66px auto 0; text-align:center; font-size:1.02rem; font-weight:700; color:var(--tx); letter-spacing:-.01em;}
+  .cfgrid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin:24px auto 0; max-width:1000px; position:relative; z-index:1;}
+  @media(max-width:900px){ .cfgrid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  @media(max-width:520px){ .cfgrid{grid-template-columns:1fr;} }
+  .cf{background:#fff; border:1px solid var(--line); border-radius:20px; padding:24px 22px; text-align:left;
+    transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1), box-shadow .3s, border-color .3s;}
+  .cf.in:hover{transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.06); border-color:#cfe0cd;}
+  .cf .no{font-family:Georgia,serif; font-size:.86rem; color:var(--accent); font-weight:700; letter-spacing:.06em;}
+  .cf h3{font-size:1.08rem; font-weight:700; letter-spacing:-.02em; margin:10px 0 6px;}
+  .cf p{color:var(--tx2); font-size:.93rem; line-height:1.62;}
+  .ccta{margin-top:50px; display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap; position:relative; z-index:1;}
+  .cnote{margin-top:14px; color:var(--tx3); font-size:.9rem; text-align:center;}
+  .consult .subcopy, .cpull{text-wrap:balance;}
+  .cbody p, .cf p, .cnote{text-wrap:pretty;}
+  
+  .policy{background:var(--panel);}
+  .pgrid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; max-width:820px; margin:40px auto 0;}
+  @media(max-width:640px){ .pgrid{grid-template-columns:1fr;} }
+  .pc{background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px 24px; text-align:left;}
+  .pc h3{font-size:1.05rem; font-weight:700; margin-bottom:8px; letter-spacing:-.01em;}
+  .pc ul{list-style:none;}
+  .pc li{color:var(--tx2); font-size:.95rem; line-height:1.65; padding:5px 0 5px 14px; position:relative;}
+  .pc li:before{content:'·'; position:absolute; left:2px; color:var(--accent); font-weight:800;}
+  .pc b{color:var(--tx); font-weight:600;}
+  .pc .hl{color:var(--tx3); font-size:.86rem; background:none;}
+  .pnote{text-align:center; color:var(--tx3); font-size:.92rem; margin-top:22px;}
+
+  
+  .reviews{background:var(--green-wash);}
+  .rgrid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:50px;}
+  @media(max-width:820px){ .rgrid{grid-template-columns:1fr;} }
+  .rcard{background:#fff; border-radius:20px; padding:26px 24px; border:1px solid #e4ecdf;}
+  .rcard .q{font-size:1.02rem; line-height:1.7; color:var(--tx);}
+  .rcard .who{margin-top:16px; color:var(--tx3); font-size:.85rem;}
+  .rcard .stars{color:var(--gold); font-size:.9rem; letter-spacing:2px; margin-bottom:12px;}
+
+  
+  .faq .list{max-width:760px; margin:44px auto 0;}
+  .qa{border-top:1px solid var(--line);}
+  .qa:last-child{border-bottom:1px solid var(--line);}
+  .qa .q{width:100%; text-align:left; background:none; border:none; font-family:inherit; cursor:pointer;
+    padding:22px 4px; font-size:1.08rem; font-weight:600; color:var(--tx); display:flex; justify-content:space-between; align-items:center; gap:14px; letter-spacing:-.01em;}
+  .qa .q .pm{color:var(--accent); font-size:1.4rem; font-weight:400; transition:transform .3s; flex:none;}
+  .qa.open .q .pm{transform:rotate(45deg);}
+  .qa .a{max-height:0; overflow:hidden; transition:max-height .35s ease; color:var(--tx2); font-size:.98rem; line-height:1.7;}
+  .qa .a p{padding:0 4px 22px;}
+
+  
+  .book{text-align:center; background:var(--bg);}
+  .book .cwm.a{top:24px; right:8%; width:56px; transform:rotate(-14deg);}
+  .book .cta{margin-top:32px; display:flex; gap:22px; justify-content:center; align-items:center; flex-wrap:wrap;}
+
+  
+  footer{background:var(--panel); color:var(--tx3); font-size:.82rem; border-top:1px solid var(--line); padding:46px 0;}
+  footer .top{display:flex; justify-content:space-between; gap:28px; flex-wrap:wrap; padding-bottom:26px; border-bottom:1px solid var(--line);}
+  footer .brand{color:var(--tx); font-size:1.05rem;}
+  footer .cols{display:flex; gap:52px; flex-wrap:wrap;}
+  footer .cols .h{color:var(--tx); font-weight:600; margin-bottom:10px;}
+  footer .cols a{display:block; color:var(--tx2); margin:8px 0;}
+  footer .cols a:hover{color:var(--tx);}
+  footer .btm{padding-top:22px;}
+  
+  .namegap{margin-top:34px;}
+  .namemark{font-size:clamp(3rem,9vw,5.4rem); font-weight:500; letter-spacing:-.02em; line-height:1.05; margin:26px auto 0; color:var(--tx);}
+  .pgrid .pc.wide{grid-column:1 / -1;}
+  
+  .menu{padding:110px 0; background:linear-gradient(180deg,#fbfaf6,var(--bg));}
+  .mstep{max-width:900px; margin:52px auto 0; font-weight:700; font-size:1.05rem; display:flex; align-items:center; gap:10px;}
+  .mstep span{font-family:Georgia,serif; font-size:.8rem; letter-spacing:.12em; color:#fff; background:var(--accent); border-radius:980px; padding:4px 11px; font-weight:700;}
+  .mtypes{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; max-width:900px; margin:16px auto 0;}
+  .mt{background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px 22px 20px;}
+  .mt .no{font-family:Georgia,serif; font-size:.78rem; letter-spacing:.14em; color:var(--gold); font-weight:700;}
+  .mt h3{font-size:1.12rem; margin:6px 0 6px;} .mt .mtg{color:var(--accentD); font-size:.9rem; line-height:1.6;} .mt p{color:var(--tx2); font-size:.92rem; margin-top:8px; line-height:1.6;}
+  .mgrid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; max-width:900px; margin:16px auto 0;}
+  .mc{background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px 24px;}
+  .mc .no{font-family:Georgia,serif; font-size:.86rem; color:var(--accent); font-weight:700; letter-spacing:.06em;}
+  .mc h3{font-size:1.08rem; margin:6px 0 8px;}
+  .mc ul{list-style:none; padding:0; margin:0;} .mc li{color:var(--tx2); padding:4px 0 4px 14px; position:relative; line-height:1.6;}
+  .mc li:before{content:''; position:absolute; left:0; top:14px; width:5px; height:5px; border-radius:50%; background:#9cc3a8;}
+  .mcnote{margin-top:10px; color:var(--tx3); font-size:.86rem; line-height:1.6;}
+  .mout{max-width:900px; margin:16px auto 0; color:var(--tx3); font-size:.92rem; text-align:center;}
+  .mhow{max-width:900px; margin:16px auto 0; background:#e8f0e4; border-radius:20px; padding:26px 28px;}
+  .mhow p{color:var(--tx2);} .mhow ol{margin:12px 0 4px 1.3em; color:var(--tx); line-height:1.9;}
+  .mbtns{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;}
+  @media(max-width:860px){ .mtypes{grid-template-columns:1fr;} }
+  @media(max-width:760px){ .menu{padding:80px 0;} .mgrid{grid-template-columns:1fr;} .mc,.mt{padding:20px;} .mhow{padding:22px 20px;} .mstep{margin-top:40px;} .mbtns .btn{flex:1 1 100%; text-align:center;} }
+  
+  .atabs{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .atabs button{font:inherit; font-size:.92rem; border:1px solid #cfe0cd; background:#fff; color:var(--accentD); border-radius:980px; padding:10px 16px; cursor:pointer; min-height:44px;}
+  .atabs button.on{background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600;}
+  .aform{margin-top:14px; display:grid; gap:10px;}
+  .af label{display:block; font-size:.86rem; color:var(--tx2); margin-bottom:4px;}
+  .af input{font:inherit; font-size:1rem; width:100%; border:1px solid var(--line); border-radius:12px; padding:11px 13px; background:#fff; color:var(--tx);}
+  .af[hidden]{display:none;}
+  .aform .btn{justify-self:start; margin-top:6px; border:0; cursor:pointer; font:inherit; font-weight:600;}
+  .anote{color:var(--accentD); font-size:.92rem;}
+  #aout{font:inherit; font-size:.9rem; width:100%; min-height:140px; border:1px solid var(--line); border-radius:12px; padding:10px;}
+  .navmenu{display:none; width:44px; height:44px; border:0; background:none; cursor:pointer; flex-direction:column; justify-content:center; align-items:center; gap:5px; margin-left:auto; margin-right:6px;}
+  .navmenu span{display:block; width:20px; height:2px; border-radius:2px; background:var(--tx); transition:transform .25s, opacity .25s;}
+  .nav.open .navmenu span:nth-child(1){transform:translateY(7px) rotate(45deg);} .nav.open .navmenu span:nth-child(2){opacity:0;} .nav.open .navmenu span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  @media(max-width:760px){
+    .navmenu{display:flex;}
+    .nav .in{position:relative;}
+    .nav.open .navlinks{display:flex; flex-direction:column; gap:0; position:absolute; left:0; right:0; top:100%; background:rgba(251,250,247,.98); border-bottom:1px solid var(--line); padding:6px 20px 12px; box-shadow:0 18px 30px -20px rgba(40,50,35,.25);}
+    .nav.open .navlinks a{padding:12px 0; font-size:1rem; border-bottom:1px solid var(--line);}
+    .nav.open .navlinks a:last-child{border-bottom:0;}
+    .aform .btn{justify-self:stretch; text-align:center;}
+  }
+  .mcsub{margin-top:12px; font-size:.86rem; font-weight:700; color:var(--accentD);}
+  .mc li .mcs{color:var(--tx3); font-size:.9rem;}
+  
+  .mlink{display:inline-block; margin-top:10px; padding:6px 0; color:var(--accentD); font-weight:600; font-size:.92rem;}
+  .brandsec{padding:100px 0; background:#fbfaf6; border-top:1px solid var(--line);}
+  .mtypes.two{grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:40px;}
+  .brandsec .mhow{margin-top:16px;}
+  .aout{font:inherit; font-size:.9rem; width:100%; min-height:140px; border:1px solid var(--line); border-radius:12px; padding:10px;}
+  @media(max-width:760px){ .brandsec{padding:80px 0;} .mtypes.two{grid-template-columns:1fr;} .mlink{padding:10px 0;} }
+  .mcnote .mysign{font-family:Georgia,AppleMyungjo,serif; font-style:italic; color:var(--accentD); font-size:1.05em;}
+  .kinds{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:20px;}
+  .kinds span{border:1px solid #cfe0cd; background:#fff; color:var(--accentD); border-radius:980px; padding:7px 16px; font-size:.95rem; font-weight:600;}
+  .kindsnote{margin-top:12px; color:var(--tx3); font-size:.9rem;}
+  .areply{margin-top:12px; padding:12px 14px; background:rgba(255,255,255,.65); border-radius:12px; color:var(--tx2); font-size:.9rem; line-height:1.7;}
+  .areply p+p{margin-top:4px;}
+  #brand .areply{margin:0 0 14px;}
+  
+  #flow, #cases, .cs{scroll-margin-top:60px;}
+  .xchg{display:grid; grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr); max-width:900px; margin:20px auto 0;}
+  .xc{background:#fff; border:1px solid var(--line); border-radius:20px; padding:24px 24px 22px; text-align:left;}
+  .xc.me{background:var(--green-wash); border-color:#cfe0cd;}
+  .xk{font-size:.86rem; font-weight:700; color:var(--accentD); letter-spacing:.02em;}
+  .xc p{margin-top:8px; color:var(--tx2); font-size:.98rem; line-height:1.7; text-wrap:pretty;}
+  .xc .link{font-size:.94rem; white-space:nowrap;}
+  .xar{position:relative; color:var(--accent);}
+  .xar i{position:absolute; left:12px; right:16px; top:50%; height:2px; margin-top:-1px; border-radius:2px; background:#cfe0cd;
+    transform:scaleX(0); transform-origin:left center; transition:transform 1s cubic-bezier(.76,0,.2,1) .35s;}
+  .xar svg{position:absolute; right:4px; top:50%; width:22px; height:22px; margin-top:-11px; opacity:0; transition:opacity .4s ease 1.1s;}
+  .xar.in i{transform:scaleX(1);}
+  .xar.in svg{opacity:1;}
+  .xmore{text-align:center; margin-top:26px;}
+  @media(max-width:760px){
+    .xchg{grid-template-columns:1fr;}
+    .xc{padding:22px 20px 20px;}
+    .xar{height:48px;}
+    .xar i{left:50%; right:auto; top:6px; bottom:14px; width:2px; height:auto; margin:0 0 0 -1px; transform:scaleY(0); transform-origin:center top;}
+    .xar.in i{transform:scaleY(1);}
+    .xar svg{left:50%; right:auto; top:auto; bottom:0; margin:0 0 0 -11px; transform:rotate(90deg);}
+  }
+  .cases{background:var(--panel);}
+  .cases .cwm.a{top:60px; right:7%; width:58px; transform:rotate(14deg);}
+  .cases .center, .cases .awk{position:relative; z-index:1;}
+  .cswho{--d:.18s; margin-top:18px; font-size:clamp(1.32rem,2.1vw,1.68rem); font-weight:700; line-height:1.36; letter-spacing:-.025em; color:var(--tx);}
+  .csbeats{position:relative; display:grid; gap:12px; padding-left:20px;}
+  .csbeats:before{content:''; position:absolute; left:0; top:5px; bottom:5px; width:2px; border-radius:2px; background:#cfe0cd;
+    transform:scaleY(0); transform-origin:center top; transition:transform 1.3s var(--wipe) .3s;}
+  .etx.in .csbeats:before{transform:scaleY(1);}
+  .csb{color:var(--tx2); font-size:.98rem; line-height:1.7;}
+  .csb:nth-child(1){--d:.28s;} .csb:nth-child(2){--d:.38s;} .csb:nth-child(3){--d:.5s;}
+  .csk{display:block; font-size:.8rem; font-weight:700; letter-spacing:.04em; color:var(--accentD); margin-bottom:2px;}
+  .cscap{display:block; font-family:var(--serif); font-size:1.1rem; line-height:1.62; color:var(--tx);}
+  .cscap .hl{background-image:linear-gradient(transparent 60%, rgba(79,154,106,.24) 60%); background-repeat:no-repeat; background-size:0% 100%;
+    transition:background-size 1.1s var(--ease) 1s;}
+  .etx.in .cscap .hl{background-size:100% 100%;}
+  .cspv{--d:.6s; margin-top:20px;}
+  .cspv .eth{cursor:pointer;}
+  .cspv .eth[aria-pressed="true"]{outline:2px solid var(--accent); outline-offset:3px;}
+  .cs .ego{--d:.7s;}
+  .cs .emk .eim.csnew{position:absolute; left:0; top:0; -webkit-clip-path:inset(100% 0 0 0); clip-path:inset(100% 0 0 0); transform:scale(1.1);
+    transition:clip-path .9s var(--wipe), -webkit-clip-path .9s var(--wipe), transform 1.4s var(--ease), opacity .3s ease;}
+  .cs .emk .eim.csnew.go{-webkit-clip-path:inset(0 0 0 0); clip-path:inset(0 0 0 0); transform:scale(1);}
+  .cases .cpull{margin-top:clamp(12px,3vh,32px);}
+  .csnote{max-width:600px; margin:22px auto 0; text-align:center; color:var(--tx2); font-size:1rem; line-height:1.75; position:relative; z-index:1; text-wrap:pretty;}
+  .cases .ccta{margin-top:30px;}
+  @media (max-width:900px){
+    .cs .eph{width:min(var(--pw,88vw), calc(min(70vh,640px) * var(--r)));}
+    .cswho{font-size:clamp(1.28rem,5.4vw,1.55rem); margin-top:12px;}
+    .cspv{margin-top:16px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .xar i, .csbeats:before{transform:none !important; opacity:1 !important; transition:none !important;}
+    .xar svg{opacity:1 !important; transition:none !important;}   
+    .cscap .hl{transition:none; background-size:100% 100%;}
+  }
+</style>
+<style>
+  
+  @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} }   
+  .hero.pvh{padding:92px 28px 76px; background:radial-gradient(130% 100% at 50% -10%, var(--green-wash) 0%, #fbfaf6 58%); background-color:#fbfaf6;}
+  .hero.pvh h1{font-size:clamp(2.3rem,6.4vw,4rem);}
+  .hero.pvh .sub{margin-top:22px;}
+  .hero.pvh .cwm.a{top:34px; left:7%; width:62px;}
+  .hero.pvh .cwm.b{bottom:26px; right:8%; width:46px;}
+  @media(min-width:761px){ .hero.pvh .cwm.b{top:44%; bottom:auto; right:5%;} }   
+  .pvh-lead{max-width:560px; margin:14px auto 0; color:var(--tx2); font-size:1.02rem; line-height:1.7; text-wrap:pretty; position:relative; z-index:1;}
+  .pvtoc{position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; max-width:720px; margin:40px auto 0;}
+  .pvtoc a{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; min-height:76px; padding:12px 14px; border-radius:18px;
+    background:rgba(255,255,255,.74); border:1px solid var(--line); text-align:center; -webkit-tap-highlight-color:transparent;
+    opacity:0; transform:translateY(14px);
+    transition:opacity .7s cubic-bezier(.2,.7,.2,1) var(--d,0s), transform .7s cubic-bezier(.2,.7,.2,1) var(--d,0s), background .25s, border-color .25s, box-shadow .3s;}
+  .pvtoc.in a{opacity:1; transform:none;}
+  .pvtoc small{font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--accentD); font-weight:600;}
+  .pvtoc b{font-size:.98rem; font-weight:700; letter-spacing:-.02em; line-height:1.35; color:var(--tx); text-wrap:balance;}
+  .pvtoc i{font-style:normal; color:var(--accent); font-size:.9rem; line-height:1; transition:transform .3s cubic-bezier(.2,.7,.2,1);}
+  .pvtoc a:hover{background:#fff; border-color:#cfe0cd; box-shadow:0 14px 30px -18px rgba(40,50,35,.3);}
+  .pvtoc a:hover i{transform:translateY(3px);}
+  .pvtoc a:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+  .pvtoc a[hidden]{display:none;}
+  @media(max-width:760px){
+    .hero.pvh{padding:70px 20px 58px;}
+    .pvtoc{max-width:460px; gap:6px; margin-top:32px;}
+    .pvtoc a{min-height:72px; padding:10px 6px;}
+    .pvtoc small{font-size:.64rem; letter-spacing:.1em;}
+    .pvtoc b{font-size:.86rem;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .pvtoc a{opacity:1; transform:none; transition:background .25s, border-color .25s;}
+    .pvtoc a:hover i{transform:none;}
+  }
+
+  
+  #pv-journey{background:linear-gradient(180deg,#fbfaf6 0%,var(--bg) 40%,var(--bg) 100%); scroll-margin-top:60px;}
+  #pv-journey [hidden]{display:none !important;}
+  #pv-journey .wrap{position:relative; z-index:1;}
+  #pv-journey .pvj-cwm{z-index:0;}
+  #pv-journey .pvj-cwm.pvj-ca{top:58px; right:6%; width:58px; transform:rotate(14deg);}
+  #pv-journey .pvj-cwm.pvj-cb{top:54%; left:2.5%; width:42px; transform:rotate(-16deg);}
+  #pv-journey .subcopy{text-wrap:pretty;}
+  #pv-journey :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+
+  
+  #pv-journey .pvj-strip{list-style:none; position:relative; display:flex; justify-content:space-between; gap:4px; max-width:780px; margin:44px auto 0; padding:0;}
+  #pv-journey .pvj-strip:before{content:''; position:absolute; left:10%; right:10%; top:18px; height:2px; border-radius:2px; background:#cfe0cd;
+    transform-origin:left center; transition:transform 1.3s cubic-bezier(.76,0,.2,1) .15s;}
+  #pv-journey .pvj-strip li{flex:1 1 0; min-width:0; position:relative; text-align:center;}
+  #pv-journey .pvj-strip a{display:flex; flex-direction:column; align-items:center; gap:3px; min-height:44px; padding:12px 4px 10px; border-radius:16px;
+    color:var(--tx); -webkit-tap-highlight-color:transparent; transition:background .25s;}
+  #pv-journey .pvj-strip a:hover{background:rgba(232,240,228,.75);}
+  #pv-journey .pvj-sd{display:block; width:14px; height:14px; border-radius:50%; background:#fff; border:3px solid var(--accent); box-shadow:0 0 0 5px var(--bg);
+    transition:transform .55s cubic-bezier(.34,1.56,.64,1) var(--d,0s), opacity .35s ease var(--d,0s);}
+  #pv-journey .pvj-strip a:hover .pvj-sd{background:var(--green-wash);}
+  #pv-journey .pvj-strip b{display:block; margin-top:6px; font-size:.95rem; font-weight:700; letter-spacing:-.02em; line-height:1.3;}
+  #pv-journey .pvj-strip small{display:block; font-size:.78rem; color:var(--tx3); line-height:1.35;}
+  #pv-journey.pvj-js .pvj-strip:not(.in):before{transform:scaleX(0);}
+  #pv-journey.pvj-js .pvj-strip:not(.in) .pvj-sd{transform:scale(0); opacity:0;}
+
+  
+  #pv-journey .pvj-list{margin-top:clamp(60px,9vh,96px);}
+  #pv-journey .pvj-st{--hv:min(max(66vh, calc(var(--w,460px) / var(--r,.8))), 80vh); --fw:min(var(--w,460px), calc(var(--hv) * var(--r,.8)));
+    display:grid; grid-template-columns:min(var(--fw),62%) minmax(0,430px); grid-template-rows:1fr auto auto 1fr;
+    grid-template-areas:"fg ." "fg hd" "fg gt" "fg ."; column-gap:clamp(36px,5vw,72px); justify-content:center; align-items:start;
+    margin:0 auto clamp(88px,12vh,136px); scroll-margin-top:72px;}
+  #pv-journey .pvj-st.pvj-r{grid-template-columns:minmax(0,430px) min(var(--fw),62%); grid-template-areas:". fg" "hd fg" "gt fg" ". fg";}
+  #pv-journey .pvj-st.pvj-first{--fw:400px;}
+  #pv-journey .pvj-st:last-child{margin-bottom:clamp(40px,6vh,64px);}
+  #pv-journey .pvj-hd{grid-area:hd; min-width:0;}
+  #pv-journey .pvj-gt{grid-area:gt; min-width:0;}
+  #pv-journey .pvj-fg, #pv-journey .pvj-chat{grid-area:fg; align-self:center; min-width:0;}
+  
+  #pv-journey .pvj-st:not(.pvj-has){grid-template-columns:minmax(0,620px); grid-template-rows:auto auto; grid-template-areas:"hd" "gt";}
+  #pv-journey .pvj-st:not(.pvj-has) .pvj-fg{display:none;}
+
+  
+  #pv-journey .pvj-when{display:flex; align-items:center; flex-wrap:wrap; gap:10px 12px; font-size:1rem; font-weight:400; line-height:1.2;}
+  #pv-journey .pvj-wd{flex:none; width:12px; height:12px; border-radius:50%; border:3px solid var(--accent); background:#fff;}
+  #pv-journey .pvj-wn{font-size:clamp(1.85rem,3.3vw,2.55rem); font-weight:500; letter-spacing:-.03em; line-height:1.1; color:var(--tx);}
+  #pv-journey .pvj-tag{display:inline-flex; align-items:center; background:#fff; border:1px solid #cfe0cd; color:var(--accentD);
+    font-size:.8rem; font-weight:600; border-radius:980px; padding:4px 12px; letter-spacing:0;}
+  #pv-journey .pvj-ln{flex:1 1 32px; min-width:24px; height:1px; background:var(--line); transform-origin:left center; transition:transform 1.2s cubic-bezier(.76,0,.2,1) .3s;}
+  #pv-journey.pvj-js .pvj-hd:not(.in) .pvj-ln{transform:scaleX(0);}
+  #pv-journey .pvj-say{margin-top:14px; font-size:clamp(1.08rem,1.55vw,1.2rem); font-weight:600; line-height:1.58; letter-spacing:-.015em; color:var(--tx); text-wrap:pretty;}
+
+  
+  #pv-journey .pvj-fg{margin:0; position:relative;}
+  #pv-journey .pvj-fig{margin:0;}
+  #pv-journey .pvj-ph{position:relative; display:block; border-radius:4px; cursor:zoom-in; transform:translate(0,var(--py,0px)); -webkit-tap-highlight-color:transparent;}
+  #pv-journey .pvj-ph:before{content:''; position:absolute; inset:0; border-radius:4px; pointer-events:none;
+    box-shadow:0 34px 64px -30px rgba(40,50,35,.42), 0 2px 8px rgba(40,50,35,.06); opacity:0; transition:opacity .9s cubic-bezier(.2,.7,.2,1) .55s;}
+  #pv-journey .pvj-fg.in .pvj-ph:before, #pv-journey:not(.pvj-js) .pvj-ph:before{opacity:1;}
+  #pv-journey .pvj-mk{position:relative; display:block; overflow:hidden; border-radius:4px; aspect-ratio:var(--r,.8); background:#ebe5d8;}
+  #pv-journey.pvj-js .pvj-mk{-webkit-clip-path:inset(calc(50% + var(--dir,1) * 50%) 0 calc(50% - var(--dir,1) * 50%) 0);
+    clip-path:inset(calc(50% + var(--dir,1) * 50%) 0 calc(50% - var(--dir,1) * 50%) 0);
+    transition:clip-path 1.2s cubic-bezier(.76,0,.2,1), -webkit-clip-path 1.2s cubic-bezier(.76,0,.2,1);}
+  #pv-journey.pvj-js .pvj-fg.in .pvj-mk{-webkit-clip-path:inset(0 0 0 0); clip-path:inset(0 0 0 0);}
+  #pv-journey .pvj-im{display:block; width:100%; height:100%; object-fit:cover; opacity:0; transform:scale(1.12);
+    transition:transform 1.8s cubic-bezier(.2,.7,.2,1), opacity .6s ease;}
+  #pv-journey .pvj-im.pvj-ld{opacity:1;}
+  #pv-journey .pvj-fg.in .pvj-im{transform:none;}
+  #pv-journey .pvj-zl{position:absolute; right:12px; bottom:12px; z-index:2; background:rgba(255,253,248,.94); color:var(--accentD); font-size:.78rem; font-weight:600;
+    border-radius:999px; padding:6px 12px; opacity:0; transform:translateY(6px); transition:opacity .3s, transform .3s; pointer-events:none;}
+  #pv-journey .pvj-ph:hover .pvj-zl{opacity:1; transform:none;}
+  
+  #pv-journey .pvj-cap{position:relative; margin-top:22px; padding-left:22px; font-size:1.06rem; line-height:1.66; color:var(--tx);
+    overflow-wrap:anywhere; transition:opacity .8s ease .5s, transform .8s cubic-bezier(.2,.7,.2,1) .5s;}
+  #pv-journey .pvj-cap:before{content:'“'; position:absolute; left:0; top:-.2em; font-family:Georgia, AppleMyungjo, serif; font-size:1.9em; line-height:1; color:#9cc3a8;}
+  #pv-journey .pvj-cap:empty{display:none;}
+  #pv-journey.pvj-js .pvj-fg:not(.in) .pvj-cap{opacity:0; transform:translateY(calc(var(--dir,1) * 12px));}
+  #pv-journey .pvj-hl{background-image:linear-gradient(transparent 60%, rgba(79,154,106,.24) 60%); background-repeat:no-repeat; background-size:0% 100%;
+    -webkit-box-decoration-break:clone; box-decoration-break:clone; transition:background-size 1.1s cubic-bezier(.2,.7,.2,1) 1.05s;}
+  #pv-journey .pvj-fg.in .pvj-hl, #pv-journey:not(.pvj-js) .pvj-hl{background-size:100% 100%;}
+  #pv-journey .pvj-more{display:inline-flex; align-items:center; gap:8px; min-height:44px; margin:2px 0 0 22px; color:var(--accentD); font-weight:600; font-size:.92rem;
+    transition:opacity .8s ease .7s;}
+  #pv-journey .pvj-more span{display:inline-block; transition:transform .3s cubic-bezier(.2,.7,.2,1);}
+  #pv-journey .pvj-more:hover span{transform:translateX(4px);}
+  #pv-journey.pvj-js .pvj-fg:not(.in) .pvj-more{opacity:0;}
+
+  
+  #pv-journey.pvj-js .pvj-u{opacity:0; transform:translateY(calc(var(--dir,1) * 16px));
+    transition:opacity .85s cubic-bezier(.2,.7,.2,1) var(--d,0s), transform .85s cubic-bezier(.2,.7,.2,1) var(--d,0s);}
+  #pv-journey.pvj-js .pvj-rv.in .pvj-u{opacity:1; transform:none;}
+  #pv-journey .pvj-ent, #pv-journey .pvj-ent *, #pv-journey .pvj-ent:before, #pv-journey .pvj-ent *:before{transition:none !important;}   
+
+  
+  #pv-journey .pvj-gt{margin-top:22px;}
+  #pv-journey .pvj-g{position:relative; background:#fff; border:1px solid var(--line); border-radius:16px; padding:13px 18px 14px;}
+  #pv-journey .pvj-g.pvj-me{background:var(--green-wash); border-color:#cfe0cd;}
+  #pv-journey .pvj-gk{display:block; margin-bottom:3px; font-size:.8rem; font-weight:700; letter-spacing:.02em; color:var(--gold);}
+  #pv-journey .pvj-me .pvj-gk{color:var(--accentD);}
+  #pv-journey .pvj-g p{color:var(--tx2); font-size:.97rem; line-height:1.68; text-wrap:pretty;}
+  #pv-journey .pvj-g .link{white-space:nowrap;}
+  #pv-journey .pvj-ar{display:block; position:relative; width:2px; height:20px; margin-left:28px;}
+  #pv-journey .pvj-ar:before{content:''; position:absolute; left:0; top:3px; bottom:3px; width:2px; border-radius:2px; background:#cfe0cd;
+    transform-origin:center top; transition:transform .7s cubic-bezier(.76,0,.2,1) .3s;}
+  #pv-journey.pvj-js .pvj-gt:not(.in) .pvj-ar:before{transform:scaleY(0);}
+  #pv-journey .pvj-sign{font-family:Georgia, AppleMyungjo, "Noto Serif KR", serif; font-style:italic; color:var(--accentD); font-size:1.05em;}
+  #pv-journey .pvj-note{display:flex; align-items:baseline; gap:8px; margin-top:14px; color:var(--tx2); font-size:.9rem; line-height:1.62; text-wrap:pretty;}
+  #pv-journey .pvj-note b{color:var(--tx); font-weight:600;}
+  #pv-journey .pvj-ns{display:block;}
+  #pv-journey .pvj-nk{flex:none; background:#fff; border:1px solid #cfe0cd; color:var(--accentD); font-size:.76rem; font-weight:700; border-radius:980px; padding:2px 9px;}
+
+  
+  #pv-journey .pvj-wxl{display:inline-flex; align-items:center; gap:6px; min-height:44px; color:var(--accentD); font-weight:600; font-size:.88rem;}
+
+  
+  #pv-journey .pvj-chat{margin:0; width:100%; max-width:400px; justify-self:center;}
+  #pv-journey .pvj-chk{margin-bottom:12px; text-align:center; font-size:.86rem; font-weight:700; color:var(--accentD);}
+  #pv-journey .pvj-win{border-radius:24px; overflow:hidden; background:#eef3ea; border:1px solid #dfe8da;
+    box-shadow:0 30px 60px -34px rgba(40,50,35,.38), 0 2px 8px rgba(40,50,35,.05);
+    transition:opacity .8s cubic-bezier(.2,.7,.2,1) .05s, transform .9s cubic-bezier(.2,.7,.2,1) .05s;}
+  #pv-journey.pvj-js .pvj-chat:not(.in) .pvj-win{opacity:0; transform:translateY(calc(var(--dir,1) * 22px)) scale(.97);}
+  #pv-journey .pvj-bar{display:flex; align-items:center; gap:8px; padding:12px 16px; background:rgba(255,255,255,.78); border-bottom:1px solid #dfe8da; font-size:.9rem; color:var(--tx);}
+  #pv-journey .pvj-back{font-size:1.3rem; line-height:1; color:var(--tx3); margin-right:2px;}
+  #pv-journey .pvj-av{flex:none; width:22px; height:22px; padding:3px; border-radius:50%; background:#fff; border:1px solid #dfe8da;}
+  #pv-journey .pvj-bar b{font-weight:700; letter-spacing:-.01em;}
+  #pv-journey .pvj-ch{margin-left:auto; font-size:.76rem; color:var(--tx3);}
+  #pv-journey .pvj-room{display:flex; flex-direction:column; gap:12px; padding:20px 16px 18px;}
+  #pv-journey .pvj-bub{align-self:flex-end; max-width:94%; background:#fbe77d; color:#3b3310; border-radius:18px 4px 18px 18px; padding:12px 15px 13px;
+    font-size:.88rem; line-height:1.62; box-shadow:0 8px 16px -12px rgba(70,58,0,.45);}
+  #pv-journey .pvj-bl{overflow-wrap:anywhere; text-wrap:pretty;}
+  #pv-journey .pvj-bl b{font-weight:600;}
+  #pv-journey.pvj-js .pvj-bub .pvj-u{transform:translateY(calc(var(--dir,1) * 6px));}
+  #pv-journey.pvj-js .pvj-rv.in .pvj-bub .pvj-u{transform:none;}
+  #pv-journey .pvj-rd{margin-top:14px; text-align:center; color:var(--tx3); font-size:.86rem; line-height:1.62; text-wrap:pretty;}
+
+  
+  #pv-journey .pvj-end{text-align:center;}
+  #pv-journey .pvj-end .cpull{margin-top:clamp(8px,2vh,24px);}
+  #pv-journey .pvj-endnote{max-width:560px; margin:20px auto 0; color:var(--tx2); font-size:1.02rem; line-height:1.72; text-wrap:pretty;}
+  #pv-journey .pvj-endgo{margin-top:26px;}
+  #pv-journey .pvj-next{min-height:48px;}
+  #pv-journey .pvj-dn{display:inline-block; animation:pvj-bob 2s ease-in-out infinite;}
+  @keyframes pvj-bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(4px);}}
+
+  
+  @media (max-width:900px){
+    #pv-journey{--edge:28px;}
+    #pv-journey .pvj-st, #pv-journey .pvj-st.pvj-r{grid-template-columns:minmax(0,1fr); grid-template-rows:auto; grid-template-areas:"hd" "fg" "gt";
+      row-gap:20px; margin-bottom:clamp(64px,9vh,92px);}
+    #pv-journey .pvj-st:not(.pvj-has){grid-template-areas:"hd" "gt";}
+    #pv-journey .pvj-fg{width:min(var(--pw,88vw), 640px, calc(min(70vh, var(--ph,640px)) * var(--r,.8))); justify-self:start; margin-left:calc(-1 * var(--edge));}   
+    #pv-journey .pvj-st.pvj-r .pvj-fg{justify-self:end; margin-left:0; margin-right:calc(-1 * var(--edge));}
+    #pv-journey .pvj-mk, #pv-journey .pvj-ph:before{border-radius:0;}
+    #pv-journey .pvj-st.pvj-l .pvj-cap{margin-left:var(--edge);}
+    #pv-journey .pvj-st.pvj-r .pvj-cap{padding-right:var(--edge);}
+    #pv-journey .pvj-st.pvj-l .pvj-more{margin-left:calc(var(--edge) + 22px);}
+    #pv-journey .pvj-cap{margin-top:16px; font-size:1.02rem;}
+    #pv-journey .pvj-chat{max-width:440px;}
+    #pv-journey .pvj-gt{margin-top:2px;}
+  }
+  @media (max-width:640px){
+    #pv-journey .pvj-strip{margin-top:34px;}
+    #pv-journey .pvj-strip small{display:none;}
+    #pv-journey .pvj-strip b{font-size:.82rem;}
+    #pv-journey .pvj-wn{font-size:clamp(1.7rem,7.4vw,2.05rem);}
+    #pv-journey .pvj-g{padding:12px 16px 13px;}
+    #pv-journey .pvj-g p{font-size:.95rem;}
+    #pv-journey .pvj-bub{font-size:.86rem;}
+  }
+  @media (max-width:760px), (pointer:coarse){
+    #pv-journey .pvj-g .link{display:inline-block; padding:11px 2px; margin:-11px 0;}   
+  }
+
+  
+  @media (prefers-reduced-motion: reduce){
+    #pv-journey .pvj-rv, #pv-journey .pvj-rv *, #pv-journey .pvj-rv:before, #pv-journey .pvj-rv *:before{transition:none !important; animation:none !important;}
+    #pv-journey.pvj-js .pvj-u, #pv-journey.pvj-js .pvj-chat .pvj-win, #pv-journey.pvj-js .pvj-fg .pvj-cap, #pv-journey.pvj-js .pvj-fg .pvj-more{opacity:1 !important; transform:none !important;}
+    #pv-journey.pvj-js .pvj-mk{-webkit-clip-path:none !important; clip-path:none !important;}
+    #pv-journey .pvj-im, #pv-journey .pvj-ph{transform:none !important;}
+    #pv-journey.pvj-js .pvj-strip:before, #pv-journey.pvj-js .pvj-ln, #pv-journey.pvj-js .pvj-ar:before, #pv-journey.pvj-js .pvj-sd{transform:none !important; opacity:1 !important;}
+    #pv-journey .pvj-ph:before{opacity:1 !important;}
+    #pv-journey .pvj-hl{background-size:100% 100% !important; transition:none !important;}
+    #pv-journey .pvj-dn{animation:none !important;}
+  }
+
+
+#pv-cases{position:relative; overflow:hidden; padding:112px 0; background:var(--panel,#efe9df); scroll-margin-top:60px;}
+#pv-cases .cwm{position:absolute; pointer-events:none; opacity:.05; color:var(--accent,#3f7d57); z-index:0;}
+#pv-cases .cwm.a{top:60px; right:7%; width:58px; transform:rotate(14deg);}
+#pv-cases .cwm.b{bottom:96px; left:5%; width:42px; transform:rotate(-12deg);}
+#pv-cases .wrap{position:relative; z-index:1;}
+#pv-cases .pvc-feed{--edge:28px; margin:clamp(52px,7vh,72px) auto 0;}
+#pv-cases .pvc-case[hidden]{display:none;}
+
+
+.pvc-case{--pvh:min(68vh,600px); --ease:cubic-bezier(.2,.7,.2,1); --wipe:cubic-bezier(.76,0,.2,1); --serif:Georgia, AppleMyungjo, "Noto Serif KR", serif;
+  display:flex; align-items:center; justify-content:center; gap:clamp(36px,5.5vw,84px);
+  margin:0 auto clamp(76px,10vh,112px); text-align:start; scroll-margin-top:72px;
+  font-family:Pretendard,'Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; line-height:1.6; letter-spacing:-.01em;}
+.pvc-case.pvc-r{flex-direction:row-reverse;}
+.pvc-case.pvc-wide{--maxw:58%;}
+.pvc-case:last-child{margin-bottom:clamp(60px,8vh,84px);}
+.pvc-case a, .pvc-case button{-webkit-tap-highlight-color:transparent;}
+.pvc-case :focus-visible{outline:2px solid var(--accent,#3f7d57); outline-offset:3px;}
+.pvc-ent, .pvc-ent *, .pvc-ent:before, .pvc-ent *:before{transition:none !important;}   
+
+
+.pvc-ph{flex:none; position:relative; margin:0; width:min(calc(var(--pvh) * var(--r)), var(--maxw,62%)); transform:translate(0,var(--py,0px));}
+.pvc-ph:before{content:''; position:absolute; inset:0; border-radius:3px; pointer-events:none;
+  box-shadow:0 34px 64px -30px rgba(40,50,35,.42), 0 2px 8px rgba(40,50,35,.06); opacity:0; transition:opacity .9s var(--ease) .55s;}
+.pvc-ph.in:before{opacity:1;}
+.pvc-cv{position:relative; display:block; width:100%; border-radius:3px; color:inherit; text-decoration:none; cursor:zoom-in;}
+.pvc-mk{position:relative; display:block; overflow:hidden; border-radius:3px; aspect-ratio:var(--r); background:#ebe5d8;
+  -webkit-clip-path:inset(calc(50% + var(--dir,1) * 50%) 0 calc(50% - var(--dir,1) * 50%) 0);
+  clip-path:inset(calc(50% + var(--dir,1) * 50%) 0 calc(50% - var(--dir,1) * 50%) 0);
+  transition:clip-path 1.2s var(--wipe), -webkit-clip-path 1.2s var(--wipe);}
+.pvc-ph.in .pvc-mk{-webkit-clip-path:inset(0 0 0 0); clip-path:inset(0 0 0 0);}
+.pvc-im{display:block; width:100%; height:100%; object-fit:cover; transform:scale(1.14); opacity:0; transition:transform 1.8s var(--ease), opacity .6s ease;}
+.pvc-im.pvc-ld{opacity:1;}
+.pvc-ph.in .pvc-im{transform:scale(1);}
+
+.pvc-mk .pvc-im.pvc-new{position:absolute; left:0; top:0; -webkit-clip-path:inset(100% 0 0 0); clip-path:inset(100% 0 0 0); transform:scale(1.1);
+  transition:clip-path .9s var(--wipe), -webkit-clip-path .9s var(--wipe), transform 1.4s var(--ease), opacity .3s ease;}
+.pvc-mk .pvc-im.pvc-new.pvc-on{-webkit-clip-path:inset(0 0 0 0); clip-path:inset(0 0 0 0); transform:scale(1);}
+.pvc-zl{position:absolute; right:12px; bottom:12px; z-index:2; background:rgba(255,253,248,.94); color:var(--accentD,#356a4a); font-size:.78rem; font-weight:600;
+  border-radius:999px; padding:6px 12px; opacity:0; transform:translateY(6px); transition:opacity .3s var(--ease), transform .3s var(--ease); pointer-events:none;}
+.pvc-cv:hover .pvc-zl, .pvc-cv:focus-visible .pvc-zl{opacity:1; transform:none;}
+.pvc-bdg{position:absolute; left:12px; top:12px; z-index:2; background:rgba(255,253,248,.94); color:var(--accentD,#356a4a); font-size:.78rem; font-weight:700;
+  border-radius:999px; padding:4px 11px; letter-spacing:.02em; opacity:0; transition:opacity .6s var(--ease) .8s;}
+.pvc-ph.in .pvc-bdg{opacity:1;}
+
+
+.pvc-tx{flex:0 1 420px; align-self:stretch; min-width:0; display:flex; flex-direction:column; justify-content:space-between; gap:26px; padding:4px 0 2px;
+  transform:translate(0,var(--ty,0px));}
+.pvc-u{opacity:0; transform:translateY(calc(var(--dir,1) * 18px)); transition:opacity .9s var(--ease) var(--d,0s), transform .9s var(--ease) var(--d,0s);}
+.pvc-tx.in .pvc-u{opacity:1; transform:none;}
+.pvc-kk{--d:.1s; display:flex; align-items:center; gap:12px; margin:0; font-size:.74rem; letter-spacing:.12em; color:var(--tx3,#8b9182); font-weight:500;}
+.pvc-ln{flex:1; height:1px; background:var(--line,#e3ded1); transform:scaleX(0); transform-origin:left center; transition:transform 1.2s var(--wipe) .35s;}
+.pvc-tx.in .pvc-ln{transform:scaleX(1);}
+.pvc-who{--d:.18s; margin:18px 0 0; font-size:clamp(1.32rem,2.1vw,1.68rem); font-weight:700; line-height:1.36; letter-spacing:-.025em; color:var(--tx,#1d231b); text-wrap:balance;}
+.pvc-beats{position:relative; display:grid; gap:12px; padding-left:20px;}
+.pvc-beats:before{content:''; position:absolute; left:0; top:6px; bottom:6px; width:2px; border-radius:2px; background:#cfe0cd;
+  transform:scaleY(0); transform-origin:center top; transition:transform 1.3s var(--wipe) .3s;}
+.pvc-tx.in .pvc-beats:before{transform:scaleY(1);}
+.pvc-b{position:relative; margin:0; color:var(--tx2,#586250); font-size:.98rem; line-height:1.7; text-wrap:pretty;}
+.pvc-b:nth-child(1){--d:.28s;} .pvc-b:nth-child(2){--d:.38s;} .pvc-b:nth-child(3){--d:.5s;}
+
+.pvc-b:before{content:''; position:absolute; left:-24px; top:6px; box-sizing:border-box; width:10px; height:10px; border-radius:50%;
+  background:var(--panel,#efe9df); border:2px solid #9cc3a8; transform:scale(0); transition:transform .5s var(--ease) calc(var(--d,0s) + .25s);}
+.pvc-b:last-child:before{background:#9cc3a8;}
+.pvc-tx.in .pvc-b:before{transform:scale(1);}
+.pvc-k{display:block; margin-bottom:2px; font-size:.8rem; font-weight:700; letter-spacing:.04em; color:var(--accentD,#356a4a);}
+.pvc-st{color:var(--tx,#1d231b); font-weight:600;}
+.pvc-cap{display:block; font-family:var(--serif); font-size:1.1rem; line-height:1.62; color:var(--tx,#1d231b);}
+.pvc-hl{background-image:linear-gradient(transparent 60%, rgba(79,154,106,.24) 60%); background-repeat:no-repeat; background-size:0% 100%;
+  transition:background-size 1.1s var(--ease) 1s;}
+.pvc-tx.in .pvc-hl{background-size:100% 100%;}
+
+
+.pvc-pv{--d:.6s; margin-top:20px;}
+.pvc-pvh{display:block; margin-bottom:9px; font-size:.78rem; color:var(--tx3,#8b9182); letter-spacing:.01em;}
+.pvc-ths{display:flex; flex-wrap:wrap; gap:8px; align-items:flex-end;}
+.pvc-th{--th:88px; position:relative; display:block; flex:none; height:var(--th); width:calc(var(--th) * var(--tr,.8)); margin:0; padding:0; border:0; border-radius:3px; overflow:hidden;
+  background:#ebe5d8; color:inherit; font:inherit; cursor:pointer; -webkit-appearance:none; appearance:none;
+  box-shadow:0 10px 20px -12px rgba(40,50,35,.4); transition:transform .35s var(--ease), box-shadow .35s var(--ease);}
+.pvc-th img{display:block; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .5s ease;}
+.pvc-th img.pvc-ld{opacity:1;}
+.pvc-th:hover{transform:translateY(-4px); box-shadow:0 16px 26px -14px rgba(40,50,35,.45);}
+.pvc-th[aria-pressed="true"]{outline:2px solid var(--accent,#3f7d57); outline-offset:3px;}
+.pvc-wide .pvc-th{--th:clamp(56px,6.4vw,68px);}   
+.pvc-go{--d:.7s; display:inline-flex; align-items:center; gap:10px; margin-top:22px; min-height:46px; padding:0 22px; border-radius:999px; border:1px solid #cfe0cd;
+  background:transparent; color:var(--accentD,#356a4a); font-weight:600; font-size:.95rem; letter-spacing:normal; text-decoration:none;
+  transition:opacity .9s var(--ease) var(--d), transform .9s var(--ease) var(--d), background .25s, border-color .25s;}
+.pvc-go:hover{background:var(--green-wash,#e8f0e4); border-color:var(--accent,#3f7d57);}
+.pvc-ar{display:inline-block; transition:transform .3s var(--ease);}
+.pvc-go:hover .pvc-ar{transform:translateX(4px);}
+.pvc-reel .pvc-go:hover .pvc-ar{transform:translate(3px,-3px);}
+
+
+#pv-cases .pvc-end{position:relative; z-index:1; text-align:center;}
+#pv-cases .pvc-pull{max-width:780px; margin:clamp(8px,2vh,24px) auto 0; font-size:clamp(1.42rem,3.7vw,2.25rem); font-weight:600; letter-spacing:-.03em; line-height:1.48;
+  color:var(--tx,#1d231b); text-wrap:balance;}
+#pv-cases .pvc-pull .hl{background-image:linear-gradient(transparent 60%, rgba(79,154,106,.24) 60%); background-repeat:no-repeat; background-size:0% 100%;
+  transition:background-size 1.1s cubic-bezier(.2,.7,.2,1) .3s;}
+#pv-cases .pvc-pull.in .hl{background-size:100% 100%;}
+#pv-cases .pvc-note{max-width:600px; margin:22px auto 0; color:var(--tx2,#586250); font-size:1rem; line-height:1.75; text-wrap:pretty;}
+#pv-cases .pvc-next{margin-top:28px;}
+#pv-cases .pvc-next a{display:inline-flex; align-items:center; gap:8px; min-height:46px; padding:0 22px; border-radius:999px; border:1px solid #cfe0cd;
+  background:rgba(255,255,255,.55); color:var(--accentD,#356a4a); font-weight:600; font-size:.98rem; text-decoration:none; -webkit-tap-highlight-color:transparent;
+  transition:background .25s, border-color .25s;}
+#pv-cases .pvc-next a:hover{background:var(--green-wash,#e8f0e4); border-color:var(--accent,#3f7d57);}
+#pv-cases .pvc-next a:focus-visible{outline:2px solid var(--accent,#3f7d57); outline-offset:3px;}
+#pv-cases .pvc-down{display:inline-block; animation:pvc-bob 2s ease-in-out infinite;}
+@keyframes pvc-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+
+@media (max-width:900px){
+  .pvc-case, .pvc-case.pvc-r{flex-direction:column; align-items:flex-start; gap:20px; margin-bottom:clamp(60px,9vh,88px);}
+  .pvc-ph{width:min(var(--pw,88vw), calc(min(70vh,640px) * var(--r)));}
+  .pvc-case.pvc-l .pvc-ph{margin-left:calc(-1 * var(--edge,28px));}
+  .pvc-case.pvc-r .pvc-ph{margin-right:calc(-1 * var(--edge,28px)); align-self:flex-end;}
+  .pvc-mk, .pvc-ph:before{border-radius:0;}
+  .pvc-tx{flex:none; align-self:stretch; width:100%; gap:14px; padding:0;}
+  .pvc-who{font-size:clamp(1.28rem,5.4vw,1.55rem); margin-top:12px;}
+  .pvc-pv{margin-top:16px;}
+  .pvc-th{--th:76px;}
+  .pvc-wide .pvc-th{--th:clamp(52px,16.5vw,64px);}
+}
+@media (max-width:760px){
+  #pv-cases{padding:92px 0;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .pvc-u, .pvc-ln, .pvc-ph:before, .pvc-bdg, .pvc-im, .pvc-b:before{opacity:1 !important; transform:none !important; transition:none !important;}
+  .pvc-mk{-webkit-clip-path:none !important; clip-path:none !important; transition:none !important;}
+  .pvc-ph, .pvc-tx{transform:none !important;}
+  .pvc-beats:before{transform:none !important; transition:none !important;}
+  .pvc-hl{transition:none !important; background-size:100% 100% !important;}
+  .pvc-th, .pvc-go, .pvc-ar{transition:none !important;}
+  #pv-cases .pvc-pull .hl{transition:none; background-size:100% 100%;}
+  #pv-cases .pvc-down{animation:none;}
+}
+
+  
+  #pv-range, #pv-more{scroll-margin-top:60px;}
+  #pv-range{padding:112px 0 100px; background:radial-gradient(120% 70% at 50% 0%, #fcfbf7 0%, var(--bg) 62%);}
+  #pv-range .cwm.a{top:64px; right:7%; width:58px; transform:rotate(14deg);}
+  #pv-range .wrap, #pv-range .pvr-row, #pv-range .pvr-note{position:relative; z-index:1;}
+  #pv-range .pvr-row[hidden]{display:none;}
+  #pv-range .pvr-row + .pvr-row{margin-top:clamp(84px,11vh,124px);}
+  #pv-range .pvr-h3{font-size:clamp(1.55rem,3.8vw,2.3rem); font-weight:700; letter-spacing:-.03em; line-height:1.22;}
+  #pv-range .subcopy{text-wrap:balance;}
+
+  
+  #pv-range .pvr-rowk{display:flex; align-items:center; gap:14px; margin:clamp(40px,6vh,56px) 0 0; font-size:.84rem; font-weight:700; letter-spacing:.06em; color:var(--accentD);
+    opacity:0; transform:translateY(10px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+  #pv-range .pvr-rowk.in{opacity:1; transform:none;}
+  #pv-range .pvr-trk{position:relative; flex:1; max-width:240px; height:2px; border-radius:2px; background:var(--line); overflow:hidden;
+    transform:scaleX(0); transform-origin:left center; transition:transform 1.2s cubic-bezier(.76,0,.2,1) .25s;}
+  #pv-range .pvr-rowk.in .pvr-trk{transform:scaleX(1);}
+  #pv-range .pvr-trk i{position:absolute; left:0; top:0; bottom:0; width:34%; border-radius:2px; background:var(--accent); transition:transform .3s ease-out, width .3s ease-out;}
+
+  
+  #pv-range .pvr-vp{position:relative; margin-top:16px; --ay:44%;}
+  #pv-range .pvr-band{--pad:max(28px, calc((100% - 1040px) / 2 + 28px)); position:relative; display:flex; align-items:flex-start; gap:clamp(18px,2.2vw,30px);
+    overflow-x:auto; overflow-y:hidden; padding:10px var(--pad) 24px; scroll-padding-inline:var(--pad);
+    scroll-snap-type:x mandatory; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+  #pv-range .pvr-band::-webkit-scrollbar{display:none;}
+  @media (pointer:fine){ #pv-range .pvr-band{scroll-snap-type:x proximity;} }
+
+  
+  #pv-range .pvr-card{--w:430px; --hm:min(max(64vh, calc(var(--w) / var(--r,.8))), 80vh); --lk:1; --ct:100%; --cr:0%; --cb:0%; --cl:0%;
+    flex:none; position:relative; display:block; width:min(var(--w), calc(var(--hm) * var(--r,.8))); margin-top:calc(var(--lift,0px) * var(--lk));
+    scroll-snap-align:start; color:inherit; text-decoration:none; border-radius:6px; -webkit-tap-highlight-color:transparent;}
+  #pv-range .pvr-card[hidden]{display:none;}
+  #pv-range .pvr-card[data-size="l"]{--w:460px;}
+  #pv-range .pvr-card[data-size="s"]{--w:420px;}
+  #pv-range .pvr-card.pvr-wide{--w:600px;}
+  #pv-range .pvr-card.pvr-tall{--w:360px; --hm:min(70vh,620px);}
+  #pv-range .pvr-card:focus-visible{outline:2px solid var(--accent); outline-offset:5px;}
+  
+  #pv-range .pvr-card[data-dir="t"]{--ct:0%; --cb:100%;}
+  #pv-range .pvr-card[data-dir="r"]{--ct:0%; --cl:100%;}
+  #pv-range .pvr-card[data-dir="l"]{--ct:0%; --cr:100%;}
+  #pv-range .pvr-fr{position:relative; display:block;}
+  #pv-range .pvr-fr:before{content:''; position:absolute; inset:0; border-radius:4px; pointer-events:none;
+    box-shadow:0 30px 56px -30px rgba(40,50,35,.44), 0 2px 8px rgba(40,50,35,.06); opacity:0; transition:opacity .8s ease calc(var(--d,0s) + .5s);}
+  #pv-range .pvr-card.in .pvr-fr:before{opacity:1;}
+  #pv-range .pvr-ph{position:relative; display:block; overflow:hidden; border-radius:4px; aspect-ratio:var(--r,.8); background:#ebe5d8;
+    -webkit-clip-path:inset(var(--ct) var(--cr) var(--cb) var(--cl)); clip-path:inset(var(--ct) var(--cr) var(--cb) var(--cl));
+    transition:clip-path 1.15s cubic-bezier(.76,0,.2,1) var(--d,0s), -webkit-clip-path 1.15s cubic-bezier(.76,0,.2,1) var(--d,0s);}
+  #pv-range .pvr-card.in .pvr-ph{-webkit-clip-path:inset(0 0 0 0); clip-path:inset(0 0 0 0);}
+  #pv-range .pvr-ph img{display:block; width:100%; height:100%; object-fit:cover; opacity:0; transform:scale(1.12);
+    transition:transform 1.7s cubic-bezier(.2,.7,.2,1) var(--d,0s), opacity .6s ease;}
+  #pv-range .pvr-ph img.ld{opacity:1;}
+  #pv-range .pvr-card.in .pvr-ph img{transform:scale(1);}
+  #pv-range .pvr-bdg{position:absolute; left:12px; top:12px; z-index:2; background:rgba(255,253,248,.94); color:var(--accentD); font-size:.78rem; font-weight:700;
+    border-radius:999px; padding:4px 11px; letter-spacing:.02em; opacity:0; transition:opacity .6s ease calc(var(--d,0s) + .8s);}
+  #pv-range .pvr-card.in .pvr-bdg{opacity:1;}
+  #pv-range .pvr-tx{display:block; padding:16px 2px 0; opacity:0; transform:translateY(12px);
+    transition:opacity .8s cubic-bezier(.2,.7,.2,1) calc(var(--d,0s) + .32s), transform .8s cubic-bezier(.2,.7,.2,1) calc(var(--d,0s) + .32s);}
+  #pv-range .pvr-card.in .pvr-tx{opacity:1; transform:none;}
+  #pv-range .pvr-nm{display:block; font-family:Georgia, AppleMyungjo, "Noto Serif KR", serif; font-size:clamp(1.08rem,1.45vw,1.24rem); font-weight:500;
+    line-height:1.42; letter-spacing:-.015em; color:var(--tx); text-wrap:balance;}
+  #pv-range .pvr-go{display:inline-flex; align-items:center; gap:5px; min-height:40px; margin-top:2px; font-size:.88rem; font-weight:600; color:var(--accentD);}
+  #pv-range .pvr-go .ar{display:inline-block; transition:transform .25s ease;}
+  @media (hover:hover){
+    #pv-range .pvr-card.in:hover .pvr-ph img{transform:scale(1.04); transition-duration:.8s, .6s; transition-delay:0s, 0s;}
+    #pv-range .pvr-card:hover .pvr-go .ar{transform:translateX(4px);}
+    #pv-range .pvr-card:hover .pvr-nm{color:var(--accentD);}
+  }
+  
+  #pv-range .pvr-card.pvr-ent, #pv-range .pvr-card.pvr-ent *, #pv-range .pvr-card.pvr-ent .pvr-fr:before{transition:none !important;}
+
+  
+  #pv-range .pvr-arw{position:absolute; top:var(--ay); z-index:3; width:48px; height:48px; margin-top:-24px; padding:0; display:flex; align-items:center; justify-content:center;
+    border-radius:50%; border:1px solid #cfe0cd; background:rgba(255,253,248,.9); color:var(--accentD); cursor:pointer; font:inherit;
+    box-shadow:0 12px 26px -14px rgba(40,50,35,.38); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    transition:opacity .3s ease, transform .3s ease, background .2s ease, border-color .2s ease; -webkit-tap-highlight-color:transparent;}
+  #pv-range .pvr-arw svg{width:22px; height:22px; display:block;}
+  #pv-range .pvr-arw.prev{left:max(12px, calc((100% - 1040px) / 2 - 8px));}
+  #pv-range .pvr-arw.next{right:max(12px, calc((100% - 1040px) / 2 - 8px));}
+  #pv-range .pvr-arw:hover{background:#fff; border-color:var(--accent);}
+  #pv-range .pvr-arw:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+  #pv-range .pvr-arw[disabled]{opacity:0; transform:scale(.82); pointer-events:none;}
+
+  #pv-range .pvr-note{max-width:640px; margin:clamp(30px,5vh,44px) auto 0; padding:0 28px; text-align:center; color:var(--tx3); font-size:.9rem; line-height:1.7; text-wrap:pretty;}
+
+  @media (max-width:760px){
+    #pv-range{padding:88px 0 80px;}
+    #pv-range .pvr-row + .pvr-row{margin-top:76px;}
+    
+    #pv-range .pvr-band{gap:14px; padding:8px var(--pad) 18px; align-items:center;}
+    #pv-range .pvr-card{--w:84vw; --hm:70vh; --lk:0;}
+    #pv-range .pvr-band > .pvr-card:first-child{--w:80vw;}   
+    #pv-range .pvr-card[data-size="l"]{--w:86vw;}
+    #pv-range .pvr-card[data-size="s"]{--w:82vw;}
+    #pv-range .pvr-card.pvr-wide{--w:88vw;}
+    #pv-range .pvr-card.pvr-tall{--w:82vw; --hm:62vh;}
+    #pv-range .pvr-nm{font-size:1.06rem;}
+    #pv-range .pvr-tx{padding-top:14px;}
+    
+    #pv-range .pvr-vp{display:flex; flex-wrap:wrap; justify-content:flex-end; align-items:center; gap:10px; padding-right:20px;}
+    #pv-range .pvr-band{order:-1; flex:0 0 100%; width:100%;}
+    #pv-range .pvr-arw{position:static; width:44px; height:44px; margin:0;}
+    #pv-range .pvr-arw[disabled]{opacity:.32; transform:none;}
+  }
+
+  
+  #pv-more{padding:112px 0; background:var(--green-wash);}
+  #pv-more .cwm.a{bottom:56px; left:5%; width:54px; transform:rotate(-12deg);}
+  #pv-more .wrap{position:relative; z-index:1;}
+  #pv-more .subcopy{text-wrap:pretty;}
+  #pv-more .pvr-mreels{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(16px,2.4vw,28px); max-width:940px; margin:clamp(40px,6vh,56px) auto 0;}
+  #pv-more .pvr-mreels.pvr-one{grid-template-columns:minmax(0,1fr); max-width:560px;}
+  #pv-more .pvr-mreels[hidden], #pv-more .pvr-mr[hidden]{display:none;}
+  
+  #pv-more .pvr-mr{display:grid; grid-template-columns:112px minmax(0,1fr); grid-template-areas:"th bq" "th go"; grid-template-rows:auto 1fr; column-gap:22px; align-items:start;
+    margin:0; padding:22px 24px 12px 22px; background:#fff; border:1px solid #d6e5d4; border-radius:22px; box-shadow:0 24px 48px -34px rgba(40,50,35,.38);}
+  #pv-more .pvr-mth{grid-area:th; position:relative; display:block; width:112px; aspect-ratio:var(--r,1); border-radius:10px; overflow:hidden; background:#ebe5d8;
+    box-shadow:0 14px 24px -14px rgba(40,50,35,.5); transform:rotate(-3deg); transition:transform 1s cubic-bezier(.2,.7,.2,1) .25s; -webkit-tap-highlight-color:transparent;}
+  #pv-more .pvr-mr + .pvr-mr .pvr-mth{transform:rotate(2.5deg);}
+  #pv-more .pvr-mr:not(.in) .pvr-mth{transform:translateY(14px) rotate(-9deg);}          
+  #pv-more .pvr-mr + .pvr-mr:not(.in) .pvr-mth{transform:translateY(14px) rotate(8deg);}
+  #pv-more .pvr-mth img{display:block; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .6s ease;}
+  #pv-more .pvr-mth img.ld{opacity:1;}
+  #pv-more .pvr-mpl{position:absolute; left:6px; bottom:6px; display:flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%;
+    background:rgba(255,253,248,.94); color:var(--accentD); font-size:.66rem; pointer-events:none;}
+  #pv-more .pvr-mbq{grid-area:bq; margin:0; font-family:Georgia, AppleMyungjo, "Noto Serif KR", serif; font-size:clamp(1.02rem,1.5vw,1.12rem); line-height:1.72; color:var(--tx); text-wrap:pretty; overflow-wrap:anywhere;}
+  #pv-more .pvr-mbq .hl{background-image:linear-gradient(transparent 60%, rgba(79,154,106,.26) 60%); background-repeat:no-repeat; background-size:0% 100%;
+    -webkit-box-decoration-break:clone; box-decoration-break:clone; transition:background-size 1.1s cubic-bezier(.2,.7,.2,1) .6s;}
+  #pv-more .pvr-mr.in .pvr-mbq .hl{background-size:100% 100%;}
+  #pv-more .pvr-mr figcaption{grid-area:go; display:flex; flex-direction:column; align-items:flex-start; margin-top:10px;}
+  #pv-more .pvr-msrc{color:var(--tx3); font-size:.8rem;}
+  #pv-more .pvr-reel{display:inline-flex; align-items:center; gap:6px; min-height:44px; color:var(--accentD); font-weight:600; font-size:.9rem;}
+  #pv-more .pvr-reel .ar{display:inline-block; transition:transform .25s ease;}
+  @media (hover:hover){
+    #pv-more .pvr-mr.in .pvr-mth:hover{transform:rotate(0deg) scale(1.04); transition-delay:0s;}
+    #pv-more .pvr-reel:hover .ar{transform:translate(3px,-3px);}
+  }
+  #pv-more .pvr-reel:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px;}
+
+  
+  #pv-more .pvr-end{margin-top:clamp(72px,10vh,104px); text-align:center;}
+  #pv-more .pvr-end .cpull{margin-top:0;}
+  #pv-more .pvr-endnote{max-width:560px; margin:18px auto 0; color:var(--tx2); font-size:1rem; line-height:1.7; text-wrap:pretty;}
+  #pv-more .pvr-end .ccta{margin-top:28px;}
+
+  @media (max-width:900px){
+    #pv-more .pvr-mreels{grid-template-columns:minmax(0,1fr); max-width:560px;}
+  }
+  @media (max-width:760px){
+    #pv-more{padding:88px 0;}
+  }
+  @media (max-width:520px){   
+    #pv-more .pvr-mr{grid-template-columns:96px minmax(0,1fr); grid-template-areas:"th go" "bq bq"; grid-template-rows:auto auto; column-gap:16px; row-gap:16px; padding:18px 18px 20px;}
+    #pv-more .pvr-mth{width:96px;}
+    #pv-more .pvr-mr figcaption{align-self:center; margin-top:0;}
+    #pv-more .pvr-reel{display:inline-block; min-height:0; padding:9px 0; line-height:1.45;}   
+  }
+
+  
+  @media (prefers-reduced-motion:reduce){
+    #pv-range .pvr-ph{-webkit-clip-path:none !important; clip-path:none !important; transition:none !important;}
+    #pv-range .pvr-ph img, #pv-range .pvr-tx, #pv-range .pvr-bdg, #pv-range .pvr-fr:before, #pv-range .pvr-rowk, #pv-range .pvr-trk{opacity:1 !important; transform:none !important; transition:none !important;}
+    #pv-range .pvr-arw, #pv-range .pvr-go .ar{transition:none !important;}
+    #pv-more .pvr-mth, #pv-more .pvr-mth img{transition:none !important;}
+    #pv-more .pvr-mr .pvr-mth, #pv-more .pvr-mr:not(.in) .pvr-mth{transform:rotate(-3deg) !important;}
+    #pv-more .pvr-mr + .pvr-mr .pvr-mth, #pv-more .pvr-mr + .pvr-mr:not(.in) .pvr-mth{transform:rotate(2.5deg) !important;}
+    #pv-more .pvr-mbq .hl{transition:none; background-size:100% 100%;}
+  }
+</style>
+<style>
+  
+  .gsbar{background:#fff8e1; color:#6b5520; border-bottom:1px solid #f0dfa8; font-size:.86rem; line-height:1.6; padding:8px 14px; text-align:center;}
+  .gsbar b{color:#57420f;}
+  .gsbar a, .gsbar button{display:inline-flex; align-items:center; min-height:44px; padding:0 16px; margin:2px 4px; border-radius:980px; border:1px solid #ead08a; background:#fff; color:#57420f; font:inherit; font-weight:600; cursor:pointer;}
+  .gsbar button[aria-pressed="true"]{background:#ffe7a3;}
+  body.gsshow [data-gs]{outline:2px dashed #d7a21e; outline-offset:4px;}
+  .mjchk{display:inline-block; margin-top:14px; padding:4px 11px; border-radius:980px; background:#fff1c2; color:#755600; font-size:.8rem; font-weight:700; line-height:1.5; letter-spacing:0;}
+  #pv-journey .pvj-g .mjchk{margin-top:10px;}
+  .mjq{background:linear-gradient(transparent 60%, #ffeaa8 60%);}
+</style>
+</head>
+<body>
+
+
+<div class="nav" id="nav"><div class="wrap in">
+  <a class="brand" href="./" aria-label="maydly 첫 화면으로">maydly <svg class="clv" width="17" height="17" viewBox="0 0 40 40"><g fill="#4f9a6a"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg></a>
+  <div class="navlinks">
+    <a href="./#story">이야기</a>
+    <a href="./#work">작업</a>
+    <a href="./#process">촬영 과정</a>
+    <a href="./#signature">단어 여정</a>
+    <a href="./#menu">촬영 안내</a>
+    <a href="./#consult">촬영 상담</a>
+    <a href="./#faq">FAQ</a>
+    <a href="./#brand">브랜드 · 협업</a>
+  </div>
+  <button class="navmenu" id="navmenu" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
+  <a class="navbook" href="./#apply">상담 신청</a>
+</div></div>
+
+<header class="hero pvh">
+  <svg class="cwm a" viewBox="0 0 40 40"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
+  <svg class="cwm b" viewBox="0 0 40 40"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
+  <div class="wrap">
+    <div class="eyebrow reveal">Before we talk</div>
+    <h1 class="reveal">상담 전에,<br><span class="em">촬영 한 번 둘러보기</span></h1>
+    <p class="sub reveal serif">어떤 촬영이 되는지는,<br>상담 전에 먼저 보셔도 좋아요.</p>
+    <p class="pvh-lead reveal">첫 대화부터 사진을 받는 날까지, 실제 촬영의 장면들로 채워 두었어요.</p>
+    <nav class="pvtoc reveal" aria-label="이 페이지 둘러보기">
+      <a href="#pv-journey" style="--d:.12s"><small>The flow</small><b>이렇게 흘러가요</b><i aria-hidden="true">↓</i></a>
+      <a href="#pv-cases" style="--d:.2s"><small>Stories</small><b>재료 하나가, 장면이 되기까지</b><i aria-hidden="true">↓</i></a>
+      <a href="#pv-range" style="--d:.28s"><small>Range</small><b>이만큼 달라져요</b><i aria-hidden="true">↓</i></a>
+    </nav>
+  </div>
+</header>
+
+<section id="pv-journey" aria-labelledby="pvj-title">
+    <svg class="cwm pvj-cwm pvj-ca" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
+  <svg class="cwm pvj-cwm pvj-cb" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="kicker">The flow</div>
+      <h2 class="big" id="pvj-title">한 번의 촬영,<br>이렇게 흘러가요</h2>
+      <p class="subcopy">촬영은 셔터를 누르는 순간에만 있지 않아요. 몇 줄의 글이 사진이 되어 돌아오기까지, 그사이에 어떤 일이 있는지 먼저 보여 드릴게요.</p>
+    </div>
+
+        <ol class="pvj-strip pvj-rv" aria-label="한 번의 촬영 흐름">
+      <li><a href="#pvj-s1"><i class="pvj-sd" style="--d:.2s" aria-hidden="true"></i><b class="pvj-u" style="--d:.26s">처음</b><small class="pvj-u" style="--d:.32s">첫 대화 · 상담</small></a></li>
+      <li><a href="#pvj-s2"><i class="pvj-sd" style="--d:.42s" aria-hidden="true"></i><b class="pvj-u" style="--d:.48s">촬영 전까지</b><small class="pvj-u" style="--d:.54s">방향 잡기</small></a></li>
+      <li><a href="#pvj-s3"><i class="pvj-sd" style="--d:.64s" aria-hidden="true"></i><b class="pvj-u" style="--d:.7s">촬영하는 날</b><small class="pvj-u" style="--d:.76s">촬영</small></a></li>
+      <li><a href="#pvj-s4"><i class="pvj-sd" style="--d:.86s" aria-hidden="true"></i><b class="pvj-u" style="--d:.92s">함께 셀렉</b><small class="pvj-u" style="--d:.98s">가장 ‘나다운’ 컷</small></a></li>
+      <li><a href="#pvj-s5"><i class="pvj-sd" style="--d:1.08s" aria-hidden="true"></i><b class="pvj-u" style="--d:1.14s">받는 날</b><small class="pvj-u" style="--d:1.2s">보정 · 전달</small></a></li>
+    </ol>
+
+    <div class="pvj-list">
+
+            <article class="pvj-st pvj-l pvj-has pvj-first" id="pvj-s1">
+        <div class="pvj-hd pvj-rv">
+          <h3 class="pvj-when pvj-u" style="--d:.04s"><i class="pvj-wd" aria-hidden="true"></i><span class="pvj-wn serif">처음</span><span class="pvj-tag">첫 대화 · 상담</span><i class="pvj-ln" aria-hidden="true"></i></h3>
+          <p class="pvj-say pvj-u" style="--d:.14s">어떤 감정·분위기로 남기고 싶은지 편하게 이야기 나눠요.</p>
+        </div>
+        <figure class="pvj-chat pvj-rv">
+          <figcaption class="pvj-chk pvj-u" style="--d:0s">신청 칸에 적으면, 이런 모양으로 정리돼요</figcaption>
+          <div class="pvj-win">
+            <div class="pvj-bar" aria-hidden="true"><span class="pvj-back">‹</span><svg class="pvj-av" viewBox="0 0 40 40"><g fill="#4f9a6a"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg><b>maydly</b><span class="pvj-ch">카카오톡 채널</span></div>
+            <div class="pvj-room">
+              <div class="pvj-bub">
+                <p class="pvj-bl pvj-u" style="--d:.34s">[maydly 개인 촬영 신청]</p>
+                <p class="pvj-bl pvj-u" style="--d:.46s"><b>어떤 촬영:</b> 프로필</p>
+                <p class="pvj-bl pvj-u" style="--d:.58s"><b>성함 · 인스타그램 아이디:</b> ○○ · @○○○○</p>
+                <p class="pvj-bl pvj-u" style="--d:.7s"><b>누구와:</b> 혼자</p>
+                <p class="pvj-bl pvj-u" style="--d:.82s"><b>어디서:</b> 스튜디오</p>
+                <p class="pvj-bl pvj-u" style="--d:.94s"><b>원하는 분위기 · 참고 자료:</b> 시안 · 레퍼런스 링크 ○○</p>
+                <p class="pvj-bl pvj-u" style="--d:1.06s"><b>희망 날짜 · 시기:</b> ○월 중 평일</p>
+              </div>
+            </div>
+          </div>
+          <p class="pvj-rd pvj-u" style="--d:1.42s">읽지 않은 알림을 그냥 넘기지 못하는 성격이라 가능한 한 빨리 답해요. 다만 촬영 중에는 휴대폰을 보기 어려워 조금 늦을 수 있어요.</p>
+        </figure>
+        <div class="pvj-gt pvj-rv">
+          <div class="pvj-g pvj-u" style="--d:.08s"><span class="pvj-gk">보내 주실 것</span><p>몇 줄의 글이면 충분해요. 어떤 촬영인지, 누구와 어디서, 원하는 분위기와 시기 정도를 카카오톡 채널로 보내 주세요. <a class="link pvj-a" href="./#apply">신청 칸에 적기 <span class="ar">›</span></a></p></div>
+          <i class="pvj-ar" aria-hidden="true"></i>
+          <div class="pvj-g pvj-me pvj-u" style="--d:.36s"><span class="pvj-gk">그다음은 제가</span><p>보내 주신 글로 어떤 촬영이 될지 먼저 그려 볼게요. 그림이 잡히면 금액과 시간을, 무엇이 포함되는지와 함께 미리 안내드려요. 예약은 그 안내를 보고 정하시면 돼요.</p></div>
+        </div>
+      </article>
+
+            <article class="pvj-st pvj-r" id="pvj-s2" data-code="DeWgusMmIm6" data-n="6" data-cap="0" data-alt="갈색 꽈배기 니트에 연청 바지를 입고 바닥에 앉아 웃는 모습" style="--w:440px; --pw:86vw; --ph:580px">
+        <div class="pvj-hd pvj-rv">
+          <h3 class="pvj-when pvj-u" style="--d:.04s"><i class="pvj-wd" aria-hidden="true"></i><span class="pvj-wn serif">촬영 전까지</span><span class="pvj-tag">방향 잡기</span><i class="pvj-ln" aria-hidden="true"></i></h3>
+          <p class="pvj-say pvj-u" style="--d:.14s">촬영 전 시안과 의상, 레퍼런스를 확인하며 함께 준비해요.</p>
+        </div>
+        <div class="pvj-fg pvj-rv">
+          <figure class="pvj-fig">
+          <a class="pvj-ph" href="gallery.html#p=DeWgusMmIm6&amp;s=6"><span class="pvj-mk"><img class="pvj-im" alt="" decoding="async" loading="lazy"></span><span class="pvj-zl" aria-hidden="true">크게 보기</span></a>
+          <figcaption class="pvj-cap serif"></figcaption>
+          </figure>
+          <a class="pvj-more" href="gallery.html#p=DeWgusMmIm6">이 촬영 넘겨보기 <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="pvj-gt pvj-rv">
+          <div class="pvj-g pvj-u" style="--d:.08s"><span class="pvj-gk">건네 주실 것</span><p>입을 옷과 착용 사진. 시안이나 레퍼런스가 있다면 함께 주셔도 돼요.</p></div>
+          <i class="pvj-ar" aria-hidden="true"></i>
+          <div class="pvj-g pvj-me pvj-u" style="--d:.36s"><span class="pvj-gk">제가 맡을 것</span><p>그걸 보고, 어떤 빛과 표정으로 담을지 잡아 둘게요.</p></div>
+          <p class="pvj-note pvj-u" style="--d:.5s"><span class="pvj-nk">사전 준비</span><span>의상과 착용 사진, 시안 등 준비 내용은 촬영일 5일 전까지 함께 확인해요</span></p>
+        </div>
+      </article>
+
+            <article class="pvj-st pvj-l" id="pvj-s3" data-code="DYtLrrrGFPm" data-n="4" data-cap="0" data-alt="민트빛 벽 앞에서 팔을 뻗고 머리를 흩날리며 웃는 모습" style="--w:500px; --pw:90vw; --ph:640px">
+        <div class="pvj-hd pvj-rv">
+          <h3 class="pvj-when pvj-u" style="--d:.04s"><i class="pvj-wd" aria-hidden="true"></i><span class="pvj-wn serif">촬영하는 날</span><span class="pvj-tag">촬영</span><i class="pvj-ln" aria-hidden="true"></i></h3>
+          <p class="pvj-say pvj-u" style="--d:.14s">분위기와 움직임을 함께 만들어가며 담아요.</p>
+        </div>
+        <div class="pvj-fg pvj-rv">
+          <figure class="pvj-fig">
+          <a class="pvj-ph" href="gallery.html#p=DYtLrrrGFPm&amp;s=4"><span class="pvj-mk"><img class="pvj-im" alt="" decoding="async" loading="lazy"></span><span class="pvj-zl" aria-hidden="true">크게 보기</span></a>
+          <figcaption class="pvj-cap serif"></figcaption>
+          </figure>
+          <a class="pvj-more" href="gallery.html#p=DYtLrrrGFPm">이 촬영 넘겨보기 <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="pvj-gt pvj-rv">
+          <div class="pvj-g pvj-u" style="--d:.08s"><span class="pvj-gk">챙겨 오실 것</span><p>확인해 둔 옷, 그리고 그날의 기분. 메이크업은 매트한 피부 표현을 추천해요.</p></div>
+          <i class="pvj-ar" aria-hidden="true"></i>
+          <div class="pvj-g pvj-me pvj-u" style="--d:.36s"><span class="pvj-gk">제가 맡을 것</span><p>카메라가 어색해도 괜찮아요. 포즈와 움직임을 하나씩 맞춰가요.</p></div>
+          <p class="pvj-note pvj-u" style="--d:.52s"><span class="pvj-nk">기상</span><span><span class="pvj-ns">비·눈 등 일반적인 기상은 <b>정상 진행</b></span><a class="pvj-wxl" href="./#policy">예약 전 안내 보기 <span aria-hidden="true">›</span></a></span></p>
+        </div>
+      </article>
+
+            <article class="pvj-st pvj-r" id="pvj-s4" data-code="DZ2a8RamCQj" data-n="12" data-cap="0" data-alt="푸른 회색 벽 앞에서 은은한 빛을 받으며 카메라를 바로 바라보는 얼굴" style="--w:520px; --pw:92vw; --ph:660px">
+        <div class="pvj-hd pvj-rv">
+          <h3 class="pvj-when pvj-u" style="--d:.04s"><i class="pvj-wd" aria-hidden="true"></i><span class="pvj-wn serif">함께 셀렉</span><i class="pvj-ln" aria-hidden="true"></i></h3>
+          <p class="pvj-say pvj-u" style="--d:.14s">작가와 함께, 가장 ‘나다운’ 컷을 골라요.</p>
+        </div>
+        <div class="pvj-fg pvj-rv">
+          <figure class="pvj-fig">
+          <a class="pvj-ph" href="gallery.html#p=DZ2a8RamCQj&amp;s=12"><span class="pvj-mk"><img class="pvj-im" alt="" decoding="async" loading="lazy"></span><span class="pvj-zl" aria-hidden="true">크게 보기</span></a>
+          <figcaption class="pvj-cap serif"></figcaption>
+          </figure>
+          <a class="pvj-more" href="gallery.html#p=DZ2a8RamCQj">이 촬영 넘겨보기 <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="pvj-gt pvj-rv">
+          <div class="pvj-g pvj-u" style="--d:.08s"><span class="pvj-gk">짚어 주실 것</span><p>‘이게 나다’ 싶은 컷이요.</p></div>
+          <i class="pvj-ar" aria-hidden="true"></i>
+          <div class="pvj-g pvj-me pvj-u" style="--d:.36s"><span class="pvj-gk">제가 맡을 것</span><p>평소에는 지나쳤던 표정과 움직임에서 나만의 분위기를 찾아요.</p></div>
+        </div>
+      </article>
+
+            <article class="pvj-st pvj-l" id="pvj-s5" data-code="DaHi_5cGDZc" data-n="5" data-cap="0,1" data-alt="눈을 감고 활짝 웃는 흑백 사진, 왼쪽 위에 maydly 로고" style="--w:460px; --pw:84vw; --ph:560px">
+        <div class="pvj-hd pvj-rv">
+          <h3 class="pvj-when pvj-u" style="--d:.04s"><i class="pvj-wd" aria-hidden="true"></i><span class="pvj-wn serif">받는 날</span><span class="pvj-tag">보정 · 전달</span><i class="pvj-ln" aria-hidden="true"></i></h3>
+          <p class="pvj-say pvj-u" style="--d:.14s">자연스러운 보정을 거쳐 한 달 이내에 전달드립니다.</p>
+        </div>
+        <div class="pvj-fg pvj-rv">
+          <figure class="pvj-fig">
+          <a class="pvj-ph" href="gallery.html#p=DaHi_5cGDZc&amp;s=5"><span class="pvj-mk"><img class="pvj-im" alt="" decoding="async" loading="lazy"></span><span class="pvj-zl" aria-hidden="true">크게 보기</span></a>
+          <figcaption class="pvj-cap serif"></figcaption>
+          </figure>
+          <a class="pvj-more" href="gallery.html#p=DaHi_5cGDZc">이 촬영 넘겨보기 <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="pvj-gt pvj-rv">
+          <div class="pvj-g pvj-u" style="--d:.08s"><span class="pvj-gk">받으실 것</span><p>보정을 마친 사진. 사진 속 함께 했던 시간의 <span class="pvj-sign">maydly</span> 로고가 담겨요.</p></div>
+          <i class="pvj-ar" aria-hidden="true"></i>
+          <div class="pvj-g pvj-me pvj-u" style="--d:.36s"><span class="pvj-gk">제가 맡을 것</span><p>피부·몸 라인·얼굴형·어깨 라인 등을 자연스럽게 보정해드려요. 과하게 손대서 정작 ‘나’가 사라지는 사진은 지양해요.</p></div>
+        </div>
+      </article>
+
+    </div>
+
+        <div class="pvj-end">
+      <p class="cpull serif reveal">언제 다시 꺼내 보아도<br><span class="hl">그날의 내가 떠오를 수 있도록.</span></p>
+      <p class="pvj-endnote reveal">흐름은 같아도, 그 안에 담기는 장면은 촬영마다 달라요.</p>
+      <p class="pvj-endgo reveal"><a class="btn out pvj-next" href="#pv-cases">재료 하나가, 장면이 되기까지 <span class="pvj-dn" aria-hidden="true">↓</span></a></p>
+    </div>
+  </div>
+</section>
+
+<section id="pv-cases" aria-labelledby="pvc-title">
+  <svg class="cwm a" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
+  <svg class="cwm b" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="kicker">Stories</div>
+      <h2 class="big" id="pvc-title">재료 하나가,<br>장면이 되기까지</h2>
+      <p class="subcopy">거창하게 정해 오지 않아도 괜찮아요. 손에 쥘 소품 하나, 옷에 더할 포인트 하나, 함께 올 사람 — 그중 하나면 시작할 수 있어요. 실제 촬영이 어떻게 시작해서 어떻게 남았는지, 따라가 볼게요.</p>
+    </div>
+    <div class="pvc-feed" id="pvc-feed"></div>
+    <div class="pvc-end">
+      <p class="pvc-pull serif reveal">소품 하나든, 함께 올 사람이든.<br><span class="hl">재료를 건네주시면, 그림은 제가 그려요.</span></p>
+      <p class="pvc-note reveal">위 장면들은 똑같이 따라 찍는 틀이 아니에요. 건네주시는 재료가 다르면, 그림도 달라지니까요.</p>
+      <p class="pvc-next reveal"><a href="#pv-range">스튜디오 안에서도, 이만큼 달라져요 <span class="pvc-down" aria-hidden="true">↓</span></a></p>
+    </div>
+  </div>
+</section>
+
+<section class="pvr" id="pv-range" aria-labelledby="pvr-title">
+    <svg class="cwm a" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
+
+    <div class="wrap">
+    <div class="center reveal">
+      <div class="kicker">Range</div>
+      <h2 class="big" id="pvr-title">스튜디오 안에서도,<br>이만큼 달라져요</h2>
+      <p class="subcopy">빛의 색을 바꾸고, 일부러 흔들리게 두고, 카메라를 한참 낮추면 — 전혀 다른 장면이 나와요. 방향은, 이야기를 듣고 제가 잡아요.</p>
+    </div>
+  </div>
+
+    <div class="pvr-row" data-row="studio">
+    <div class="wrap">
+      <p class="pvr-rowk"><span>스튜디오</span><span class="pvr-trk" aria-hidden="true"><i></i></span></p>
+    </div>
+    <div class="pvr-vp">
+      <button type="button" class="pvr-arw prev" aria-label="이전 장면" aria-controls="pvr-band-studio" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="pvr-band" id="pvr-band-studio" role="group" aria-label="스튜디오 촬영 장면 — 옆으로 넘겨 보기">
+        <a class="pvr-card" data-code="DZ9450umC1-" data-s="2" data-size="l" hidden><span class="pvr-fr"><span class="pvr-ph"><img alt="붉은 조명 아래 일렉 기타를 치켜든 채 흔들려 담긴 사람과 벽에 진 그림자"></span></span><span class="pvr-tx"><span class="pvr-nm">기타 소리가 번진 빨강</span><span class="pvr-go">게시물 보기 <span class="ar" aria-hidden="true">›</span></span></span></a>
+        <a class="pvr-card" data-code="DeMJQuZmHwl" data-s="3" data-size="s" hidden><span class="pvr-fr"><span class="pvr-ph"><img alt="신발 밑창 너머로 낮게 올려다본 검은 옷차림의 사람"></span></span><span class="pvr-tx"><span class="pvr-nm">낮게 볼수록 커지는 태도</span><span class="pvr-go">게시물 보기 <span class="ar" aria-hidden="true">›</span></span></span></a>
+        <a class="pvr-card" data-code="DZ6z_DrGJcs" data-s="7" data-size="m" hidden><span class="pvr-fr"><span class="pvr-ph"><img alt="흰 천 앞에 앉아 머리카락을 날리는 검은 바디슈트 차림의 사람"></span></span><span class="pvr-tx"><span class="pvr-nm">don’t touch the mood.</span><span class="pvr-go">게시물 보기 <span class="ar" aria-hidden="true">›</span></span></span></a>
+        <a class="pvr-card" data-code="Da-cL6WmGT1" data-s="3" data-size="l" hidden><span class="pvr-fr"><span class="pvr-ph"><img alt="빨간 배경 앞, 고양이 그림 흰 티셔츠를 입고 머리를 만지는 장면"></span></span><span class="pvr-tx"><span class="pvr-nm">테스트로 끝날 뻔한 컷</span><span class="pvr-go">게시물 보기 <span class="ar" aria-hidden="true">›</span></span></span></a>
+        <a class="pvr-card" data-code="DeY_5s4GHAU" data-s="6" data-size="s" hidden><span class="pvr-fr"><span class="pvr-ph"><img alt="하늘색 셔츠를 입고 바닥에 앉아 무릎을 끌어안고 크게 웃는 장면"></span></span><span class="pvr-tx"><span class="pvr-nm">웃음이 멈추지 않던 하늘색</span><span class="pvr-go">게시물 보기 <span class="ar" aria-hidden="true">›</span></span></span></a>
+        <a class="pvr-card" data-code="DYKJFgRmMm7" data-s="2" data-size="l" hidden><span class="pvr-fr"><span class="pvr-ph"><img alt="어두운 배경에 비스듬히 든 빛줄기 안에서 곱슬머리의 사람이 옆을 바라보는 장면"></span></span><span class="pvr-tx"><span class="pvr-nm">한 줄기 빛 안에서, 잠깐</span><span class="pvr-go">게시물 보기 <span class="ar" aria-hidden="true">›</span></span></span></a>
+        <a class="pvr-card" data-code="DYMOzpZGDX3" data-s="2" data-size="m" hidden><span class="pvr-fr"><span class="pvr-ph"><img alt="흰 배경 앞에 흰 민소매와 연청 바지 차림으로 선 사람"></span></span><span class="pvr-tx"><span class="pvr-nm">가장 단순한 옷, 가장 또렷한 사람</span><span class="pvr-go">게시물 보기 <span class="ar" aria-hidden="true">›</span></span></span></a>
+      </div>
+      <button type="button" class="pvr-arw next" aria-label="다음 장면" aria-controls="pvr-band-studio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+
+    <div class="pvr-row" data-row="outdoor">
+    <div class="wrap">
+      <div class="center reveal">
+        <h3 class="pvr-h3">밖으로 나가면,<br>장소가 장면이 돼요</h3>
+        <p class="subcopy">햇살 든 공원, 오래된 골목, 비 오는 밤길까지. 평범한 자리도 그날의 무대가 돼요.</p>
+      </div>
+      <p class="pvr-rowk"><span>야외</span><span class="pvr-trk" aria-hidden="true"><i></i></span></p>
+    </div>
+    <div class="pvr-vp">
+      <button type="button" class="pvr-arw prev" aria-label="이전 장면" aria-controls="pvr-band-outdoor" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="pvr-band" id="pvr-band-outdoor" role="group" aria-label="야외 촬영 장면 — 옆으로 넘겨 보기">
+        <a class="pvr-card" data-code="DeJgwL9GBaQ" data-s="9" data-size="l" hidden><span class="pvr-fr"><span class="pvr-ph"><img alt="햇살이 쏟아지는 공원 나무 아래, 흰 셔츠의 두 사람이 함께 두 팔을 든 장면"></span></span><span class="pvr-tx"><span class="pvr-nm">한 명이 시작하면, 둘이 되는 숲</span><span class="pvr-go">게시물 보기 <span class="ar" aria-hidden="true">›</span></span></span></a>
+        <a class="pvr-card" data-code="DaDYq25GJBr" data-s="8" data-size="m" hidden><span class="pvr-fr"><span class="pvr-ph"><img alt="햇살 든 골목에서 필름 카메라를 들어 이쪽을 찍는 사람"></span></span><span class="pvr-tx"><span class="pvr-nm">카메라끼리 마주친 골목</span><span class="pvr-go">게시물 보기 <span class="ar" aria-hidden="true">›</span></span></span></a>
+        <a class="pvr-card" data-code="DbIis-txrso" data-s="1" data-size="m" hidden><span class="pvr-fr"><span class="pvr-ph"><img alt="비 내리는 밤, 조명 아치 아래를 작은 강아지와 걸어가는 뒷모습"></span></span><span class="pvr-tx"><span class="pvr-nm">계획엔 없던 비가 내린 밤</span><span class="pvr-go">게시물 보기 <span class="ar" aria-hidden="true">›</span></span></span></a>
+        <a class="pvr-card" data-code="DQ8zeaoEQMe" data-s="12" data-size="m" hidden><span class="pvr-fr"><span class="pvr-ph"><img alt="회색 벽 앞 초록 플라스틱 의자에 앉아 고개를 숙인 장면"></span></span><span class="pvr-tx"><span class="pvr-nm">의자들이 먼저 기다리던 오후</span><span class="pvr-go">게시물 보기 <span class="ar" aria-hidden="true">›</span></span></span></a>
+      </div>
+      <button type="button" class="pvr-arw next" aria-label="다음 장면" aria-controls="pvr-band-outdoor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+
+  <p class="pvr-note reveal">사진은 인스타그램 게시물에서 그대로 가져왔어요.</p>
+</section>
+
+<section class="pvr-more" id="pv-more" aria-labelledby="pvm-title">
+    <svg class="cwm a" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="kicker">In motion</div>
+      <h2 class="big" id="pvm-title">사진 밖의 순간도,<br>남아요</h2>
+      <p class="subcopy">셔터를 누르지 않는 순간에도, 그날은 계속 흘러가요. 바닷가 촬영은 사진과 함께, 짧은 영상으로도 남았어요.</p>
+    </div>
+    <div class="pvr-mreels">
+      <figure class="pvr-mr reveal" data-code="DdvWBm_Mh_a" hidden>
+        <a class="pvr-mth" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img alt=""><span class="pvr-mpl">▶</span></a>
+        <blockquote class="pvr-mbq"></blockquote>
+        <figcaption><span class="pvr-msrc">영상과 함께 올린 글</span><a class="pvr-reel" target="_blank" rel="noopener" aria-label="인스타그램에서 영상 보기 — 캠코더 화면 속, 모래 위에 흩어진 즉석사진과 분홍 디카(새 창)">▶ 인스타그램에서 영상 보기 <span class="ar" aria-hidden="true">↗</span></a></figcaption>
+      </figure>
+      <figure class="pvr-mr reveal" data-code="DdgOq29Poer" hidden>
+        <a class="pvr-mth" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img alt=""><span class="pvr-mpl">▶</span></a>
+        <blockquote class="pvr-mbq"></blockquote>
+        <figcaption><span class="pvr-msrc">영상과 함께 올린 글</span><a class="pvr-reel" target="_blank" rel="noopener" aria-label="인스타그램에서 영상 보기 — 옛 컴퓨터 창 속, 바닷가에서 팔을 들고 웃는 두 사람(새 창)">▶ 인스타그램에서 영상 보기 <span class="ar" aria-hidden="true">↗</span></a></figcaption>
+      </figure>
+    </div>
+    <div class="pvr-end">
+      <p class="cpull serif reveal">다음 장면은, 아직 비어 있어요.<br><span class="hl">이 모든 흐름의 시작은, 몇 줄의 글이에요.</span></p>
+      <p class="pvr-endnote reveal">신청 칸에 적어 주시면, 카카오톡 채널로 이어져요.</p>
+      <div class="ccta reveal"><a class="btn pri" href="./#apply">촬영 상담 신청하기</a></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="top">
+    <div>
+      <div class="brand">maydly</div>
+      <p style="margin-top:10px; color:var(--tx3); max-width:280px;">오늘의 너에게, 또 한 번 반하다 · mad about you</p>
+    </div>
+    <div class="cols">
+      <div><div class="h">둘러보기</div><a href="./#work">작업</a><a href="./#process">촬영 과정</a><a href="./#signature">단어 여정</a><a href="./#menu">촬영 안내</a><a href="./#consult">촬영 상담</a></div>
+      <div><div class="h">연결</div><a href="./#apply">촬영 상담 신청</a><a href="./#brand">브랜드 · 협업 문의</a><a href="./#faq">FAQ</a><a href="./#policy">예약·취소 안내</a></div>
+      <div><div class="h">Instagram</div><a href="https://instagram.com/maydly_u" target="_blank" rel="noopener">@maydly_u · 작가 계정</a><a href="https://instagram.com/maydly_s" target="_blank" rel="noopener">@maydly_s · 스튜디오</a><a href="https://instagram.com/maydly_f" target="_blank" rel="noopener">@maydly_f · 야외</a></div>
+    </div>
+  </div>
+  <div class="btm">maydly · MyoungJin Kim</div>
+</div></footer>
+
+<script src="site_assets/ig-data.js"></script>
+<script>
+  (function(){
+    var nav = document.getElementById('nav'), mb = document.getElementById('navmenu');
+    if (nav && mb){
+      mb.addEventListener('click', function(){ var o = nav.classList.toggle('open'); mb.setAttribute('aria-expanded', o); mb.setAttribute('aria-label', o ? '메뉴 닫기' : '메뉴 열기'); });
+      nav.addEventListener('click', function(e){ if (e.target.closest('.navlinks a')){ nav.classList.remove('open'); mb.setAttribute('aria-expanded', false); } });
+    }
+  })();
+</script>
+<script>
+  var RV=26; // 등장 이동거리(px)
+  var inObs=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  var outObs=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting){
+        e.target.style.setProperty('--rv', (e.boundingClientRect.top>0 ? RV : -RV)+'px');
+        e.target.classList.remove('in');
+      }
+    });
+  },{threshold:0, rootMargin:'12% 0px 12% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el,i){ el.style.transitionDelay=(Math.min(i%4,3)*0.06)+'s'; inObs.observe(el); outObs.observe(el); });
+  ['.steps .pstep','.gallery .ph','.cfgrid .cf','.rgrid .rcard','.pgrid .pc'].forEach(function(s){ document.querySelectorAll(s).forEach(function(el,i){ el.style.transitionDelay=((i%4)*0.08)+'s'; }); });
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){ nav.classList.toggle('scr', scrollY>8); },{passive:true});
+</script>
+<script>
+/* 촬영 미리보기 ① 여정 — 사진·캡션 채우기 + 등장(양방향) + 아주 약한 패럴랙스
+   게시물은 window.MAYDLY_IG 에서 코드로 찾는다(data-code · data-n = 몇 번째 장 · data-cap = 캡션 몇 번째 문단).
+   데이터에 없거나 사진이 안 열리면 그 사진 칸만 숨기고 글은 남긴다. 캡션은 원문 그대로(#·@ 줄만 뺌) */
+(function(){
+  'use strict';
+  var A = 'site_assets/';
+  var GAL = 'gallery.html';
+  var sec = document.getElementById('pv-journey');
+  if (!sec) return;
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var hasIO = typeof window.IntersectionObserver === 'function';
+  sec.classList.add('pvj-js');
+
+  function each(sel, fn){ Array.prototype.forEach.call(sec.querySelectorAll(sel), fn); }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function gal(code, n){ return GAL + '#p=' + encodeURIComponent(code) + (n > 1 ? '&s=' + n : ''); }
+  function capKeys(el){ return String(el.getAttribute('data-cap') || '0').split(',').map(function(x){ return parseInt(x, 10) || 0; }); }
+  function capLines(p, keys){
+    var paras = String(p.body || '').split(/\n[ \t]*\n/), out = [];
+    keys.forEach(function(k){
+      String(paras[k] || '').split('\n').forEach(function(l){ l = l.trim(); if (l && !/^([#@][^\s#@]+\s*)+$/.test(l)) out.push(l); });
+    });
+    return out;
+  }
+
+  /* ── 사진 채우기 ── */
+  var filled = false;
+  function fill(G){
+    var by = {}, taken = {};
+    (G.posts || []).forEach(function(p){ if (p && p.code) by[p.code] = p; });
+    (G.hero || []).concat(G.landing || []).forEach(function(c){ taken[c] = 1; });
+
+    each('.pvj-st[data-code]', function(st){
+      var fg = st.querySelector('.pvj-fg'); if (!fg) return;
+      var code = st.getAttribute('data-code'), p = by[code], n = parseInt(st.getAttribute('data-n'), 10) || 1;
+      if (p && taken[code] && n === 1) n = 2;   // 첫 화면·「작업」 칸에 든 게시물이면 표지 장은 피함
+      var x = p && p.slides && p.slides[n - 1];
+      if (!x || !x.src || !x.w || !x.h){ st.classList.remove('pvj-has'); return; }
+      var im = fg.querySelector('.pvj-im'), ph = fg.querySelector('.pvj-ph'), cap = fg.querySelector('.pvj-cap'), more = fg.querySelector('.pvj-more');
+      if (!im || !ph){ st.classList.remove('pvj-has'); return; }
+      var alt = st.getAttribute('data-alt') || 'maydly 촬영 사진';
+      st.style.setProperty('--r', (x.w / x.h).toFixed(4));
+      ph.setAttribute('href', gal(code, n));
+      ph.setAttribute('aria-label', alt + ' — 크게 보기');
+      im.setAttribute('width', x.w); im.setAttribute('height', x.h);
+      im.setAttribute('alt', alt);
+      im.addEventListener('load', function(){ im.classList.add('pvj-ld'); });
+      im.addEventListener('error', function(){ st.classList.remove('pvj-has'); });
+      im.setAttribute('src', A + x.src);
+      if (im.complete && im.naturalWidth) im.classList.add('pvj-ld');
+      if (cap){
+        var lines = capLines(p, capKeys(st));
+        if (lines.length){
+          var last = lines.pop();
+          cap.innerHTML = lines.map(esc).join('<br>') + (lines.length ? '<br>' : '') + '<span class="pvj-hl">' + esc(last) + '</span>';
+        } else cap.hidden = true;
+      }
+      if (more){
+        if (p.slides.length > 1){ more.setAttribute('href', gal(code, 1)); more.setAttribute('aria-label', alt + ' — 이 촬영 넘겨보기'); }
+        else more.hidden = true;
+      }
+      st.classList.add('pvj-has');
+    });
+
+  }
+  function tryFill(){
+    if (filled) return true;
+    var G = window.MAYDLY_IG;
+    if (!G || !G.posts) return false;
+    filled = true;
+    try { fill(G); }
+    catch (e) { each('.pvj-st[data-code]', function(st){ st.classList.remove('pvj-has'); }); }
+    return true;
+  }
+
+  /* ── 등장: 양방향 — 들어오는 순간의 위치로 방향을 정하고(아래에서 오면 아래부터), 화면을 충분히 벗어나면 되감음 ── */
+  function watch(){
+    var units = Array.prototype.slice.call(sec.querySelectorAll('.pvj-rv'));
+    if (reduce || !hasIO){ units.forEach(function(el){ el.classList.add('in'); }); return; }
+    var scrolled = false;
+    window.addEventListener('scroll', function(){ scrolled = true; }, {passive:true, once:true});
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el = e.target, r = e.boundingClientRect;
+      var d = !scrolled ? 1 : ((r.top + r.height / 2) > window.innerHeight / 2 ? 1 : -1);
+      if (!el.classList.contains('in') && el.style.getPropertyValue('--dir') !== String(d)){
+        el.classList.add('pvj-ent'); el.style.setProperty('--dir', d); void el.offsetWidth; el.classList.remove('pvj-ent');
+      }
+      el.classList.add('in');
+    }); }, {threshold:.1, rootMargin:'0px 0px -6% 0px'});
+    var oo = new IntersectionObserver(function(es){ es.forEach(function(e){
+      if (e.isIntersecting) return;
+      e.target.style.setProperty('--dir', e.boundingClientRect.top > 0 ? 1 : -1);
+      e.target.classList.remove('in');
+    }); }, {threshold:0, rootMargin:'15% 0px 15% 0px'});
+    units.forEach(function(el){ io.observe(el); oo.observe(el); });
+  }
+
+  /* ── 패럴랙스(아주 약하게): 보이는 사진만, 스크롤 한 번에 한 프레임 ── */
+  function drift(){
+    if (reduce || !hasIO) return;
+    var vis = [], tk = false;
+    var po = new IntersectionObserver(function(es){ es.forEach(function(e){
+      var i = vis.indexOf(e.target);
+      if (e.isIntersecting){ if (i < 0) vis.push(e.target); } else if (i > -1) vis.splice(i, 1);
+    }); }, {rootMargin:'10% 0px 10% 0px'});
+    each('.pvj-fg', function(f){ po.observe(f); });
+    function run(){
+      tk = false;
+      var vh = window.innerHeight, amp = window.innerWidth <= 900 ? 5 : 10;
+      vis.forEach(function(f){
+        var r = f.getBoundingClientRect(), q = ((r.top + r.height / 2) - vh / 2) / vh;
+        q = Math.max(-1, Math.min(1, q));
+        f.style.setProperty('--py', (-q * amp).toFixed(1) + 'px');
+      });
+    }
+    function ask(){ if (!tk){ tk = true; window.requestAnimationFrame(run); } }
+    window.addEventListener('scroll', ask, {passive:true});
+    window.addEventListener('resize', ask);
+    ask();
+  }
+
+  watch();
+  drift();
+  if (!tryFill()){
+    if (document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', function(){ if (!tryFill()) window.addEventListener('load', tryFill); });
+    } else if (document.readyState !== 'complete'){
+      window.addEventListener('load', tryFill);
+    }
+  }
+})();
+</script>
+<script>
+/* 촬영 미리보기 ② 재료 하나가, 장면이 되기까지 (#pv-cases)
+   - 게시물은 window.MAYDLY_IG 에서 코드로 찾는다. 없으면 그 장면을 건너뛰고, 하나도 없으면 칸 전체를 숨긴다.
+   - 지금 랜딩 첫 화면·작업 칸에 걸린 게시물(hero·landing)은 표지 장(1번)을 쓰지 않고 같은 게시물의 다른 장으로.
+   - 작은 사진을 누르면 같은 촬영의 다른 장면이 그 자리에서 걷히며 바뀐다(갤러리로 바로 넘어가지 않음).
+   - 등장은 양방향(들어오는 쪽에서 마스크가 걷힘, 화면 밖으로 나가면 다시 숨음). 움직임 줄이기 설정이면 멈춤. */
+(function(){
+  'use strict';
+  var A = 'site_assets/';
+  var GAL = 'gallery.html';
+
+  /* 장면 — 걱정 한 줄 → 시작은 → 그림은 제가 → 남은 장면(그 게시물 캡션 원문, cap = 몇 번째 문단)
+     · 글은 사진에 보이는 것과 일하는 방식(현재형)만. 「시작은」은 누가 준비했는지 말하지 않는 명사 나열로.
+       그날의 상황이 재료인 장면(골목 · 젖은 머리)은 k1 = 「그날은」. 제목은 「~라면」만 반복하지 않게 말꼴을 섞는다.
+     · shots = 큰 사진(첫째) + 작은 사진 셋. spare = 데이터에 없거나 표지라서 빠질 때 대신 채울 장.
+     · 여섯 장면. 데이터에 없는 게시물은 건너뛴다(대체 장면은 두지 않음).
+     · H = 데스크탑 큰 사진 높이(폭 약 420~512px가 되게), pw = 폰 화면 폭 비율. 장면마다 달라 크기에 리듬이 생긴다. */
+  var CASES = [
+    {id:'pvc-c-paper', code:'DaFbJ3WGB4W', who:'혼자', H:'clamp(525px,76vh,620px)', pw:'88vw',
+      worry:['카메라 앞이', '어색할까 걱정이라면'],
+      start:'정장 한 벌.',
+      mine:'신문 한 부는 제가 준비해 뒀어요. 손에 쥘 것 하나가 있으면, 포즈를 외워 오지 않아도 돼요. 펼치고, 머리에 얹고, 접어 쥐는 사이 표정이 먼저 풀려요.',
+      cap:[0],
+      shots:[{n:2, alt:'신문을 무릎에 두고 크게 웃는 장면', btn:'크게 웃는 장면 보기'},
+             {n:5, alt:'신문을 지붕처럼 머리에 얹고 쪼그려 앉은 장면', btn:'신문을 머리에 얹은 장면 보기'},
+             {n:6, alt:'안경을 쓰고 신문을 내려다보며 읽는 장면', btn:'신문을 읽는 장면 보기'}],
+      spare:[{n:3, alt:'신문을 머리 위로 펼쳐 들고 웃는 장면', btn:'신문을 펼쳐 든 장면 보기'}]},
+    {id:'pvc-c-two', code:'DbS3kN3mMBu', who:'둘', H:'clamp(525px,70vh,560px)', pw:'84vw',
+      worry:['둘이 함께', '오신다면'],
+      start:'오래 알고 지낸 두 사람, 그리고 교복.',
+      mine:'둘이 오면, 둘 사이에 이미 있는 장난부터 봐요. 뛰고, 기대고, 헤드폰을 씌워 주는 순간을 따라가요.',
+      cap:[1],
+      shots:[{n:4, alt:'교복 차림의 두 사람, 한 사람이 뒤로 기대며 웃는 장면', btn:'뒤로 기대며 웃는 장면 보기'},
+             {n:3, alt:'교복 차림으로 뛰어오르는 두 사람', btn:'뛰어오르는 장면 보기'},
+             {n:6, alt:'한 사람이 다른 사람에게 헤드폰을 씌워 주는 장면', btn:'헤드폰을 씌워 주는 장면 보기'}],
+      spare:[{n:5, alt:'돌 난간에 나란히 앉아 브이를 하며 셀카를 찍는 두 사람', btn:'나란히 앉은 장면 보기'}]},
+    {id:'pvc-c-hat', code:'DasN6JaGD8k', who:'혼자', H:'clamp(525px,72vh,590px)', pw:'86vw',
+      worry:['특별한 옷이 없어', '고민이라면'],
+      start:'흰 민소매에 청바지, 그리고 모자 하나.',
+      mine:'옷이 단순하면, 포인트 하나를 끝까지 가지고 놀아요. 눌러 쓰고, 올려다보고, 끈이 콧수염이 될 때까지요.',
+      cap:[0],
+      shots:[{n:5, alt:'모자 끈을 콧수염처럼 코 밑에 댄 장면', btn:'모자 끈을 콧수염처럼 댄 장면 보기'},
+             {n:1, alt:'흰 민소매에 청바지 차림으로 모자를 쓰고 바닥에 앉은 장면', btn:'바닥에 앉은 전신 장면 보기'},
+             {n:11, alt:'모자를 벗고 두 손으로 볼을 감싼 채 웃는 장면', btn:'모자를 벗고 웃는 장면 보기'}],
+      spare:[{n:4, alt:'모자를 쓰고 볼에 바람을 넣은 채 옆을 보는 장면', btn:'볼에 바람을 넣은 장면 보기'}]},
+    {id:'pvc-c-walk', code:'DQ8zeaoEQMe', who:'혼자', H:'clamp(340px,52vh,400px)', pw:'92vw',
+      worry:['실내보다,', '바깥이 편한 사람'], k1:'그날은',
+      start:'걷기 좋은 골목, 그리고 아이스크림 한 컵.',
+      mine:'밖에서는 포즈보다 걸음이 먼저예요. 걷다가 멈춘 자리, 햇살이 닿는 자리를 제가 장면으로 잡아요.',
+      cap:[0],
+      shots:[{n:1, alt:'골목에서 아이스크림을 한입 떠먹는 장면', btn:'아이스크림을 먹는 장면 보기'},
+             {n:7, alt:'햇살 드는 정원 돌길에 쪼그려 앉아 손으로 볕을 가리는 장면', btn:'정원 길에 앉은 장면 보기'},
+             {n:11, alt:'벽돌 담장에 기대어 바람에 머리칼을 날리며 웃는 장면', btn:'담장에 기대 웃는 장면 보기'}],
+      spare:[{n:17, alt:'햇살 아래에서 카메라를 보며 웃는 장면', btn:'웃는 장면 보기'},
+             {n:6, alt:'초록 덩굴 앞에서 고개를 돌려 옆을 바라보는 장면', btn:'초록 덩굴 앞 장면 보기'}]},
+    {id:'pvc-c-bag', code:'DeJgwL9GBaQ', who:'둘', H:'clamp(525px,74vh,600px)', pw:'90vw',
+      worry:['나란히 서는 게', '쑥스러운 두 사람'],
+      start:'맞춰 입은 흰 셔츠.',
+      mine:'종이봉투는 제가 챙겨 갔어요. 얼굴부터 보여 주지 않아도 돼요. 봉투를 쓰고 뛰다 보면 쑥스러울 틈이 없거든요. 볼을 맞대는 장면은, 실컷 웃고 난 뒤에 와요.',
+      cap:[0, 1],
+      shots:[{n:4, alt:'종이봉투를 쓰고 웃으며 달려오는 두 사람', btn:'봉투를 쓰고 달리는 장면 보기'},
+             {n:3, alt:'종이봉투를 쓴 채 팔을 활짝 벌리고 길을 달려가는 두 사람의 뒷모습', btn:'팔을 벌린 뒷모습 보기'},
+             {n:8, alt:'볼을 맞대고 웃는 두 사람', btn:'볼을 맞댄 장면 보기'}],
+      spare:[{n:5, alt:'건널목을 깡충 건너는 두 사람', btn:'건널목을 건너는 장면 보기'}]},
+    {id:'pvc-c-quiet', code:'DaSZFTCmBit', who:'혼자', H:'clamp(525px,78vh,640px)', pw:'86vw',
+      worry:['웃지 않아도,', '충분히 나다운 얼굴'], k1:'그날은',
+      start:'커다란 흰 셔츠, 그리고 젖은 머리.',
+      mine:'웃음 대신, 그 사람의 공기를 담아요. 사람을 작게 두고 장소를 크게 잡거나, 뒷모습과 달려가는 걸음을 따라가요.',
+      cap:[0],
+      shots:[{n:2, alt:'젖은 머리로 두 손을 주머니에 넣고 옆을 바라보는 흑백 장면', btn:'옆을 바라보는 장면 보기'},
+             {n:3, alt:'잔디밭을 달려가는 뒷모습', btn:'달려가는 뒷모습 보기'},
+             {n:6, alt:'잔디밭에 서서 하늘을 올려다보는 장면', btn:'하늘을 올려다보는 장면 보기'}],
+      spare:[{n:4, alt:'잔디밭에서 두 팔을 벌린 뒷모습', btn:'두 팔을 벌린 장면 보기'}]}
+  ];
+  var MAX = 6;
+
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var hasIO = typeof window.IntersectionObserver === 'function';
+  var userScrolled = false;
+  window.addEventListener('scroll', function(){ userScrolled = true; }, {passive:true, once:true});
+
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(ch){ return {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[ch]; }); }
+  function link(code, n){ return GAL + '#p=' + encodeURIComponent(code) + (n > 1 ? '&s=' + n : ''); }
+  function where(p){ return p.acct === 'studio' ? '스튜디오' : '야외'; }
+  function retidy(){ if (typeof window.pvTidy === 'function') window.pvTidy(); }   // 칸이 숨으면 목차·다음 칸 버튼도 다시 맞춤
+  function ld(im, bad){
+    var done = false;
+    function ok(){ if (done) return; done = true; im.classList.add('pvc-ld'); }
+    function no(){ if (done) return; done = true; if (bad) bad(); else im.classList.add('pvc-ld'); }
+    im.addEventListener('load', ok); im.addEventListener('error', no);
+    if (im.complete && im.naturalWidth) ok();
+  }
+  function caption(p, c){
+    var paras = String(p.body || '').split(/\n[ \t]*\n/), lines = [];
+    c.cap.forEach(function(k){
+      String(paras[k] || '').split('\n').forEach(function(l){ l = l.trim(); if (l && !/^([#@][^\s#@]+\s*)+$/.test(l)) lines.push(l); });
+    });
+    if (!lines.length && p.title) lines = [String(p.title)];
+    if (!lines.length) return '';
+    var last = lines.pop();
+    return lines.map(esc).join('<br>') + (lines.length ? '<br>' : '') + '<span class="pvc-hl">' + esc(last) + '</span>';
+  }
+
+  var ran = false;
+  function start(){
+    if (ran) return;
+    var sec = document.getElementById('pv-cases');
+    if (!sec){ ran = true; return; }
+    var feed = sec.querySelector('.pvc-feed'), G = window.MAYDLY_IG;
+    if (!feed || !G || !G.posts || !G.posts.length){
+      if (document.readyState !== 'complete') return;   // 데이터 스크립트가 늦게 오면 load 때 한 번 더 본다
+      ran = true; sec.hidden = true; return;
+    }
+    ran = true;
+
+    var by = {}, taken = {};
+    G.posts.forEach(function(p){ if (p && p.code) by[p.code] = p; });
+    (G.hero || []).concat(G.landing || []).forEach(function(c){ taken[c] = 1; });
+
+    function pick(c, p){
+      var seen = {}, use = [];
+      c.shots.concat(c.spare || []).forEach(function(s){
+        if (use.length >= 3 || seen[s.n]) return;
+        var x = p.slides[s.n - 1];
+        if (!x || !x.src || !(x.w > 0) || !(x.h > 0)) return;
+        if (taken[c.code] && s.n === 1) return;
+        seen[s.n] = 1; use.push(s);
+      });
+      return use;
+    }
+    var list = [];
+    CASES.forEach(function(c){
+      if (list.length >= MAX) return;
+      var p = by[c.code];
+      if (!p || !p.slides || !p.slides.length) return;
+      var use = pick(c, p);
+      if (use.length) list.push({c:c, p:p, use:use});
+    });
+    if (!list.length){ sec.hidden = true; return; }
+
+    /* 등장(양방향) — 들어오는 순간의 위치로 방향을 정하고, 화면 밖으로 충분히 나가면 되감는다 */
+    var io = null, oo = null, po = null, vis = [];
+    if (hasIO && !reduce){
+      io = new IntersectionObserver(function(es){ es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target, r = e.boundingClientRect;
+        var d = !userScrolled ? 1 : ((r.top + r.height / 2) > window.innerHeight / 2 ? 1 : -1);
+        if (!el.classList.contains('in') && el.style.getPropertyValue('--dir') !== String(d)){
+          el.classList.add('pvc-ent'); el.style.setProperty('--dir', d); void el.offsetWidth; el.classList.remove('pvc-ent');
+        }
+        el.classList.add('in');
+      }); }, {threshold:.08, rootMargin:'0px 0px -6% 0px'});
+      oo = new IntersectionObserver(function(es){ es.forEach(function(e){
+        if (!e.isIntersecting){ e.target.style.setProperty('--dir', e.boundingClientRect.top > 0 ? 1 : -1); e.target.classList.remove('in'); }
+      }); }, {threshold:0, rootMargin:'15% 0px 15% 0px'});
+      po = new IntersectionObserver(function(es){ es.forEach(function(e){
+        var k = vis.indexOf(e.target);
+        if (e.isIntersecting){ if (k < 0) vis.push(e.target); } else if (k >= 0) vis.splice(k, 1);
+      }); }, {rootMargin:'10% 0px 10% 0px'});
+    }
+    function watch(el){ if (!el) return; if (!io){ el.classList.add('in'); return; } io.observe(el); oo.observe(el); }
+
+
+    function settle(){
+      var any = [].some.call(feed.querySelectorAll('.pvc-case'), function(a){ return !a.hidden; });
+      if (!any) sec.hidden = true;
+      retidy();
+    }
+
+    var cfg = {};
+    list.forEach(function(it, i){
+      var c = it.c, p = it.p, use = it.use, s0 = p.slides[use[0].n - 1], r = s0.w / s0.h;
+      var reel = p.kind === 'reel', at = where(p), cap = caption(p, c), hid = c.id + '-h';
+      var art = document.createElement('article');
+      art.className = 'pvc-case ' + (i % 2 ? 'pvc-r' : 'pvc-l') + (reel ? ' pvc-reel' : '') + (r > 1.2 ? ' pvc-wide' : '');
+      art.id = c.id;
+      art.style.setProperty('--r', r.toFixed(4));
+      art.style.setProperty('--pvh', c.H);
+      art.style.setProperty('--pw', c.pw);
+      cfg[c.id] = it;
+      var thumbs = use.length > 1
+        ? '<div class="pvc-pv pvc-u"><span class="pvc-pvh" id="' + hid + '">같은 촬영의 다른 장면 · 눌러서 바꿔 보기</span>'
+          + '<div class="pvc-ths" role="group" aria-labelledby="' + hid + '">' + use.map(function(s, j){
+              var x = p.slides[s.n - 1];
+              return '<button class="pvc-th" type="button" data-k="' + j + '" aria-pressed="' + (j ? 'false' : 'true') + '" aria-label="' + esc(s.btn) + '"'
+                + ' style="--tr:' + Math.min(x.w / x.h, 1.5).toFixed(3) + '"><img src="' + esc(A + (x.t || x.src)) + '" alt="" loading="lazy" decoding="async"></button>';
+            }).join('') + '</div></div>'
+        : '';
+      var go = (reel && p.url)
+        ? '<a class="pvc-go pvc-u" href="' + esc(p.url) + '" target="_blank" rel="noopener">▶ 인스타그램에서 영상 보기 <span class="pvc-ar" aria-hidden="true">↗</span></a>'
+        : '<a class="pvc-go pvc-u" href="' + esc(link(c.code, 1)) + '">이 촬영 넘겨보기 <span class="pvc-ar" aria-hidden="true">→</span></a>';
+      art.innerHTML =
+        '<figure class="pvc-ph"><a class="pvc-cv" href="' + esc(link(c.code, use[0].n)) + '" aria-label="' + esc(use[0].alt) + ' — 크게 보기">'
+        + '<span class="pvc-mk"><img class="pvc-im" src="' + esc(A + s0.src) + '" width="' + s0.w + '" height="' + s0.h + '" alt="maydly ' + at + ' 촬영 — ' + esc(use[0].alt) + '" loading="lazy" decoding="async"></span>'
+        + '<span class="pvc-zl" aria-hidden="true">크게 보기</span></a>' + (reel ? '<span class="pvc-bdg">▶ 영상</span>' : '') + '</figure>'
+        + '<div class="pvc-tx"><div class="pvc-top">'
+        + '<p class="pvc-kk pvc-u"><span>' + esc(c.who + ' · ' + at) + '</span><i class="pvc-ln" aria-hidden="true"></i></p>'
+        + '<h3 class="pvc-who pvc-u">' + c.worry.map(esc).join('<br>') + '</h3></div>'
+        + '<div class="pvc-bot"><div class="pvc-beats">'
+        + '<p class="pvc-b pvc-st pvc-u"><span class="pvc-k">' + esc(c.k1 || '시작은') + '</span>' + esc(c.start) + '</p>'
+        + '<p class="pvc-b pvc-u"><span class="pvc-k">그림은 제가</span>' + esc(c.mine) + '</p>'
+        + (cap ? '<p class="pvc-b pvc-u"><span class="pvc-k">남은 장면</span><span class="pvc-cap">' + cap + '</span></p>' : '')
+        + '</div>' + thumbs + go + '</div></div>';
+      feed.appendChild(art);
+      watch(art.querySelector('.pvc-ph'));
+      watch(art.querySelector('.pvc-tx'));
+      if (po) po.observe(art);
+      ld(art.querySelector('.pvc-mk .pvc-im'), function(){ art.hidden = true; settle(); });
+      [].forEach.call(art.querySelectorAll('.pvc-th img'), function(t){
+        ld(t, function(){   // 작은 사진을 못 받으면 그 버튼만 빼고, 하나만 남으면 바꿔 보기 줄째 숨김
+          var b = t.parentNode; if (b && b.parentNode) b.parentNode.removeChild(b);
+          if (art.querySelectorAll('.pvc-th').length < 2){ var pv = art.querySelector('.pvc-pv'); if (pv) pv.hidden = true; }
+        });
+      });
+    });
+
+    feed.addEventListener('click', function(e){
+      var b = e.target && e.target.closest ? e.target.closest('.pvc-th') : null;
+      if (!b || !feed.contains(b)) return;
+      var art = b.closest('.pvc-case'), it = art && cfg[art.id];
+      if (!it || b.getAttribute('aria-pressed') === 'true') return;
+      var s = it.use[+b.getAttribute('data-k')], x = s && it.p.slides[s.n - 1];
+      if (!x) return;
+      [].forEach.call(art.querySelectorAll('.pvc-th'), function(t){ t.setAttribute('aria-pressed', t === b ? 'true' : 'false'); });
+      var a = art.querySelector('.pvc-cv'), mk = art.querySelector('.pvc-mk'), olds = [].slice.call(mk.querySelectorAll('.pvc-im'));
+      a.setAttribute('href', link(it.c.code, s.n));
+      a.setAttribute('aria-label', s.alt + ' — 크게 보기');
+      var im = document.createElement('img');
+      im.className = 'pvc-im' + (reduce ? ' pvc-ld' : ' pvc-new');
+      im.alt = 'maydly ' + where(it.p) + ' 촬영 — ' + s.alt;
+      im.width = x.w; im.height = x.h; im.decoding = 'async';
+      function drop(){ olds.forEach(function(o){ if (o.parentNode) o.parentNode.removeChild(o); }); }
+      if (reduce){ im.src = A + x.src; drop(); mk.appendChild(im); return; }
+      im.onload = function(){
+        im.classList.add('pvc-ld');
+        requestAnimationFrame(function(){ requestAnimationFrame(function(){ im.classList.add('pvc-on'); }); });
+        setTimeout(function(){ drop(); im.classList.remove('pvc-new', 'pvc-on'); }, 1500);
+      };
+      im.onerror = function(){ if (im.parentNode) im.parentNode.removeChild(im); };
+      im.src = A + x.src;
+      mk.appendChild(im);
+    });
+
+    if (po){
+      var tk = false;
+      var para = function(){
+        tk = false;
+        var vh = window.innerHeight, amp = window.innerWidth <= 900 ? 8 : 16;
+        vis.forEach(function(sp){
+          var rc = sp.getBoundingClientRect(), q = ((rc.top + rc.height / 2) - vh / 2) / vh;
+          q = Math.max(-1, Math.min(1, q));
+          sp.style.setProperty('--py', (-q * amp).toFixed(1) + 'px');
+          sp.style.setProperty('--ty', (q * amp * .45).toFixed(1) + 'px');
+        });
+      };
+      var onScroll = function(){ if (!tk){ tk = true; requestAnimationFrame(para); } };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      window.addEventListener('resize', onScroll);
+      onScroll();
+    }
+  }
+  start();
+  if (!ran) window.addEventListener('load', start);
+})();
+</script>
+<script>
+/* 가능성 — #pv-range(가로로 넘기는 띠 두 줄) · #pv-more(사진 밖의 순간도, 남아요) 채우기
+   사진·영상 주소·캡션은 window.MAYDLY_IG 에서 게시물 코드로 찾는다(카드마다 data-code · data-s = 몇 번째 장, 1부터).
+   데이터에 없는 게시물 칸은 빼고, 세 장이 안 되는 줄은 줄째 숨기고, 두 줄 다 없으면 칸 전체를 숨긴다.
+   자동으로 흐르지 않는다 — 손가락·트랙패드로 넘기거나 양옆 화살표. 등장은 양방향(나가면 다시 숨고, 들어오는 쪽에서 걷힘) */
+(function(){
+  'use strict';
+  var A = 'site_assets/';
+  var GAL = 'gallery.html';
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var range = null, more = null, started = false, moved = false;
+
+  function each(list, fn){ Array.prototype.forEach.call(list, fn); }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function gal(code, n){ return GAL + '#p=' + encodeURIComponent(code) + (n > 1 ? '&s=' + n : ''); }
+  function reelUrl(p){
+    var u = String(p.url || '');
+    return /^https:\/\/www\.instagram\.com\//.test(u) ? u : 'https://www.instagram.com/reel/' + encodeURIComponent(p.code) + '/';
+  }
+  function okSlide(x){ return !!(x && x.src && x.w > 0 && x.h > 0); }
+  function retidy(){ if (typeof window.pvTidy === 'function') window.pvTidy(); }   // 줄·칸이 숨으면 목차·다음 칸 버튼도 다시 맞춤
+
+  /* ── 등장(양방향) ──
+     카드는 들어오는 순간의 자리로 방향을 정한다: 화면 아래·위 끝을 지나는 중이면 아래·위에서, 띠를 옆으로 넘겨 들어오면 그쪽 옆에서.
+     방향을 바꿀 때는 전환을 잠깐 끄고(pvr-ent) 숨김 모양만 먼저 맞춘다. 화면(또는 띠) 밖으로 완전히 나가면 다시 숨는다 */
+  var io = null, oo = null;
+  function side(el, r){
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    if (!moved || r.bottom > vh - 2) return 'b';
+    if (r.top < 2) return 't';
+    var b = el.parentNode.getBoundingClientRect();
+    return (r.left + r.width / 2) > (b.left + b.width / 2) ? 'r' : 'l';
+  }
+  if (!reduce && typeof window.IntersectionObserver === 'function'){
+    io = new IntersectionObserver(function(es){
+      var k = 0;
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        if (el.classList.contains('in')) return;
+        if (el.classList.contains('pvr-card')){
+          var ir = e.intersectionRect, br = e.boundingClientRect;
+          if (e.intersectionRatio < 0.14 && !(br.height > 0 && ir.height >= br.height * 0.6)) return;
+          var d = side(el, br);
+          if (el.getAttribute('data-dir') !== d){
+            el.classList.add('pvr-ent'); el.setAttribute('data-dir', d); void el.offsetWidth; el.classList.remove('pvr-ent');
+          }
+          el.style.setProperty('--d', (Math.min(k++, 4) * 0.09).toFixed(2) + 's');
+        } else if (e.intersectionRatio < 0.14) return;
+        el.classList.add('in');
+      });
+    }, {threshold:[0, 0.14], rootMargin:'0px 0px -6% 0px'});
+    oo = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting) return;
+        var el = e.target;
+        if (!el.classList.contains('in')) return;
+        el.classList.add('pvr-ent'); el.classList.remove('in'); el.style.setProperty('--d', '0s'); void el.offsetWidth; el.classList.remove('pvr-ent');
+      });
+    }, {threshold:0, rootMargin:'12% 0px 12% 0px'});
+  }
+  function watch(el){
+    if (!el) return;
+    if (!io){ el.classList.add('in'); return; }
+    io.observe(el); oo.observe(el);
+  }
+
+  /* ── 카드 하나 채우기 — 사진 비율로 모양(세로·가로·긴 세로)과 높낮이를 정한다. 돌려주는 값 = 모양('' = 못 채움) ── */
+  function fillCard(card, p, n, kp){
+    var x = p && p.slides && p.slides[n - 1], img = card.querySelector('img'), fr = card.querySelector('.pvr-fr');
+    if (!okSlide(x) || !img || !fr) return '';
+    var r = x.w / x.h, type = r > 1.2 ? 'wide' : (r < 0.66 ? 'tall' : 'port');
+    card.style.setProperty('--r', r.toFixed(4));
+    if (type !== 'port') card.classList.add('pvr-' + type);
+    card.style.setProperty('--lift', (type === 'wide' ? 64 : (type === 'tall' ? 0 : [0, 34, 14][kp % 3])) + 'px');
+    card.setAttribute('href', gal(p.code, n));
+    img.setAttribute('alt', 'maydly ' + (p.acct === 'studio' ? '스튜디오' : '야외') + ' 촬영 — ' + (img.getAttribute('alt') || ''));
+    img.setAttribute('width', x.w); img.setAttribute('height', x.h);
+    img.setAttribute('loading', 'lazy'); img.setAttribute('decoding', 'async');
+    img.addEventListener('load', function(){ img.classList.add('ld'); });
+    img.addEventListener('error', function(){
+      card.hidden = true;
+      var row = card.closest ? card.closest('.pvr-row') : null;
+      if (row && typeof Event === 'function') row.dispatchEvent(new Event('pvr-change'));
+    });
+    if (x.t){
+      var tw = x.w >= x.h ? 480 : Math.round(480 * x.w / x.h);
+      img.setAttribute('srcset', A + x.t + ' ' + tw + 'w, ' + A + x.src + ' ' + x.w + 'w');
+      img.setAttribute('sizes', '(max-width: 760px) 88vw, 600px');
+    }
+    img.setAttribute('src', A + x.src);
+    if (img.complete && img.naturalWidth) img.classList.add('ld');
+    if (p.kind === 'reel' && !fr.querySelector('.pvr-bdg')){
+      var bd = document.createElement('span');
+      bd.className = 'pvr-bdg'; bd.setAttribute('aria-hidden', 'true'); bd.textContent = '▶ 영상';
+      fr.appendChild(bd);
+    }
+    card.hidden = false;
+    return type;
+  }
+
+  /* ── 줄 하나: 카드 채우기 → 화살표·넘긴 만큼 차는 선 ── */
+  function setupRow(row, by){
+    var band = row.querySelector('.pvr-band');
+    if (!band){ row.hidden = true; return false; }
+    var kp = 0;
+    each(band.querySelectorAll('.pvr-card'), function(card){
+      var p = by[card.getAttribute('data-code')], n = parseInt(card.getAttribute('data-s'), 10) || 1;
+      var t = p ? fillCard(card, p, n, kp) : '';
+      if (!t){ band.removeChild(card); return; }
+      if (t === 'port') kp++;
+    });
+    function cards(){ return Array.prototype.filter.call(band.children, function(c){ return c.classList && c.classList.contains('pvr-card') && !c.hidden; }); }
+    if (cards().length < 3){ row.hidden = true; return false; }
+
+    var prev = row.querySelector('.pvr-arw.prev'), next = row.querySelector('.pvr-arw.next'), bar = row.querySelector('.pvr-trk i');
+    function update(){
+      var max = band.scrollWidth - band.clientWidth, x = band.scrollLeft;
+      if (prev) prev.disabled = !(x > 4);
+      if (next) next.disabled = !(x < max - 4);
+      if (bar){
+        var f = max > 0 ? band.clientWidth / band.scrollWidth : 1, q = max > 0 ? Math.min(1, Math.max(0, x / max)) : 0;
+        bar.style.width = (f * 100).toFixed(2) + '%';
+        bar.style.transform = 'translateX(' + (f > 0 && f < 1 ? q * (1 - f) / f * 100 : 0).toFixed(2) + '%)';
+      }
+    }
+    function go(dir){
+      var cs = cards(); if (!cs.length) return;
+      var pad = cs[0].offsetLeft, x = band.scrollLeft, t = null, i, L;
+      if (dir > 0){
+        for (i = 0; i < cs.length; i++){ L = cs[i].offsetLeft - pad; if (L > x + 8){ t = L; break; } }
+        if (t === null) t = band.scrollWidth;
+      } else {
+        for (i = cs.length - 1; i >= 0; i--){ L = cs[i].offsetLeft - pad; if (L < x - 8){ t = L; break; } }
+        if (t === null) t = 0;
+      }
+      moved = true;
+      if (band.scrollTo){ try { band.scrollTo({left:t, behavior: reduce ? 'auto' : 'smooth'}); return; } catch (err) {} }
+      band.scrollLeft = t;
+    }
+    if (prev) prev.addEventListener('click', function(){ go(-1); });
+    if (next) next.addEventListener('click', function(){ go(1); });
+    var tk = false;
+    function req(){ if (!tk){ tk = true; requestAnimationFrame(function(){ tk = false; update(); }); } }
+    band.addEventListener('scroll', function(){ moved = true; req(); }, {passive:true});
+    window.addEventListener('resize', req);
+    window.addEventListener('load', req);
+    row.addEventListener('pvr-change', function(){
+      if (cards().length < 3){
+        row.hidden = true;
+        if (range && !Array.prototype.some.call(range.querySelectorAll('.pvr-row'), function(r){ return !r.hidden; })) range.hidden = true;
+      }
+      req();
+      retidy();
+    });
+    update();
+    each(cards(), watch);
+    watch(row.querySelector('.pvr-rowk'));
+    return true;
+  }
+
+  /* ── #pv-more: 바다 영상 두 편 — 작은 표지(누르면 새 창으로 인스타그램 영상) + 영상과 함께 올린 글(문단 전부, #·@ 줄만 뺌) ── */
+  function captionLines(p){
+    if (!p) return [];
+    var out = [];
+    String(p.body || '').split(/\n[ \t]*\n/).forEach(function(par){
+      par.split('\n').forEach(function(l){ l = l.trim(); if (l && !/^([#@][^\s#@]+\s*)+$/.test(l)) out.push(l); });
+    });
+    if (!out.length && p.title) out = [String(p.title)];
+    return out;
+  }
+  function setupMore(by){
+    var box = more.querySelector('.pvr-mreels');
+    function check(){
+      var left = Array.prototype.filter.call(more.querySelectorAll('.pvr-mr'), function(f){ return !f.hidden; }).length;
+      if (!box) return;
+      box.hidden = !left;
+      if (left === 1) box.classList.add('pvr-one'); else box.classList.remove('pvr-one');
+    }
+    each(more.querySelectorAll('.pvr-mr[data-code]'), function(fig){
+      var p = by[fig.getAttribute('data-code')], x = p && ((p.slides && p.slides[0]) || p.cover);
+      var img = fig.querySelector('img'), bq = fig.querySelector('blockquote'), lines = captionLines(p);
+      if (!p || !okSlide(x) || !img || !bq || !lines.length){ fig.hidden = true; return; }
+      fig.style.setProperty('--r', (x.w / x.h).toFixed(4));
+      var url = reelUrl(p);
+      each(fig.querySelectorAll('a'), function(a){ a.setAttribute('href', url); });
+      img.setAttribute('width', x.w); img.setAttribute('height', x.h);
+      img.setAttribute('loading', 'lazy'); img.setAttribute('decoding', 'async');
+      img.addEventListener('load', function(){ img.classList.add('ld'); });
+      img.addEventListener('error', function(){ fig.hidden = true; check(); });
+      img.setAttribute('src', A + (x.t || x.src));   // 작은 표지라 미리보기 크기(긴 변 480px)로 충분
+      if (img.complete && img.naturalWidth) img.classList.add('ld');
+      var last = lines.pop();
+      bq.innerHTML = lines.map(esc).join('<br>') + (lines.length ? '<br>' : '') + '<span class="hl">' + esc(last) + '</span>';
+      fig.hidden = false;
+    });
+    check();
+  }
+
+  function start(){
+    if (started) return; started = true;
+    var G = window.MAYDLY_IG, by = {};
+    if (G && G.posts && G.posts.forEach) G.posts.forEach(function(p){ if (p && p.code) by[p.code] = p; });
+    var sc = document.querySelector('script[src$="ig-data.js"]');
+    if (sc) A = sc.getAttribute('src').replace(/ig-data\.js$/, '');
+    window.addEventListener('scroll', function(){ moved = true; }, {passive:true});
+    if (range){
+      var shown = 0;
+      each(range.querySelectorAll('.pvr-row'), function(row){ if (setupRow(row, by)) shown++; });
+      if (!shown){ range.hidden = true; retidy(); }
+    }
+    if (more) setupMore(by);
+  }
+  function boot(){
+    range = document.getElementById('pv-range'); more = document.getElementById('pv-more');
+    if (!range && !more) return;
+    if (window.MAYDLY_IG || document.readyState === 'complete') start();
+    else window.addEventListener('load', start);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+<script>
+  (function(){
+    function tidy(){
+      [].forEach.call(document.querySelectorAll('.pvtoc a[href^="#"], .pvj-endgo a[href^="#"], .pvc-next a[href^="#"]'), function(a){
+        var t = document.getElementById(a.getAttribute('href').slice(1)), box = a.closest('.pvj-endgo, .pvc-next') || a;
+        box.hidden = !!(t && t.hidden);
+      });
+    }
+    window.pvTidy = tidy;
+    tidy();
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tidy);
+    window.addEventListener('load', function(){ setTimeout(tidy, 0); });
+  })();
+</script>
+</body>
+</html>
