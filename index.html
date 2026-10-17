@@ -414,6 +414,69 @@
   .areply{margin-top:12px; padding:12px 14px; background:rgba(255,255,255,.65); border-radius:12px; color:var(--tx2); font-size:.9rem; line-height:1.7;}
   .areply p+p{margin-top:4px;}
   #brand .areply{margin:0 0 14px;}
+  
+  #flow, #cases, .cs{scroll-margin-top:60px;}
+  .xchg{display:grid; grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr); max-width:900px; margin:20px auto 0;}
+  .xc{background:#fff; border:1px solid var(--line); border-radius:20px; padding:24px 24px 22px; text-align:left;}
+  .xc.me{background:var(--green-wash); border-color:#cfe0cd;}
+  .xk{font-size:.86rem; font-weight:700; color:var(--accentD); letter-spacing:.02em;}
+  .xc p{margin-top:8px; color:var(--tx2); font-size:.98rem; line-height:1.7; text-wrap:pretty;}
+  .xc .link{font-size:.94rem; white-space:nowrap;}
+  .xar{position:relative; color:var(--accent);}
+  .xar i{position:absolute; left:12px; right:16px; top:50%; height:2px; margin-top:-1px; border-radius:2px; background:#cfe0cd;
+    transform:scaleX(0); transform-origin:left center; transition:transform 1s cubic-bezier(.76,0,.2,1) .35s;}
+  .xar svg{position:absolute; right:4px; top:50%; width:22px; height:22px; margin-top:-11px; opacity:0; transition:opacity .4s ease 1.1s;}
+  .xar.in i{transform:scaleX(1);}
+  .xar.in svg{opacity:1;}
+  .xmore{text-align:center; margin-top:26px;}
+  @media(max-width:760px){
+    .xchg{grid-template-columns:1fr;}
+    .xc{padding:22px 20px 20px;}
+    .xar{height:48px;}
+    .xar i{left:50%; right:auto; top:6px; bottom:14px; width:2px; height:auto; margin:0 0 0 -1px; transform:scaleY(0); transform-origin:center top;}
+    .xar.in i{transform:scaleY(1);}
+    .xar svg{left:50%; right:auto; top:auto; bottom:0; margin:0 0 0 -11px; transform:rotate(90deg);}
+  }
+  .cases{background:var(--panel);}
+  .cases .cwm.a{top:60px; right:7%; width:58px; transform:rotate(14deg);}
+  .cases .center, .cases .awk{position:relative; z-index:1;}
+  .cswho{--d:.18s; margin-top:18px; font-size:clamp(1.32rem,2.1vw,1.68rem); font-weight:700; line-height:1.36; letter-spacing:-.025em; color:var(--tx);}
+  .csbeats{position:relative; display:grid; gap:12px; padding-left:20px;}
+  .csbeats:before{content:''; position:absolute; left:0; top:5px; bottom:5px; width:2px; border-radius:2px; background:#cfe0cd;
+    transform:scaleY(0); transform-origin:center top; transition:transform 1.3s var(--wipe) .3s;}
+  .etx.in .csbeats:before{transform:scaleY(1);}
+  .csb{color:var(--tx2); font-size:.98rem; line-height:1.7;}
+  .csb:nth-child(1){--d:.28s;} .csb:nth-child(2){--d:.38s;} .csb:nth-child(3){--d:.5s;}
+  .csk{display:block; font-size:.8rem; font-weight:700; letter-spacing:.04em; color:var(--accentD); margin-bottom:2px;}
+  .cscap{display:block; font-family:var(--serif); font-size:1.1rem; line-height:1.62; color:var(--tx);}
+  .cscap .hl{background-image:linear-gradient(transparent 60%, rgba(79,154,106,.24) 60%); background-repeat:no-repeat; background-size:0% 100%;
+    transition:background-size 1.1s var(--ease) 1s;}
+  .etx.in .cscap .hl{background-size:100% 100%;}
+  .cspv{--d:.6s; margin-top:20px;}
+  .cspv .eth{cursor:pointer;}
+  .cspv .eth[aria-pressed="true"]{outline:2px solid var(--accent); outline-offset:3px;}
+  .cs .ego{--d:.7s;}
+  .cs .emk .eim.csnew{position:absolute; left:0; top:0; -webkit-clip-path:inset(100% 0 0 0); clip-path:inset(100% 0 0 0); transform:scale(1.1);
+    transition:clip-path .9s var(--wipe), -webkit-clip-path .9s var(--wipe), transform 1.4s var(--ease), opacity .3s ease;}
+  .cs .emk .eim.csnew.go{-webkit-clip-path:inset(0 0 0 0); clip-path:inset(0 0 0 0); transform:scale(1);}
+  .cases .cpull{margin-top:clamp(12px,3vh,32px);}
+  .csnote{max-width:600px; margin:22px auto 0; text-align:center; color:var(--tx2); font-size:1rem; line-height:1.75; position:relative; z-index:1; text-wrap:pretty;}
+  .cases .ccta{margin-top:30px;}
+  @media (max-width:900px){
+    .cs .eph{width:min(var(--pw,88vw), calc(min(70vh,640px) * var(--r)));}
+    .cswho{font-size:clamp(1.28rem,5.4vw,1.55rem); margin-top:12px;}
+    .cspv{margin-top:16px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .xar i, .csbeats:before{transform:none !important; opacity:1 !important; transition:none !important;}
+    .xar svg{opacity:1 !important; transition:none !important;}   
+    .cscap .hl{transition:none; background-size:100% 100%;}
+  }
+  
+  @media (min-width:761px) and (max-width:900px){ .navlinks{gap:16px;} }
+  @media (min-width:761px) and (max-width:800px){ .navlinks{gap:12px;} }
+  #apply, #brand{scroll-margin-top:84px;}
+  @media(max-width:760px){ .nav.open .navlinks{max-height:calc(100vh - 64px); max-height:calc(100dvh - 64px); overflow-y:auto; -webkit-overflow-scrolling:touch;} }
 </style>
 </head>
 <body>
@@ -424,7 +487,7 @@
   <div class="navlinks">
     <a href="#story">이야기</a>
     <a href="#work">작업</a>
-    <a href="#process">촬영 과정</a>
+    <a href="#process">촬영 과정</a><a href="preview.html">촬영 미리보기</a>
     <a href="#signature">단어 여정</a>
     <a href="#menu">촬영 안내</a>
     <a href="#consult">촬영 상담</a>
@@ -521,6 +584,13 @@
     <div class="pstep reveal"><div class="num">STEP 04</div><h3>함께 셀렉</h3><p>작가와 함께, 가장 ‘나다운’ 컷을 골라요.</p></div>
     <div class="pstep reveal"><div class="num">STEP 05</div><h3>보정 · 전달</h3><p>자연스러운 보정을 거쳐 한 달 이내에 전달드립니다.</p></div>
   </div>
+  <p class="cfhead reveal" id="flow">첫 대화는, 이렇게 주고받아요</p>
+  <div class="xchg">
+    <div class="xc reveal"><div class="xk">보내 주실 것</div><p>몇 줄의 글이면 충분해요. 어떤 촬영인지, 누구와 어디서, 원하는 분위기와 시기 정도를 카카오톡 채널로 보내 주세요. <a class="link" href="#apply">신청 칸에 적기 <span class="ar">›</span></a></p></div>
+    <div class="xar reveal" aria-hidden="true"><i></i><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="xc me reveal"><div class="xk">그다음은 제가</div><p>보내 주신 글로 어떤 촬영이 될지 먼저 그려 볼게요. 그림이 잡히면 금액과 시간을, 무엇이 포함되는지와 함께 미리 안내드려요. 예약은 그 안내를 보고 정하시면 돼요.</p></div>
+  </div>
+  <a class="xc reveal" href="preview.html" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:16px 28px; max-width:720px; margin:30px auto 0; padding:18px 26px 18px 18px; box-shadow:0 20px 40px -34px rgba(40,50,35,.3);"><span aria-hidden="true" style="position:relative; display:block; flex:none; width:210px; height:128px;"><img onerror="this.remove()" src="site_assets/ig/s/DaHi_5cGDZc_05.jpg" alt="" loading="lazy" decoding="async" style="position:absolute; left:0; top:19px; width:83px; height:104px; object-fit:cover; border:4px solid #fff; border-radius:6px; box-shadow:0 12px 22px -12px rgba(40,50,35,.5); transform:rotate(-7deg);"><img onerror="this.remove()" src="site_assets/ig/s/DZ9450umC1-_02.jpg" alt="" loading="lazy" decoding="async" style="position:absolute; left:61px; top:0; width:102px; height:128px; z-index:1; object-fit:cover; border:4px solid #fff; border-radius:6px; box-shadow:0 12px 22px -12px rgba(40,50,35,.5); transform:rotate(2deg);"><img onerror="this.remove()" src="site_assets/ig/s/DaDYq25GJBr_08.jpg" alt="" loading="lazy" decoding="async" style="position:absolute; left:114px; top:49px; width:114px; height:78px; z-index:2; object-fit:cover; border:4px solid #fff; border-radius:6px; box-shadow:0 12px 22px -12px rgba(40,50,35,.5); transform:rotate(6deg);"></span><span style="display:block; flex:1 1 250px; min-width:0;"><span style="display:block; color:var(--tx2); font-size:.93rem; line-height:1.6;">실제 촬영은 어떻게 흘러가는지 궁금하다면</span><b style="display:block; margin-top:3px; font-size:1.12rem; font-weight:700; letter-spacing:-.02em; color:var(--tx);">촬영 미리보기 <span aria-hidden="true" style="color:var(--accent);">→</span></b><span style="display:block; margin-top:6px; color:var(--tx3); font-size:.88rem; line-height:1.65;">첫 대화부터 받는 날까지 · 실제 촬영 이야기 · 스튜디오와 야외 장면</span></span></a>
 </div></section>
 
 <section class="signature" id="signature">
@@ -546,19 +616,20 @@
     <h2 class="big">나를 위한 촬영</h2>
     <p class="subcopy">지금의 나를, 나에게 어울리는 장면으로 남겨요.</p>
     <div class="kinds"><span>프로필</span><span>졸업</span><span>앨범 자켓</span><span>콘셉트 화보</span><span>인물 촬영</span></div>
-    <p class="kindsnote">그 밖의 촬영도 편하게 물어봐 주세요.</p>
+    <p class="kindsnote">그 밖의 촬영도 편하게 물어봐 주세요. 예를 들면 오래된 친구와 보낸 하루, 느리게 걷는 오후의 동네 산책 같은 촬영도 있었어요.</p>
   </div>
   <div class="mstep reveal" id="fit"><span>STEP 01</span>이렇게 맞춰가요</div>
   <div class="mgrid">
     <div class="mc reveal"><div class="no">01</div><h3>누구와</h3><ul><li>혼자</li><li>둘 — 커플 · 친구</li><li>여럿이 함께</li></ul></div>
-    <div class="mc reveal"><div class="no">02</div><h3>어디서</h3><ul><li>스튜디오 — 기본은 서울 둔촌동 호리존 스튜디오<br><span class="mcs">컨셉에 따라 다른 스튜디오를 대관해 진행하기도 해요</span></li><li>야외 — 장소는 상담에서 함께 정해요</li><li>해외 — 출장 일정과 비용은 따로 협의해요</li></ul></div>
+    <div class="mc reveal"><div class="no">02</div><h3>어디서</h3><ul><li>스튜디오 — 기본은 서울 둔촌동 호리존 스튜디오<br><span class="mcs">컨셉에 따라 다른 스튜디오를 대관해 진행하기도 해요</span></li><li>야외 — 장소는 상담에서 함께 정해요<br><span class="mcs">나무가 많은 길, 오래된 동네 골목, 가게 앞 벤치에서도 찍었어요. <a class="link" href="gallery.html#outdoor">야외 작업 보기 <span class="ar">›</span></a></span></li><li>해외 — 출장 일정과 비용은 따로 협의해요</li></ul></div>
     <div class="mc reveal"><div class="no">03</div><h3>어떤 분위기로</h3><ul><li>원하는 시안 · 레퍼런스를 주셔도 되고</li><li>의상 · 소품 · 색상 중 포인트 하나로 잡아도 돼요</li><li>막막하면 단어 여정으로 함께 찾아요</li><li>꽃을 들고 싶다면 함께 골라요</li></ul></div>
     <div class="mc reveal"><div class="no">04</div><h3>더하고 싶다면</h3><ul><li>전체 셀렉 원본 사진</li><li>전체 셀렉 색보정</li><li>디테일 보정 더하기</li></ul><p class="mcsub">원하시면 해드려요</p><ul><li>빈티지 디카 · 폴라로이드 촬영</li><li>촬영 현장 비하인드(BTS) 영상</li></ul><p class="mcnote">사진 속 함께 했던 시간의 <span class="mysign">maydly</span> 로고가 담겨요.</p></div>
   </div>
   <p class="mout reveal">헤어 · 메이크업과 원본 RAW 파일은 포함되지 않아요. 메이크업은 매트한 피부 표현을 추천해요.</p>
+  <p class="xmore reveal" style="margin-top:14px; font-size:.94rem"><a class="link" href="preview.html#pv-range">어떤 장면까지 가능한지 궁금하다면, 실제 장면 보기 <span class="ar">→</span></a></p>
   <div class="mstep reveal"><span>STEP 02</span>개인 촬영 신청</div>
   <div class="mhow reveal" id="apply">
-    <p>몇 가지만 적어 주세요. 「내용 복사하고 카카오톡 열기」를 누르면 정리된 글이 복사되고 카카오톡 채널이 열려요. 채팅창에 붙여넣어 보내 주시면 돼요. 구성과 금액은 상담에서 안내드려요.</p>
+    <p>몇 가지만 적어 주세요. 분위기 칸은 입고 싶은 옷, 손에 쥘 소품 하나처럼 작은 재료만 적어 주셔도 괜찮아요. 「내용 복사하고 카카오톡 열기」를 누르면 정리된 글이 복사되고 카카오톡 채널이 열려요. 채팅창에 붙여넣어 보내 주시면 돼요. 구성과 금액은 상담에서 안내드려요.</p>
     <div class="areply"><p>남겨 주신 내용을 확인한 뒤 안내드려요. 항목 없이 인사만 남겨 주시면 답변드리기 어려워요.</p><p>읽지 않은 알림을 그냥 넘기지 못하는 성격이라 가능한 한 빨리 답해요. 다만 촬영 중에는 휴대폰을 보기 어려워 조금 늦을 수 있어요.</p></div>
     <form class="aform" id="aform" onsubmit="return false">
       <div class="af" data-for="p"><label>어떤 촬영</label><input name="kind" placeholder="프로필 · 졸업 · 앨범 자켓 · 콘셉트 화보 등"></div>
@@ -586,7 +657,7 @@
     </div>
     <div class="cbody reveal">
       <p>좋아하는 색이나 옷, 요즘의 기분처럼 작은 이야기부터 시작해도 좋으니까요.</p>
-      <p>촬영마다 원하는 모습도, 필요한 준비도 다르기에 이야기를 나눈 뒤 <b>컨셉과 장소, 촬영 시간과 결과물 구성</b>을 함께 정해요.</p>
+      <p>촬영마다 원하는 모습도, 필요한 준비도 다르기에 이야기를 나눈 뒤 <b>컨셉과 장소</b>를 함께 그려요. 그에 맞는 <b>촬영 시간과 결과물 구성</b>은 제가 정리해 안내드려요.</p>
       <p>비용도 그 내용을 바탕으로 미리 자세히 안내드릴게요.</p>
     </div>
     <p class="cpull serif reveal">어떤 사진을 남기고 싶은지,<br><span class="hl">먼저 들려주세요.</span></p>
@@ -594,7 +665,7 @@
       <a class="btn pri" href="#apply">촬영 상담 신청하기</a>
       <a class="btn out" href="https://maydly.github.io/maydly-hub/word-journey/" target="_blank" rel="noopener">단어 여정 먼저 해보기</a>
     </div>
-    <p class="cnote reveal">단어 여정에서 고른 다섯 단어는, 상담의 첫 재료가 돼요.</p>
+    <p class="cnote reveal">단어 여정에서 고른 다섯 단어는, 상담의 첫 재료가 돼요.<br>이를테면 ‘다정한 · 꾸밈없는 · 고요히 머무는’이 모이면, 무리해 웃는 얼굴보다 편한 호흡이 남는 장면부터 그려 볼게요.</p>
   </div>
 </section>
 
@@ -606,12 +677,13 @@
   </div>
   <div class="list reveal">
     <div class="qa"><button class="q">촬영이 처음인데 괜찮을까요? <span class="pm">+</span></button><div class="a"><p>그럼요. 오히려 경험이 많지 않을수록, 꾸미지 않은 솔직한 분위기에서 가장 좋은 사진이 나오는 경우가 많아요. 처음이신 분을 위해 ‘단어 여정’도 준비했고요. 카메라 앞이 어색한 그 마음까지도 사실은 가장 당신다운 모습이에요.</p></div></div>
+    <div class="qa"><button class="q">실제 촬영은 어떻게 진행되나요? <span class="pm">+</span></button><div class="a"><p>문의부터 사진을 받는 날까지의 흐름과 실제 촬영 장면을 「촬영 미리보기」에 모아 두었어요. 어떤 장면까지 가능한지도 함께 둘러보실 수 있어요. <a class="link" href="preview.html">촬영 미리보기로 가기 <span class="ar">→</span></a></p></div></div>
     <div class="qa"><button class="q">촬영 금액과 시간은 어떻게 되나요? <span class="pm">+</span></button><div class="a"><p>상담에서 어떤 촬영이 될지 정한 뒤에 금액과 시간을 안내드려요. 촬영마다 성격도, 들이는 품도 달라서 정해진 가격표를 두지 않거든요. 금액을 말씀드릴 때, 무엇이 포함되는지도 함께 알려드릴게요.</p></div></div>
     <div class="qa"><button class="q">무료 촬영이나 상호 무페이 촬영도 하나요? <span class="pm">+</span></button><div class="a"><p>처음 뵙는 분과 1:1로 하는 개인 간 무료 촬영이나 상호 무페이 촬영은 진행하지 않아요. 노쇼처럼 약속이 지켜지지 않는 일이 반복돼, 준비한 시간과 공간을 지키기 위해 정한 기준이에요. 다만 새로운 시도가 담긴 촬영이라면 일정과 준비가 맞는 선에서 열어 두고 있어요. 이런 제안이나 브랜드 · 협업 제안은 「브랜드 · 협업 문의」로 남겨 주세요.</p></div></div>
     <div class="qa"><button class="q">스튜디오는 어디인가요? <span class="pm">+</span></button><div class="a"><p>서울 <b>둔촌동 호리존 스튜디오</b>를 기본으로 고정 대여해 진행해요. 같은 공간에서 꾸준히 촬영하며 사진의 일관성과 완성도를 높이고 있어요. 컨셉에 따라 다른 스튜디오를 대관해 진행하기도 해요.</p></div></div>
     <div class="qa"><button class="q">보정은 어떻게 되나요? <span class="pm">+</span></button><div class="a"><p>피부·몸 라인·얼굴형·어깨 라인 등을 자연스럽게 보정해드려요. 과하게 손대서 정작 ‘나’가 사라지는 사진은 지양해요. 보정본은 촬영 후 <b>한 달 이내</b>에 전달드립니다.</p></div></div>
     <div class="qa"><button class="q">단어 여정은 꼭 해야 하나요? <span class="pm">+</span></button><div class="a"><p>필수는 아니에요. 다만 막막하시면 큰 도움이 돼요. 2–3분이면 충분하고, 정답도 없어요.</p></div></div>
-    <div class="qa"><button class="q">야외 촬영도 되나요? <span class="pm">+</span></button><div class="a"><p>네, 외부 장소 촬영도 가능해요. 어디서 찍을지는 상담에서 함께 정해요. 야외 촬영 갤러리는 @maydly_f에서 보실 수 있어요.</p></div></div>
+    <div class="qa"><button class="q">야외 촬영도 되나요? <span class="pm">+</span></button><div class="a"><p>네, 외부 장소 촬영도 가능해요. 어디서 찍을지는 상담에서 함께 정해요. 비·눈 같은 일반적인 날씨에도 그대로 진행해요. 계획엔 없던 비가, 오히려 그날의 장면이 되기도 하거든요. 야외 촬영 갤러리는 @maydly_f에서 보실 수 있어요. 작업 갤러리의 <a class="link" href="gallery.html#outdoor">야외·스냅</a>에도 모아 두었어요.</p></div></div>
   </div>
 </div></section>
 
@@ -677,7 +749,7 @@
       <p style="margin-top:10px; color:var(--tx3); max-width:280px;">오늘의 너에게, 또 한 번 반하다 · mad about you</p>
     </div>
     <div class="cols">
-      <div><div class="h">둘러보기</div><a href="#work">작업</a><a href="#process">촬영 과정</a><a href="#signature">단어 여정</a><a href="#menu">촬영 안내</a><a href="#consult">촬영 상담</a></div>
+      <div><div class="h">둘러보기</div><a href="#work">작업</a><a href="#process">촬영 과정</a><a href="preview.html">촬영 미리보기</a><a href="#signature">단어 여정</a><a href="#menu">촬영 안내</a><a href="#consult">촬영 상담</a></div>
       <div><div class="h">연결</div><a href="#apply">촬영 상담 신청</a><a href="#brand">브랜드 · 협업 문의</a><a href="#faq">FAQ</a><a href="#policy">예약·취소 안내</a></div>
       <div><div class="h">Instagram</div><a href="https://instagram.com/maydly_u" target="_blank" rel="noopener">@maydly_u · 작가 계정</a><a href="https://instagram.com/maydly_s" target="_blank" rel="noopener">@maydly_s · 스튜디오</a><a href="https://instagram.com/maydly_f" target="_blank" rel="noopener">@maydly_f · 야외</a></div>
     </div>

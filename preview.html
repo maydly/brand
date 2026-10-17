@@ -2,7 +2,6 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1002,14 +1001,9 @@
 </style>
 <style>
   
-  .gsbar{background:#fff8e1; color:#6b5520; border-bottom:1px solid #f0dfa8; font-size:.86rem; line-height:1.6; padding:8px 14px; text-align:center;}
-  .gsbar b{color:#57420f;}
-  .gsbar a, .gsbar button{display:inline-flex; align-items:center; min-height:44px; padding:0 16px; margin:2px 4px; border-radius:980px; border:1px solid #ead08a; background:#fff; color:#57420f; font:inherit; font-weight:600; cursor:pointer;}
-  .gsbar button[aria-pressed="true"]{background:#ffe7a3;}
-  body.gsshow [data-gs]{outline:2px dashed #d7a21e; outline-offset:4px;}
-  .mjchk{display:inline-block; margin-top:14px; padding:4px 11px; border-radius:980px; background:#fff1c2; color:#755600; font-size:.8rem; font-weight:700; line-height:1.5; letter-spacing:0;}
-  #pv-journey .pvj-g .mjchk{margin-top:10px;}
-  .mjq{background:linear-gradient(transparent 60%, #ffeaa8 60%);}
+  @media (min-width:761px) and (max-width:900px){ .navlinks{gap:16px;} }
+  @media (min-width:761px) and (max-width:800px){ .navlinks{gap:12px;} }
+  #apply, #brand{scroll-margin-top:84px;}
 </style>
 </head>
 <body>
@@ -1021,6 +1015,7 @@
     <a href="./#story">이야기</a>
     <a href="./#work">작업</a>
     <a href="./#process">촬영 과정</a>
+    <a href="preview.html" aria-current="page" style="color:var(--tx); font-weight:700;">촬영 미리보기</a>
     <a href="./#signature">단어 여정</a>
     <a href="./#menu">촬영 안내</a>
     <a href="./#consult">촬영 상담</a>
@@ -1035,7 +1030,7 @@
   <svg class="cwm a" viewBox="0 0 40 40"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
   <svg class="cwm b" viewBox="0 0 40 40"><g fill="currentColor"><path d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(90 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(180 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/><path transform="rotate(270 20 20)" d="M20,20 C16,14 8,13 8,8 C8,4.5 13,3.5 16,6 C18,7.5 19.5,9 20,10.5 C20.5,9 22,7.5 24,6 C27,3.5 32,4.5 32,8 C32,13 24,14 20,20 Z"/></g></svg>
   <div class="wrap">
-    <div class="eyebrow reveal">Before we talk</div>
+    <div class="eyebrow reveal" style="letter-spacing:.12em;">촬영 미리보기</div>
     <h1 class="reveal">상담 전에,<br><span class="em">촬영 한 번 둘러보기</span></h1>
     <p class="sub reveal serif">어떤 촬영이 되는지는,<br>상담 전에 먼저 보셔도 좋아요.</p>
     <p class="pvh-lead reveal">첫 대화부터 사진을 받는 날까지, 실제 촬영의 장면들로 채워 두었어요.</p>
@@ -1110,7 +1105,7 @@
           <a class="pvj-more" href="gallery.html#p=DeWgusMmIm6">이 촬영 넘겨보기 <span aria-hidden="true">→</span></a>
         </div>
         <div class="pvj-gt pvj-rv">
-          <div class="pvj-g pvj-u" style="--d:.08s"><span class="pvj-gk">건네 주실 것</span><p>입을 옷과 착용 사진. 시안이나 레퍼런스가 있다면 함께 주셔도 돼요.</p></div>
+          <div class="pvj-g pvj-u" style="--d:.08s"><span class="pvj-gk">건네주실 것</span><p>입을 옷과 착용 사진. 시안이나 레퍼런스가 있다면 함께 주셔도 돼요.</p></div>
           <i class="pvj-ar" aria-hidden="true"></i>
           <div class="pvj-g pvj-me pvj-u" style="--d:.36s"><span class="pvj-gk">제가 맡을 것</span><p>그걸 보고, 어떤 빛과 표정으로 담을지 잡아 둘게요.</p></div>
           <p class="pvj-note pvj-u" style="--d:.5s"><span class="pvj-nk">사전 준비</span><span>의상과 착용 사진, 시안 등 준비 내용은 촬영일 5일 전까지 함께 확인해요</span></p>
@@ -1291,7 +1286,7 @@
       <p style="margin-top:10px; color:var(--tx3); max-width:280px;">오늘의 너에게, 또 한 번 반하다 · mad about you</p>
     </div>
     <div class="cols">
-      <div><div class="h">둘러보기</div><a href="./#work">작업</a><a href="./#process">촬영 과정</a><a href="./#signature">단어 여정</a><a href="./#menu">촬영 안내</a><a href="./#consult">촬영 상담</a></div>
+      <div><div class="h">둘러보기</div><a href="./#work">작업</a><a href="./#process">촬영 과정</a><a href="preview.html">촬영 미리보기</a><a href="./#signature">단어 여정</a><a href="./#menu">촬영 안내</a><a href="./#consult">촬영 상담</a></div>
       <div><div class="h">연결</div><a href="./#apply">촬영 상담 신청</a><a href="./#brand">브랜드 · 협업 문의</a><a href="./#faq">FAQ</a><a href="./#policy">예약·취소 안내</a></div>
       <div><div class="h">Instagram</div><a href="https://instagram.com/maydly_u" target="_blank" rel="noopener">@maydly_u · 작가 계정</a><a href="https://instagram.com/maydly_s" target="_blank" rel="noopener">@maydly_s · 스튜디오</a><a href="https://instagram.com/maydly_f" target="_blank" rel="noopener">@maydly_f · 야외</a></div>
     </div>
@@ -1328,9 +1323,6 @@
   addEventListener('scroll',function(){ nav.classList.toggle('scr', scrollY>8); },{passive:true});
 </script>
 <script>
-/* 촬영 미리보기 ① 여정 — 사진·캡션 채우기 + 등장(양방향) + 아주 약한 패럴랙스
-   게시물은 window.MAYDLY_IG 에서 코드로 찾는다(data-code · data-n = 몇 번째 장 · data-cap = 캡션 몇 번째 문단).
-   데이터에 없거나 사진이 안 열리면 그 사진 칸만 숨기고 글은 남긴다. 캡션은 원문 그대로(#·@ 줄만 뺌) */
 (function(){
   'use strict';
   var A = 'site_assets/';
@@ -1353,7 +1345,6 @@
     return out;
   }
 
-  /* ── 사진 채우기 ── */
   var filled = false;
   function fill(G){
     var by = {}, taken = {};
@@ -1403,7 +1394,6 @@
     return true;
   }
 
-  /* ── 등장: 양방향 — 들어오는 순간의 위치로 방향을 정하고(아래에서 오면 아래부터), 화면을 충분히 벗어나면 되감음 ── */
   function watch(){
     var units = Array.prototype.slice.call(sec.querySelectorAll('.pvj-rv'));
     if (reduce || !hasIO){ units.forEach(function(el){ el.classList.add('in'); }); return; }
@@ -1426,7 +1416,6 @@
     units.forEach(function(el){ io.observe(el); oo.observe(el); });
   }
 
-  /* ── 패럴랙스(아주 약하게): 보이는 사진만, 스크롤 한 번에 한 프레임 ── */
   function drift(){
     if (reduce || !hasIO) return;
     var vis = [], tk = false;
@@ -1462,22 +1451,11 @@
 })();
 </script>
 <script>
-/* 촬영 미리보기 ② 재료 하나가, 장면이 되기까지 (#pv-cases)
-   - 게시물은 window.MAYDLY_IG 에서 코드로 찾는다. 없으면 그 장면을 건너뛰고, 하나도 없으면 칸 전체를 숨긴다.
-   - 지금 랜딩 첫 화면·작업 칸에 걸린 게시물(hero·landing)은 표지 장(1번)을 쓰지 않고 같은 게시물의 다른 장으로.
-   - 작은 사진을 누르면 같은 촬영의 다른 장면이 그 자리에서 걷히며 바뀐다(갤러리로 바로 넘어가지 않음).
-   - 등장은 양방향(들어오는 쪽에서 마스크가 걷힘, 화면 밖으로 나가면 다시 숨음). 움직임 줄이기 설정이면 멈춤. */
 (function(){
   'use strict';
   var A = 'site_assets/';
   var GAL = 'gallery.html';
 
-  /* 장면 — 걱정 한 줄 → 시작은 → 그림은 제가 → 남은 장면(그 게시물 캡션 원문, cap = 몇 번째 문단)
-     · 글은 사진에 보이는 것과 일하는 방식(현재형)만. 「시작은」은 누가 준비했는지 말하지 않는 명사 나열로.
-       그날의 상황이 재료인 장면(골목 · 젖은 머리)은 k1 = 「그날은」. 제목은 「~라면」만 반복하지 않게 말꼴을 섞는다.
-     · shots = 큰 사진(첫째) + 작은 사진 셋. spare = 데이터에 없거나 표지라서 빠질 때 대신 채울 장.
-     · 여섯 장면. 데이터에 없는 게시물은 건너뛴다(대체 장면은 두지 않음).
-     · H = 데스크탑 큰 사진 높이(폭 약 420~512px가 되게), pw = 폰 화면 폭 비율. 장면마다 달라 크기에 리듬이 생긴다. */
   var CASES = [
     {id:'pvc-c-paper', code:'DaFbJ3WGB4W', who:'혼자', H:'clamp(525px,76vh,620px)', pw:'88vw',
       worry:['카메라 앞이', '어색할까 걱정이라면'],
@@ -1601,7 +1579,6 @@
     });
     if (!list.length){ sec.hidden = true; return; }
 
-    /* 등장(양방향) — 들어오는 순간의 위치로 방향을 정하고, 화면 밖으로 충분히 나가면 되감는다 */
     var io = null, oo = null, po = null, vis = [];
     if (hasIO && !reduce){
       io = new IntersectionObserver(function(es){ es.forEach(function(e){
@@ -1727,10 +1704,6 @@
 })();
 </script>
 <script>
-/* 가능성 — #pv-range(가로로 넘기는 띠 두 줄) · #pv-more(사진 밖의 순간도, 남아요) 채우기
-   사진·영상 주소·캡션은 window.MAYDLY_IG 에서 게시물 코드로 찾는다(카드마다 data-code · data-s = 몇 번째 장, 1부터).
-   데이터에 없는 게시물 칸은 빼고, 세 장이 안 되는 줄은 줄째 숨기고, 두 줄 다 없으면 칸 전체를 숨긴다.
-   자동으로 흐르지 않는다 — 손가락·트랙패드로 넘기거나 양옆 화살표. 등장은 양방향(나가면 다시 숨고, 들어오는 쪽에서 걷힘) */
 (function(){
   'use strict';
   var A = 'site_assets/';
@@ -1748,9 +1721,6 @@
   function okSlide(x){ return !!(x && x.src && x.w > 0 && x.h > 0); }
   function retidy(){ if (typeof window.pvTidy === 'function') window.pvTidy(); }   // 줄·칸이 숨으면 목차·다음 칸 버튼도 다시 맞춤
 
-  /* ── 등장(양방향) ──
-     카드는 들어오는 순간의 자리로 방향을 정한다: 화면 아래·위 끝을 지나는 중이면 아래·위에서, 띠를 옆으로 넘겨 들어오면 그쪽 옆에서.
-     방향을 바꿀 때는 전환을 잠깐 끄고(pvr-ent) 숨김 모양만 먼저 맞춘다. 화면(또는 띠) 밖으로 완전히 나가면 다시 숨는다 */
   var io = null, oo = null;
   function side(el, r){
     var vh = window.innerHeight || document.documentElement.clientHeight;
@@ -1793,7 +1763,6 @@
     io.observe(el); oo.observe(el);
   }
 
-  /* ── 카드 하나 채우기 — 사진 비율로 모양(세로·가로·긴 세로)과 높낮이를 정한다. 돌려주는 값 = 모양('' = 못 채움) ── */
   function fillCard(card, p, n, kp){
     var x = p && p.slides && p.slides[n - 1], img = card.querySelector('img'), fr = card.querySelector('.pvr-fr');
     if (!okSlide(x) || !img || !fr) return '';
@@ -1827,7 +1796,6 @@
     return type;
   }
 
-  /* ── 줄 하나: 카드 채우기 → 화살표·넘긴 만큼 차는 선 ── */
   function setupRow(row, by){
     var band = row.querySelector('.pvr-band');
     if (!band){ row.hidden = true; return false; }
@@ -1887,7 +1855,6 @@
     return true;
   }
 
-  /* ── #pv-more: 바다 영상 두 편 — 작은 표지(누르면 새 창으로 인스타그램 영상) + 영상과 함께 올린 글(문단 전부, #·@ 줄만 뺌) ── */
   function captionLines(p){
     if (!p) return [];
     var out = [];
