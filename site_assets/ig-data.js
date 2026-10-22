@@ -2,7 +2,7 @@
    다시 가져오기 = 수집 후 조립기 재실행(자동 실행기가 함). 빼고 싶은 게시물은 1-1-6…/제외목록.json 에 코드를 넣는다
    (이 파일을 직접 고치면 다음 갱신 때 다시 덮인다). slides[].t = 미리보기용 작은 사진(긴 변 480px) */
 window.MAYDLY_IG = {
- "updated": "자동기록_261019_0057",
+ "updated": "v1.5.0_maydly_브랜드사이트_인스타_A에디토리얼_ForBrands한곳_작업성격_261022_1234",
  "fetched": "2026-10-19",
  "source": "instagram @maydly_s · @maydly_f 최근 게시물",
  "hero": [
@@ -15,6 +15,24 @@ window.MAYDLY_IG = {
   "DeMJQuZmHwl",
   "DeJgwL9GBaQ",
   "Ddd8h8xGEIs"
+ ],
+ "kinds": [
+  {
+   "k": "editorial",
+   "name": "콘셉트 · 에디토리얼"
+  },
+  {
+   "k": "fashion",
+   "name": "패션 · 스타일링"
+  },
+  {
+   "k": "portrait",
+   "name": "인물 · 프로필"
+  },
+  {
+   "k": "snap",
+   "name": "일상 · 스냅"
+  }
  ],
  "posts": [
   {
@@ -85,7 +103,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DeeAPpwGHnt_09.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DeeAPpwGHnt/"
+   "url": "https://www.instagram.com/p/DeeAPpwGHnt/",
+   "work": "fashion"
   },
   {
    "code": "DebbbMKGIuB",
@@ -143,7 +162,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DebbbMKGIuB_07.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DebbbMKGIuB/"
+   "url": "https://www.instagram.com/p/DebbbMKGIuB/",
+   "work": "editorial"
   },
   {
    "code": "DeY_5s4GHAU",
@@ -201,7 +221,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DeY_5s4GHAU_07.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DeY_5s4GHAU/"
+   "url": "https://www.instagram.com/p/DeY_5s4GHAU/",
+   "work": "fashion"
   },
   {
    "code": "DeWgusMmIm6",
@@ -259,7 +280,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DeWgusMmIm6_07.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DeWgusMmIm6/"
+   "url": "https://www.instagram.com/p/DeWgusMmIm6/",
+   "work": "portrait"
   },
   {
    "code": "DeMJQuZmHwl",
@@ -329,7 +351,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DeMJQuZmHwl_09.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DeMJQuZmHwl/"
+   "url": "https://www.instagram.com/p/DeMJQuZmHwl/",
+   "work": "fashion"
   },
   {
    "code": "DeJgwL9GBaQ",
@@ -399,7 +422,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DeJgwL9GBaQ_09.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DeJgwL9GBaQ/"
+   "url": "https://www.instagram.com/p/DeJgwL9GBaQ/",
+   "work": "snap"
   },
   {
    "code": "DdvWBm_Mh_a",
@@ -421,7 +445,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DdvWBm_Mh_a_01.jpg"
     }
    ],
-   "url": "https://www.instagram.com/reel/DdvWBm_Mh_a/"
+   "url": "https://www.instagram.com/reel/DdvWBm_Mh_a/",
+   "work": "snap"
   },
   {
    "code": "DdgOq29Poer",
@@ -443,7 +468,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DdgOq29Poer_01.jpg"
     }
    ],
-   "url": "https://www.instagram.com/reel/DdgOq29Poer/"
+   "url": "https://www.instagram.com/reel/DdgOq29Poer/",
+   "work": "snap"
   },
   {
    "code": "Ddd8h8xGEIs",
@@ -507,7 +533,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/Ddd8h8xGEIs_08.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/Ddd8h8xGEIs/"
+   "url": "https://www.instagram.com/p/Ddd8h8xGEIs/",
+   "work": "snap"
   },
   {
    "code": "DbS3kN3mMBu",
@@ -571,7 +598,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DbS3kN3mMBu_08.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DbS3kN3mMBu/"
+   "url": "https://www.instagram.com/p/DbS3kN3mMBu/",
+   "work": "snap"
   },
   {
    "code": "DbIis-txrso",
@@ -593,7 +621,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DbIis-txrso_01.jpg"
     }
    ],
-   "url": "https://www.instagram.com/reel/DbIis-txrso/"
+   "url": "https://www.instagram.com/reel/DbIis-txrso/",
+   "work": "snap"
   },
   {
    "code": "Da-cL6WmGT1",
@@ -651,7 +680,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/Da-cL6WmGT1_07.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/Da-cL6WmGT1/"
+   "url": "https://www.instagram.com/p/Da-cL6WmGT1/",
+   "work": "editorial"
   },
   {
    "code": "DasN6JaGD8k",
@@ -739,7 +769,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DasN6JaGD8k_12.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DasN6JaGD8k/"
+   "url": "https://www.instagram.com/p/DasN6JaGD8k/",
+   "work": "fashion"
   },
   {
    "code": "DaSZFTCmBit",
@@ -791,7 +822,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DaSZFTCmBit_06.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DaSZFTCmBit/"
+   "url": "https://www.instagram.com/p/DaSZFTCmBit/",
+   "work": "editorial"
   },
   {
    "code": "DaHi_5cGDZc",
@@ -867,7 +899,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DaHi_5cGDZc_10.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DaHi_5cGDZc/"
+   "url": "https://www.instagram.com/p/DaHi_5cGDZc/",
+   "work": "portrait"
   },
   {
    "code": "DaFbJ3WGB4W",
@@ -955,7 +988,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DaFbJ3WGB4W_12.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DaFbJ3WGB4W/"
+   "url": "https://www.instagram.com/p/DaFbJ3WGB4W/",
+   "work": "fashion"
   },
   {
    "code": "DaDYq25GJBr",
@@ -1067,7 +1101,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DaDYq25GJBr_16.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DaDYq25GJBr/"
+   "url": "https://www.instagram.com/p/DaDYq25GJBr/",
+   "work": "snap"
   },
   {
    "code": "DaAbT3HGGEJ",
@@ -1125,7 +1160,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DaAbT3HGGEJ_07.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DaAbT3HGGEJ/"
+   "url": "https://www.instagram.com/p/DaAbT3HGGEJ/",
+   "work": "editorial"
   },
   {
    "code": "DZ9450umC1-",
@@ -1261,7 +1297,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DZ9450umC1-_20.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DZ9450umC1-/"
+   "url": "https://www.instagram.com/p/DZ9450umC1-/",
+   "work": "editorial"
   },
   {
    "code": "DZ6z_DrGJcs",
@@ -1325,7 +1362,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DZ6z_DrGJcs_08.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DZ6z_DrGJcs/"
+   "url": "https://www.instagram.com/p/DZ6z_DrGJcs/",
+   "work": "editorial"
   },
   {
    "code": "DZ2a8RamCQj",
@@ -1413,7 +1451,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DZ2a8RamCQj_12.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DZ2a8RamCQj/"
+   "url": "https://www.instagram.com/p/DZ2a8RamCQj/",
+   "work": "editorial"
   },
   {
    "code": "DZe4PsEGMor",
@@ -1471,7 +1510,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DZe4PsEGMor_07.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DZe4PsEGMor/"
+   "url": "https://www.instagram.com/p/DZe4PsEGMor/",
+   "work": "snap"
   },
   {
    "code": "DZKxGeuGNzD",
@@ -1547,7 +1587,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DZKxGeuGNzD_10.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DZKxGeuGNzD/"
+   "url": "https://www.instagram.com/p/DZKxGeuGNzD/",
+   "work": "editorial"
   },
   {
    "code": "DYzVrxamA9h",
@@ -1611,7 +1652,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DYzVrxamA9h_08.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DYzVrxamA9h/"
+   "url": "https://www.instagram.com/p/DYzVrxamA9h/",
+   "work": "snap"
   },
   {
    "code": "DYtLrrrGFPm",
@@ -1669,7 +1711,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DYtLrrrGFPm_07.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DYtLrrrGFPm/"
+   "url": "https://www.instagram.com/p/DYtLrrrGFPm/",
+   "work": "portrait"
   },
   {
    "code": "DYMOzpZGDX3",
@@ -1727,7 +1770,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DYMOzpZGDX3_07.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DYMOzpZGDX3/"
+   "url": "https://www.instagram.com/p/DYMOzpZGDX3/",
+   "work": "portrait"
   },
   {
    "code": "DYKJFgRmMm7",
@@ -1785,7 +1829,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DYKJFgRmMm7_07.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DYKJFgRmMm7/"
+   "url": "https://www.instagram.com/p/DYKJFgRmMm7/",
+   "work": "editorial"
   },
   {
    "code": "DQ8zeaoEQMe",
@@ -1903,7 +1948,8 @@ window.MAYDLY_IG = {
      "t": "ig/s/DQ8zeaoEQMe_17.jpg"
     }
    ],
-   "url": "https://www.instagram.com/p/DQ8zeaoEQMe/"
+   "url": "https://www.instagram.com/p/DQ8zeaoEQMe/",
+   "work": "snap"
   }
  ]
 };

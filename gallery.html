@@ -242,6 +242,31 @@
     .rv, .mn, .my, .md, .mm, .rule, .lct, .ltx, .lbtn, .lbx:before{opacity:1 !important; transform:none !important; transition:none !important;}
     .cmv, .tocp{transition:none !important;}
   }
+  
+  .kinds{display:flex; align-items:center; gap:10px; min-width:0; flex:1 1 100%;}
+  .kinds[hidden]{display:none;}
+  @media (min-width:901px){ .kinds{order:3;} }
+  .kl{flex:none; font-family:var(--serif); color:var(--gold); font-size:.92rem; letter-spacing:.01em; white-space:nowrap;}
+  .ks{position:relative; display:flex; gap:6px; overflow-x:auto; min-width:0; padding:5px 6px; margin:-5px -6px;
+    scrollbar-width:none; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch;}
+  .ks::-webkit-scrollbar{display:none;}
+  .ks.ovf:not(.end){-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent); mask-image:linear-gradient(90deg,#000 82%,transparent);}
+  .ks button{flex:none; min-height:40px; padding:0 15px; border:1px solid var(--line); border-radius:999px; background:rgba(255,253,248,.55); color:var(--tx2);
+    font-size:.84rem; white-space:nowrap; transition:background .2s, border-color .2s, color .2s, opacity .2s;}
+  .ks button:hover{border-color:#cfe0cd; background:#fffdf8;}
+  .ks button .c{color:var(--tx3); font-size:.74rem; margin-left:5px;}
+  .ks button[aria-pressed="true"]{background:var(--green-wash); border-color:#b5d0b9; color:var(--accentD);}
+  .ks button[aria-pressed="true"] .c{color:var(--accent);}
+  .ks button.z:not([aria-pressed="true"]), .tabs button.z:not(.on){opacity:.55;}
+  .kempty{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px 16px; padding:clamp(56px,10vh,96px) 0 clamp(64px,11vh,110px);
+    text-align:center; font-family:var(--serif); font-size:clamp(1.05rem,1.6vw,1.2rem); color:var(--tx2);}
+  .kreset{display:inline-flex; align-items:center; gap:6px; min-height:44px; padding:0 18px; border:1px solid #cfe0cd; border-radius:999px;
+    color:var(--accentD); font-family:var(--sans); font-size:.9rem; font-weight:600; transition:background .25s, border-color .25s;}
+  .kreset:hover{background:var(--green-wash); border-color:var(--accent);}
+  .tocp .k0{padding:6px 12px 10px; color:var(--tx3); font-size:.86rem;}
+  @media (max-width:900px){ .kinds{flex:none;} }
+  @media (max-width:560px){ .ks button{padding:0 13px;} }
+  @media (prefers-reduced-motion: reduce){ .ks button, .kreset{transition:none !important;} }
 
   
   .esp{--H:min(68vh,620px); --ease:cubic-bezier(.2,.7,.2,1); --wipe:cubic-bezier(.76,0,.2,1); --serif:Georgia, AppleMyungjo, "Noto Serif KR", serif;
@@ -373,6 +398,7 @@
       </div>
       <div class="tools rv" style="--d:.2s">
         <div class="tabs" id="tabs" role="tablist" aria-label="계정별로 보기"></div>
+        <div class="kinds"><span class="kl" id="kl">작업 성격</span><div class="ks" id="ks" role="group" aria-labelledby="kl" data-hscroll="1"></div></div>
         <nav class="contents" aria-label="달별 목차"><span class="cl">Contents</span><div class="cs" id="cs" data-hscroll="1"></div></nav>
       </div>
     </div>
@@ -541,14 +567,50 @@ window.EDZ = (function(){
   function mlabel(k){ return k.slice(5,7) + ' · ' + k.slice(0,4); }
   Array.prototype.forEach.call(document.querySelectorAll('.rv'), watch);
 
+  /* ── 작업 성격 ── 장소 탭과 함께 걸린다(예: 스튜디오 + 패션 · 스타일링) · 주소로는 여러 성격을 함께 걸 수 있다(#kind=editorial,fashion)
+     성격 = ig-data.js 의 kinds(이름 · 순서) + 게시물마다 work(조립기가 작업성격분류.json 으로 붙임). work 가 없는 게시물은 「전체」에서만 보인다
+     주소 #kind=…(쉼표로 여럿) 은 #studio · #outdoor · #p=코드&s=장 과 & 로 함께 써도 됨 */
+  var KIND = {};
+  (D.kinds || []).forEach(function(x){ if (x && x.k) KIND[x.k] = {name:x.name, codes:[]}; });
+  ALL.forEach(function(p){ if (p.work && KIND[p.work]) KIND[p.work].codes.push(p.code); });
+  var KORD = Object.keys(KIND), KMAP = {}, curKinds = [], ks = $('ks');   // curKinds = 고른 성격(표 순서 · 비어 있으면 전체)
+  KORD.forEach(function(k){ KIND[k].codes.forEach(function(c){ KMAP[c] = k; }); });
+  if (!KORD.length){ var kbox = document.querySelector('.kinds'); if (kbox) kbox.hidden = true; }   // 분류표가 없으면 줄째 숨김
+  function kindOk(p){ return !curKinds.length || curKinds.indexOf(KMAP[p.code]) >= 0; }
+  function normKinds(a){   // 표 순서로 · 겹치거나 없는 이름은 뺌 · 다 고르면 전체와 같음
+    var o = KORD.filter(function(k){ return a.indexOf(k) >= 0; });
+    return o.length === KORD.length ? [] : o;
+  }
+
   /* ── 탭(계정) ── */
   function drawTabs(){
-    var c = {all:ALL.length, studio:0, outdoor:0};
-    ALL.forEach(function(p){ if (c[p.acct] != null) c[p.acct]++; });
+    var c = {all:ALL.length, studio:0, outdoor:0}, f = {all:0, studio:0, outdoor:0};   // c = 탭이 있는지(전체 수) · f = 보이는 수(지금 고른 작업 성격 안에서)
+    ALL.forEach(function(p){ if (c[p.acct] != null) c[p.acct]++; if (kindOk(p)){ f.all++; if (f[p.acct] != null) f[p.acct]++; } });
     tabs.innerHTML = ['all','studio','outdoor'].filter(function(k){ return c[k] > 0 || k === 'all'; }).map(function(k){
       var on = k === cur;
-      return '<button type="button" role="tab" data-k="'+k+'" class="'+(on?'on':'')+'" aria-selected="'+on+'">'+(k==='all'?'전체':KO[k])+'<span class="c">'+c[k]+'</span></button>';
+      return '<button type="button" role="tab" data-k="'+k+'" class="'+(on?'on':'')+(f[k]?'':' z')+'" aria-selected="'+on+'">'+(k==='all'?'전체':KO[k])+'<span class="c">'+f[k]+'</span></button>';
     }).join('');
+  }
+  /* ── 작업 성격 줄 ── 수 = 지금 고른 장소 안에서. 단추는 한 번만 만들고 수·눌림만 바꾼다(누른 단추의 초점·옆으로 민 자리가 그대로) */
+  function drawKinds(){
+    var c = {all:0}; KORD.forEach(function(k){ c[k] = 0; });
+    ALL.forEach(function(p){ if (cur !== 'all' && p.acct !== cur) return; c.all++; if (KMAP[p.code]) c[KMAP[p.code]]++; });
+    if (!ks.children.length) ks.innerHTML = ['all'].concat(KORD).map(function(k){
+      return '<button type="button" data-k="'+k+'" aria-pressed="false">'+(k === 'all' ? '전체' : esc(KIND[k].name))+'<span class="c"></span></button>';
+    }).join('');
+    Array.prototype.forEach.call(ks.children, function(b){
+      var k = b.dataset.k; b.setAttribute('aria-pressed', String(k === 'all' ? !curKinds.length : curKinds.indexOf(k) >= 0)); b.classList.toggle('z', !c[k]); b.querySelector('.c').textContent = c[k];
+    });
+    ksEdge();
+  }
+  function ksEdge(){ ks.classList.toggle('ovf', ks.scrollWidth > ks.clientWidth + 2); ks.classList.toggle('end', ks.scrollLeft + ks.clientWidth >= ks.scrollWidth - 2); }
+  ks.addEventListener('scroll', ksEdge, {passive:true});
+  function ksShow(sm){   // 고른 단추가 옆으로 가려 있거나 흐린 끝에 걸려 있으면 가운데로(폰 · 주소 #kind= 로 들어온 때)
+    var b = ks.querySelector('[aria-pressed="true"]'); if (!b || ks.scrollWidth <= ks.clientWidth + 2) return;
+    var l = b.offsetLeft, r = l + b.offsetWidth, s = ks.scrollLeft, w = ks.clientWidth;
+    if (l >= s && r <= s + w * .8) return;
+    var x = Math.max(0, Math.min(ks.scrollWidth - w, Math.round(l + b.offsetWidth / 2 - w / 2)));
+    if (sm && !reduce && ks.scrollTo) ks.scrollTo({left:x, behavior:'smooth'}); else { ks.scrollLeft = x; ksEdge(); }
   }
   /* ── 목차(달) ── */
   function drawToc(){
@@ -619,10 +681,26 @@ window.EDZ = (function(){
   function build(){
     Array.prototype.forEach.call(feed.querySelectorAll('.mh'), unwatch);
     Array.prototype.forEach.call(feed.querySelectorAll('.esp'), E.unmount);
-    warmReset();
-    list = ALL.filter(function(p){ return cur === 'all' || p.acct === cur; });
+    warmReset(); Array.prototype.forEach.call(feed.querySelectorAll('.kempty'), unwatch);   // 지난 「아직 없어요」 줄도 관찰에서 뺌
+    list = ALL.filter(function(p){ return (cur === 'all' || p.acct === cur) && kindOk(p); });
     feed.innerHTML = ''; rendered = 0; lastKey = null; curBody = null; monEls = []; curK = null;
     drawToc(); fill(); frame();
+    if (!list.length && curKinds.length) none();   // 고른 장소·성격의 작업이 없으면 한 줄(성격이 전체인데 비면 원래처럼 빈 채로)
+  }
+  /* 「아직 없어요」 한 줄 — 고른 장소·성격 이름을 넣어서(예: 스튜디오에서 찍은 일상 · 스냅 작업은 아직 없어요.) */
+  var PLACE = {studio:'스튜디오에서 찍은 ', outdoor:'야외에서 찍은 '};
+  function gwa(s){ var c = s.charCodeAt(s.length - 1) - 0xAC00; return s + (c >= 0 && c < 11172 && c % 28 ? '과' : '와'); }   // 끝 글자에 받침이 있으면 「과」
+  function noneText(){
+    var n = curKinds.map(function(k){ return KIND[k].name; });
+    var what = n.length > 1 ? gwa(n.slice(0, -1).join(', ')) + ' ' + n[n.length - 1] : n[0];
+    return (PLACE[cur] || '') + what + ' 작업은 아직 없어요.';
+  }
+  function none(){
+    var t = esc(noneText());
+    feed.innerHTML = '<p class="kempty rv">' + t + '<button type="button" class="kreset">작업 성격 전체 보기 <span aria-hidden="true">→</span></button></p>';
+    watch(feed.querySelector('.kempty'));   // 등장은 사이트의 .rv 그대로
+    tocl.innerHTML = '<p class="k0">' + t + '</p>';
+    cmw.innerHTML = '<span class="cmv">&nbsp;</span>'; foot.classList.add('done');
   }
 
   /* ── 스크롤: 패럴랙스 + 지금 보는 달 + 상단바 ── */
@@ -651,7 +729,7 @@ window.EDZ = (function(){
     bar.classList.toggle('scr', y > 40);
   }
   addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(frame); } }, {passive:true});
-  addEventListener('resize', function(){ fill(); csEdge(); if (!ticking){ ticking = true; requestAnimationFrame(frame); } if (lbx.classList.contains('open')) fitNow();
+  addEventListener('resize', function(){ fill(); csEdge(); ksEdge(); if (!ticking){ ticking = true; requestAnimationFrame(frame); } if (lbx.classList.contains('open')) fitNow();
     clearTimeout(cvT); cvT = setTimeout(cvReset, 250); });   // 창 크기가 바뀌면 달 높이를 다시 잰다(v1.0.3)
 
   /* ── 달로 이동 ── */
@@ -686,10 +764,35 @@ window.EDZ = (function(){
 
   tabs.addEventListener('click', function(e){
     var b = e.target.closest('button[data-k]'); if (!b || b.dataset.k === cur) return;
-    cur = b.dataset.k; drawTabs(); build();
+    cur = b.dataset.k; drawTabs(); drawKinds(); build();
     var top = feed.getBoundingClientRect().top + scrollY - bar.getBoundingClientRect().height;
     if (scrollY > top) scrollTo(0, top);
-    if (history.replaceState) history.replaceState(null, '', cur === 'all' ? location.pathname + location.search : '#' + cur);
+    syncHash();
+  });
+  /* ── 작업 성격 누르기 ── 장소 탭과 같은 흐름. 안 눌린 성격 = 그 성격 하나로 · 눌린 성격을 다시 누르면 그 성격만 빠짐(하나뿐이면 전체로)
+     · 「전체」 = 성격 풀기. 여러 성격이 함께 눌린 상태는 주소(#kind=editorial,fashion)로 들어왔을 때만 생긴다 */
+  function setKinds(a){
+    a = normKinds(a);
+    if (a.join() === curKinds.join()) return;
+    curKinds = a; drawTabs(); drawKinds(); build();
+    var top = feed.getBoundingClientRect().top + scrollY - bar.getBoundingClientRect().height;
+    if (scrollY > top) scrollTo(0, top);
+    syncHash();
+  }
+  function syncHash(){   // 주소 = #장소&kind=성격(여럿이면 쉼표로 · 둘 다 전체면 주소 조각 없음 — 성격이 전체면 지금과 같음)
+    if (!history.replaceState) return;
+    var h = [cur === 'all' ? '' : cur, curKinds.length ? 'kind=' + curKinds.join(',') : ''].filter(function(x){ return x; }).join('&');
+    history.replaceState(null, '', h ? '#' + h : location.pathname + location.search);
+  }
+  ks.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-k]'); if (!b) return;
+    var k = b.dataset.k;
+    setKinds(k === 'all' ? [] : curKinds.indexOf(k) >= 0 ? curKinds.filter(function(x){ return x !== k; }) : [k]); ksShow(true);
+  });
+  feed.addEventListener('click', function(e){   // 「아직 없어요」 한 줄의 「작업 성격 전체 보기」
+    if (!e.target.closest('.kreset')) return;
+    setKinds([]); ksShow(true);
+    var b0 = ks.querySelector('[data-k="all"]'); if (b0) try { b0.focus({preventScroll:true}); } catch (err) {}
   });
 
   /* ── 미리보기의 큰 사진 미리 받기(v1.0.1) ── 미리보기는 작은 사진(ig/s)이라, 눌렀을 때 큰 사진이 아직 없으면 크게 보기가
@@ -835,9 +938,12 @@ window.EDZ = (function(){
 
   /* ── 시작 ── 주소: #studio·#outdoor = 탭, #p=코드 = 그 게시물 크게, #p=코드&s=번호 = 그 게시물의 n번째 사진부터 */
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';   // 지연 로딩이라 새로고침 시 맨 위에서 시작
-  var h = (location.hash || '').slice(1), m = /^p=([^&]+)(?:&s=(\d+))?/.exec(h);
-  if (h === 'studio' || h === 'outdoor') cur = h;
-  drawTabs(); build();
+  var h = (location.hash || '').slice(1), m = /(?:^|&)p=([^&]+)/.exec(h), ms = /(?:^|&)s=(\d+)/.exec(h);
+  h.split('&').forEach(function(t){   // 주소 조각을 & 로 나눠 읽음(#studio&kind=fashion · #kind=editorial,fashion · #kind=snap&p=코드&s=2 도 됨)
+    if (t === 'studio' || t === 'outdoor') cur = t;
+    else if (t.slice(0, 5) === 'kind='){ var v = t.slice(5); try { v = decodeURIComponent(v); } catch (err) {} curKinds = normKinds(v.split(',')); }
+  });
+  drawTabs(); drawKinds(); ksShow(); build();
   /* 주소(#p=코드)로 바로 연 게시물 — 닫으면 갤러리 맨 위가 아니라 그 게시물 자리가 보이게(v1.0.2):
      열기 전에 그 지면까지 그려 두고, 지면이 화면 가운데(폰처럼 지면이 화면보다 길면 사진이 상단바 바로 아래) 오도록 바로 옮겨 둔다.
      그 지면은 등장 움직임 없이 다 보이는 상태로 — #p=코드(1번 사진)로 열었다 닫으면 큰 사진이 표지 자리로 돌아가 내려앉는다 */
@@ -855,8 +961,10 @@ window.EDZ = (function(){
   }
   if (m){
     var code = decodeURIComponent(m[1]), at = -1;
-    for (var x = 0; x < list.length; x++){ if (list[x].code === code){ at = x; break; } }
-    if (at >= 0){ placeAt(at); openLb(at, m[2] ? Math.max(0, +m[2] - 1) : 0, null); }
+    var find = function(){ for (var x = 0; x < list.length; x++){ if (list[x].code === code) return x; } return -1; };
+    at = find();
+    if (at < 0 && (cur !== 'all' || curKinds.length)){ cur = 'all'; curKinds = []; drawTabs(); drawKinds(); build(); at = find(); }   // 고른 장소·성격에 없는 게시물이면 전체에서 연다
+    if (at >= 0){ placeAt(at); openLb(at, ms ? Math.max(0, +ms[1] - 1) : 0, null); }
   }
 })();
 </script>
