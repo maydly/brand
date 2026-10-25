@@ -2,19 +2,19 @@
    다시 가져오기 = 수집 후 조립기 재실행(자동 실행기가 함). 빼고 싶은 게시물은 1-1-6…/제외목록.json 에 코드를 넣는다
    (이 파일을 직접 고치면 다음 갱신 때 다시 덮인다). slides[].t = 미리보기용 작은 사진(긴 변 480px) */
 window.MAYDLY_IG = {
- "updated": "v1.5.1",
- "fetched": "2026-10-19",
+ "updated": "자동기록_261025_1935",
+ "fetched": "2026-10-25",
  "source": "instagram @maydly_s · @maydly_f 최근 게시물",
  "hero": [
+  "De6aP2jGP1f",
   "DeeAPpwGHnt",
   "DebbbMKGIuB",
-  "DeY_5s4GHAU",
-  "DeWgusMmIm6"
+  "DeY_5s4GHAU"
  ],
  "landing": [
+  "DeWgusMmIm6",
   "DeMJQuZmHwl",
-  "DeJgwL9GBaQ",
-  "Ddd8h8xGEIs"
+  "DeJgwL9GBaQ"
  ],
  "kinds": [
   {
@@ -35,6 +35,64 @@ window.MAYDLY_IG = {
   }
  ],
  "posts": [
+  {
+   "code": "De6aP2jGP1f",
+   "acct": "studio",
+   "kind": "post",
+   "time": "2026-10-25",
+   "title": "A LITTLE OFF, A LOT OF STYLE. 조금 엉뚱하게, 꽤 멋있게.",
+   "body": "A LITTLE OFF, A LOT OF STYLE.\n조금 엉뚱하게, 꽤 멋있게.",
+   "cover": {
+    "src": "ig/t/De6aP2jGP1f.jpg",
+    "w": 675,
+    "h": 900
+   },
+   "slides": [
+    {
+     "src": "ig/g/De6aP2jGP1f_01.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De6aP2jGP1f_01.jpg"
+    },
+    {
+     "src": "ig/g/De6aP2jGP1f_02.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De6aP2jGP1f_02.jpg"
+    },
+    {
+     "src": "ig/g/De6aP2jGP1f_03.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De6aP2jGP1f_03.jpg"
+    },
+    {
+     "src": "ig/g/De6aP2jGP1f_04.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De6aP2jGP1f_04.jpg"
+    },
+    {
+     "src": "ig/g/De6aP2jGP1f_05.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De6aP2jGP1f_05.jpg"
+    },
+    {
+     "src": "ig/g/De6aP2jGP1f_06.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De6aP2jGP1f_06.jpg"
+    },
+    {
+     "src": "ig/g/De6aP2jGP1f_07.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De6aP2jGP1f_07.jpg"
+    }
+   ],
+   "url": "https://www.instagram.com/p/De6aP2jGP1f/"
+  },
   {
    "code": "DeeAPpwGHnt",
    "acct": "studio",
