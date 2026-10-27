@@ -2,19 +2,19 @@
    다시 가져오기 = 수집 후 조립기 재실행(자동 실행기가 함). 빼고 싶은 게시물은 1-1-6…/제외목록.json 에 코드를 넣는다
    (이 파일을 직접 고치면 다음 갱신 때 다시 덮인다). slides[].t = 미리보기용 작은 사진(긴 변 480px) */
 window.MAYDLY_IG = {
- "updated": "자동기록_261027_0034",
+ "updated": "자동기록_261027_1817",
  "fetched": "2026-10-27",
  "source": "instagram @maydly_s · @maydly_f 최근 게시물",
  "hero": [
+  "De_dKysGBmV",
   "De6aP2jGP1f",
   "DeeAPpwGHnt",
-  "DebbbMKGIuB",
-  "DeY_5s4GHAU"
+  "DebbbMKGIuB"
  ],
  "landing": [
+  "DeY_5s4GHAU",
   "DeWgusMmIm6",
-  "DeMJQuZmHwl",
-  "DeJgwL9GBaQ"
+  "DeMJQuZmHwl"
  ],
  "kinds": [
   {
@@ -35,6 +35,88 @@ window.MAYDLY_IG = {
   }
  ],
  "posts": [
+  {
+   "code": "De_dKysGBmV",
+   "acct": "studio",
+   "kind": "post",
+   "time": "2026-10-27",
+   "title": "그냥 둘까 하다가, 연필을 들었다.",
+   "body": "그냥 둘까 하다가, 연필을 들었다.",
+   "cover": {
+    "src": "ig/t/De_dKysGBmV.jpg",
+    "w": 675,
+    "h": 900
+   },
+   "slides": [
+    {
+     "src": "ig/g/De_dKysGBmV_01.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De_dKysGBmV_01.jpg"
+    },
+    {
+     "src": "ig/g/De_dKysGBmV_02.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De_dKysGBmV_02.jpg"
+    },
+    {
+     "src": "ig/g/De_dKysGBmV_03.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De_dKysGBmV_03.jpg"
+    },
+    {
+     "src": "ig/g/De_dKysGBmV_04.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De_dKysGBmV_04.jpg"
+    },
+    {
+     "src": "ig/g/De_dKysGBmV_05.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De_dKysGBmV_05.jpg"
+    },
+    {
+     "src": "ig/g/De_dKysGBmV_06.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De_dKysGBmV_06.jpg"
+    },
+    {
+     "src": "ig/g/De_dKysGBmV_07.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De_dKysGBmV_07.jpg"
+    },
+    {
+     "src": "ig/g/De_dKysGBmV_08.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De_dKysGBmV_08.jpg"
+    },
+    {
+     "src": "ig/g/De_dKysGBmV_09.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De_dKysGBmV_09.jpg"
+    },
+    {
+     "src": "ig/g/De_dKysGBmV_10.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De_dKysGBmV_10.jpg"
+    },
+    {
+     "src": "ig/g/De_dKysGBmV_11.jpg",
+     "w": 1080,
+     "h": 1440,
+     "t": "ig/s/De_dKysGBmV_11.jpg"
+    }
+   ],
+   "url": "https://www.instagram.com/p/De_dKysGBmV/"
+  },
   {
    "code": "De6aP2jGP1f",
    "acct": "studio",
