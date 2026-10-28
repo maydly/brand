@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>maydly · 작업</title>
+<meta name="description" content="maydly(사진가 명진)의 촬영 작업 — 에디토리얼 · 화보 · 패션 · 기록 · 기념. 스튜디오 · 야외 · 해외 촬영을 최근 작업부터 모았습니다.">
 <style>
 
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
@@ -232,6 +233,15 @@ b{font-weight:600;}
 .ekk > span:first-child{display:inline-flex; align-items:center; gap:9px;}
 .ekk > span:first-child:before{content:''; flex:none; width:9px; height:9px; background:var(--tone, var(--ink-3));}   
 .ekk .eln{flex:none; display:block; width:24px; height:1px; background:var(--ink-3); opacity:.55; transform:none !important;}
+.ekk .ekn{font:400 var(--t5)/1.4 var(--sans); color:var(--ink-3); letter-spacing:.01em;}   
+.mon .mn, .mon .my{font:italic 400 clamp(30px,3.8vw,56px)/.9 var(--lat); color:var(--ink); letter-spacing:-.02em;}   
+.mon .md{font-size:clamp(22px,2.6vw,38px); color:var(--ink-3);}
+.eday{font-size:clamp(36px,4.8vw,72px);}
+.ekk .eno{font:italic 400 var(--t5)/1 var(--lat); color:var(--ink-3); letter-spacing:.03em; font-variant-numeric:lining-nums;}   
+@media (min-width:901px){ .v-solo .ekk .eno{display:none;} }   
+.esp.notitle.v-solo .etx{justify-content:center; gap:28px;}   
+@media (max-width:900px){ .ekk{font-size:13.5px;} .ekk .ekn, .ekk .eno, .lct{color:var(--ink-2);} }
+.kdesc{margin:10px 0 0; min-height:1.5em; font:400 var(--t5)/1.5 var(--sans); color:var(--ink-2);}   
 .ekk time{font:italic 400 var(--t5)/1 var(--lat); color:var(--ink-3); letter-spacing:.03em; font-variant-numeric:lining-nums;}
 .ett{margin:0; font:300 var(--t2)/1.38 var(--kr); letter-spacing:-.005em; color:var(--ink); text-wrap:balance; overflow-wrap:anywhere;}
 .ett.lt{font:italic 400 var(--t2)/1.16 var(--lat); letter-spacing:0;}
@@ -360,6 +370,18 @@ b{font-weight:600;}
 @media(max-width:359px){ .gend .fl .nw{white-space:normal;} }   
 
 
+.rlz{padding:clamp(56px,7vw,96px) 0 clamp(24px,3vw,40px); border-top:1px solid var(--line); margin-top:clamp(40px,5vw,72px);}   
+.rlhd{display:flex; align-items:baseline; gap:18px; flex-wrap:wrap; margin-bottom:clamp(20px,2.4vw,32px);}
+.rlhd h2{font:400 clamp(30px,3.4vw,48px)/1.1 var(--kr); margin:0; color:var(--ink);}
+.rlhd .cap{margin:0; color:var(--ink-3);}
+.rlg{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:clamp(18px,2vw,28px) clamp(12px,1.4vw,20px);}
+.rlc{display:block; text-decoration:none; color:inherit;}
+.rli{position:relative; display:block; aspect-ratio:9/16; overflow:hidden; background:var(--line);}
+.rli img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s cubic-bezier(.2,.7,.2,1);}
+.rlc:hover .rli img, .rlc:focus-visible .rli img{transform:scale(1.04);}
+.rli i{position:absolute; left:10px; bottom:8px; font-style:normal; color:#fff; font-size:13px; text-shadow:0 1px 4px rgba(0,0,0,.45);}
+.rlt{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; font-size:13.5px; line-height:1.5; margin-top:8px; color:var(--ink-2);}
+@media (max-width:900px){ .rlg{grid-template-columns:repeat(2,minmax(0,1fr));} }
 .foot .lay{display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:32px;}
 .foot .tag{margin:12px 0 0; max-width:280px;}
 .foot .cols{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px;}
@@ -443,8 +465,8 @@ b{font-weight:600;}
   </div></nav>
   <div class="folio"><div class="wrap fin">
     <span class="pg">작업</span>
-    <button class="curm" id="curm" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="tocp" aria-label="달별 목차 열기"><span class="cl">목차</span><span class="cmw" id="cmw"><span class="cmv">&nbsp;</span></span></button>
-    <div class="tocp" id="tocp" role="menu" aria-label="달별 목차"><div id="tocl"></div></div>
+    <button class="curm" id="curm" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="tocp" aria-label="목차 열기"><span class="cl">목차</span><span class="cmw" id="cmw"><span class="cmv">&nbsp;</span></span></button>
+    <div class="tocp" id="tocp" role="menu" aria-label="작업 목차"><div id="tocl"></div></div>
   </div></div>
 </header>
 
@@ -455,18 +477,23 @@ b{font-weight:600;}
     <div class="wrap"><div class="mast-in">
       <div class="mhd">
         <h1 class="t1">작업</h1>
-        <p class="lede">인스타그램에 올린 작업을 달마다 쌓아 두었어요.</p>
+        <p class="lede">가장 최근 작업부터 처음 작업까지 모았어요.</p>
       </div>
       <div class="tools">
         <div class="tabs" id="tabs" role="tablist" aria-label="계정별로 보기"></div>
-        <div class="kinds"><span class="kl cap" id="kl">작업 성격</span><div class="ks" id="ks" role="group" aria-labelledby="kl" data-hscroll="1"></div></div>
-        <nav class="contents" aria-label="달별 목차"><span class="cl cap">목차</span><div class="cs" id="cs" data-hscroll="1"></div></nav>
+        <div class="kinds"><span class="kl cap" id="kl" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">작은 분류</span><div class="ks" id="ks" role="group" aria-labelledby="kl" data-hscroll="1"></div></div>
+        <p class="kdesc" id="kdesc" aria-live="polite"></p>
+        <nav class="contents" aria-label="작업 목차"><span class="cl cap">목차</span><div class="cs" id="cs" data-hscroll="1"></div></nav>
       </div>
     </div></div>
   </section>
 
   <div class="feed" id="feed" aria-live="off"></div>
   <div class="sent" id="sent" aria-hidden="true"></div>
+  <section class="rlz" id="reels" hidden aria-labelledby="rlh"><div class="wrap">
+    <header class="rlhd rv"><h2 id="rlh">영상</h2><p class="cap">인스타그램 릴스로 올린 작업이에요. 누르면 인스타그램에서 볼 수 있어요.</p></header>
+    <div class="rlg" id="rlg"></div>
+  </div></section>
 
   <div class="gend" id="foot">
     <svg class="fc" viewBox="0 0 40 40" aria-hidden="true"><use href="#clv"/></svg>
@@ -475,6 +502,7 @@ b{font-weight:600;}
       <p class="fl">더 많은 작업은 <span class="nw">인스타그램에서 —</span> <span class="nw"><a href="https://instagram.com/maydly_s" target="_blank" rel="noopener">@maydly_s</a> · <a href="https://instagram.com/maydly_f" target="_blank" rel="noopener">@maydly_f</a> · <a href="https://instagram.com/maydly_u" target="_blank" rel="noopener">@maydly_u</a></span></p>
     </div>
   </div>
+<noscript><section class="seo-list"><h2>maydly 작업</h2><p>사진가 명진(maydly)의 촬영 작업 159편 — 최근 작업부터. 인스타그램 릴스 영상 59편은 갤러리 아래 영상 모음에.</p><ul><li>장면 연출 — 무엇을 하고, 어디에 있고, 누구를 연기하는지 — 한 장면을 만들어 찍은 촬영</li><li>무드 화보 — 색과 빛, 스타일링으로 그 사람의 분위기를 만든 화보</li><li>지금의 나 — 정해진 프로필 대신, 얼굴과 표정, 좋아하는 옷으로 지금의 나를 담는 촬영</li><li>룩북·스타일링 — 옷과 코디가 주인공인 촬영 — 룩북 · 브랜드 스타일링</li><li>우정·기념 — 친구 · 연인과 함께, 또는 졸업 같은 특별한 날을 남기는 촬영</li><li>야외 화보 — 골목 · 정류장 · 바다 · 노을 — 바깥 장소를 무대로 찍은 화보</li><li>하루·여행 스냅 — 동네 산책부터 여행지까지, 그날을 따라가며 남긴 스냅</li></ul><ol><li>No. 159 · 스튜디오 · 지금의 나 — 오늘의 취미: 남의 사진첩 예쁘게 만들기.</li><li>No. 158 · 스튜디오 · 무드 화보 — 고개를 숙이고 있던 건, 피기 전이라서. 나비는 먼저 알았지만.</li><li>No. 157 · 스튜디오 · 장면 연출 — 검은 고양이를 입고 온 날. “한 컷만 더?” “냐.”</li><li>No. 156 · 스튜디오 · 지금의 나 — 가을은 니트부터</li><li>No. 155 · 스튜디오 · 장면 연출</li><li>No. 154 · 스튜디오 · 장면 연출</li><li>No. 153 · 스튜디오 · 룩북·스타일링 — LOWER ANGLE, LOUDER LOOK.</li><li>No. 152 · 야외·여행 · 우정·기념 — 최종_진짜최종_우리.zip 바다에서 주워온 여름의 조각들.</li><li>No. 151 · 야외·여행 · 우정·기념 — 10년이 넘는 시간.</li><li>No. 150 · 스튜디오 · 장면 연출 — 테스트만 하려고 했는데…</li><li>No. 149 · 스튜디오 · 장면 연출 — 말랑한 얼굴로 여름</li><li>No. 148 · 스튜디오 · 장면 연출 — A LITTLE OFF, A LOT OF STYLE. 조금 엉뚱하게, 꽤 멋있게.</li><li>No. 147 · 스튜디오 · 장면 연출 — 올타임 미모 레전드라고 적고 싶었는데 참았다.</li><li>No. 146 · 야외·여행 · 하루·여행 스냅 — 장소 보러 갔다가 부끄러워 도망가는 사람을 찍었다.</li><li>No. 145 · 스튜디오 · 장면 연출 — 오늘은 작은 내가 더 바빴다.</li><li>No. 144 · 스튜디오 · 장면 연출 — the noise of being alive.</li><li>No. 143 · 스튜디오 · 무드 화보 — don’t touch the mood.</li><li>No. 142 · 스튜디오 · 무드 화보 — slip into mood.</li><li>No. 141 · 야외·여행 · 하루·여행 스냅 — 비가 와도, 좋은 날이었다.</li><li>No. 140 · 야외·여행 · 하루·여행 스냅 — 비가 오고, 걷고, 기다리고, 가끔은 초점도 놓쳤던 오무타.</li><li>No. 139 · 야외·여행 · 하루·여행 스냅 — 사라지기 전에, 남겨두는 것들.</li><li>No. 138 · 스튜디오 · 장면 연출 — 멈추지 않아서 지금인 것들.</li><li>No. 137 · 스튜디오 · 지금의 나 — 가장 단순한 색으로 가장 선명한 사람.</li><li>No. 136 · 스튜디오 · 장면 연출 — 빛 속에서 잠깐, 사라지는 것들에 대하여.</li><li>No. 135 · 스튜디오 · 무드 화보 — 차가운 빛 안에서 조금 흐려진 표정과 선명한 분위기.</li><li>No. 134 · 스튜디오 · 장면 연출 — 셔터 사이사이에도 말은 계속됐다.</li><li>No. 133 · 스튜디오 · 무드 화보 — Christmas 무엇보다 빛나는</li><li>No. 132 · 스튜디오 · 장면 연출 — 오늘의 기분은, 조금 장난스럽게.</li><li>No. 131 · 스튜디오 · 무드 화보 — 가만히 앉아 있을 뿐인데 마음은 조금 멀리 가 있었다.</li><li>No. 130 · 스튜디오 · 무드 화보 — 차가운 계절 속, 가장 따뜻했던 순간, 있는 그대로를,,,,,,</li><li>No. 129 · 스튜디오 · 무드 화보 — 차분한 눈빛 위로 짧은 웃음이 번지고 끝엔 기다림만이 남는다.</li><li>No. 128 · 스튜디오 · 장면 연출 — 마음은 가라앉고, 장면은 더 선명해지는 순간. 그 분위기 속에서.</li><li>No. 127 · 스튜디오 · 무드 화보 — 고요하게 시작해, 시선이 달라지고 차분히 멈춘 순간.</li><li>No. 126 · 야외·여행 · 야외 화보</li><li>No. 125 · 스튜디오 · 무드 화보</li><li>No. 124 · 스튜디오 · 지금의 나</li><li>No. 123 · 스튜디오 · 무드 화보</li><li>No. 122 · 스튜디오 · 무드 화보</li><li>No. 121 · 스튜디오 · 지금의 나</li><li>No. 120 · 야외·여행 · 하루·여행 스냅 — 느리게 걷던 오후, 햇살이 조금 남은 순간들. 그냥 그렇게 좋았던 하루.</li><li>No. 119 · 야외·여행 · 하루·여행 스냅</li><li>No. 118 · 스튜디오 · 지금의 나</li><li>No. 117 · 스튜디오 · 지금의 나 — 그냥 둘까 하다가, 연필을 들었다.</li><li>No. 116 · 야외·여행 · 야외 화보 — 생각에 잠~시 빠졌 나?</li><li>No. 115 · 스튜디오 · 룩북·스타일링</li><li>No. 114 · 야외·여행 · 하루·여행 스냅</li><li>No. 113 · 야외·여행 · 우정·기념 — 한 명이 시작하면 어느새 둘이 같이 하고 있는 사이.</li><li>No. 112 · 야외·여행 · 우정·기념</li><li>No. 111 · 야외·여행 · 하루·여행 스냅</li><li>No. 110 · 스튜디오 · 장면 연출 — 그저, 이쁘게 충분하니까. 웃음 그대로 두는 게 어울려서. 결국 다 전해지니까.</li><li>No. 109 · 야외·여행 · 야외 화보</li><li>No. 108 · 야외·여행 · 야외 화보</li><li>No. 107 · 스튜디오 · 룩북·스타일링</li><li>No. 106 · 스튜디오 · 지금의 나 — 차분히 가라앉아, 날카로운 기류를 머금었지만 끝내 참지 못한 웃음.</li><li>No. 105 · 스튜디오 · 지금의 나 — 사랑스러운 얼굴, 그 안에 담긴 군인의 무게. 가장 존경스러운 반전.</li><li>No. 104 · 스튜디오 · 지금의 나</li><li>No. 103 · 스튜디오 · 지금의 나</li><li>No. 102 · 스튜디오 · 지금의 나 — 마주한 눈빛에 멈춘 숨결은 끝내 두 눈에</li><li>No. 101 · 스튜디오 · 룩북·스타일링</li><li>No. 100 · 스튜디오 · 지금의 나</li><li>No. 99 · 스튜디오 · 지금의 나</li><li>No. 98 · 야외·여행 · 야외 화보</li><li>No. 97 · 스튜디오 · 무드 화보</li><li>No. 96 · 스튜디오 · 장면 연출</li><li>No. 95 · 스튜디오 · 무드 화보</li><li>No. 94 · 스튜디오 · 지금의 나</li><li>No. 93 · 야외·여행 · 하루·여행 스냅 — 가을이 좋은 이유</li><li>No. 92 · 스튜디오 · 지금의 나</li><li>No. 91 · 스튜디오 · 지금의 나</li><li>No. 90 · 스튜디오 · 지금의 나</li><li>No. 89 · 야외·여행 · 야외 화보 — The last sunset</li><li>No. 88 · 스튜디오 · 무드 화보 — pocari</li><li>No. 87 · 스튜디오 · 무드 화보</li><li>No. 86 · 스튜디오 · 장면 연출</li><li>No. 85 · 스튜디오 · 장면 연출</li><li>No. 84 · 스튜디오 · 지금의 나</li><li>No. 83 · 스튜디오 · 지금의 나 — 가을에 청청 올리기~</li><li>No. 82 · 스튜디오 · 장면 연출 — ブラック</li><li>No. 81 · 스튜디오 · 룩북·스타일링</li><li>No. 80 · 스튜디오 · 룩북·스타일링</li><li>No. 79 · 스튜디오 · 룩북·스타일링</li><li>No. 78 · 스튜디오 · 지금의 나 — 찡끗</li><li>No. 77 · 스튜디오 · 무드 화보 — 花</li><li>No. 76 · 스튜디오 · 장면 연출</li><li>No. 75 · 스튜디오 · 지금의 나 — 투명함 그대로_</li><li>No. 74 · 스튜디오 · 무드 화보 — edge!</li><li>No. 73 · 스튜디오 · 지금의 나 — white dress</li><li>No. 72 · 스튜디오 · 장면 연출 — invu</li><li>No. 71 · 야외·여행 · 야외 화보 — 아직 마르지 않은 장면.</li><li>No. 70 · 스튜디오 · 장면 연출 — 피폐 [疲弊]</li><li>No. 69 · 스튜디오 · 장면 연출 — I shine the most when I love myself</li><li>No. 68 · 스튜디오 · 지금의 나 — smiley</li><li>No. 67 · 스튜디오 · 장면 연출 — 방황,,,</li><li>No. 66 · 야외·여행 · 우정·기념 — 졸업을 축하합니다!</li><li>No. 65 · 스튜디오 · 장면 연출 — move</li><li>No. 64 · 스튜디오 · 룩북·스타일링 — 드디어 금요일 다들 고생 많으셨어요</li><li>No. 63 · 스튜디오 · 무드 화보 — 하얀색 가을</li><li>No. 62 · 스튜디오 · 무드 화보 — 나 매료됐나,,,?</li><li>No. 61 · 스튜디오 · 지금의 나 — 구미호</li><li>No. 60 · 스튜디오 · 지금의 나 — 네일과 같이</li><li>No. 59 · 스튜디오 · 무드 화보 — 꽃속에 소녀</li><li>No. 58 · 스튜디오 · 장면 연출 — 어릴적 꿈에서</li><li>No. 57 · 스튜디오 · 장면 연출 — 미리 크리스마스</li><li>No. 56 · 스튜디오 · 무드 화보 — 토마토</li><li>No. 55 · 스튜디오 · 룩북·스타일링</li><li>No. 54 · 야외·여행 · 우정·기념 — 3인3색</li><li>No. 53 · 야외·여행 · 우정·기념 — 3인3색</li><li>No. 52 · 야외·여행 · 우정·기념 — 3인3색</li><li>No. 51 · 스튜디오 · 무드 화보</li><li>No. 50 · 스튜디오 · 장면 연출 — 비눗방울</li><li>No. 49 · 스튜디오 · 무드 화보 — Move</li><li>No. 48 · 스튜디오 · 장면 연출 — 상처,,</li><li>No. 47 · 스튜디오 · 무드 화보 — 서늘함을 원한건 맞지만 너무 이뻐요,,</li><li>No. 46 · 스튜디오 · 무드 화보 — 잘사나 두고 보자.</li><li>No. 45 · 스튜디오 · 장면 연출 — 함께라서 즐거웠던,,,</li><li>No. 44 · 스튜디오 · 무드 화보 — KITCH</li><li>No. 43 · 스튜디오 · 무드 화보 — Flowers in the Forest</li><li>No. 42 · 스튜디오 · 장면 연출 — 깨진거울,,</li><li>No. 41 · 스튜디오 · 지금의 나</li><li>No. 40 · 스튜디오 · 지금의 나</li><li>No. 39 · 스튜디오 · 장면 연출 — gilrs need love emerald</li><li>No. 38 · 스튜디오 · 장면 연출 — 속세의 Purple,,</li><li>No. 37 · 스튜디오 · 장면 연출 — 비눗방울이 좋아</li><li>No. 36 · 스튜디오 · 장면 연출 — 현대무용과 모티브</li><li>No. 35 · 스튜디오 · 지금의 나 — 뷰티모델st</li><li>No. 34 · 야외·여행 · 우정·기념</li><li>No. 33 · 야외·여행 · 우정·기념</li><li>No. 32 · 야외·여행 · 우정·기념</li><li>No. 31 · 야외·여행 · 우정·기념</li><li>No. 30 · 야외·여행 · 우정·기념</li><li>No. 29 · 스튜디오 · 장면 연출 — 풍선</li><li>No. 28 · 스튜디오 · 무드 화보 — movement</li><li>No. 27 · 스튜디오 · 무드 화보 — red&amp;black</li><li>No. 26 · 스튜디오 · 무드 화보 — W&amp;B smoke</li><li>No. 25 · 스튜디오 · 룩북·스타일링</li><li>No. 24 · 스튜디오 · 무드 화보 — 빛꽃</li><li>No. 23 · 스튜디오 · 무드 화보 — 리본</li><li>No. 22 · 스튜디오 · 무드 화보</li><li>No. 21 · 스튜디오 · 무드 화보 — ditto</li><li>No. 20 · 스튜디오 · 장면 연출 — 고마츠 나나</li><li>No. 19 · 야외·여행 · 야외 화보 — 가로등아래</li><li>No. 18 · 야외·여행 · 야외 화보 — 한국에서 베트남 느낌내기</li><li>No. 17 · 스튜디오 · 지금의 나</li><li>No. 16 · 스튜디오 · 무드 화보 — with.flowers</li><li>No. 15 · 스튜디오 · 지금의 나 — cutie</li><li>No. 14 · 스튜디오 · 장면 연출 — 잠자는 숲속의 공주</li><li>No. 13 · 야외·여행 · 야외 화보 — 봄꿈</li><li>No. 12 · 스튜디오 · 장면 연출 — 고혹</li><li>No. 11 · 스튜디오 · 장면 연출 — eve</li><li>No. 10 · 스튜디오 · 장면 연출 — rain</li><li>No. 09 · 스튜디오 · 장면 연출</li><li>No. 08 · 스튜디오 · 지금의 나 — 빛나는</li><li>No. 07 · 스튜디오 · 지금의 나 — 여쿨느낌 낭낭하게</li><li>No. 06 · 야외·여행 · 야외 화보 — 노을</li><li>No. 05 · 스튜디오 · 장면 연출 — 피자먹을래? 냠</li><li>No. 04 · 스튜디오 · 무드 화보 — 상실감...</li><li>No. 03 · 스튜디오 · 장면 연출 — 코랄 한방울의 코지한느낌</li><li>No. 02 · 스튜디오 · 장면 연출 — 처음부터 끝까지 너무 좋았던 첫 경험 기기테스트 하고 시간도 짧아 많이 못찍었지만 모든게 유익했던 시간 일단 가볍게 제일 맘에 드는 사진</li><li>No. 01 · 스튜디오 · 장면 연출 — 바라보는 시선부터 포즈 하나하나 디테일에 감탄만 나왔던 분 감사합니다</li></ol></section></noscript>
 </main>
 
 <footer class="foot"><div class="wrap">
@@ -501,10 +529,11 @@ b{font-weight:600;}
 </div>
 
 <script src="site_assets/ig-data.js"></script>
+<script src="site_assets/works-data.js"></script>
 <script>
 window.EDZ = (function(){
   'use strict';
-  var KO = {studio:'스튜디오', outdoor:'야외·스냅'};
+  var KO = {studio:'스튜디오', outdoor:'야외·스냅', abroad:'해외'};
   var reduce = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function dot(t){ return String(t).replace(/-/g,'.'); }
@@ -570,23 +599,23 @@ window.EDZ = (function(){
                   : '<button class="'+cls+'" type="button" data-s="'+k+'"'+attrs+'>'+inner+'</button>';
     }
     var el = document.createElement('article');
-    el.className = 'esp ' + (i % 2 ? 'eR' : 'eL') + (reel ? ' ereel' : '');
+    el.className = 'esp ' + (i % 2 ? 'eR' : 'eL') + (reel ? ' ereel' : '') + (!s.t.join('').trim() && !ex ? ' notitle' : '');
     el.style.setProperty('--r', r.toFixed(4));
-    el.dataset.i = i; el.dataset.code = p.code;
+    el.dataset.i = i; el.dataset.code = p.code; if (o.no) el.dataset.no = o.no;
     el.innerHTML =
       '<figure class="eph">' + hit('ecv', 0, ' aria-label="'+esc(label)+' — 크게 보기"',
           '<span class="emk"><img class="eim" src="'+A+p.cover.src+'"'+set+' width="'+p.cover.w+'" height="'+p.cover.h+'" alt="maydly '+acctKo(p.acct)+' 촬영 — '+esc(label)+'"'
           + (!o.lazy && i < 2 ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async"></span>'
           + '<span class="ezl" aria-hidden="true">크게 보기</span>')
       + (reel ? '<span class="ebdg">▶ 영상</span>' : '') + '</figure>'
-      + '<div class="etx"><div class="etop"><p class="eday eu" aria-hidden="true">'+esc(p.time.slice(8,10))+'</p><p class="ekk eu"><span>'+acctKo(p.acct)+'</span><i class="eln" aria-hidden="true"></i><time datetime="'+esc(p.time)+'">'+dot(p.time)+'</time></p></div>'
+      + '<div class="etx"><div class="etop"><p class="eday eu" aria-hidden="true">'+esc(o.no || '')+'</p><p class="ekk eu"><span>'+acctKo(p.acct)+'</span>'+(o.kn ? '<i class="eln" aria-hidden="true"></i><span class="ekn">'+esc(o.kn)+'</span>' : '')+(o.no ? '<span class="eno">No. '+esc(o.no)+'</span>' : '')+'</p></div>'
       + '<div class="ebot">' + (s.t.join('').trim() ? '<h3 class="ett eu">'+s.t.map(esc).join('<br>')+'</h3>' : '')   // 글 없는 게시물은 빈 제목 칸을 그리지 않음(v1.0.1)
       + (ex ? '<p class="eex eu">'+esc(ex)+'</p>' : '')
       + (prev.length ? '<div class="epv eu">' + prev.map(function(x, j){
           return hit('eth', j + 1, ' style="--tr:'+Math.min(x.w/x.h, 1.5).toFixed(3)+'" aria-label="'+(j+2)+'번째 사진 크게 보기"',
                      '<img src="'+A+(x.t || x.src)+'" alt="" loading="lazy" decoding="async">');
         }).join('') + (more > 0 ? hit('eth emore', prev.length + 1, ' data-n="'+more+'" aria-label="나머지 '+more+'장 보기"', '') : '') + '</div>' : '')
-      + (reel ? '<a class="ego eu" href="'+esc(p.url)+'" target="_blank" rel="noopener">▶ 인스타그램에서 영상 보기 <span class="ear">↗</span></a>'
+      + (reel ? '<a class="ego eu" href="'+esc(p.url)+'" target="_blank" rel="noopener">' + (/\/(p|reel)\//.test(p.url) ? '▶ 인스타그램에서 영상 보기' : '▶ 영상은 인스타그램 @maydly_u에서') + ' <span class="ear">↗</span></a>'
               : hit('ego eu', 0, '', (n > 1 ? n+'장 넘겨보기' : '크게 보기')+' <span class="ear" aria-hidden="true">→</span>'))
       + '</div></div>';
     return el;
@@ -658,6 +687,7 @@ window.EDZ = (function(){
     "DYKJFgRmMm7":["#b28869","#f9e9de"],
     "DQ8zeaoEQMe":["#999076","#efebe2"]
   };
+  var WK0 = window.MAYDLY_WORKS; if (WK0 && WK0.works) WK0.works.forEach(function(w){ if (w && w.code && w.tint) TINT[w.code] = w.tint; });   // 폴더 작업의 색(사진에서 뽑음)
   var EMO = /[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}\u{20E3}]/gu;
   function plain(s){ return String(s == null ? '' : s).replace(EMO, '').replace(/[ \t]{2,}/g, ' '); }
   function deco(s){ return String(s).replace(/^\s*▶\s*/, '').replace(/\s*[↗→]\s*$/, '').trim(); }
@@ -743,7 +773,7 @@ window.EDZ = (function(){
     if (v === 'print'){
       var b = el.querySelector('.epv .eth[data-s="1"]');
       if (b && ph){ b.classList.add('eprt'); ph.appendChild(b); }
-      if (cv) cv.setAttribute('data-date', E.dot(p.time));
+      if (cv && el.dataset.no) cv.setAttribute('data-date', 'No. ' + el.dataset.no);   // 인화지 아래 글 = 작업 번호(날짜 대신)
     }
     if (v === 'seq') [].forEach.call(el.querySelectorAll('.epv .eth[data-s] img'), function(img){
       var y = p.slides[+img.parentNode.getAttribute('data-s')];
@@ -784,38 +814,58 @@ window.EDZ = (function(){
 (function(){
   'use strict';
   var E = window.EDZ;
-  var D = window.MAYDLY_IG || {posts:[]}, A = 'site_assets/';
-  var ALL = (D.posts || []).filter(function(p){ return p && p.time && p.cover && p.slides && p.slides.length; })
-    .map(function(p,i){ return [p,i]; })
-    .sort(function(a,b){ return a[0].time < b[0].time ? 1 : a[0].time > b[0].time ? -1 : a[1]-b[1]; })
+  var D = window.MAYDLY_IG || {posts:[]}, A = 'site_assets/', WK = window.MAYDLY_WORKS || {};
+  var EXTRA = WK.extra || {}, SEQ = {};
+  (WK.seq || []).forEach(function(c, i){ SEQ[c] = i; });
+  function okSl(x){ return !!(x && x.src && x.w > 0 && x.h > 0); }
+  var ALL = (D.posts || []).filter(function(p){ return p && p.code && p.cover && p.slides && p.slides.length; })
+    .map(function(p){ var x = EXTRA[p.code]; if (x && x.length){ p._ign = p.slides.length; p.slides = p.slides.concat(x.filter(okSl)); } return p; })
+    .concat((WK.works || []).filter(function(w){ return w && w.code && w.cover && w.slides && w.slides.filter(okSl).length; }))
+    .map(function(p, i){ return [p, i]; })
+    .sort(function(a, b){
+      var x = SEQ[a[0].code], y = SEQ[b[0].code];
+      if (x != null && y != null) return y - x;
+      if (x != null) return 1; if (y != null) return -1;   // 순서표에 아직 없는 것(막 올라온 게시물)은 맨 위 — 게시일 최근 차례
+      var s = a[0].time || '', t = b[0].time || ''; return s < t ? 1 : s > t ? -1 : a[1] - b[1];
+    })
     .map(function(x){ return x[0]; });
+  var ACC = WK.acct || {}, WKW = WK.work || {}; ALL.forEach(function(p){ if (ACC[p.code]) p.acct = ACC[p.code]; if (WKW[p.code]) p.work = WKW[p.code]; });   // 갤러리에서 장소 · 성격을 정하는 표(works-data) — 인스타 계정 · 옛 분류보다 앞선다
+  var REELS = ALL.filter(function(p){ return p.kind === 'reel'; }); ALL = ALL.filter(function(p){ return p.kind !== 'reel'; });   // 릴스는 사진 지면에서 빼고 맨 아래 「영상」 모음으로 — 번호 · 목차 · 탭 개수는 사진 지면만
+  var TREE = WK.tree || null, TD = {}, OLDK = (TREE && TREE.old) || {};   // 2단 분류 — 판정(장소 × 성격)은 그대로, 화면에서 큰 분류 · 작은 분류로
+  function twoLevel(p){ var pl = p.acct, mp = (TREE.map || {})[pl] || {}; p.place = pl; p.acct = (TREE.topOf || {})[pl] || pl; if (p.work && mp[p.work]) p.work = mp[p.work]; }
+  if (TREE){ ALL.forEach(twoLevel); REELS.forEach(twoLevel); (TREE.tops || []).forEach(function(t){ E.KO[t.k] = t.name; TD[t.k] = t.desc; }); }
   var KO = E.KO;
-  var EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   var reduce = E.reduce;
   var $ = function(id){ return document.getElementById(id); };
   var feed=$('feed'), sent=$('sent'), tabs=$('tabs'), cs=$('cs'), tocl=$('tocl'), tocp=$('tocp'), curm=$('curm'), cmw=$('cmw'), bar=$('bar'), foot=$('foot');
   var cur='all', list=[], rendered=0, lastKey=null, curBody=null, monEls=[], counts={}, months=[], CH=4;
 
   var esc = E.esc, dot = E.dot, split = E.split, acctKo = E.acctKo, watch = E.watch, unwatch = E.unwatch;
-  function mlabel(k){ return k.slice(5,7) + ' · ' + k.slice(0,4); }
+  var CHN = 10;   // 목차 한 묶음 = 작업 10개(날짜 대신 번호로)
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  var GNO = {}; ALL.forEach(function(p, i){ GNO[p.code] = ALL.length - i; });   // 작업 번호 = 찍은 차례(가장 오래된 작업 01 · 맨 위가 가장 큰 번호 · 거르기를 눌러도 그대로)
+  function ckey(i){ return 'c' + Math.floor((GNO[list[i].code] - 1) / CHN); }
+  function crange(k){ var c = +k.slice(1), a = c * CHN + 1; return [a, Math.min(ALL.length, a + CHN - 1)]; }
+  function mlabel(k){ var r = crange(k); return pad(r[1]) + ' — ' + pad(r[0]); }   // 읽는 방향대로(큰 번호 → 작은 번호)
   Array.prototype.forEach.call(document.querySelectorAll('.rv'), watch);
 
   var KIND = {};
-  (D.kinds || []).forEach(function(x){ if (x && x.k) KIND[x.k] = {name:x.name, codes:[]}; });
+  (TREE ? TREE.subs : ((WK.kinds && WK.kinds.length) ? WK.kinds : (D.kinds || []))).forEach(function(x){ if (x && x.k) KIND[x.k] = {name:x.name, codes:[]}; });   // 성격 표 = 갤러리 데이터(새 다섯) 먼저
   ALL.forEach(function(p){ if (p.work && KIND[p.work]) KIND[p.work].codes.push(p.code); });
   var KORD = Object.keys(KIND), KMAP = {}, curKinds = [], ks = $('ks');   // curKinds = 고른 성격(표 순서 · 비어 있으면 전체)
   KORD.forEach(function(k){ KIND[k].codes.forEach(function(c){ KMAP[c] = k; }); });
   if (!KORD.length){ var kbox = document.querySelector('.kinds'); if (kbox) kbox.hidden = true; }   // 분류표가 없으면 줄째 숨김
   function kindOk(p){ return !curKinds.length || curKinds.indexOf(KMAP[p.code]) >= 0; }
   function normKinds(a){   // 표 순서로 · 겹치거나 없는 이름은 뺌 · 다 고르면 전체와 같음
+    if (TREE) a = [].concat.apply([], a.map(function(k){ return OLDK[k] || [k]; }));   // 옛 주소(#kind=editorial 등)도 새 칸으로
     var o = KORD.filter(function(k){ return a.indexOf(k) >= 0; });
     return o.length === KORD.length ? [] : o;
   }
 
   function drawTabs(){
-    var c = {all:ALL.length, studio:0, outdoor:0}, f = {all:0, studio:0, outdoor:0};   // c = 탭이 있는지(전체 수) · f = 보이는 수(지금 고른 작업 성격 안에서)
+    var c = {all:ALL.length, studio:0, outdoor:0, abroad:0}, f = {all:0, studio:0, outdoor:0, abroad:0};   // c = 탭이 있는지(전체 수) · f = 보이는 수(지금 고른 작업 성격 안에서)
     ALL.forEach(function(p){ if (c[p.acct] != null) c[p.acct]++; if (kindOk(p)){ f.all++; if (f[p.acct] != null) f[p.acct]++; } });
-    tabs.innerHTML = ['all','studio','outdoor'].filter(function(k){ return c[k] > 0 || k === 'all'; }).map(function(k){
+    tabs.innerHTML = ['all','studio','outdoor','abroad'].filter(function(k){ return c[k] > 0 || k === 'all'; }).map(function(k){
       var on = k === cur;
       return '<button type="button" role="tab" data-k="'+k+'" class="'+(on?'on':'')+(f[k]?'':' z')+'" aria-selected="'+on+'">'+(k==='all'?'전체':KO[k])+'<span class="c">'+f[k]+'</span></button>';
     }).join('');
@@ -827,8 +877,9 @@ window.EDZ = (function(){
       return '<button type="button" data-k="'+k+'" aria-pressed="false">'+(k === 'all' ? '전체' : esc(KIND[k].name))+'<span class="c"></span></button>';
     }).join('');
     Array.prototype.forEach.call(ks.children, function(b){
-      var k = b.dataset.k; b.setAttribute('aria-pressed', String(k === 'all' ? !curKinds.length : curKinds.indexOf(k) >= 0)); b.classList.toggle('z', !c[k]); b.querySelector('.c').textContent = c[k];
+      var k = b.dataset.k; b.setAttribute('aria-pressed', String(k === 'all' ? !curKinds.length : curKinds.indexOf(k) >= 0)); b.classList.toggle('z', !c[k]); b.hidden = !!TREE && k !== 'all' && !c[k]; b.querySelector('.c').textContent = c[k];
     });
+    var kd = $('kdesc'), KD = WK.kind_desc || {}; if (TREE){ KD = {}; (TREE.subs || []).forEach(function(x){ KD[x.k] = x.desc; }); } if (kd) kd.textContent = curKinds.length === 1 && KD[curKinds[0]] ? KD[curKinds[0]] : (TREE && cur !== 'all' && TD[cur]) ? TD[cur] : '';
     ksEdge();
   }
   function ksEdge(){ ks.classList.toggle('ovf', ks.scrollWidth > ks.clientWidth + 2); ks.classList.toggle('end', ks.scrollLeft + ks.clientWidth >= ks.scrollWidth - 2); }
@@ -842,22 +893,22 @@ window.EDZ = (function(){
   }
   function drawToc(){
     counts = {}; months = [];
-    list.forEach(function(p){ var k = p.time.slice(0,7); if (!counts[k]){ counts[k] = 0; months.push(k); } counts[k]++; });
-    cs.innerHTML = months.map(function(k){ return '<button type="button" data-k="'+k+'" aria-label="'+k.slice(0,4)+'년 '+(+k.slice(5,7))+'월로 이동">'+mlabel(k)+'<span class="n">'+counts[k]+'</span></button>'; }).join('');
-    tocl.innerHTML = months.map(function(k){ return '<button type="button" role="menuitem" data-k="'+k+'"><span class="k">'+mlabel(k)+'</span><span class="c">게시물 '+counts[k]+'개</span></button>'; }).join('');
+    list.forEach(function(p, i){ var k = ckey(i); if (!counts[k]){ counts[k] = 0; months.push(k); } counts[k]++; });
+    cs.innerHTML = months.map(function(k){ var r = crange(k); return '<button type="button" data-k="'+k+'" aria-label="작업 '+r[1]+'번부터 '+r[0]+'번으로 이동">'+mlabel(k)+'</button>'; }).join('');
+    tocl.innerHTML = months.map(function(k){ return '<button type="button" role="menuitem" data-k="'+k+'"><span class="k">'+mlabel(k)+'</span><span class="c">작업 '+counts[k]+'개</span></button>'; }).join('');
     csEdge();
   }
   function csEdge(){ cs.classList.toggle('ovf', cs.scrollWidth > cs.clientWidth + 2); cs.classList.toggle('end', cs.scrollLeft + cs.clientWidth >= cs.scrollWidth - 2); }
   cs.addEventListener('scroll', csEdge, {passive:true});
 
   function makeMonth(k, idx){
-    var y = k.slice(0,4), m = k.slice(5,7), sec = document.createElement('section');
+    var r = crange(k), sec = document.createElement('section');
     sec.className = 'mon'; sec.id = 'm-' + k; sec.dataset.k = k;
     sec.innerHTML = '<header class="mh">'
-      + '<div class="mhr"><h2 class="mt" aria-label="'+y+'년 '+(+m)+'월"><span class="mw" aria-hidden="true"><span class="mn">'+m+'</span></span>'
-      + '<span class="md" aria-hidden="true">·</span><span class="mw" aria-hidden="true"><span class="my">'+y+'</span></span></h2>'
+      + '<div class="mhr"><h2 class="mt" aria-label="작업 '+r[1]+'번부터 '+r[0]+'번"><span class="mw" aria-hidden="true"><span class="mn">'+pad(r[1])+'</span></span>'
+      + '<span class="md" aria-hidden="true">—</span><span class="mw" aria-hidden="true"><span class="my">'+pad(r[0])+'</span></span></h2>'
       + '<p class="mm">'+(idx % 2 === 1 ? '<span class="cwm" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#clv"/></svg></span>' : '')
-      + '<i>'+EN[(+m)-1]+'</i><span>게시물 '+counts[k]+'개</span></p></div>'
+      + '<span>작업 '+counts[k]+'개</span></p></div>'
       + '<i class="rule" aria-hidden="true"></i></header><div class="mb"></div>';
     return sec;
   }
@@ -883,33 +934,44 @@ window.EDZ = (function(){
   function renderMore(n){
     var end = Math.min(list.length, rendered + n);
     for (var i = rendered; i < end; i++){
-      var p = list[i], k = p.time.slice(0,7);
+      var p = list[i], k = ckey(i);
       if (k !== lastKey){
         if (monEls.length) cvSeal(monEls[monEls.length - 1]);   // 앞 달은 다 그림(v1.0.3)
         var sec = makeMonth(k, monEls.length); feed.appendChild(sec); monEls.push(sec);
         curBody = sec.querySelector('.mb'); lastKey = k; watch(sec.querySelector('.mh'));
       }
-      var sp = E.spread(p, i, {A:A, cw:cw}); curBody.appendChild(sp); E.mount(sp); warmWatch(sp);
+      var sp = E.spread(p, i, {A:A, cw:cw, no:pad(GNO[p.code]), kn:(KIND[p.work] && KIND[p.work].name) || ''}); curBody.appendChild(sp); E.mount(sp); warmWatch(sp);
     }
     rendered = end;
     if (rendered >= list.length && monEls.length) cvSeal(monEls[monEls.length - 1]);   // 마지막 달도 다 그림(v1.0.3)
     foot.classList.toggle('done', rendered >= list.length);
+    if (rz) rz.hidden = !(rendered >= list.length && vlist.length);   // 사진 지면이 다 나온 뒤에 영상 모음
   }
   function fill(){ var g = 0; while (rendered < list.length && g++ < 400 && sent.getBoundingClientRect().top < innerHeight + 1600) renderMore(CH); }
   function renderTo(idx){ var g = 0; while (rendered <= idx && rendered < list.length && g++ < 400) renderMore(CH); fill(); }
   var so = new IntersectionObserver(function(es){ if (es[0].isIntersecting) fill(); }, {rootMargin:'0px 0px 1600px 0px'});
   so.observe(sent);
 
+  var rz = document.getElementById('reels'), rg = document.getElementById('rlg'), vlist = [];
+  function drawReels(){   // 영상 모음 — 고른 장소 · 성격의 릴스만, 표지 + 첫 줄 글, 누르면 인스타(예전 게시물은 프로필)
+    if (!rz || !rg) return;
+    vlist = REELS.filter(function(p){ return (cur === 'all' || p.acct === cur) && kindOk(p); });
+    rg.innerHTML = vlist.map(function(p){ var t = (p.title || '').split('\n')[0];
+      return '<a class="rlc rv" href="' + esc(p.url) + '" target="_blank" rel="noopener"><span class="rli"><img loading="lazy" src="' + A + esc(p.cover.src) + '" width="' + p.cover.w + '" height="' + p.cover.h + '" alt="maydly 영상 — ' + esc(t || acctKo(p.acct)) + '"><i aria-hidden="true">▶</i></span>' + (t ? '<span class="rlt">' + esc(t) + '</span>' : '') + '</a>'; }).join('');
+    Array.prototype.forEach.call(rg.querySelectorAll('.rv'), watch);
+    rz.hidden = !(rendered >= list.length && vlist.length);
+  }
   function build(){
     Array.prototype.forEach.call(feed.querySelectorAll('.mh'), unwatch);
     Array.prototype.forEach.call(feed.querySelectorAll('.esp'), E.unmount);
     warmReset(); Array.prototype.forEach.call(feed.querySelectorAll('.kempty'), unwatch);   // 지난 「아직 없어요」 줄도 관찰에서 뺌
     list = ALL.filter(function(p){ return (cur === 'all' || p.acct === cur) && kindOk(p); });
+    drawReels();
     feed.innerHTML = ''; rendered = 0; lastKey = null; curBody = null; monEls = []; curK = null;
     drawToc(); fill(); frame();
     if (!list.length && curKinds.length) none();   // 고른 장소·성격의 작업이 없으면 한 줄(성격이 전체인데 비면 원래처럼 빈 채로)
   }
-  var PLACE = {studio:'스튜디오에서 찍은 ', outdoor:'야외에서 찍은 '};
+  var PLACE = {studio:'스튜디오에서 찍은 ', outdoor:'야외에서 찍은 ', abroad:'해외에서 찍은 '};
   function gwa(s){ var c = s.charCodeAt(s.length - 1) - 0xAC00; return s + (c >= 0 && c < 11172 && c % 28 ? '과' : '와'); }   // 끝 글자에 받침이 있으면 「과」
   function noneText(){
     var n = curKinds.map(function(k){ return KIND[k].name; });
@@ -921,7 +983,7 @@ window.EDZ = (function(){
     feed.innerHTML = '<p class="kempty rv">' + t + '<button type="button" class="kreset">작업 성격 전체 보기 <span aria-hidden="true">→</span></button></p>';
     watch(feed.querySelector('.kempty'));   // 등장은 사이트의 .rv 그대로
     tocl.innerHTML = '<p class="k0">' + t + '</p>';
-    cmw.innerHTML = '<span class="cmv">&nbsp;</span>'; foot.classList.add('done');
+    cmw.innerHTML = '<span class="cmv">&nbsp;</span>'; foot.classList.add('done'); if (rz) rz.hidden = !vlist.length;
   }
 
   var ticking = false, lastY = scrollY, curK = null;
@@ -953,7 +1015,7 @@ window.EDZ = (function(){
     clearTimeout(cvT); cvT = setTimeout(cvReset, 250); });   // 창 크기가 바뀌면 달 높이를 다시 잰다(v1.0.3)
 
   function jump(k){
-    var idx = -1; for (var i = 0; i < list.length; i++){ if (list[i].time.slice(0,7) === k){ idx = i; break; } }
+    var idx = -1; for (var i = 0; i < list.length; i++){ if (ckey(i) === k){ idx = i; break; } }
     if (idx < 0) return;
     renderTo(idx + 1);
     var sec = $('m-' + k); if (!sec) return;
@@ -1048,17 +1110,19 @@ window.EDZ = (function(){
   }
   function lbText(p){
     var s = split(p), n = p.slides.length, reel = p.kind === 'reel', segs = '';
-    if (n > 1) for (var j = 0; j < n; j++) segs += '<i' + (j === si ? ' class="on"' : '') + '></i>';
-    return '<p class="ekk"><span>' + acctKo(p.acct) + '</span><i class="eln" aria-hidden="true"></i><time datetime="' + esc(p.time) + '">' + dot(p.time) + '</time></p>'
+    if (n > 1 && n <= 12) for (var j = 0; j < n; j++) segs += '<i' + (j === si ? ' class="on"' : '') + '></i>';   // 장이 많으면 점선 대신 숫자(1 / 28)만
+    var kn = (KIND[p.work] && KIND[p.work].name) || '';
+    return '<p class="ekk"><span>' + acctKo(p.acct) + '</span>' + (kn ? '<i class="eln" aria-hidden="true"></i><span class="ekn">' + esc(kn) + '</span>' : '') + '<span class="eno">No. ' + pad(GNO[p.code]) + '</span></p>'
       + (s.t.join('').trim() ? '<h2>' + s.t.map(esc).join('<br>') + '</h2>' : '')
       + (s.rest ? '<p class="lb">' + esc(s.rest) + '</p>' : '')
       + (segs ? '<div class="lsg" aria-hidden="true">' + segs + '</div>' : '')
-      + '<a class="ig" href="' + esc(p.url) + '" target="_blank" rel="noopener">' + (reel ? '▶ 인스타그램에서 영상 보기 ↗' : '인스타그램에서 보기 ↗') + '</a>';
+      + (p.url ? '<a class="ig" href="' + esc(p.url) + '" target="_blank" rel="noopener">' + (/\/(p|reel)\//.test(p.url) ? (reel ? '▶ 인스타그램에서 영상 보기 ↗' : '인스타그램에서 보기 ↗') : (reel ? '▶ 영상은 인스타그램 @maydly_u에서 ↗' : '인스타그램 @maydly_u ↗')) + '</a>' : '');   // 폴더 작업은 인스타 링크 없음 · 예전 게시물(내보내기로 받은 것)은 게시물 주소가 없어 프로필로
   }
   function paintText(){
     var p = list[pi], n = p.slides.length;
     lc.textContent = p.kind === 'reel' ? '영상 게시물 · 재생은 인스타그램에서' : (si + 1) + ' / ' + n;
     if (lt.dataset.code !== p.code){ lt.innerHTML = lbText(p); lt.dataset.code = p.code; lt.scrollTop = 0; }
+    var igl = lt.querySelector('.ig'); if (igl) igl.hidden = !!(p._ign && si >= p._ign);   // 이어 붙인 장(인스타에 없는 사진)에서는 인스타 링크 숨김
     var segs = lt.querySelectorAll('.lsg i'); for (var j = 0; j < segs.length; j++) segs[j].classList.toggle('on', j === si);
   }
   function preload(){ var p = list[pi]; [si + 1, si - 1].forEach(function(j){ if (j >= 0 && j < p.slides.length){ var x = new Image(); x.src = A + p.slides[j].src; } }); }
@@ -1152,7 +1216,7 @@ window.EDZ = (function(){
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';   // 지연 로딩이라 새로고침 시 맨 위에서 시작
   var h = (location.hash || '').slice(1), m = /(?:^|&)p=([^&]+)/.exec(h), ms = /(?:^|&)s=(\d+)/.exec(h);
   h.split('&').forEach(function(t){   // 주소 조각을 & 로 나눠 읽음(#studio&kind=fashion · #kind=editorial,fashion · #kind=snap&p=코드&s=2 도 됨)
-    if (t === 'studio' || t === 'outdoor') cur = t;
+    if (t === 'studio' || t === 'outdoor' || t === 'abroad') cur = (TREE && TREE.topOf && TREE.topOf[t]) || t;   // 옛 #abroad 는 야외·여행으로
     else if (t.slice(0, 5) === 'kind='){ var v = t.slice(5); try { v = decodeURIComponent(v); } catch (err) {} curKinds = normKinds(v.split(',')); }
   });
   drawTabs(); drawKinds(); ksShow(); build();

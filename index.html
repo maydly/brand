@@ -715,16 +715,18 @@ a.sw:hover .ph img.on{transform:scale(1.02);}
     <div class="head">
       <h2 class="t1">작업</h2>
       <div class="fl">
-        <div class="row">
-          <span><a class="lnk go" href="gallery.html#studio">스튜디오</a><sup data-count="studio">16</sup></span>
-          <span><a class="lnk go" href="gallery.html#outdoor">야외·스냅</a><sup data-count="outdoor">12</sup></span>
+        <div class="row" role="group" aria-label="스튜디오 작업">
+          <span><a class="lnk go" href="gallery.html#studio"><b>스튜디오</b></a><sup data-count="studio">0</sup></span>
+          <span><a class="lnk go" href="gallery.html#studio&kind=scene">장면 연출</a><sup data-count="k:scene">0</sup></span>
+          <span><a class="lnk go" href="gallery.html#studio&kind=mood">무드 화보</a><sup data-count="k:mood">0</sup></span>
+          <span><a class="lnk go" href="gallery.html#studio&kind=now">지금의 나</a><sup data-count="k:now">0</sup></span>
+          <span><a class="lnk go" href="gallery.html#studio&kind=lookbook">룩북·스타일링</a><sup data-count="k:lookbook">0</sup></span>
         </div>
-        <div class="row" role="group" aria-labelledby="ktl">
-          <span class="lab cap" id="ktl">작업 성격</span>
-          <span><a class="lnk go" href="gallery.html#kind=editorial">콘셉트 · 에디토리얼</a><sup data-count="k:editorial">9</sup></span>
-          <span><a class="lnk go" href="gallery.html#kind=fashion">패션 · 스타일링</a><sup data-count="k:fashion">5</sup></span>
-          <span><a class="lnk go" href="gallery.html#kind=portrait">인물 · 프로필</a><sup data-count="k:portrait">4</sup></span>
-          <span><a class="lnk go" href="gallery.html#kind=snap">일상 · 스냅</a><sup data-count="k:snap">10</sup></span>
+        <div class="row" role="group" aria-label="야외·여행 작업">
+          <span><a class="lnk go" href="gallery.html#outdoor"><b>야외·여행</b></a><sup data-count="outdoor">0</sup></span>
+          <span><a class="lnk go" href="gallery.html#outdoor&kind=together">우정·기념</a><sup data-count="k:together">0</sup></span>
+          <span><a class="lnk go" href="gallery.html#outdoor&kind=location">야외 화보</a><sup data-count="k:location">0</sup></span>
+          <span><a class="lnk go" href="gallery.html#outdoor&kind=daytrip">하루·여행 스냅</a><sup data-count="k:daytrip">0</sup></span>
         </div>
       </div>
     </div>
@@ -992,6 +994,7 @@ a.sw:hover .ph img.on{transform:scale(1.02);}
 
 <script src="site_assets/ig-data.js"></script>
 <script src="site_assets/orig-data.js"></script>
+<script src="site_assets/works-data.js"></script>
 <script>
 (function(){
   var nav = document.getElementById('nav'), mb = document.getElementById('menubtn');
@@ -1058,7 +1061,11 @@ a.sw:hover .ph img.on{transform:scale(1.02);}
   var A = 'site_assets/', GAL = 'gallery.html';
   var G = window.MAYDLY_IG, by = {};
   if (G && G.posts) G.posts.forEach(function(p){ by[p.code] = p; });
-  var KO = {studio:'스튜디오', outdoor:'야외·스냅'};
+  var WKA = (window.MAYDLY_WORKS && window.MAYDLY_WORKS.acct) || {}, WKW = (window.MAYDLY_WORKS && window.MAYDLY_WORKS.work) || {}; if (G && G.posts) G.posts.forEach(function(p){ if (WKA[p.code]) p.acct = WKA[p.code]; if (WKW[p.code]) p.work = WKW[p.code]; });   // 갤러리와 같은 장소 · 성격
+  var TREE = (window.MAYDLY_WORKS && window.MAYDLY_WORKS.tree) || null;   // 2단 분류 — 갤러리와 같은 큰 분류 · 작은 분류
+  function twoLevel(p){ var pl = p.acct, mp = (TREE.map || {})[pl] || {}; p.acct = (TREE.topOf || {})[pl] || pl; if (p.work && mp[p.work]) p.work = mp[p.work]; }
+  if (TREE && G && G.posts) G.posts.forEach(twoLevel);
+  var KO = {studio:'스튜디오', outdoor:'야외·여행', abroad:'해외'};
   var MM = window.matchMedia ? function(q){ return matchMedia(q); } : function(){ return {matches:false, addEventListener:function(){}}; };
   var REDUCE = MM('(prefers-reduced-motion: reduce)').matches;
   var HOVER = MM('(hover: hover) and (pointer: fine)').matches;
@@ -1108,7 +1115,8 @@ a.sw:hover .ph img.on{transform:scale(1.02);}
   [].forEach.call(document.querySelectorAll('[data-titlefor]'), function(el){ var p = by[el.getAttribute('data-titlefor')]; if (!p){ el.hidden = true; return; } el.textContent = norm(plain(p.title)); });
 
   var cnt = {};
-  if (G && G.posts) G.posts.forEach(function(p){ cnt[p.acct] = (cnt[p.acct] || 0) + 1; cnt['k:' + p.work] = (cnt['k:' + p.work] || 0) + 1; });
+  if (G && G.posts) G.posts.forEach(function(p){ if (p.kind === 'reel') return; cnt[p.acct] = (cnt[p.acct] || 0) + 1; cnt['k:' + p.work] = (cnt['k:' + p.work] || 0) + 1; });   // 릴스는 갤러리 아래 영상 모음이라 사진 작업 수에서 뺌
+  var WKS = window.MAYDLY_WORKS; if (WKS && WKS.works) WKS.works.forEach(function(w0){ var w = {acct:w0.acct, work:w0.work}; if (TREE) twoLevel(w); cnt[w.acct] = (cnt[w.acct] || 0) + 1; cnt['k:' + w.work] = (cnt['k:' + w.work] || 0) + 1; });   // 폴더 작업도 갤러리에 있으니 함께 센다
   [].forEach.call(document.querySelectorAll('[data-count]'), function(el){ if (G && G.posts){ var v = cnt[el.getAttribute('data-count')]; if (v) el.textContent = v; else el.hidden = true; } });
 
   var TONE = {   // 게시물 사진에서 재 둔 색 — [글자용 진한 색, 옅은 선, 아주 옅은 바탕]. 표에 없는 게시물은 기본 먹색
