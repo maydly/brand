@@ -2,7 +2,7 @@
    다시 가져오기 = 수집 후 조립기 재실행(자동 실행기가 함). 빼고 싶은 게시물은 1-1-6…/제외목록.json 에 코드를 넣는다
    (이 파일을 직접 고치면 다음 갱신 때 다시 덮인다). slides[].t = 미리보기용 작은 사진(긴 변 480px) */
 window.MAYDLY_IG = {
- "updated": "수동_261028_갤러리개편",
+ "updated": "수동_261030_갤러리손보기",
  "fetched": "2026-10-27",
  "source": "instagram @maydly_s · @maydly_f 최근 게시물",
  "hero": [
@@ -1659,7 +1659,7 @@ window.MAYDLY_IG = {
    "kind": "post",
    "time": "2026-06-05",
    "title": "비가 오고, 걷고, 기다리고, 가끔은 초점도 놓쳤던 오무타.",
-   "body": "비가 오고, 걷고, 기다리고,\n가끔은 초점도 놓쳤던 오무타.\n\n계획 없이 떠난 여행이라,\n오히려 오래 남은 장면들을\n한 권의 작은 여행 기록처럼 엮었습니다.\n\nOMUTA AFTER RAIN\n\nwith.",
+   "body": "비가 오고, 걷고, 기다리고,\n가끔은 초점도 놓쳤던 오무타.\n\n계획 없이 떠난 여행이라,\n오히려 오래 남은 장면들을\n한 권의 작은 여행 기록처럼 엮었습니다.\n\nOMUTA AFTER RAIN",
    "cover": {
     "src": "ig/t/DZKxGeuGNzD.jpg",
     "w": 720,
