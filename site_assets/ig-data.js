@@ -2,19 +2,19 @@
    다시 가져오기 = 수집 후 조립기 재실행(자동 실행기가 함). 빼고 싶은 게시물은 1-1-6…/제외목록.json 에 코드를 넣는다
    (이 파일을 직접 고치면 다음 갱신 때 다시 덮인다). slides[].t = 미리보기용 작은 사진(긴 변 480px) */
 window.MAYDLY_IG = {
- "updated": "자동기록_261102_0329",
- "fetched": "2026-11-02",
+ "updated": "자동기록_261114_1421",
+ "fetched": "2026-11-14",
  "source": "instagram @maydly_s · @maydly_f 최근 게시물",
  "hero": [
+  "Dfmb7DDGIZC",
   "De_dKysGBmV",
   "De6aP2jGP1f",
-  "DeeAPpwGHnt",
-  "DebbbMKGIuB"
+  "DeeAPpwGHnt"
  ],
  "landing": [
+  "DebbbMKGIuB",
   "DeY_5s4GHAU",
-  "DeWgusMmIm6",
-  "DeMJQuZmHwl"
+  "DeWgusMmIm6"
  ],
  "kinds": [
   {
@@ -35,6 +35,82 @@ window.MAYDLY_IG = {
   }
  ],
  "posts": [
+  {
+   "code": "Dfmb7DDGIZC",
+   "acct": "studio",
+   "kind": "post",
+   "time": "2026-11-11",
+   "title": "Ctrl+C, Ctrl+V,",
+   "body": "Ctrl+C, Ctrl+V,",
+   "cover": {
+    "src": "ig/t/Dfmb7DDGIZC.jpg",
+    "w": 720,
+    "h": 900
+   },
+   "slides": [
+    {
+     "src": "ig/g/Dfmb7DDGIZC_01.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Dfmb7DDGIZC_01.jpg"
+    },
+    {
+     "src": "ig/g/Dfmb7DDGIZC_02.jpg",
+     "w": 1152,
+     "h": 1440,
+     "t": "ig/s/Dfmb7DDGIZC_02.jpg"
+    },
+    {
+     "src": "ig/g/Dfmb7DDGIZC_03.jpg",
+     "w": 1152,
+     "h": 1440,
+     "t": "ig/s/Dfmb7DDGIZC_03.jpg"
+    },
+    {
+     "src": "ig/g/Dfmb7DDGIZC_04.jpg",
+     "w": 1152,
+     "h": 1440,
+     "t": "ig/s/Dfmb7DDGIZC_04.jpg"
+    },
+    {
+     "src": "ig/g/Dfmb7DDGIZC_05.jpg",
+     "w": 1152,
+     "h": 1440,
+     "t": "ig/s/Dfmb7DDGIZC_05.jpg"
+    },
+    {
+     "src": "ig/g/Dfmb7DDGIZC_06.jpg",
+     "w": 1152,
+     "h": 1440,
+     "t": "ig/s/Dfmb7DDGIZC_06.jpg"
+    },
+    {
+     "src": "ig/g/Dfmb7DDGIZC_07.jpg",
+     "w": 1152,
+     "h": 1440,
+     "t": "ig/s/Dfmb7DDGIZC_07.jpg"
+    },
+    {
+     "src": "ig/g/Dfmb7DDGIZC_08.jpg",
+     "w": 1152,
+     "h": 1440,
+     "t": "ig/s/Dfmb7DDGIZC_08.jpg"
+    },
+    {
+     "src": "ig/g/Dfmb7DDGIZC_09.jpg",
+     "w": 1152,
+     "h": 1440,
+     "t": "ig/s/Dfmb7DDGIZC_09.jpg"
+    },
+    {
+     "src": "ig/g/Dfmb7DDGIZC_10.jpg",
+     "w": 1152,
+     "h": 1440,
+     "t": "ig/s/Dfmb7DDGIZC_10.jpg"
+    }
+   ],
+   "url": "https://www.instagram.com/p/Dfmb7DDGIZC/"
+  },
   {
    "code": "De_dKysGBmV",
    "acct": "studio",
