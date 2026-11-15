@@ -2,8 +2,8 @@
    다시 가져오기 = 수집 후 조립기 재실행(자동 실행기가 함). 빼고 싶은 게시물은 1-1-6…/제외목록.json 에 코드를 넣는다
    (이 파일을 직접 고치면 다음 갱신 때 다시 덮인다). slides[].t = 미리보기용 작은 사진(긴 변 480px) */
 window.MAYDLY_IG = {
- "updated": "자동기록_261114_1421",
- "fetched": "2026-11-14",
+ "updated": "자동기록_261115_1406",
+ "fetched": "2026-11-15",
  "source": "instagram @maydly_s · @maydly_f 최근 게시물",
  "hero": [
   "Dfmb7DDGIZC",
@@ -35,6 +35,28 @@ window.MAYDLY_IG = {
   }
  ],
  "posts": [
+  {
+   "code": "Dfv9TaHunTv",
+   "acct": "studio",
+   "kind": "reel",
+   "time": "2026-11-15",
+   "title": "새 렌즈 4개면 일단 찍어봐야지.",
+   "body": "새 렌즈 4개면 일단 찍어봐야지.\n\n테스트는 핑계고, 결과물은 덤. 📷",
+   "cover": {
+    "src": "ig/t/Dfv9TaHunTv.jpg",
+    "w": 506,
+    "h": 900
+   },
+   "slides": [
+    {
+     "src": "ig/g/Dfv9TaHunTv_01.jpg",
+     "w": 720,
+     "h": 1280,
+     "t": "ig/s/Dfv9TaHunTv_01.jpg"
+    }
+   ],
+   "url": "https://www.instagram.com/reel/Dfv9TaHunTv/"
+  },
   {
    "code": "Dfmb7DDGIZC",
    "acct": "studio",
