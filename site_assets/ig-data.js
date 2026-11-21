@@ -2,19 +2,19 @@
    다시 가져오기 = 수집 후 조립기 재실행(자동 실행기가 함). 빼고 싶은 게시물은 1-1-6…/제외목록.json 에 코드를 넣는다
    (이 파일을 직접 고치면 다음 갱신 때 다시 덮인다). slides[].t = 미리보기용 작은 사진(긴 변 480px) */
 window.MAYDLY_IG = {
- "updated": "자동기록_261116_0210",
- "fetched": "2026-11-16",
+ "updated": "자동기록_261121_1933",
+ "fetched": "2026-11-21",
  "source": "instagram @maydly_s · @maydly_f 최근 게시물",
  "hero": [
+  "Df_7-DBmADt",
   "Dfmb7DDGIZC",
   "De_dKysGBmV",
-  "De6aP2jGP1f",
-  "DeeAPpwGHnt"
+  "De6aP2jGP1f"
  ],
  "landing": [
+  "DeeAPpwGHnt",
   "DebbbMKGIuB",
-  "DeY_5s4GHAU",
-  "DeWgusMmIm6"
+  "DeY_5s4GHAU"
  ],
  "kinds": [
   {
@@ -35,6 +35,106 @@ window.MAYDLY_IG = {
   }
  ],
  "posts": [
+  {
+   "code": "Df_7-DBmADt",
+   "acct": "studio",
+   "kind": "post",
+   "time": "2026-11-21",
+   "title": "꿈속의 토끼에게 쫓기는 중이야. 🐇",
+   "body": "꿈속의 토끼에게 쫓기는 중이야. 🐇",
+   "cover": {
+    "src": "ig/t/Df_7-DBmADt.jpg",
+    "w": 720,
+    "h": 900
+   },
+   "slides": [
+    {
+     "src": "ig/g/Df_7-DBmADt_01.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_01.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_02.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_02.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_03.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_03.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_04.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_04.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_05.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_05.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_06.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_06.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_07.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_07.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_08.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_08.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_09.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_09.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_10.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_10.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_11.jpg",
+     "w": 1152,
+     "h": 1440,
+     "t": "ig/s/Df_7-DBmADt_11.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_12.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_12.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_13.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_13.jpg"
+    },
+    {
+     "src": "ig/g/Df_7-DBmADt_14.jpg",
+     "w": 1080,
+     "h": 1350,
+     "t": "ig/s/Df_7-DBmADt_14.jpg"
+    }
+   ],
+   "url": "https://www.instagram.com/p/Df_7-DBmADt/"
+  },
   {
    "code": "Dfv9TaHunTv",
    "acct": "studio",
